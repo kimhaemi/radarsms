@@ -1,0 +1,132 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <th:block th:fragment="headerFragment111">
+    
+  <nav class="navbar navbar-light justify-content-between">
+    <a class="navbar-brand" href="/">
+      <img src="/images/favicon.ico" width="30" height="30" class="d-inline-block align-top" alt="">
+      <span class="navbar-brand">자료 수신 모니터링 시스템</span>
+    </a>
+    <form class="form-inline">
+      <a href="/logout">로그아웃</a>&nbsp;&nbsp;
+      <a href="/config/menu/menuSave">메뉴등록</a>&nbsp;&nbsp;
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="navbarsExample07">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown07">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+      
+    </form>
+  </nav>
+
+  <hr />
+
+  <nav class="navbar navbar-expand-sm navbar-light ">
+    <!-- <a class="navbar-brand" href="#">Expand at sm</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> -->
+
+    <div class="collapse navbar-collapse" id="navbarsExample03">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">전체 감시</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">지점별 감시</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown03">
+            <a href="/station/kwk" class="dropdown-item">관악산 레이더</a>
+            <a href="/station/iia" class="dropdown-item">영종도 레이더</a>
+            <a href="/station/gdk" class="dropdown-item">광덕산 레이더</a>
+            <a href="/station/gng" class="dropdown-item">강릉 레이더</a>
+            <a href="/station/myn" class="dropdown-item">면봉산 레이더</a>
+            <a href="/station/psn" class="dropdown-item">구덕산 레이더</a>
+            <a href="/station/ksn" class="dropdown-item">오성산 레이더</a>  
+            <a href="/station/jni" class="dropdown-item">진도 레이더</a>
+            <a href="/station/gsn" class="dropdown-item">고산 레이더</a>
+            <a href="/station/ssp" class="dropdown-item">성산 레이더</a>
+            <a href="/station/bri" class="dropdown-item">백령도 레이더</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">과거자료 검색</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown03">
+            <a href="/station/hist/kwk" class="dropdown-item">관악산 레이더</a>
+            <a href="/station/hist/iia" class="dropdown-item">영종도 레이더</a>
+            <a href="/station/hist/gdk" class="dropdown-item">광덕산 레이더</a>
+            <a href="/station/hist/gng" class="dropdown-item">강릉 레이더</a>
+            <a href="/station/hist/myn" class="dropdown-item">면봉산 레이더</a>
+            <a href="/station/hist/psn" class="dropdown-item">구덕산 레이더</a>
+            <a href="/station/hist/ksn" class="dropdown-item">오성산 레이더</a>
+            <a href="/station/hist/jni" class="dropdown-item">진도 레이더</a>
+            <a href="/station/hist/gsn" class="dropdown-item">고산 레이더</a>
+            <a href="/station/hist/ssp" class="dropdown-item">성산 레이더</a>
+            <a href="/station/hist/bri" class="dropdown-item">백령도 레이더</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">지점별 통계</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown03">
+            <a href="/stat/month_rdr_kwk" class="dropdown-item">관악산 레이더</a>
+            <a href="/stat/month_rdr_iia" class="dropdown-item">영종도 레이더</a>
+            <a href="/stat/month_rdr_gdk" class="dropdown-item">광덕산 레이더</a>
+            <a href="/stat/month_rdr_gng" class="dropdown-item">강릉 레이더</a>
+            <a href="/stat/month_rdr_myn" class="dropdown-item">면봉산 레이더</a>
+            <a href="/stat/month_rdr_psn" class="dropdown-item">구덕산 레이더</a>
+            <a href="/stat/month_rdr_ksn" class="dropdown-item">오성산 레이더</a>
+            <a href="/stat/month_rdr_jni" class="dropdown-item">진도 레이더</a>
+            <a href="/stat/month_rdr_gsn" class="dropdown-item">고산 레이더</a>
+            <a href="/stat/month_rdr_ssp" class="dropdown-item">성산 레이더</a>
+            <a href="/stat/month_rdr_bri" class="dropdown-item">백령도 레이더</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">문자 관리</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown03">
+            <a href="/manage/sms_set_rc" class="dropdown-item">지점/자료별 문자 발송 설정</a>
+            <a href="/manage/sms_set_rcc" class="dropdown-item">경고 기준 설정</a>
+            <a href="/manage/sms_set_rs" class="dropdown-item">자료 수신 감시 설정</a>
+            <a href="/manage/sms_set_msg" class="dropdown-item">문자 메시지 패턴 설정</a>
+            <a href="/manage/station_status" class="dropdown-item">지점별 운영상태 설정</a>
+            <a href="/manage/sms_target_group" class="dropdown-item">문자 수신 그룹 관리</a>
+            <a href="/manage/sms_target_member" class="dropdown-item">문자 수신자 관리</a>
+            <a href="/manage/sms_target_monitorgroup" class="dropdown-item">상시 문자 수신 그룹 관리</a>
+            <a href="/manage/sms_send" class="dropdown-item">문자 발송</a>
+            <a href="/manage/sms_send_result" class="dropdown-item">문자 발송 대기 내역</a>
+            <a href="/manage/sms_send_onoff" class="dropdown-item">문자 발송 기능 ON/OFF 설정</a>
+            <a href="/manage/admin_user" class="dropdown-item">사용자 관리</a>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/users/admin_user">사용자 관리</span></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <hr style=""/>
+
+  </th:block>
+</html>
