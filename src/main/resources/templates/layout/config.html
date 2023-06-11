@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:fragment="configFragment">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" th:content="${metaTitle}">
+    <!-- <title th:text="${metaTitle}"></title> -->
+    <title>자료수신모니터링</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/navbar.css}" />
+    <script th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="/css/default.css">
+    <link rel="stylesheet" type="text/css" href="/css/topnav.css">
+    <link rel="stylesheet" type="text/css" href="/css/toggles-full.css">
+    <link rel="stylesheet" type="text/css" href="/css/noty/animate.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/css/noty/buttons.css"> -->
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <script type="text/javascript" src="/js/jquery-1.11.1.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui-1.11.1.js"></script>
+    <script type="text/javascript" src="/js/topnav.js"></script>
+    <script type="text/javascript" src="/js/toggles.min.js"></script>
+    <script type="text/javascript" src="/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script type="text/javascript" src="/js/noty-template.js"></script>
+    <script type="text/javascript" src="/js/default.js"></script>
+  </head>
+</th:block>
+</html>

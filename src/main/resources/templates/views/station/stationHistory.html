@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='전체 감시'">
+
+      <th:block layout:fragment="content">
+        <script type="text/javascript">
+            $(document).ready(function(){
+                //window.setInterval("reloadWarning()",60000);
+            });
+            $(function() {
+                $( "#datePick" ).datepicker({
+                    showOn: "button",
+                    buttonImage: "/images/calendar.gif",
+                    buttonImageOnly: true,
+                    buttonText: "Select date",
+                    changeMonth: true,
+                    changeYear: true,
+                    prevText: '이전 달',
+                    nextText: '다음 달',
+                    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    dayNames: ['일','월','화','수','목','금','토'],
+                    dayNamesShort: ['일','월','화','수','목','금','토'],
+                    dayNamesMin: ['일','월','화','수','목','금','토'],
+                    showMonthAfterYear: true,
+                    yearSuffix: '년',
+                    dateFormat: 'yy년 mm월 dd일',
+                    minDate: (new Date(2009, 1 - 1, 1)), maxDate: "+0D"/*(new Date(2014, 11, 31)) /*"+1Y +1M +10D"*/
+                });
+            });
+            var searchDate = function(){
+                var selDate = $("#datePick").val().replace(/ |년|월|일/g, "");
+                $("#termClose").val(selDate+"2350");
+                $("#termStart").val(selDate+"0000");
+                $("#searchDate").submit();
+            };
+        </script>
+        
+        <form action="" method="post" target="_self" id="searchDate">
+            <input type="hidden" name="termStart" id="termStart">
+            <input type="hidden" name="termClose" id="termClose">
+            <table class="noticeTbl searchSeries">
+            <colgroup>
+                <col style="width:auto;">
+                <col style="width:130px;">
+                <col style="width:40px;">
+            </colgroup>
+                <thead>
+                <tr>
+                    <th class="left">
+                        과거자료 검색 &gt; <span class="radar"> 관악산 레이더</span>
+                    </th>
+                    <th class="center">
+                        <label for="datePick" class="hidden">년월일 선택</label>
+                        <input type="text" readonly="" value="2023년 05월 31일" id="datePick" class="hasDatepicker">
+                            <img class="ui-datepicker-trigger" src="/images/calendar.gif" alt="Select date" title="Select date">
+                    </th>
+                    <th class="right">
+                        <img src="/images/search_icon.png" class="ui-datepicker-search" onclick="javascript:searchDate();"></th>
+                </tr>
+                </thead>
+            </table>
+            </form>
+            
+            <table class="mainTbl searchSeries" summary="">
+                <caption class="hidden">관악산 레이더</caption>
+                <colgroup>
+                    <col>
+                    <col style="width:36px">
+                    <col style="width:129px">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th rowspan="2">시간</th>
+                        <th colspan="2">이진자료<br>(NQC)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            
+                        </td>
+                        
+                        <td>
+                            <div class="recv " title=""></div>
+                        </td>
+                        <td> - </td>
+                    </tr>
+                </tbody>
+            </table>
+      </th:block>
+                
+    <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>

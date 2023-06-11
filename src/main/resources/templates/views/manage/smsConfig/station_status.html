@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='전체 감시'">
+
+	<th:block layout:fragment="content">
+        <script type="text/javascript">
+        
+        $(function() {
+            $('.toggle').toggles({
+                text : {
+                    on : '정상운영',
+                    off : '유지보수'
+                }
+            });
+            $('.toggle').on('toggle', function (e, active) {
+                var targetId=e.target.id.replace("toggle","activation");
+                if (active) {
+                    $("#"+targetId).val("RUN");
+                } else {
+                    $("#"+targetId).val("MRO");
+                }
+            });
+        });
+        </script>
+    
+        <form action="/manage/station_status_update" method="post" target="_self" id="searchDate">
+        <table class="noticeTbl searchSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                    관리 &gt; 지점별 운영상태 설정
+                </th>
+                <th class="right">
+                    <input type="submit" value="설정저장">
+                </th>
+            </tr>
+            </thead>
+        </table>
+        
+        <table class="mainTbl searchSeries" summary="">
+            <caption class="hidden">지점별 운영상태 </caption>
+            <colgroup>
+                <col>
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>지점</th>
+                    <th>운영상태</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                
+                <tr>
+                    <td>
+                        백령도 ( BRI )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_BRI" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="BRI" id="activation_BRI" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                        광덕산 ( GDK )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_GDK" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="GDK" id="activation_GDK" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                        강릉 ( GNG )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_GNG" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="GNG" id="activation_GNG" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                        고산 ( GSN )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_GSN" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="GSN" id="activation_GSN" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                        영종도 ( IIA )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_IIA" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="IIA" id="activation_IIA" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                        진도 ( JNI )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_JNI" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="JNI" id="activation_JNI" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                        오성산 ( KSN )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_KSN" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="KSN" id="activation_KSN" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                        관악산 ( KWK )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_KWK" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="KWK" id="activation_KWK" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                
+                
+                <tr>
+                    <td>
+                        면봉산 ( MYN )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_MYN" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="MYN" id="activation_MYN" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                        구덕산 ( PSN )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_PSN" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="PSN" id="activation_PSN" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                    <td>
+                        성산 ( SSP )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_SSP" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="SSP" id="activation_SSP" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <tr>
+                    <td>
+                        낙뢰 ( LGT )
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" id="toggle_NOTI_RUN" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 380px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div></div></div></div>
+                        <input type="hidden" name="LGT" id="activation_NOTI_RUN" value="RUN">
+                    </td>
+                </tr>
+                
+                
+                
+                
+                
+                
+                
+                
+            </tbody>
+        </table>
+        <table class="noticeTbl searchSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                </th>
+                <th class="right">
+                    <input type="submit" value="설정저장">
+                </th>
+            </tr>
+            </thead>
+        </table>
+        </form>
+    </th:block>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='전체 감시'">
+
+	<th:block layout:fragment="content">
+		<div id="contentMain">
+			<table class="noticeTbl mainSeries">
+				<colgroup>
+					<col style="width:auto">
+					<col style="width:70px;">
+					<col style="width:105px;">
+					<col style="width:70px;">
+					<col style="width:130px;">
+				</colgroup>
+				<thead>
+					<tr>
+						<th class="left">
+							전체 사이트 감시
+						</th>
+						<th class="left">알람설정:</th>
+						<th class="center toggle-light">
+							<div class="toggle" id="s" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 180px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 90px; text-indent: -10px; line-height: 20px;">&nbsp;<i class="fa fa-bell"> ON</i></div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 90px; margin-left: -10px; text-indent: 10px; line-height: 20px;"><i class="fa fa-bell-slash-o"> OFF</i>&nbsp;</div></div></div></div>
+							<input type="hidden" name="alert_activity" id="alert_activity" value="1">
+							<input type="hidden" name="alert_lasttime" id="alert_lasttime" value="20230531212428">
+							<input type="hidden" name="alert_checksite" id="alert_checksite" value="ALL">
+						</th>
+						<th class="left">현재시간:</th>
+						<th class="right" id="nowTime">2023.05.31 21:24:45</th>
+					</tr>
+				</thead>
+			</table>
+		
+			<div id="f5content" class="mainSeries">
+				<div class="alertMap">
+					<div class="map"><img src="/images/map.png" alt="지도"></div>
+					<div class="radar KWK ORDI" id="KWK">
+						<div><a href="/station/KWK.do">관악산</a></div>
+					</div>
+					<div class="radar IIA WARN" id="IIA">
+						<div><a href="/station/IIA.do">영종도</a></div>
+					</div>
+					<div class="radar GDK ORDI" id="GDK">
+						<div><a href="/station/GDK.do">광덕산</a></div>
+					</div>
+					<div class="radar GNG ORDI" id="GNG">
+						<div><a href="/station/GNG.do">강릉</a></div>
+					</div>
+					<div class="radar MYN ORDI" id="MYN">
+						<div><a href="/station/MYN.do">면봉산</a></div>
+					</div>
+					<div class="radar PSN ORDI" id="PSN">
+						<div><a href="/station/PSN.do">구덕산</a></div>
+					</div>
+					<div class="radar KSN ORDI" id="KSN">
+						<div><a href="/station/KSN.do">오성산</a></div>
+					</div>
+					<div class="radar JNI ORDI" id="JNI">
+						<div><a href="/station/JNI.do">진도</a></div>
+					</div>
+					<div class="radar GSN ORDI" id="GSN">
+						<div><a href="/station/GSN.do">고산</a></div>
+					</div>
+					<div class="radar SSP ORDI" id="SSP">
+						<div><a href="/station/SSP.do">성산</a></div>
+					</div>
+					<div class="radar BRI ORDI" id="BRI">
+						<div><a href="/station/BRI.do">백령도</a></div>
+					</div>
+				</div>
+
+				<div class="alertTbls">
+				<table class="mainTbl " id="KWK" summary="">
+					<caption class="hidden">관악산</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/kwk.do" class="radar">관악산 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="mainTbl " id="IIA" summary="">
+					<caption class="hidden">영종도</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/iia.do" class="radar">영종도 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status WARN" title="경고"></div></td>
+							<td>
+								2015.12.23 12:13
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="mainTbl " id="GDK" summary="">
+					<caption class="hidden">광덕산</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/gdk.do" class="radar">광덕산 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<table class="mainTbl " id="GNG" summary="">
+					<caption class="hidden">강릉</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/gng.do" class="radar">강릉 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="mainTbl " id="MYN" summary="">
+					<caption class="hidden">면봉산</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/myn.do" class="radar">면봉산 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="mainTbl " id="PSN" summary="">
+					<caption class="hidden">구덕산</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/psn.do" class="radar">구덕산 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="mainTbl " id="KSN" summary="">
+					<caption class="hidden">오성산</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/ksn.do" class="radar">오성산 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="mainTbl " id="JNI" summary="">
+					<caption class="hidden">진도</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/jni.do" class="radar">진도 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<table class="mainTbl " id="GSN" summary="">
+					<caption class="hidden">고산</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/gsn.do" class="radar">고산 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<table class="mainTbl " id="SSP" summary="">
+					<caption class="hidden">성산</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/ssp.do" class="radar">성산 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table class="mainTbl " id="BRI" summary="">
+					<caption class="hidden">백령도</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/bri.do" class="radar">백령도 레이더</a></th>
+						</tr>
+						<tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			
+				<table class="mainTbl lgtTbl">
+				<caption class="hidden">LGT</caption>
+					<colgroup>
+						
+						<col style="width:40px;">
+						<col>
+						
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="6"><a href="/station/lgt.do" class="lgt">낙뢰 자료</a></th>
+						</tr>
+						<tr>
+						
+							<th colspan="2" style="letter-spacing: -1px;">관측자료</th>
+						
+						</tr>
+						<tr>
+						
+							<th>상태</th>
+							<th>최종수신</th>
+						
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status WARN" title="경고"></div></td>
+							<td>
+								22.07.29 10:55
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	<audio class="alarmAudio" controls="" preload="auto" loop=""><source src="/sounds/Electronic_Chime.mp3" type="audio/mpeg"></audio>
+</html>

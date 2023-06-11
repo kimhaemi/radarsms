@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>ERROR</title>
+<link th:href="@{/css/common.css}" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+function fncGoAfterErrorPage(){
+    history.back(-2);
+}
+</script>
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center" valign="top"><br />
+      <br />
+      <br />
+      <table width="600" border="0" cellpadding="0" cellspacing="0" background="er_images/blue_bg.jpg' />">
+        <tr>
+          <td align="center">
+            <table width="100%" border="0" cellspacing="9" cellpadding="0">
+              <tr>
+                <td bgcolor="#FFFFFF">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td align="left"><img th:src="@{/images/egovframework/com/cmm/er_logo.jpg}" width="379" height="57" /></td>
+                    </tr>
+                    <tr>
+                      <td><br />
+                        <br /></td>
+                    </tr>
+                    <tr>
+                      <td align="center">
+                        <table width="520" border="0" cellspacing="2" cellpadding="2">
+                          <tr>
+                            <td width="74" rowspan="2" align="center"><img th:src="@{/images/egovframework/com/cmm/danger.jpg}" width="74" height="74" /></td>
+                            <td width="399" align="left" class="lt_text2">오류발생 알림화면(허용되지 않는 요청을 하셨습니다)</td>
+                          </tr>
+                        </table>
+                        <table width="500" border="0" cellspacing="2" cellpadding="2">
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <br /><br />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td align="center">
+                        <a href="javascript:fncGoAfterErrorPage();">
+                          <img th:src="@{/images/egovframework/com/cmm/go_history.jpg}" width="90" height="29" />
+                        </a>
+                        <a href="/">
+                          <img th:src="@{/images/egovframework/com/cmm/go_main.jpg}"  />
+                        </a>
+                      </td>
+                    </tr>
+                  </table><br />
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

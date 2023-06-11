@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='전체 감시'">
+
+	<th:block layout:fragment="content">
+        <script type="text/javascript">
+            $(function() {
+                $('.toggle').toggles();
+                $('.toggle').on('toggle', function (e, active) {
+                    var targetId=e.target.id.replace("act","aci");
+                    if (active) {
+                        $("#"+targetId).val("1");
+                    } else {
+                        $("#"+targetId).val("0");
+                    }
+                });
+                $('input.back').click(function(e){
+                    window.location.href = "/manage/sms_target_group";
+                });
+            });
+        </script>
+    
+        <table class="noticeTbl settingSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                    관리 &gt; 문자 수신자 관리
+                </th>
+                <th class="right">
+                </th>
+            </tr>
+            </thead>
+        </table>
+        
+        <table class="mainTbl settingSeries" summary="">
+            <caption class="hidden">문자 수신자 관리</caption>
+            <colgroup>
+                <col style="width:90px">
+                <col style="width:120px">
+                <col style="width:120px">
+                <col style="width:200px">
+                <col>
+                <col>
+                <col style="width:140px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>성명</th>
+                    <th>직책</th>
+                    <th>부서</th>
+                    <th>소속</th>
+                    <th>연락처</th>
+                    <th>활성화</th>
+                    <th>관리</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[0]" method="post" target="_self" id="searchDate0"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="154">
+                        <input type="text" name="name" value="권두순">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="사무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-4464-6988">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-0" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-0" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=154" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[1]" method="post" target="_self" id="searchDate1"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="117">
+                        <input type="text" name="name" value="김경희">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-7160-2959">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-1" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-1" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=117" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[2]" method="post" target="_self" id="searchDate2"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="158">
+                        <input type="text" name="name" value="김성수">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-6291-3978">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-2" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-2" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=158" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[3]" method="post" target="_self" id="searchDate3"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="110">
+                        <input type="text" name="name" value="김성원">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-4658-5229">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-3" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-3" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=110" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[4]" method="post" target="_self" id="searchDate4"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="144">
+                        <input type="text" name="name" value="김용제">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="인탭">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-9618-1205">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-4" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-4" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=144" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[5]" method="post" target="_self" id="searchDate5"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="122">
+                        <input type="text" name="name" value="김지훈">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="책임기술자">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="킴스앤">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-4249-4214">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-5" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-5" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=122" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[6]" method="post" target="_self" id="searchDate6"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="143">
+                        <input type="text" name="name" value="나기생">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="인탭">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-7353-9496">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-6" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-6" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=143" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[7]" method="post" target="_self" id="searchDate7"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="134">
+                        <input type="text" name="name" value="남호진">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-4613-2205">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-7" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-7" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=134" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[8]" method="post" target="_self" id="searchDate8"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="147">
+                        <input type="text" name="name" value="노수명">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="세인에스앤씨">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-6277-6545">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-8" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-8" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=147" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[9]" method="post" target="_self" id="searchDate9"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="124">
+                        <input type="text" name="name" value="노준상">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="참여기술자">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="킴스앤">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-8518-6240">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-9" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-9" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=124" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[10]" method="post" target="_self" id="searchDate10"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="133">
+                        <input type="text" name="name" value="박충신">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="사무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-2738-7539">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-10" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-10" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=133" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[11]" method="post" target="_self" id="searchDate11"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="156">
+                        <input type="text" name="name" value="백승록">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-6694-1364">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-11" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-11" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=156" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[12]" method="post" target="_self" id="searchDate12"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="123">
+                        <input type="text" name="name" value="서현옥">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="참여기술자">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="킴스앤">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-3745-6629">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-12" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-12" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=123" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[13]" method="post" target="_self" id="searchDate13"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="113">
+                        <input type="text" name="name" value="신상창">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="부장">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="세인에스앤씨">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-4264-7793">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-13" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-13" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=113" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[14]" method="post" target="_self" id="searchDate14"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="50">
+                        <input type="text" name="name" value="오윤석">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="대리">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="세인에스앤씨">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-9138-7513">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-14" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-14" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=50" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[15]" method="post" target="_self" id="searchDate15"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="53">
+                        <input type="text" name="name" value="오창록">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-4613-8677">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-15" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-15" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=53" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[16]" method="post" target="_self" id="searchDate16"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="160">
+                        <input type="text" name="name" value="유충길">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-9774-0010">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-16" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-16" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=160" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[17]" method="post" target="_self" id="searchDate17"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="142">
+                        <input type="text" name="name" value="이승표">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-9116-3178">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-17" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-17" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=142" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[18]" method="post" target="_self" id="searchDate18"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="159">
+                        <input type="text" name="name" value="이종환">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-2215-7654">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-18" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-18" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=159" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[19]" method="post" target="_self" id="searchDate19"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="139">
+                        <input type="text" name="name" value="임덕빈">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="과장">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-8287-7357">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-19" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-19" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=139" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[20]" method="post" target="_self" id="searchDate20"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="153">
+                        <input type="text" name="name" value="임무승">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="킴스앤">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-3370-6843">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-20" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-20" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=153" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[21]" method="post" target="_self" id="searchDate21"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="138">
+                        <input type="text" name="name" value="임병희">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-2704-7408">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-21" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-21" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=138" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[22]" method="post" target="_self" id="searchDate22"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="97">
+                        <input type="text" name="name" value="장복수">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-2479-2685">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-22" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-22" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=97" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[23]" method="post" target="_self" id="searchDate23"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="108">
+                        <input type="text" name="name" value="전종혁">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="주무관">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="레이더운영과">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="기상청">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-9316-2113">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-23" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-23" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=108" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[24]" method="post" target="_self" id="searchDate24"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="96">
+                        <input type="text" name="name" value="정시목">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="이사">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="코엠정보통신">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-3300-9365">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-24" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-24" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=96" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[25]" method="post" target="_self" id="searchDate25"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="47">
+                        <input type="text" name="name" value="정준석">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="대리">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="코엠정보통신">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-8820-4829">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-25" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-25" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=47" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[26]" method="post" target="_self" id="searchDate26"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="140">
+                        <input type="text" name="name" value="조민호">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="대리">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="코엠정보통싱">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-7224-1905">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-26" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-26" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=140" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[27]" method="post" target="_self" id="searchDate27"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="112">
+                        <input type="text" name="name" value="조수만">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="대표이사">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="코엠정보통신">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-7235-9365">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-27" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-27" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=112" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[28]" method="post" target="_self" id="searchDate28"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="146">
+                        <input type="text" name="name" value="조재욱">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="세인에스앤씨">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-8765-1276">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-28" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-28" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=146" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[29]" method="post" target="_self" id="searchDate29"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="145">
+                        <input type="text" name="name" value="최성호">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="인탭">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-2860-7962">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-29" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-29" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=145" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+                <tr>
+                <form action="sms_target_member_update.do" name="smsTargetMember[30]" method="post" target="_self" id="searchDate30"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="141">
+                        <input type="text" name="name" value="홍경화">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="유지보수업체">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="코엠정보통신">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="010-4208-7098">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-30" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-30" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="수정" role="button">
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_member_remove.do?m=141" role="button"><span class="ui-button-text">삭제</span></a>
+                    </td>
+                
+                </tr>
+                
+            </tbody>
+        </table>
+        <table class="noticeTbl settingSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                    관리 &gt; 문자 수신자 추가
+                </th>
+                <th class="right">
+                
+                </th>
+            </tr>
+            </thead>
+        </table>
+        <table class="mainTbl settingSeries" summary="">
+            <caption class="hidden">문자 수신자 추가</caption>
+            <colgroup>
+                <col style="width:90px">
+                <col style="width:120px">
+                <col style="width:120px">
+                <col style="width:200px">
+                <col>
+                <col>
+                <col style="width:140px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>성명</th>
+                    <th>직책</th>
+                    <th>부서</th>
+                    <th>소속</th>
+                    <th>연락처</th>
+                    <th>활성화</th>
+                    <th>추가</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <form action="sms_target_member_add.do" name="smsTargetMemberAdd" method="post" target="_self" id="smsTargetMemberAdd"></form>
+                    <td>
+                        <input type="hidden" name="mid" value="0">
+                        <input type="text" name="name" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="position" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="department" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="organization" value="">
+                    </td>
+                    <td>
+                        <input type="text" name="phone_num" value="">
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light" id="act-Add" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="activation" id="aci-Add" value="1">
+                    </td>
+                    <td>
+                        <input type="submit" class="btn ui-button ui-widget ui-state-default ui-corner-all" name="" value="사용자 추가" role="button">
+                    </td>
+                
+                </tr>
+            </tbody>
+        </table>
+    </th:block>
+</html>

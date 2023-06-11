@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='전체 감시'">
+
+	<th:block layout:fragment="content">
+        <script type="text/javascript">
+        $(function() {
+            $('.toggle.pmt').toggles();
+            $('.toggle.pmt').on('toggle', function (e, active) {
+                var targetId=e.target.id.replace("pmt","pmi");
+                if (active) {
+                    $("#"+targetId).val("1");
+                } else {
+                    $("#"+targetId).val("0");
+                }
+            });
+            $('.toggle.tz').toggles({
+                text: {
+                    on: 'UTC',
+                    off: 'KST'
+                }
+            });
+            $('.toggle.tz').on('toggle', function (e, active) {
+                var targetId=e.target.id.replace("tzt","tzi");
+                if (active) {
+                    $("#"+targetId).val("U");
+                } else {
+                    $("#"+targetId).val("K");
+                }
+            });
+        });
+        </script>
+    
+        <form id="searchDate" modelattribute="receiveSettingForm" action="sms_set_rs_update.do" method="post" target="_self">
+        <input type="hidden" name="termStart" id="termStart">
+        <input type="hidden" name="termClose" id="termClose">
+        <table class="noticeTbl settingSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                    관리 &gt; 자료 수신 감시 설정
+                </th>
+                <th class="right">
+                    <input type="submit" value="설정저장">
+                </th>
+            </tr>
+            </thead>
+        </table>
+        
+        <table class="mainTbl settingSeries" summary="">
+            <caption class="hidden">이벤트 문자 발송 설정</caption>
+            <colgroup>
+                <col style="width:50px">
+                <col style="width:180px">
+                <col style="width:70px">
+                <col>
+                <col>
+                <col style="width:70px">
+                <col style="width:70px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan="2">데이터 종류</th>
+                    <th>시간대<br> 설정</th>
+                    <th>파일이름 패턴</th>
+                    <th>파일이름 정규식 </th>
+                    <th>누락처리<br> 지연시간 </th>
+                    <th>자료 감시<br> 설정 </th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                
+                
+                    <tr>
+                        <th colspan="7">
+                        
+                            
+                                레이더
+                            
+                            
+                        
+                            
+                        </th>
+                    </tr>
+                    
+                
+                <tr>
+                    <td>
+                        <input type="hidden" name="receiveSettings[0].data_type" value="LNG">
+                        <input type="hidden" name="receiveSettings[0].data_kind" value="RDR">
+                        LNG
+                    </td>
+                    <td>
+                        <input type="hidden" name="receiveSettings[0].data_name" value="강수량 자료">
+                        강수량 자료
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light tz" id="tzt-0" data-toggle-on="false" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">UTC</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">KST</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[0].time_zone" id="tzi-0" value="K">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[0].filename_pattern" class="namePattern" value="RDR_%site%_LNG_%yyyyMMddHHmm%.uf">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[0].filename_regex" class="nameRegex" value="RDR_[A-Z]+_LNG_[0-9]+\.uf">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[0].delay_tolerance" class="rccset" value="10">분
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light pmt" id="pmt-0" data-toggle-on="0" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[0].permitted_watch" id="pmi-0" value="0">
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td>
+                        <input type="hidden" name="receiveSettings[1].data_type" value="NQC">
+                        <input type="hidden" name="receiveSettings[1].data_kind" value="RDR">
+                        NQC
+                    </td>
+                    <td>
+                        <input type="hidden" name="receiveSettings[1].data_name" value="이진자료">
+                        이진자료
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light tz" id="tzt-1" data-toggle-on="false" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">UTC</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">KST</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[1].time_zone" id="tzi-1" value="K">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[1].filename_pattern" class="namePattern" value="RDR_%site%_RAW_%yyyyMMddHHmm%.nc">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[1].filename_regex" class="nameRegex" value="RDR_[A-Z]+_RAW_[0-9]+\.nc">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[1].delay_tolerance" class="rccset" value="15">분
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light pmt" id="pmt-1" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[1].permitted_watch" id="pmi-1" value="1">
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td>
+                        <input type="hidden" name="receiveSettings[2].data_type" value="PCP">
+                        <input type="hidden" name="receiveSettings[2].data_kind" value="RDR">
+                        PCP
+                    </td>
+                    <td>
+                        <input type="hidden" name="receiveSettings[2].data_name" value="1시간 추정 강수량 자료">
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light tz" id="tzt-2" data-toggle-on="false" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">UTC</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">KST</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[2].time_zone" id="tzi-2" value="K">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[2].filename_pattern" class="namePattern" value="RDR_%site%_%yyyyMMddHHmm%.pcp.gz">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[2].filename_regex" class="nameRegex" value="RDR_[A-Z]+_[0-9]+\.pcp\.gz">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[2].delay_tolerance" class="rccset" value="10">분
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light pmt" id="pmt-2" data-toggle-on="0" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[2].permitted_watch" id="pmi-2" value="0">
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td>
+                        <input type="hidden" name="receiveSettings[3].data_type" value="PNG">
+                        <input type="hidden" name="receiveSettings[3].data_kind" value="RDR">
+                        PNG
+                    </td>
+                    <td>
+                        <input type="hidden" name="receiveSettings[3].data_name" value="이미지 자료">
+                        이미지 자료
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light tz" id="tzt-3" data-toggle-on="false" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">UTC</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">KST</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[3].time_zone" id="tzi-3" value="K">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[3].filename_pattern" class="namePattern" value="RDR_%site%_%yyyyMMddHHmm%.png">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[3].filename_regex" class="nameRegex" value="RDR_[A-Z]+_[0-9]+\.png">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[3].delay_tolerance" class="rccset" value="10">분
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light pmt" id="pmt-3" data-toggle-on="0" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[3].permitted_watch" id="pmi-3" value="0">
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td>
+                        <input type="hidden" name="receiveSettings[4].data_type" value="QCD">
+                        <input type="hidden" name="receiveSettings[4].data_kind" value="RDR">
+                        QCD
+                    </td>
+                    <td>
+                        <input type="hidden" name="receiveSettings[4].data_name" value="품질관리 자료">
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light tz" id="tzt-4" data-toggle-on="false" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">UTC</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">KST</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[4].time_zone" id="tzi-4" value="K">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[4].filename_pattern" class="namePattern" value="RDR_%site%_QCD_%yyyyMMddHHmm%.uf">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[4].filename_regex" class="nameRegex" value="RDR_[A-Z]+_QCD_[0-9]+\.uf">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[4].delay_tolerance" class="rccset" value="10">분
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light pmt" id="pmt-4" data-toggle-on="0" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[4].permitted_watch" id="pmi-4" value="0">
+                    </td>
+                </tr>
+                
+                
+                    <tr>
+                        <th colspan="7">
+                        
+                            
+                            
+                                낙뢰 
+                            
+                        
+                            
+                        </th>
+                    </tr>
+                    
+                
+                <tr>
+                    <td>
+                        <input type="hidden" name="receiveSettings[5].data_type" value="10M">
+                        <input type="hidden" name="receiveSettings[5].data_kind" value="LGT">
+                        10M
+                    </td>
+                    <td>
+                        <input type="hidden" name="receiveSettings[5].data_name" value="10분 영상">
+                        10분 영상
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light tz" id="tzt-5" data-toggle-on="false" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">UTC</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">KST</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[5].time_zone" id="tzi-5" value="K">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[5].filename_pattern" class="namePattern" value="LGT_10M_%yyyyMMddHHmm%.png">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[5].filename_regex" class="nameRegex" value="LGT_10M_[0-9]+\.png">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[5].delay_tolerance" class="rccset" value="15">분
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light pmt" id="pmt-5" data-toggle-on="0" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[5].permitted_watch" id="pmi-5" value="0">
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td>
+                        <input type="hidden" name="receiveSettings[6].data_type" value="KMA">
+                        <input type="hidden" name="receiveSettings[6].data_kind" value="LGT">
+                        KMA
+                    </td>
+                    <td>
+                        <input type="hidden" name="receiveSettings[6].data_name" value="관측자료">
+                        관측자료
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light tz" id="tzt-6" data-toggle-on="false" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">UTC</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">KST</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[6].time_zone" id="tzi-6" value="K">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[6].filename_pattern" class="namePattern" value="LGT_KMA_%yyyyMMddHHmm%.asc">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[6].filename_regex" class="nameRegex" value="LGT_KMA_[0-9]+\.asc">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[6].delay_tolerance" class="rccset" value="10">분
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light pmt" id="pmt-6" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[6].permitted_watch" id="pmi-6" value="1">
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td>
+                        <input type="hidden" name="receiveSettings[7].data_type" value="RDR">
+                        <input type="hidden" name="receiveSettings[7].data_kind" value="LGT">
+                        RDR
+                    </td>
+                    <td>
+                        <input type="hidden" name="receiveSettings[7].data_name" value="낙뢰-레이더 합성">
+                        낙뢰-레이더 합성
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light tz" id="tzt-7" data-toggle-on="false" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">UTC</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">KST</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[7].time_zone" id="tzi-7" value="K">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[7].filename_pattern" class="namePattern" value="LGT_RDR_%yyyyMMddHHmm%.png">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[7].filename_regex" class="nameRegex" value="LGT_RDR_[0-9]+\.png">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[7].delay_tolerance" class="rccset" value="10">분
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light pmt" id="pmt-7" data-toggle-on="0" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[7].permitted_watch" id="pmi-7" value="0">
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td>
+                        <input type="hidden" name="receiveSettings[8].data_type" value="SAT">
+                        <input type="hidden" name="receiveSettings[8].data_kind" value="LGT">
+                        SAT
+                    </td>
+                    <td>
+                        <input type="hidden" name="receiveSettings[8].data_name" value="낙뢰-위성 합성">
+                        낙뢰-위성 합성
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light tz" id="tzt-8" data-toggle-on="false" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">UTC</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">KST</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[8].time_zone" id="tzi-8" value="K">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[8].filename_pattern" class="namePattern" value="LGT_SAT_%yyyyMMddHHmm%.png">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[8].filename_regex" class="nameRegex" value="LGT_SAT_[0-9]+\.png">
+                    </td>
+                    <td>
+                        <input type="text" name="receiveSettings[8].delay_tolerance" class="rccset" value="10">분
+                    </td>
+                    <td>
+                        <div class="toggle toggle-light pmt" id="pmt-8" data-toggle-on="0" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 80px; margin-left: -30px;"><div class="toggle-on" style="height: 20px; width: 40px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off active" style="height: 20px; width: 40px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+                        <input type="hidden" name="receiveSettings[8].permitted_watch" id="pmi-8" value="0">
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <table class="noticeTbl settingSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                    
+                </th>
+                <th class="right">
+                    <input type="submit" value="설정저장">
+                </th>
+            </tr>
+            </thead>
+        </table>
+        </form>
+    </th:block>
+</html>

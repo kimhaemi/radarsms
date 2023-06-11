@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='전체 감시'">
+
+    <th:block layout:fragment="content">
+        <link rel="stylesheet" type="text/css" href="/css/jquery.jqplot.css">
+        <script type="text/javascript" src="/js/jquery.jqplot.min.js"></script>
+        <script type="text/javascript" src="/js/plugins/jqplot.canvasTextRenderer.min.js"></script>
+        <script type="text/javascript" src="/js/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+        <script type="text/javascript" src="/js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+        <script type="text/javascript" src="/js/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+        
+        <script type="text/javascript">
+        var sColor = [ "#F7B9D9", "#FFCCCC", "#FFDDA6", "#CCD1FF", "#B8F3B8", "#A9E2C5", "#2ED7D2", "#EBDBC4"];
+        var sValue = [];
+        var sLabel = ["수신자료","지연수신","수신누락"];
+        var sTicks = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+        var sVal = {
+        
+            "NQC" : [
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0] ]
+        };
+        
+        var getMonthStat = function(){
+            // var url = "month_rdr_kwk.do?statYear="+$("#statYear :selected").val();
+            // $(location).attr('href',url);
+        }
+        var drawPlot = function(){
+            $("#monthLine").empty();
+            sValue=sVal[$("#statType :selected").val()];
+            var plot1 = $.jqplot('monthLine', sValue, 
+                    {
+                        axes: {
+                            xaxis: {
+                                renderer:$.jqplot.CategoryAxisRenderer, 
+                                ticks:sTicks,
+                                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                                pad: 0
+                            },
+                            yaxis: {
+                                label: "건수",
+                                pad: 0
+                            }
+                        },
+                        seriesDefaults: {
+                            lineWidth:1, 
+                            markerOptions: { style:'circle', size:3 },
+                            rendererOptions: {
+                                smooth: true
+                            }
+                        },
+                        series:[
+                        ],
+                        legend: {
+                            renderer: $.jqplot.EnhancedLegendRenderer,
+                            placement: 'outsideGrid',
+                            labels: sLabel,
+                            marginTop: 0,
+                            show: true,
+                            location: 'e',
+                            rendererOptions: {
+                                seriesToggle: false,
+                                disableIEFading: true
+                            }
+                        },
+                        seriesColors: sColor 
+                    }
+                );
+        }
+        
+        $(document).ready(function(){
+            drawPlot();
+        });
+        </script>
+        
+        <form action="" method="post" target="_self" id="searchDate">
+        <input type="hidden" name="termStart" id="termStart">
+        <input type="hidden" name="termClose" id="termClose">
+
+        <table class="noticeTbl searchSeries">
+        <colgroup>
+            <col style="width:auto;">
+            <col style="width:100px;">
+            <col style="width:34px;">
+            <col style="width:205px;">
+            <col style="width:34px;">
+        </colgroup>
+            <thead>
+            <tr>
+                <th class="left">
+                    지점별 통계 &gt; <span class="radar"> 관악산 레이더</span>
+                </th>
+                <th class="right">
+                    <select name="statYear" id="statYear" class="">
+                        
+                        <option value="2013">2013년도</option>
+                        
+                        <option value="2014">2014년도</option>
+                        
+                        <option value="2015">2015년도</option>
+                        
+                        <option value="2016">2016년도</option>
+                        
+                        <option value="2017">2017년도</option>
+                        
+                        <option value="2018">2018년도</option>
+                        
+                        <option value="2019">2019년도</option>
+                        
+                        <option value="2020">2020년도</option>
+                        
+                        <option value="2021">2021년도</option>
+                        
+                        <option value="2022">2022년도</option>
+                        
+                        <option value="2023" selected="selected">2023년도</option>
+                        
+                    </select>
+                </th>
+                <th class="right">
+                    <input type="button" onclick="getMonthStat()" value="조회" style="height:18px;/*line-height: 12px;*/">
+                </th>
+                <th class="right">
+                    <select name="statType" id="statType" class="">
+                        
+                        <option value="NQC">이진자료</option>
+                        
+                    </select>
+                </th>
+                <th class="right">
+                    <input type="button" onclick="drawPlot()" value="조회" style="height:18px;/*line-height: 12px;*/">
+                </th>
+            </tr>
+            </thead>
+        </table>
+        </form>
+        
+        <div class="monthLine jqplot-target" id="monthLine" style="position: relative;"><canvas width="800" height="400" class="jqplot-base-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas><div class="jqplot-title" style="height: 0px; width: 0px;"></div><div class="jqplot-axis jqplot-xaxis" style="position: absolute; width: 800px; height: 15px; left: 0px; bottom: 0px;"><canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 66.5417px;"></canvas><canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 121.625px;"></canvas><canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 176.708px;"></canvas><canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 231.792px;"></canvas><canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 286.875px;"></canvas><canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 341.958px;"></canvas><canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 397.042px;"></canvas><canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 452.125px;"></canvas><canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 507.208px;"></canvas><canvas width="27" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 558.792px;"></canvas><canvas width="27" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 613.875px;"></canvas><canvas width="27" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 668.958px;"></canvas></div><div class="jqplot-axis jqplot-yaxis" style="position: absolute; height: 400px; width: 39px; left: 0px; top: 0px;"><div style="position: absolute; width: 25px; top: 174.5px; left: 0px;" class="jqplot-yaxis-label">건수</div><div class="jqplot-yaxis-tick" style="position: absolute; top: 366px;">0.0</div><div class="jqplot-yaxis-tick" style="position: absolute; top: 293px;">0.2</div><div class="jqplot-yaxis-tick" style="position: absolute; top: 220px;">0.4</div><div class="jqplot-yaxis-tick" style="position: absolute; top: 147px;">0.6</div><div class="jqplot-yaxis-tick" style="position: absolute; top: 74px;">0.8</div><div class="jqplot-yaxis-tick" style="position: absolute; top: 1px;">1.0</div></div><canvas width="800" height="400" class="jqplot-grid-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas><canvas width="661" height="365" class="jqplot-series-shadowCanvas" style="position: absolute; left: 49px; top: 10px;"></canvas><canvas width="661" height="365" class="jqplot-series-shadowCanvas" style="position: absolute; left: 49px; top: 10px;"></canvas><canvas width="661" height="365" class="jqplot-series-shadowCanvas" style="position: absolute; left: 49px; top: 10px;"></canvas><canvas width="661" height="365" class="jqplot-series-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas><canvas width="661" height="365" class="jqplot-series-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas><canvas width="661" height="365" class="jqplot-series-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas><table class="jqplot-table-legend" style="position: absolute; margin-top: 0px; right: 0px; top: 163.5px;"><tbody><tr class="jqplot-table-legend"><td class="jqplot-table-legend jqplot-table-legend-swatch" style="text-align: center; padding-top: 0px;"><div class="jqplot-table-legend-swatch-outline"><div class="jqplot-table-legend-swatch" style="background-color: rgb(247, 185, 217); border-color: rgb(247, 185, 217);"></div></div></td><td class="jqplot-table-legend jqplot-table-legend-label" style="padding-top: 0px;">수신자료</td></tr><tr class="jqplot-table-legend"><td class="jqplot-table-legend jqplot-table-legend-swatch" style="text-align: center; padding-top: 0.5em;"><div class="jqplot-table-legend-swatch-outline"><div class="jqplot-table-legend-swatch" style="background-color: rgb(255, 204, 204); border-color: rgb(255, 204, 204);"></div></div></td><td class="jqplot-table-legend jqplot-table-legend-label" style="padding-top: 0.5em;">지연수신</td></tr><tr class="jqplot-table-legend"><td class="jqplot-table-legend jqplot-table-legend-swatch" style="text-align: center; padding-top: 0.5em;"><div class="jqplot-table-legend-swatch-outline"><div class="jqplot-table-legend-swatch" style="background-color: rgb(255, 221, 166); border-color: rgb(255, 221, 166);"></div></div></td><td class="jqplot-table-legend jqplot-table-legend-label" style="padding-top: 0.5em;">수신누락</td></tr></tbody></table><canvas width="661" height="365" class="jqplot-lineRenderer-highlight-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas><canvas width="661" height="365" class="jqplot-event-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas></div>	
+        
+        <div class="monthTable">
+        
+            <table class="mainTbl statTbl" summary="">
+                <caption class="hidden">월간 수신률</caption>
+                    <colgroup>
+                        <col class="title">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                        <col class="month">
+                    </colgroup>
+                
+                <thead>
+                    <tr>
+                        <th rowspan="2" colspan="2">항목</th>
+                        <th colspan="12">관악산 레이더</th>
+                    </tr>
+                    <tr>
+                    
+                        <th>1월</th>
+                    
+                        <th>2월</th>
+                    
+                        <th>3월</th>
+                    
+                        <th>4월</th>
+                    
+                        <th>5월</th>
+                    
+                        <th>6월</th>
+                    
+                        <th>7월</th>
+                    
+                        <th>8월</th>
+                    
+                        <th>9월</th>
+                    
+                        <th>10월</th>
+                    
+                        <th>11월</th>
+                    
+                        <th>12월</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td rowspan="3">
+                            이진자료
+
+                        </td>
+                        <td>
+                            수신자료
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            지연수신
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td>
+                            수신누락
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                        <td>
+                            
+                            
+                            
+                                - 
+                            
+                            
+                        </td>
+                        
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </th:block>
+</html>

@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='전체 감시'">
+
+	<th:block layout:fragment="content">
+        <script type="text/javascript">
+        $(function() {
+            $('.toggle').toggles();
+            $('.toggle').on('toggle', function (e, active) {
+                var targetId=e.target.id.replace("toggle","id");
+                if (active) {
+                    $("#"+targetId).val("1");
+                } else {
+                    $("#"+targetId).val("0");
+                }
+            });
+            $('a.btn').button();
+            $('input.back').click(function(e){
+                window.location.href = "/manage/sms_target_group";
+            });
+        });
+        </script>
+
+        <table class="noticeTbl searchSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                    관리 &gt; 그룹 관리 &gt; [ [1그룹] 관악 백령 광덕 면봉 ] 그룹 감시 자료 설정
+                </th>
+                <th class="right">
+                    <input type="button" class="back" value="그룹관리로 돌아가기">
+                </th>
+            </tr>
+            </thead>
+        </table>
+
+        <table class="mainTbl searchSeries" summary="">
+            <caption class="hidden">그룹 관리</caption>
+            <colgroup>
+                <col style="width:100px">
+                <col style="width:120px">
+                <col style="width:100px">
+                <col>
+                <col style="width:140px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan="5">
+                        [1그룹] 관악 백령 광덕 면봉 그룹에게 문자가 통보되는 지점별 데이터 목록
+                    </th>
+                </tr>
+                <tr>
+                    <th>구분</th>
+                    <th>지점</th>
+                    <th colspan="2">데이터</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            관악산
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="/manage/sms_target_group_unlink?id=2&amp;k=RDR&amp;t=NQC&amp;s=KWK" role="button"><span class="ui-button-text">연결 삭제</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            광덕산
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_unlink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=GDK" role="button"><span class="ui-button-text">연결 삭제</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            면봉산
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_unlink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=MYN" role="button"><span class="ui-button-text">연결 삭제</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            백령도
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_unlink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=BRI" role="button"><span class="ui-button-text">연결 삭제</span></a>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <table class="noticeTbl searchSeries">
+            <thead>
+            <tr>
+                <th class="left">
+
+                </th>
+                <th class="right">
+                    <input type="button" class="back" value="그룹관리로 돌아가기">
+                </th>
+            </tr>
+            </thead>
+        </table>
+
+        <table class="mainTbl searchSeries" summary="">
+            <caption class="hidden">그룹 관리</caption>
+            <colgroup>
+                <col style="width:100px">
+                <col style="width:120px">
+                <col style="width:100px">
+                <col>
+                <col style="width:140px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan="5">
+                        [1그룹] 관악 백령 광덕 면봉 그룹에게 문자가 통보되도록 추가할 수 있는 지점별 데이터 목록
+                    </th>
+                </tr>
+                <tr>
+                    <th>구분</th>
+                    <th>지점</th>
+                    <th colspan="2">데이터</th>
+                    <th>추가</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            강릉
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=GNG" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            강릉
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=GNG" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            강릉
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=GNG" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            강릉
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=GNG" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            고산
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=GSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            고산
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=GSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            고산
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=GSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            고산
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=GSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            관악산
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=KWK" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            관악산
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=KWK" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            관악산
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=KWK" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            광덕산
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=GDK" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            광덕산
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=GDK" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            광덕산
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=GDK" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            구덕산
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=PSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            구덕산
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=PSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            구덕산
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=PSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            구덕산
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=PSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            면봉산
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=MYN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            면봉산
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=MYN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            면봉산
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=MYN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            백령도
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=BRI" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            백령도
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=BRI" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            백령도
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=BRI" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            성산
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=SSP" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            성산
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=SSP" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            성산
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=SSP" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            성산
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=SSP" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            영종도
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=IIA" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            영종도
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=IIA" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            영종도
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=IIA" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            영종도
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=IIA" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            오성산
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=KSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            오성산
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=KSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            오성산
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=KSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            오성산
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=KSN" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            진도
+                            
+                        
+                    </td>
+                    <td>
+                        LNG
+                    </td>
+                    <td>
+                        강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=LNG&amp;s=JNI" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            진도
+                            
+                        
+                    </td>
+                    <td>
+                        NQC
+                    </td>
+                    <td>
+                        이진자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=NQC&amp;s=JNI" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            진도
+                            
+                        
+                    </td>
+                    <td>
+                        PCP
+                    </td>
+                    <td>
+                        1시간 추정 강수량 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=PCP&amp;s=JNI" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            레이더
+                            
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            진도
+                            
+                        
+                    </td>
+                    <td>
+                        QCD
+                    </td>
+                    <td>
+                        품질관리 자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=RDR&amp;t=QCD&amp;s=JNI" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            
+                            
+                            낙뢰
+                        
+                    </td>
+                    <td>
+                        
+                            
+                            -
+                        
+                    </td>
+                    <td>
+                        10M
+                    </td>
+                    <td>
+                        10분 영상
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=LGT&amp;t=10M&amp;s=LGT" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            
+                            
+                            낙뢰
+                        
+                    </td>
+                    <td>
+                        
+                            
+                            -
+                        
+                    </td>
+                    <td>
+                        KMA
+                    </td>
+                    <td>
+                        관측자료
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=LGT&amp;t=KMA&amp;s=LGT" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            
+                            
+                            낙뢰
+                        
+                    </td>
+                    <td>
+                        
+                            
+                            -
+                        
+                    </td>
+                    <td>
+                        RDR
+                    </td>
+                    <td>
+                        낙뢰-레이더 합성
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=LGT&amp;t=RDR&amp;s=LGT" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            
+                            
+                            낙뢰
+                        
+                    </td>
+                    <td>
+                        
+                            
+                            -
+                        
+                    </td>
+                    <td>
+                        SAT
+                    </td>
+                    <td>
+                        낙뢰-위성 합성
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=LGT&amp;t=SAT&amp;s=LGT" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        
+                            
+                            네트워크
+                            
+                        
+                    </td>
+                    <td>
+                        
+                            
+                            -
+                        
+                    </td>
+                    <td>
+                        not
+                    </td>
+                    <td>
+                        네트워크 장애 여부
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_group_mklink.do?id=2&amp;k=all&amp;t=not&amp;s=net" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <table class="noticeTbl searchSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                </th>
+                <th class="right">
+                    <input type="button" class="back" value="그룹관리로 돌아가기">
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </th:block>
+</html>

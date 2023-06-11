@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='전체 감시'">
+
+	<th:block layout:fragment="content">
+        <script type="text/javascript">
+            $(function() {
+                $('.toggle').toggles();
+                $('.toggle').on('toggle', function (e, active) {
+                    var targetId=e.target.id.replace("toggle","id");
+                    if (active) {
+                        $("#"+targetId).val("1");
+                    } else {
+                        $("#"+targetId).val("0");
+                    }
+                });
+                $('input.back').click(function(e){
+                    window.location.href = "/manage/sms_target_group";
+                });
+            });
+        </script>
+     
+        <table class="noticeTbl searchSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                    관리 &gt; 상시 문자 수신 그룹 관리
+                </th>
+                <th class="right">
+                </th>
+            </tr>
+            </thead>
+        </table>
+        
+        <table class="mainTbl searchSeries" summary="">
+            <caption class="hidden">그룹 관리</caption>
+            <colgroup>
+                <col style="width:90px">
+                <col style="width:120px">
+                <col style="width:120px">
+                <col style="width:200px">
+                <col>
+                <col style="width:140px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan="6">
+                        정상 자료 수신 시 1일 3회 보내는 문자 전송받을 수신자
+                    </th>
+                </tr>
+                <tr>
+                    <th>성명</th>
+                    <th>직책</th>
+                    <th>부서</th>
+                    <th>소속</th>
+                    <th>연락처</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <table class="mainTbl searchSeries">
+            <thead>
+            <tr>
+                <th class="phead">
+                    &nbsp;
+                </th>
+                <th class="ptail">
+                </th>
+            </tr>
+            </thead>
+        </table>
+        
+        <table class="mainTbl searchSeries" summary="">
+            <caption class="hidden">그룹 관리</caption>
+            <colgroup>
+                <col style="width:90px">
+                <col style="width:120px">
+                <col style="width:120px">
+                <col style="width:200px">
+                <col>
+                <col style="width:140px">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th colspan="6">
+                        정상 자료 수신 시 1일 3회 보내는 문자 전송받지 않는 수신자
+                    </th>
+                </tr>
+                <tr>
+                    <th>성명</th>
+                    <th>직책</th>
+                    <th>부서</th>
+                    <th>소속</th>
+                    <th>연락처</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>
+                        권두순
+                    </td>
+                    <td>
+                        사무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-4464-6988
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=154" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        김경희
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-7160-2959
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=117" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        김성수
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-6291-3978
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=158" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        김성원
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-4658-5229
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=110" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        김용제
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        인탭
+                    </td>
+                    <td>
+                        010-9618-1205
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=144" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        김지훈
+                    </td>
+                    <td>
+                        책임기술자
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        킴스앤
+                    </td>
+                    <td>
+                        010-4249-4214
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=122" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        나기생
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        인탭
+                    </td>
+                    <td>
+                        010-7353-9496
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=143" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        남호진
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-4613-2205
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=134" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        노수명
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        세인에스앤씨
+                    </td>
+                    <td>
+                        010-6277-6545
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=147" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        노준상
+                    </td>
+                    <td>
+                        참여기술자
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        킴스앤
+                    </td>
+                    <td>
+                        010-8518-6240
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=124" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        박충신
+                    </td>
+                    <td>
+                        사무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        010-2738-7539
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=133" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        백승록
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-6694-1364
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=156" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        서현옥
+                    </td>
+                    <td>
+                        참여기술자
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        킴스앤
+                    </td>
+                    <td>
+                        010-3745-6629
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=123" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        신상창
+                    </td>
+                    <td>
+                        부장
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        세인에스앤씨
+                    </td>
+                    <td>
+                        010-4264-7793
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=113" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        오윤석
+                    </td>
+                    <td>
+                        대리
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        세인에스앤씨
+                    </td>
+                    <td>
+                        010-9138-7513
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=50" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        오창록
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-4613-8677
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=53" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        유충길
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-9774-0010
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=160" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        이승표
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-9116-3178
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=142" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        이종환
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-2215-7654
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=159" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        임덕빈
+                    </td>
+                    <td>
+                        과장
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-8287-7357
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=139" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        임무승
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        킴스앤
+                    </td>
+                    <td>
+                        010-3370-6843
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=153" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        임병희
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-2704-7408
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=138" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        장복수
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-2479-2685
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=97" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        전종혁
+                    </td>
+                    <td>
+                        주무관
+                    </td>
+                    <td>
+                        레이더운영과
+                    </td>
+                    <td>
+                        기상청
+                    </td>
+                    <td>
+                        010-9316-2113
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=108" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        정시목
+                    </td>
+                    <td>
+                        이사
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        코엠정보통신
+                    </td>
+                    <td>
+                        010-3300-9365
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=96" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        정준석
+                    </td>
+                    <td>
+                        대리
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        코엠정보통신
+                    </td>
+                    <td>
+                        010-8820-4829
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=47" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        조민호
+                    </td>
+                    <td>
+                        대리
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        코엠정보통싱
+                    </td>
+                    <td>
+                        010-7224-1905
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=140" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        조수만
+                    </td>
+                    <td>
+                        대표이사
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        코엠정보통신
+                    </td>
+                    <td>
+                        010-7235-9365
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=112" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        조재욱
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        세인에스앤씨
+                    </td>
+                    <td>
+                        010-8765-1276
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=146" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        최성호
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        인탭
+                    </td>
+                    <td>
+                        010-2860-7962
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=145" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        홍경화
+                    </td>
+                    <td>
+                        
+                    </td>
+                    <td>
+                        유지보수업체
+                    </td>
+                    <td>
+                        코엠정보통신
+                    </td>
+                    <td>
+                        010-4208-7098
+                    </td>
+                    <td>
+                        <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="sms_target_monitorgroup_mklink.do?m=141" role="button"><span class="ui-button-text">연결 추가</span></a>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <table class="noticeTbl searchSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                    
+                </th>
+                <th class="right">
+                    &nbsp;
+                </th>
+            </tr>
+            </thead>
+        </table>
+    </th:block>
+</html>
