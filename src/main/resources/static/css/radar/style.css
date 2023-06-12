@@ -46,7 +46,7 @@
 .nav > li:hover::after,
 .nav > .on::after{display:inline-block;content:"";width:0;height:0;border:7px solid #0461c0;border-bottom-color:transparent;border-right-color:transparent; transform:rotate(45deg);position:absolute;top:55px;left:50%;margin-left:-5px;}
 /* .sub{display:none;position:absolute;left:50%;top:60px;width:180px;z-index:1400;overflow:hidden;box-sizing:border-box;background-color:#003964;margin-left:-90px;box-shadow:0 0 5px rgba(0,0,0,.5);box-sizing:border-box;} */
-.sub{ border-radius: 10px;
+.sub{ border-radius: 8px;
     display:none;position:absolute;left:50%;top:60px;width:250px;z-index:1400;overflow:hidden;box-sizing:border-box;
     background-color:#ffffff;margin-left:-90px;box-shadow:0 0 5px rgb(47, 0, 255);box-sizing:border-box;}
 .sub li{display:block;}

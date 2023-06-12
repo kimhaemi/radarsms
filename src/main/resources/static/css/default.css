@@ -8,7 +8,7 @@ ol,ul,li{list-style: none;}
 img{border:0 none;}
 table {
 	/* border-collapse:collapse; */
-	border-radius: 10px;
+	border-radius: 8px;
 }
 input, button {vertical-align:middle;}
 
@@ -616,8 +616,9 @@ input, select {
  
 .mainTbl {border:1px solid #838383; width:246px; float:left; margin:2px;} 
 .mainTbl.on {background: #EBF6FC;font-weight:bold;}
-.mainTbl.on th a {color: #f41138;} 
-.mainTbl.lgtTbl {width:246px;}
+.mainTbl.on th a {color: #f41138;}
+/* 소형 */
+.mainTbl.small {width:246px;}
 .mainTbl th, .mainTbl td{text-align: center; padding: 1px 2px; }
 .mainTbl thead th {background: url(../images/tbl_head_bar1.png) repeat-x;
 background-size: 10px 66px;

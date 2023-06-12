@@ -114,7 +114,7 @@ input, textarea {border:1px solid #a9a9a9;color:#333;vertical-align:middle;}
 .fl{float:left !important;}
 .fr{float:right !important;}
 
-/* .clearfix{*zoom:1;} */
+.clearfix{*zoom:1;}
 .clearfix::before,
 .clearfix::after{display:block;content:"";line-height:0;}
 .clearfix::after{clear:both;}
@@ -171,7 +171,7 @@ input, textarea {border:1px solid #a9a9a9;color:#333;vertical-align:middle;}
 .axi_v_prev::before{content:"\f04a";margin-left:-1px;}
 .axi_v_next::before{content:"\f04e";margin-right:-1px;}
 
-.btn_toggle{position:relative;width:60px;height:20px;background-color:#2e66aa;border-radius:10px;vertical-align:middle;padding:0 5px;box-sizing:border-box;font-size:0;border:1px solid;}
+.btn_toggle{position:relative;width:60px;height:20px;background-color:#2e66aa;border-radius:8px;vertical-align:middle;padding:0 5px;box-sizing:border-box;font-size:0;border:1px solid;}
 .btn_toggle[disabled]{cursor:default;}
 .btn_toggle::before{position:absolute;top:1px;display:inline-block;content:"";width:16px;height:16px;background-color:#fff;border-radius:50%;}
 .btn_toggle::after{font-size:12px;line-height:17px;color:#fff;letter-spacing:0;}
