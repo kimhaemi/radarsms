@@ -236,7 +236,7 @@ border-bottom: 1px solid #0046a6;
 .amosCtrl_tbl2 { float: left; margin: 10px 0 20px 10px; width: 85px; font-size: 12px;}
 .amosCtrl_tbl2 thead th.start {color: #ffffff; font-weight: bold;height: 20px;background: #f57a20;border-top: 1px solid #ff3c00;border-bottom: 1px solid #f47111;border-left: 1px solid #f47111;border-right: 1px solid #f47111;}
 .amosCtrl_tbl2 thead th.start2 {color: #555555; height: 20px;background: #fff2e8;border-top: 1px solid #f47111;border-bottom: 1px solid #f47111;border-right: 1px solid #f47111;border-left: 1px solid #f47111;}
-.amosCtrl_tbl2 thead td.end2 {color: #555555;height: 20px;background: :#ffffff;border-top: 1px solid #f47111;border-bottom: 1px solid #f47111;border-right: 1px solid #f47111;border-left: 1px solid #47111;}
+.amosCtrl_tbl2 thead td.end2 {color: #555555;height: 20px;background: #ffffff;border-top: 1px solid #f47111;border-bottom: 1px solid #f47111;border-right: 1px solid #f47111;border-left: 1px solid #f47111;}
 .amosCtrl_tbl3 {float: left; margin: -15px 0 20px 10px; width: 230px; font-size: 12px;}
 /*       */
 .amosCtrl_tbl3 thead tr th.start{color:#ffffff; height:20px; background:#628fcc; border-top:1px solid #0046a6; border-bottom:1px solid #2e65b0; border-left:1px solid #2e65b0; border-right:1px solid #2e65b0}
@@ -254,7 +254,7 @@ border-bottom: 1px solid #0046a6;
 .amosCtrl_tbl4 thead td.end{color:#555555; height:20px;background:#628fcc; border-top:1px solid #0046a6; border-bottom:1px solid #2e65b0; border-right:1px solid #2e65b0; border-left:1px solid #2e65b0}
 .amosCtrl_tbl4 thead td.start2{color:#0046a6; height:20px;background:#ecf0f7; border-top:1px solid #0046a6; border-bottom:1px solid #a4a4a4; border-left:1px solid #a4a4a4;line-height:1.5}
 .amosCtrl_tbl4 thead td{color:#555555; height:20px;background:#ffffff; border-top:1px solid #a4a4a4; border-bottom:1px solid #a4a4a4; border-left:1px solid #a4a4a4;border-right:1px solid #a4a4a4}
-.amosCtrl_tbl4 thead td.end2{color:#555555; height:20px;background::#ffffff; border-top:1px solid #2e65b0; border-bottom:1px solid #a4a4a4; border-right:1px solid #a4a4a4; border-left:1px solid #a4a4a4}
+.amosCtrl_tbl4 thead td.end2{color:#555555; height:20px;background:#ffffff; border-top:1px solid #2e65b0; border-bottom:1px solid #a4a4a4; border-right:1px solid #a4a4a4; border-left:1px solid #a4a4a4}
 /*       */
 .btn_blue{color:#ffffff; background:url('../images/btn_blue.gif') no-repeat; width:45px; height:27px; text-align:center;font-weight:bold;border:0px solid #ffffff; font-size:13px}
 .btn_white{color:#2e70b6; background:url('../images/btn_white.gif') no-repeat; width:45px; height:27px; text-align:center;font-weight:bold;border:0px solid #ffffff;font-size:13px}
@@ -597,7 +597,7 @@ input, select {
 .toggle{text-align:center;border-collapse:separate;}
 
 .status{
-	width:24px;height:24px;background-position:center;margin:auto;url(../images/watchcon/status_unknown.png);background-size:100% 100%;
+	width:24px;height:24px;background-position:center;margin:auto;background: url(../images/watchcon/status_unknown.png);background-size:100% 100%;
 }
 .status.TOTA{background:url(../images/watchcon/status_TOTA.png);background-size:100% 100%;}
 .status.ORDI{background:url(../images/watchcon/status_ORDI.png);background-size:100% 100%;}
@@ -607,7 +607,7 @@ input, select {
 .status.MRO {background:url(../images/watchcon/status_MRO.png);background-size:100% 100%;}
 
 .recv{
-	width:24px;height:24px;background-position:center;margin:auto;url(../images/watchcon/recv_unknown.png);background-size:100% 100%;
+	width:24px;height:24px;background-position:center;margin:auto;background: url(../images/watchcon/recv_unknown.png);background-size:100% 100%;
 }
 .recv.INIT{background:url(../images/watchcon/recv_INIT.png);}
 .recv.MISS{background:url(../images/watchcon/recv_MISS.png);}
