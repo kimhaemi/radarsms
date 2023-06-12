@@ -67,11 +67,11 @@ table.view td{padding-left:15px;}
 table.view td div{min-height:275px;}
 
 
-table{border-collapse:collapse;}
-table td.last,table th.last{border-right:none}
+/* table{border-collapse:collapse;} */
+/* table td.last,table th.last{border-right:none}
 table td.center,table th.center{text-align:center}
 table td.left,table th.left{text-align:left}
-table td.right,table th.right{text-align:right}
+table td.right,table th.right{text-align:right} */
 
 /* sub */
 h1.logo{text-align:center;padding:20px 0;}

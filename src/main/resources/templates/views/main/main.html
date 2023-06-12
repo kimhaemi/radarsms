@@ -4,7 +4,33 @@
       th:with="metaTitle='전체 감시'">
 
 	<th:block layout:fragment="content">
+		<script type="text/javascript">
+			var alertToggle;
+			$(document).ready(function(){
+			  $("#nowTime").text(nowTime());
+			  window.setInterval(function(){
+				$("#nowTime").text(nowTime());
+			  },1000);
+			  window.setInterval(function(){
+				alertCheck2();
+				f5Station();
+			  },30000);
+			  alertToggle=$('.toggle').data('toggles');
+			});
+			$(function(){
+			  $('.toggle').toggles();
+			  $('.toggle').on('toggle', function (e, active) {
+				if (active) {
+				  $("#alert_activity").val("1");
+				} else {
+				  $("#alert_activity").val("0");
+				}
+			  });
+			});
+		  </script>
+
 		<div id="contentMain">
+			
 			<table class="noticeTbl mainSeries">
 				<colgroup>
 					<col style="width:auto">
@@ -16,7 +42,7 @@
 				<thead>
 					<tr>
 						<th class="left">
-							전체 사이트 감시
+							<!-- 전체 사이트 감시 -->
 						</th>
 						<th class="left">알람설정:</th>
 						<th class="center toggle-light">
@@ -80,10 +106,10 @@
 						<tr>
 							<th colspan="2"><a href="/station/kwk.do" class="radar">관악산 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -106,10 +132,10 @@
 						<tr>
 							<th colspan="2"><a href="/station/iia.do" class="radar">영종도 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -132,10 +158,10 @@
 						<tr>
 							<th colspan="2"><a href="/station/gdk.do" class="radar">광덕산 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -158,10 +184,10 @@
 						<tr>
 							<th colspan="2"><a href="/station/gng.do" class="radar">강릉 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -184,10 +210,10 @@
 						<tr>
 							<th colspan="2"><a href="/station/myn.do" class="radar">면봉산 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -210,10 +236,10 @@
 						<tr>
 							<th colspan="2"><a href="/station/psn.do" class="radar">구덕산 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -236,10 +262,10 @@
 						<tr>
 							<th colspan="2"><a href="/station/ksn.do" class="radar">오성산 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -262,10 +288,10 @@
 						<tr>
 							<th colspan="2"><a href="/station/jni.do" class="radar">진도 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -288,16 +314,15 @@
 						<tr>
 							<th colspan="2"><a href="/station/gsn.do" class="radar">고산 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
 							<td><div class="status ORDI" title="정상"></div></td>
-							<td>
-								2022.07.29 14:15
+							<td>최종 수신 2022.07.29 14:15
 								
 							</td>
 						</tr>
@@ -314,10 +339,10 @@
 						<tr>
 							<th colspan="2"><a href="/station/ssp.do" class="radar">성산 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -340,10 +365,36 @@
 						<tr>
 							<th colspan="2"><a href="/station/bri.do" class="radar">백령도 레이더</a></th>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>상태</th>
 							<th>최종수신</th>
+						</tr> -->
+					</thead>
+					<tbody>
+						<tr>
+							<td><div class="status ORDI" title="정상"></div></td>
+							<td>
+								2022.07.29 14:15
+								
+							</td>
 						</tr>
+					</tbody>
+				</table>
+
+				<table class="mainTbl lgtTbl" id="small" summary="">
+					<caption class="hidden">소형</caption>
+					<colgroup>
+						<col style="width:40px;">
+						<col>
+					</colgroup>
+					<thead>
+						<tr>
+							<th colspan="2"><a href="/station/bri.do" class="radar">소형 레이더</a></th>
+						</tr>
+						<!-- <tr>
+							<th>상태</th>
+							<th>최종수신</th>
+						</tr> -->
 					</thead>
 					<tbody>
 						<tr>
@@ -356,39 +407,6 @@
 					</tbody>
 				</table>
 			
-				<table class="mainTbl lgtTbl">
-				<caption class="hidden">LGT</caption>
-					<colgroup>
-						
-						<col style="width:40px;">
-						<col>
-						
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="6"><a href="/station/lgt.do" class="lgt">낙뢰 자료</a></th>
-						</tr>
-						<tr>
-						
-							<th colspan="2" style="letter-spacing: -1px;">관측자료</th>
-						
-						</tr>
-						<tr>
-						
-							<th>상태</th>
-							<th>최종수신</th>
-						
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status WARN" title="경고"></div></td>
-							<td>
-								22.07.29 10:55
-							</td>
-						</tr>
-					</tbody>
-				</table>
 				</div>
 			</div>
 		</div>

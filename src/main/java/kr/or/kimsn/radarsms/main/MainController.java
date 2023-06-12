@@ -20,9 +20,9 @@ public class MainController {
     @GetMapping({"", "/"})
     public String main(ModelMap model) {
         //메뉴조회
-        List<MainDto> menuList = menuService.getMenuList();
-        System.out.println(menuList);
-        model.addAttribute("menuList", menuList);
+        // List<MainDto> menuList = menuService.getMenuList();
+        // System.out.println(menuList);
+        // model.addAttribute("menuList", menuList);
         return "views/main/main";
     }
 
@@ -30,9 +30,9 @@ public class MainController {
     @GetMapping("/config/menu/menuSave")
     public String menuSaveView(ModelMap model) {
         //메뉴조회
-        List<MainDto> menuList = menuService.getMenuList();
-        System.out.println(menuList);
-        model.addAttribute("menuList", menuList);
+        // List<MainDto> menuList = menuService.getMenuList();
+        // System.out.println(menuList);
+        // model.addAttribute("menuList", menuList);
         return "views/config/menu/menuSave";
     }
 

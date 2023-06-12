@@ -87,7 +87,7 @@ a:hover{text-decoration:none;}
 caption{width:0;height:0;overflow:hidden;visibility:hidden;font-size:0;line-height:0;}
 ul,ol{list-style:none;}
 em,address{font-style:normal;}
-table{border:0;border-spacing:0;width:100%;text-align:center;border-collapse:collapse;}
+/* table{border:0;border-spacing:0;width:100%;text-align:center;border-collapse:collapse;} */
 p{text-align:justify;}
 button{display:inline-block;border:none;cursor:pointer;box-sizing:border-box;background:transparent;}
 input, textarea {border:1px solid #a9a9a9;color:#333;vertical-align:middle;}
