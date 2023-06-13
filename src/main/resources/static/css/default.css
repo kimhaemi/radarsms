@@ -6,10 +6,10 @@ form,fieldset{border:0;margin:0;padding:0;}
 /* body,input,textarea,select,button,table,th,td{font-family:'굴림','Gulim','돋움',Dotum,Helvetica,AppleGothic,sans-serif;font-size:12px;line-height:18px;color:#4b4b4b} */
 ol,ul,li{list-style: none;}
 img{border:0 none;}
-table {
+/* table { */
 	/* border-collapse:collapse; */
-	border-radius: 8px;
-}
+	/* border-radius: 8px; */
+/* } */
 input, button {vertical-align:middle;}
 
 a {color: #006FBB; text-decoration: none;}
@@ -614,16 +614,16 @@ input, select {
 .recv.RECV{background:url(../images/watchcon/recv_RECV.png);}
 .recv.RETR{background:url(../images/watchcon/recv_RETR.png);}
  
-.mainTbl {border:1px solid #838383; width:246px; float:left; margin:2px;} 
+.mainTbl {border:1px solid #0461c0; width:246px; float:left; margin:2px; border-radius: 8px;} 
 .mainTbl.on {background: #EBF6FC;font-weight:bold;}
 .mainTbl.on th a {color: #f41138;}
-/* 소형 */
-.mainTbl.small {width:246px;}
+
 .mainTbl th, .mainTbl td{text-align: center; padding: 1px 2px; }
-.mainTbl thead th {background: url(../images/tbl_head_bar1.png) repeat-x;
-background-size: 10px 66px;
-background-position: 0px -3px;
-border-bottom: 1px solid #838383;
+.mainTbl thead th {
+	background: url(../images/tbl_head_bar1.png) repeat-x;
+	background-size: 10px 66px;
+	background-position: 0px -3px;
+	border-bottom: 1px solid #0461c0;
 }
 .mainTbl thead th.row2 {background-position: 0px -24px;}
 .mainTbl tbody th {background-color: #FFFFFF}

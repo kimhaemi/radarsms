@@ -14,9 +14,12 @@
   <!-- config -->
   <th:block th:replace="layout/config :: configFragment"></th:block>
   
-  <body>
+  <body style="zoom: 1;">
+    
     <!-- header -->
-    <th:block th:replace="layout/header :: headerFragment"></th:block>
+    <div id="wrap">
+      <th:block th:replace="layout/header :: headerFragment"></th:block>
+    </div>
     
     <div id="wrap">
       <div class="container">

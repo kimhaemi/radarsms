@@ -3,25 +3,38 @@
   <th:block th:fragment="headerFragment">
     <script type="text/javascript">
       $(document).ready(function () {
-          var path = window.location.pathname;
-          
-          $(".nav li").each(function () {
-              var url = $(this).find("a").attr("href");
-              if (url == path) {
-                  $(this).addClass("on");
-              }
-          });
-  
-          $(".header h1").on("click", function () {
-              location.href = "/";
-              return false;
-          });
-  
-          $(".header h1").hover(function () {
-              $(this).css("cursor", "pointer");
-          });
-   
+        var path = window.location.pathname;
+        
+        $(".nav li").each(function () {
+            var url = $(this).find("a").attr("href");
+            if (url == path) {
+                // $(this).addClass("on");
+            }
+        });
+
+        $(".header h1").on("click", function () {
+            location.href = "/";
+            return false;
+        });
+
+        $(".header h1").hover(function () {
+            $(this).css("cursor", "pointer");
+        });
+
+        $('.nav > li').on({
+            mouseenter: function () {
+                var sub = $(this).children('.sub');
+                sub.stop();
+                sub.slideDown();
+            },
+            mouseleave: function () {
+                var sub = $(this).children('.sub');
+                sub.stop();
+                sub.slideUp();
+            }
+        });
       });
+
   </script>
     <div class="wrap">
         <div class="header">
@@ -40,6 +53,8 @@
                 </li>
             </ul>
         </div>
+
+        
         
         <!-- 현재 사용자가 보고있는 페이지 메뉴를 감싼 li에 class='on'을 추가해주세요. -->
         <div class="lnb">
@@ -57,8 +72,8 @@
 
                 <li>
                     <a href="#">지점별 감시</a>
-                    <!-- <ul class="sub" style="display: block; height: 145px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;"> -->
                     <ul class="sub" style="display: none; height: 600px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                    <!-- <ul class="sub" > -->
                         <li><a href="#">대형</a></li>
                         <li><!-- <img title="" alt="" src="/images/watchcon/radar.png" width="15"> -->
                             <a href="/station/kwk" >관악산 레이더</a></li>
@@ -125,7 +140,7 @@
 
                 <li>
                     <a href="#">문자 관리</a>
-                    <ul class="sub" style="display: none; height: 600px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                    <ul class="sub" style="display: none; height: 400px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
                         <li><a href="/manage/sms_set_rc" class="dropdown-item">지점/자료별 문자 발송 설정</a></li>
                         <li><a href="/manage/sms_set_rcc" class="dropdown-item">경고 기준 설정</a></li>
                         <li><a href="/manage/sms_set_rs" class="dropdown-item">자료 수신 감시 설정</a></li>
