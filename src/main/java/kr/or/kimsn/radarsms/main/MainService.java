@@ -10,13 +10,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class MainService {
 
-    // @Autowired
-    // private MainRepository menuRepository;
+    @Autowired
+    private MainRepository menuRepository;
 
-    //메뉴조회
-    // public List<MainDto> getMenuList(){
-        // return menuRepository.findAll();
-    // }
+    @Autowired
+    private StationRepository stationRepository;
+
+    // 메뉴조회
+    public List<MainDto> getMenuList(){
+        return menuRepository.findAll();
+    }
+
+    // 지점조회
+    public List<StationDto> getStationList(){
+        return stationRepository.findAll();
+    }
     
     //메뉴저장
     @Transactional

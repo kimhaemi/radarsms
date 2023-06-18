@@ -4,6 +4,7 @@ package kr.or.kimsn.radarsms.station;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
 /**
  * 지점별 감시
  */
@@ -15,9 +16,12 @@ public class StationController {
 
     //조회
     @GetMapping("/station/{name}")
-    public String getStation(@PathVariable("name") String name ){
+    public ModelAndView getStation(@PathVariable("name") String name ){
+        ModelAndView mav = new ModelAndView();
+        System.out.println("ffsdfsdfsdfsdfsdfsd");
         System.out.println(name);
-        return "views/station/station";
+        mav.setViewName("views/station/station");
+        return mav;
     }
 
     //저장

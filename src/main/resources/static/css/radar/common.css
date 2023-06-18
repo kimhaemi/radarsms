@@ -92,6 +92,8 @@ p{text-align:justify;}
 button{display:inline-block;border:none;cursor:pointer;box-sizing:border-box;background:transparent;}
 input, textarea {border:1px solid #a9a9a9;color:#333;vertical-align:middle;}
 
+hr{border:100px solid #a9a9a9;color:#333}
+
 .scroll{overflow-y:scroll;background-color:#f5f5f5;}
 .full{display:inline-block;width:100%!important;min-width:auto;}
 
@@ -137,7 +139,7 @@ input, textarea {border:1px solid #a9a9a9;color:#333;vertical-align:middle;}
 /* btn */
 .btn{
   border-radius: 8px;
-  border-width:1px;border-style:solid;border-color:transparent;color:#fff;text-align:center;text-indent:0;line-height:18px;padding:0 6px 1px;background-color:#fff;
+  border-width:10px;border-style:solid;border-color:transparent;color:#fff;text-align:center;text-indent:0;line-height:18px;padding:0 6px 1px;background-color:#fff;
   vertical-align:middle;}
 .btn_white{color:#333;border-color:#959595;}
 .btn_red{border-color:#f8574d;background-color:#e45148;}
@@ -150,7 +152,7 @@ input, textarea {border:1px solid #a9a9a9;color:#333;vertical-align:middle;}
 .btn_grayline{color:#606060;border-color:#606060;}
 .btn_greenline{color:#5cb85c;border-color:#5cb85c;}
 .btn_redline{color:#e73e34;border-color:#e73e34;}
-.btn_gray{background-color:#7f7d7e;border-color:#686868;}
+.btn_gray{background-color:#7f7d7e;border-color:#7f7d7e;}
 .ico_btn{background:transparent;border:none;font-size:0;overflow:hidden;}
 .ico_btn::before{display:inline-block;content:"";background-image:url(../img/btn_ico.png);width:17px;height:18px;line-height:0;margin-top:4px;}
 .ico_pdf::before{background-position:0 -84px;}

@@ -2,38 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <th:block th:fragment="headerFragment">
     <script type="text/javascript">
-      $(document).ready(function () {
-        var path = window.location.pathname;
-        
-        $(".nav li").each(function () {
-            var url = $(this).find("a").attr("href");
-            if (url == path) {
-                // $(this).addClass("on");
-            }
+        var menuList;
+        var stationList;
+        $(document).ready(function () {
+
+            menuData();
+
+            var path = window.location.pathname;
+            
+            $(".nav li").each(function () {
+                var url = $(this).find("a").attr("href");
+                if (url == path) {
+                    // $(this).addClass("on");
+                }
+            });
+
+            $(".header h1").on("click", function () {
+                location.href = "/";
+                return false;
+            });
+
+            $(".header h1").hover(function () {
+                $(this).css("cursor", "pointer");
+            });
+
+            $('.nav > div> li').on({
+                mouseenter: function () {
+                    var sub = $(this).children('.sub');
+                    sub.stop();
+                    sub.slideDown();
+                },
+                mouseleave: function () {
+                    var sub = $(this).children('.sub');
+                    sub.stop();
+                    sub.slideUp();
+                }
+            });
         });
 
-        $(".header h1").on("click", function () {
-            location.href = "/";
-            return false;
-        });
-
-        $(".header h1").hover(function () {
-            $(this).css("cursor", "pointer");
-        });
-
-        $('.nav > li').on({
-            mouseenter: function () {
-                var sub = $(this).children('.sub');
-                sub.stop();
-                sub.slideDown();
-            },
-            mouseleave: function () {
-                var sub = $(this).children('.sub');
-                sub.stop();
-                sub.slideUp();
-            }
-        });
-      });
+        //menu List
+        function menuData() {    
+            $.ajax({
+                type: "GET",
+                url: "/getMenuData",
+                contentType : 'application/json; charset=utf-8',
+                dataType : 'json',
+                success: function (data) {
+                console.log(data);
+                //$("#data").replaceWith(data);
+                },
+                error :function (request, status, error) {
+                    console.log("error");
+                    console.log(error);
+                }
+            });
+        }
 
   </script>
     <div class="wrap">
@@ -45,26 +68,45 @@
             <ul class="gnb fr">
                 <li><a href="/logout" class="btn btn_gray">logout</a></li>
                 <li>
-                <!-- <div class="util">
-                    <button class="btn_hambuger" toggle_menu="">
-                        <span class="ico">메뉴</span>
-                    </button> -->
-                </div>
+                    <div class="util">
+                        <button class="btn_hambuger" toggle_menu="">
+                            <span class="ico">메뉴</span>
+                        </button>
+                    </div>
                 </li>
             </ul>
         </div>
-
-        
         
         <!-- 현재 사용자가 보고있는 페이지 메뉴를 감싼 li에 class='on'을 추가해주세요. -->
         <div class="lnb">
+            <div class="lnb_wrap clearfix">
+                <ul class="nav" role="navigation">
+                    <div th:each="mList : ${list.menuList}">
+                        <li th:if="${mList.depth == 1}">
+                            <a th:href="${mList.path}" th:text="${mList.menu_name}"></a>
+                            <ul th:if="${mList.id != 1000 && mList.id != 6000}"
+                            class="sub" style="display: none; height: 600px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                                <li th:if="${mList.id != 5000}"><a href="#">대형</a></li>
+                                <li th:if="${mList.id != 5000}" th:each="sList : ${list.stationList}">
+                                    <a th:href="${'/station/'+sList.site_cd}" th:text="${sList.name_kr}"></a>
+                                </li>
+                                <li th:if="${mList.id != 5000}"><a href="#">소형</a></li>
+
+                                <li th:if="${mList.depth == 2 && mList.id > 5000}" th:each="mList : ${list.menuList}">
+                                    <a th:href="${mList.path}" th:text="${mList.menu_name}"></a>
+                                </li>
+                                <!-- <li th:each="subList : ${list.menuList}" th:if="${subList.depth == 2}">
+                                    <a th:href="${subList.path}" th:text="${subList.menu_name+'/'+subList.depth}"></a>
+                                </li> -->
+                            </ul>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+
+        <div class="lnb">
           <div class="lnb_wrap clearfix">
-            <!-- <div class="util">
-                <button class="btn_hambuger" toggle_menu="">
-                    <span class="ico">메뉴</span>
-                </button>
-            </div> -->
-            
             <ul class="nav" role="navigation">
                 <li>
                     <a href="/">전체 감시</a>
@@ -73,10 +115,9 @@
                 <li>
                     <a href="#">지점별 감시</a>
                     <ul class="sub" style="display: none; height: 600px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
-                    <!-- <ul class="sub" > -->
                         <li><a href="#">대형</a></li>
                         <li><!-- <img title="" alt="" src="/images/watchcon/radar.png" width="15"> -->
-                            <a href="/station/kwk" >관악산 레이더</a></li>
+                            <a href="/station/kwk" class="dropdown-item">관악산 레이더</a></li>
                         <li><a href="/station/iia" class="dropdown-item">영종도 레이더</a></li>
                         <li><a href="/station/gdk" class="dropdown-item">광덕산 레이더</a></li>
                         <li><a href="/station/gng" class="dropdown-item">강릉 레이더</a></li>

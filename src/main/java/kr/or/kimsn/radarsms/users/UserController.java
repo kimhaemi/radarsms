@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
@@ -47,14 +48,22 @@ public class UserController {
 
     // 사용자 관리
     @GetMapping("/users/admin_user")
-    public String admin_user() {
-        return "views/users/admin_user";
+    public ModelAndView admin_user() {
+        ModelAndView mav = new ModelAndView();
+        System.out.println("ffsdfsdfsdfsdfsdfsd");
+        
+        mav.setViewName("views/users/admin_user");
+        return mav;
     }
 
     // 사용자 등록 화면
     @GetMapping("/users/admin_user_form")
-    public String admin_user_form() {
-        return "views/users/admin_user_form";
+    public ModelAndView admin_user_form() {
+        ModelAndView mav = new ModelAndView();
+        System.out.println("ffsdfsdfsdfsdfsdfsd");
+        
+        mav.setViewName("views/users/admin_user_form");
+        return mav;
     }
 
     // 사용자 등록
