@@ -32,5 +32,8 @@ public class StationDto {
     private String prod_country;
     private String permitted_watch;
     private String sort_order;
+    private String ip;
+    private String user_id;
+    private String pwd;
    
 }

@@ -21,7 +21,7 @@ public class MainDto {
 	private Boolean status; 
 	private int depth;
 	private String order; 
-	private Boolean created_at;
+	private String created_at;
 	private String updated_at;
 
 }
