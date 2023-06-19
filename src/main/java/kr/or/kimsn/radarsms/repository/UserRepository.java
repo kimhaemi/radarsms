@@ -1,6 +1,8 @@
-package kr.or.kimsn.radarsms.users;
+package kr.or.kimsn.radarsms.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import kr.or.kimsn.radarsms.dto.UserDto;
 
 //CRUD 함수를 JpaRepository가 들고있음.
 // @repository라는 어노테이션이 없어도 Ioc가 됨.

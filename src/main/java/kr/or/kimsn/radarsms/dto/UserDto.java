@@ -1,4 +1,4 @@
-package kr.or.kimsn.radarsms.users;
+package kr.or.kimsn.radarsms.dto;
 
 import javax.persistence.Entity;
 

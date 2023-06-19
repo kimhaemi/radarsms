@@ -1,4 +1,4 @@
-package kr.or.kimsn.radarsms.manage;
+package kr.or.kimsn.radarsms.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

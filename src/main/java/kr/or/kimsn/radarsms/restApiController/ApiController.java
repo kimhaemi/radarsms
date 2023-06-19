@@ -1,4 +1,4 @@
-package kr.or.kimsn.radarsms.restApi;
+package kr.or.kimsn.radarsms.restApiController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.kimsn.radarsms.main.MainDto;
-import kr.or.kimsn.radarsms.main.MainService;
-import kr.or.kimsn.radarsms.main.StationDto;
+import kr.or.kimsn.radarsms.dto.MainDto;
+import kr.or.kimsn.radarsms.dto.StationDto;
+import kr.or.kimsn.radarsms.service.MainService;
 
 @RestController
 public class ApiController {

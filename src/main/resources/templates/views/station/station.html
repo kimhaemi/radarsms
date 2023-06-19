@@ -4,6 +4,7 @@
       th:with="metaTitle='지점별 감시'">
 
   <th:block layout:fragment="content">
+    
     <script type="text/javascript">
       var alertToggle;
       $(document).ready(function(){
@@ -40,17 +41,25 @@
       <thead> 
       <tr>
         <th class="left">
-          지점별 감시 &gt; <span class="radar"> 관악산 레이더</span>
+          지점별 감시 &gt; <span class="radar" th:text="${list.siteName+' 레이더'}"></span>
         </th>
         <th class="left">알람설정:</th>
         <th class="center">
-          <div class="toggle toggle-light" id="s" data-toggle-on="1" style="height: 20px;"><div class="toggle-slide"><div class="toggle-inner" style="width: 180px; margin-left: 0px;"><div class="toggle-on active" style="height: 20px; width: 90px; text-indent: -10px; line-height: 20px;">ON</div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 90px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div></div></div></div>
+          <div class="toggle toggle-light" id="s" data-toggle-on="1" style="height: 20px;">
+            <div class="toggle-slide">
+              <div class="toggle-inner" style="width: 180px; margin-left: 0px;">
+                <div class="toggle-on active" style="height: 20px; width: 90px; text-indent: -10px; line-height: 20px;">ON</div>
+                <div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div>
+                <div class="toggle-off" style="height: 20px; width: 90px; margin-left: -10px; text-indent: 10px; line-height: 20px;">OFF</div>
+              </div>
+            </div>
+          </div>
           <input type="hidden" name="alert_activity" id="alert_activity" value="1">
-          <input type="hidden" name="alert_lasttime" id="alert_lasttime" value="20230531212524">
-          <input type="hidden" name="alert_checksite" id="alert_checksite" value="KWK">
+          <input type="hidden" name="alert_lasttime" id="alert_lasttime" value="">
+          <input type="hidden" name="alert_checksite" id="alert_checksite" th:value="${list.siteCd}">
         </th>
         <th class="left">현재시간:</th>
-        <th class="right" id="nowTime">2023.05.31 21:25:49</th>
+        <th class="right" id="nowTime"></th>
       </tr>
       </thead>
     </table>

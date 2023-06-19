@@ -1,4 +1,4 @@
-package kr.or.kimsn.radarsms.main;
+package kr.or.kimsn.radarsms.service;
 
 import java.util.List;
 
@@ -6,6 +6,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import kr.or.kimsn.radarsms.dto.MainDto;
+import kr.or.kimsn.radarsms.dto.StationDto;
+import kr.or.kimsn.radarsms.repository.MainRepository;
+import kr.or.kimsn.radarsms.repository.StationRepository;
 
 @Service
 public class MainService {

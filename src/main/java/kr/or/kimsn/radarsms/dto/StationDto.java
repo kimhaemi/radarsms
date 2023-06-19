@@ -1,4 +1,4 @@
-package kr.or.kimsn.radarsms.main;
+package kr.or.kimsn.radarsms.dto;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
