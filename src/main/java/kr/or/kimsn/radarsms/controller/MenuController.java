@@ -25,9 +25,7 @@ public class MenuController {
 
     //메인 화면(전체 감시)
     @GetMapping({"", "/"})
-    public ModelAndView main(ModelMap model) {
-        ModelAndView mav = new ModelAndView();
-
+    public String main(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -38,25 +36,9 @@ public class MenuController {
 
         map.put("menuList", menuList);
         map.put("stationList", stationList);
-
-        mav.addObject("list", map);
-
-        mav.setViewName("views/main/main");
-
-        return mav;
-
-        // //메뉴조회
-        // Map<String, Object> map = new HashMap<>();
-        // List<MainDto> menuList = menuService.getMenuList();
-        // List<StationDto> stationList = menuService.getStationList();
         
-        // System.out.println("menuList ::: " + menuList);
-
-        // map.put("menuList", menuList);
-        // map.put("stationList", stationList);
+        model.addAttribute("list", map);
         
-        // model.addAttribute("menuList", map);
-        
-        // return "views/main/main";
+        return "views/main/main";
     }
 }

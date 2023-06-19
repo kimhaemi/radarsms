@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,9 +33,8 @@ public class StationController {
 
     //조회
     @GetMapping("/station/{name}")
-    public ModelAndView getStation(@PathVariable("name") String name ){
-        ModelAndView mav = new ModelAndView();
-
+    public String getStation(@PathVariable("name") String name, ModelMap model){
+        
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -50,10 +50,9 @@ public class StationController {
         map.put("stationList", stationList);
         map.put("stationDtl", stationDtl);
         
-        mav.addObject("list", map);
-        mav.setViewName("views/station/station");
+        model.addAttribute("list", map);
         
-        return mav;
+        return "views/station/station";
     }
 
     //저장

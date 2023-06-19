@@ -1,17 +1,28 @@
 package kr.or.kimsn.radarsms.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 // import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.kimsn.radarsms.dto.MenuDto;
+import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.repository.UserRepository;
+import kr.or.kimsn.radarsms.service.MenuService;
 
 @Controller
 public class UserController {
+
+    @Autowired
+    private MenuService menuService;
 
     @Autowired
     private UserRepository userReository;
@@ -50,12 +61,21 @@ public class UserController {
 
     // 사용자 관리
     @GetMapping("/users/admin_user")
-    public ModelAndView admin_user() {
-        ModelAndView mav = new ModelAndView();
-        System.out.println("ffsdfsdfsdfsdfsdfsd");
+    public String admin_user(ModelMap model){
+        Map<String, Object> map = new HashMap<>();
+
+        List<MenuDto> menuList = menuService.getMenuList();
+        // table join 필요
+        // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
+		// 				FROM watchdog.receive_condition; 
+        List<StationDto> stationList = menuService.getStationList();
+
+        map.put("menuList", menuList);
+        map.put("stationList", stationList);
         
-        mav.setViewName("views/users/admin_user");
-        return mav;
+        model.addAttribute("list", map);
+        
+        return "views/users/admin_user";
     }
 
     // 사용자 등록 화면
