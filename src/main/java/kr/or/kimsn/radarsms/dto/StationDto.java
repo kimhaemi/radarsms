@@ -1,5 +1,6 @@
 package kr.or.kimsn.radarsms.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +17,8 @@ public class StationDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String site_cd;
+    
+    @Column(name = "site_cd") private String siteCd;
     private String site_num;
     private String name_kr;
     private String name_en;

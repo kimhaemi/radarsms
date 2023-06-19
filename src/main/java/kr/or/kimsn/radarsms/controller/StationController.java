@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MenuService;
+import kr.or.kimsn.radarsms.service.StationService;
 /**
  * 지점별 감시
  */
@@ -25,6 +26,9 @@ public class StationController {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private StationService stationService;
 
     //조회
     @GetMapping("/station/{name}")
@@ -39,11 +43,13 @@ public class StationController {
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
 
+        //지점별 감시
+        List<StationDto> stationDtl = stationService.getStationDetail(name);
+
         map.put("menuList", menuList);
         map.put("stationList", stationList);
-        map.put("siteCd", name);
-        map.put("siteName", "관악산");
-
+        map.put("stationDtl", stationDtl);
+        
         mav.addObject("list", map);
         mav.setViewName("views/station/station");
         

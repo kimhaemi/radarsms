@@ -23,10 +23,10 @@ public class ApiController {
     @GetMapping("getMenuData")
     public Map<String, Object> menuData(){
         Map<String, Object> map = new HashMap<>();
-        // List<MainDto> menuList = menuService.getMenuList();
+        List<MenuDto> menuList = menuService.getMenuList();
         // List<StationDto> stationList = menuService.getStationList();
 
-        // map.put("menuList", menuList);
+        map.put("menuList", menuList);
         // map.put("stationList", stationList);
         return map;
     }

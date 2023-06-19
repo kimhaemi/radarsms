@@ -72,14 +72,14 @@
 						FROM watchdog.receive_condition; 
 					-->
 					
-					<div th:each="sList : ${list.stationList}" th:classappend="${'radar '+sList.site_cd+' '+ 'ORDI'}" th:id="${sList.site_cd}">
-						<div><a th:href="${'/station/'+sList.site_cd}" th:text="${sList.name_kr}"></a></div>
+					<div th:each="sList : ${list.stationList}" th:classappend="${'radar '+sList.siteCd+' '+ 'ORDI'}" th:id="${sList.siteCd}">
+						<div><a th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a></div>
 					</div>
 				</div>
 
 				<div class="alertTbls">
 
-					<table th:each="sList : ${list.stationList}" class="mainTbl " th:id="${sList.site_cd}" summary="">
+					<table th:each="sList : ${list.stationList}" class="mainTbl " th:id="${sList.siteCd}" summary="">
 						<caption class="hidden" th:text="${sList.name_kr}"></caption>
 						<colgroup>
 							<col style="width:40px;">
@@ -87,7 +87,7 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th colspan="2"><a th:href="${'/station/'+sList.site_cd}" class="radar" th:text="${sList.name_kr+' 레이더'}"></a></th>
+								<th colspan="2"><a th:href="${'/station/'+sList.siteCd}" class="radar" th:text="${sList.name_kr+' 레이더'}"></a></th>
 							</tr>
 						</thead>
 						<tbody>

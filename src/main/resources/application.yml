@@ -19,8 +19,8 @@ spring:
   jpa:
     open-in-view: false #spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
     show-sql: true # true 설정시 JPA 쿼리문 확인 가능
-    hibernate: 
-      ddl-auto: none # DDL(create, alter, drop, none) 정의시 DB의 고유 기능을 사용할 수 있다.
+    # hibernate: 
+    #   ddl-auto: none # DDL(create, alter, drop, none) 정의시 DB의 고유 기능을 사용할 수 있다.
 
 # JPA의 구현체인 Hibernate가 동작하면서 발생한 SQL의 가독성을 높여준다.
 # spring.jpa.properties.hibernate.format_sql=true

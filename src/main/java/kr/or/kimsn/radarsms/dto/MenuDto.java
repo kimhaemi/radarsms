@@ -1,5 +1,6 @@
 package kr.or.kimsn.radarsms.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,12 +17,12 @@ public class MenuDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	private String menu_name;
+	@Column(name = "menu_name") private String menuName;
 	private String path; 
 	private Boolean status; 
 	private int depth;
 	private String order; 
-	private String created_at;
-	private String updated_at;
+	@Column(name = "created_at") private String createdAt;
+	@Column(name = "updated_at") private String updatedAt;
 
 }

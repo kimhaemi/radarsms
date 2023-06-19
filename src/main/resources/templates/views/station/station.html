@@ -39,9 +39,9 @@
         <col style="width:130px;">
       </colgroup>
       <thead> 
-      <tr>
+      <tr th:each="sData : ${list.stationDtl}">
         <th class="left">
-          지점별 감시 &gt; <span class="radar" th:text="${list.siteName+' 레이더'}"></span>
+          지점별 감시 &gt; <span class="radar" th:text="${sData.name_kr+' 레이더'}"></span>
         </th>
         <th class="left">알람설정:</th>
         <th class="center">
@@ -56,13 +56,15 @@
           </div>
           <input type="hidden" name="alert_activity" id="alert_activity" value="1">
           <input type="hidden" name="alert_lasttime" id="alert_lasttime" value="">
-          <input type="hidden" name="alert_checksite" id="alert_checksite" th:value="${list.siteCd}">
+          <input type="hidden" name="alert_checksite" id="alert_checksite" th:value="${sData.siteCd}">
         </th>
         <th class="left">현재시간:</th>
         <th class="right" id="nowTime"></th>
       </tr>
       </thead>
     </table>
+
+
     <div id="f5content">
       <table class="mainTbl timeSeries" summary="">
         <caption class="hidden">관악산 레이더</caption>

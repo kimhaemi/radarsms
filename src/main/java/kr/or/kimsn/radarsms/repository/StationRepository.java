@@ -10,4 +10,6 @@ import kr.or.kimsn.radarsms.dto.StationDto;
 public interface StationRepository extends JpaRepository<StationDto, Long> {
 
     List<StationDto> findAll();
+
+    List<StationDto> findBySiteCd(String siteCd);
 }
