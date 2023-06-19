@@ -10,18 +10,18 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.or.kimsn.radarsms.dto.MainDto;
+import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
-import kr.or.kimsn.radarsms.service.MainService;
+import kr.or.kimsn.radarsms.service.MenuService;
 
 /**
  * 메뉴
  */
 @Controller
-public class MainController {
+public class MenuController {
     
     @Autowired
-    private MainService menuService;
+    private MenuService menuService;
 
     //메인 화면(전체 감시)
     @GetMapping({"", "/"})
@@ -30,7 +30,7 @@ public class MainController {
 
         Map<String, Object> map = new HashMap<>();
 
-        List<MainDto> menuList = menuService.getMenuList();
+        List<MenuDto> menuList = menuService.getMenuList();
         // table join 필요
         // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
 		// 				FROM watchdog.receive_condition; 

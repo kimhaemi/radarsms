@@ -11,7 +11,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "menu")
-public class MainDto {
+public class MenuDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

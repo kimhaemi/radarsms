@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.kimsn.radarsms.dto.MainDto;
+import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
-import kr.or.kimsn.radarsms.service.MainService;
+import kr.or.kimsn.radarsms.service.MenuService;
 
 @RestController
 public class ApiController {
 
     @Autowired
-    private MainService menuService;
+    private MenuService menuService;
     
     @GetMapping("getMenuData")
     public Map<String, Object> menuData(){
@@ -35,7 +35,7 @@ public class ApiController {
     @GetMapping("/config/menu/menuSave")
     public Map<String, Object> menuSaveView(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
-        List<MainDto> menuList = menuService.getMenuList();
+        List<MenuDto> menuList = menuService.getMenuList();
         List<StationDto> stationList = menuService.getStationList();
 
         map.put("menuList", menuList);
@@ -46,7 +46,7 @@ public class ApiController {
 
     //메뉴 저장
     @PostMapping("/menu/save")
-    public String menuSave(MainDto menuDto, ModelMap model) throws Exception{
+    public String menuSave(MenuDto menuDto, ModelMap model) throws Exception{
         // System.out.println(menuDto.getMenu1());
         // System.out.println(menuDto.getMenu2());
         // System.out.println(menuDto.getMenu3());

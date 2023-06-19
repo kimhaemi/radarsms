@@ -7,22 +7,22 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.kimsn.radarsms.dto.MainDto;
+import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
-import kr.or.kimsn.radarsms.repository.MainRepository;
+import kr.or.kimsn.radarsms.repository.MenuRepository;
 import kr.or.kimsn.radarsms.repository.StationRepository;
 
 @Service
-public class MainService {
+public class MenuService {
 
     @Autowired
-    private MainRepository menuRepository;
+    private MenuRepository menuRepository;
 
     @Autowired
     private StationRepository stationRepository;
 
     // 메뉴조회
-    public List<MainDto> getMenuList(){
+    public List<MenuDto> getMenuList(){
         return menuRepository.findAll();
     }
 
@@ -33,7 +33,7 @@ public class MainService {
     
     //메뉴저장
     @Transactional
-    public MainDto addMenuDto(MainDto menuDto) throws Exception {
+    public MenuDto addMenuDto(MenuDto menuDto) throws Exception {
         try {
             // menuDto = menuRepository.save(menuDto);    
         } catch (Exception e) {
