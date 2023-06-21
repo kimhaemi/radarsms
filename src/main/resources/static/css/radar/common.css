@@ -75,7 +75,7 @@
 *{margin:0;padding:0;}
 body,h1,h2,h3,h4,h5,h6,th,td,input,select,textarea,ul,li,dl,dt,dd,button,p,a{color:#333;font-family:"notokrR","Malgun Gothic","맑은고딕","AppleSDGothic","Nanum Barun Gothic","NanumGothic","AppleGothic","Dotum","Arial",sans-serif;font-size:12px;font-weight:normal;word-spacing:.5px;letter-spacing:-.01em;}
 body,html{width:100%;height:100%;text-align:center;-webkit-text-size-adjust:none;background:#fff;}
-b{font-family:"notokrM";font-weight:normal;}
+b{font-family:"notokrM";font-weight:900;}
 h1,h2,h3,h4,h5,h6{display:inline-block;box-sizing:border-box;width:auto;}
 ul,ol,li{box-sizing:border-box;list-style:none;}
 img,fieldset,iframe{border:none;}
@@ -139,7 +139,15 @@ hr{border:100px solid #a9a9a9;color:#333}
 /* btn */
 .btn{
   border-radius: 8px;
-  border-width:10px;border-style:solid;border-color:transparent;color:#fff;text-align:center;text-indent:0;line-height:18px;padding:0 6px 1px;background-color:#fff;
+  border-width:1px;
+  border-style:solid;
+  border-color:transparent;
+  /* color:#fff; */
+  color: #7f7d7e;
+  text-align:center;text-indent:0;
+  line-height:25px;
+  padding:0 10px 1px;
+  background-color:#fff;
   vertical-align:middle;}
 .btn_white{color:#333;border-color:#959595;}
 .btn_red{border-color:#f8574d;background-color:#e45148;}
@@ -149,10 +157,10 @@ hr{border:100px solid #a9a9a9;color:#333}
 .btn_hanblue{background-color:#377acd;color:#fff;border:none;}
 .btn_grayblue{background-color:#6090b6;border-color:#476a85; }
 .btn_blueline{color:#1c67b2;border-color:#1c67b2;}
-.btn_grayline{color:#606060;border-color:#606060;}
+.btn_grayline{color:#7f7d7e;border-color:#606060;}
 .btn_greenline{color:#5cb85c;border-color:#5cb85c;}
 .btn_redline{color:#e73e34;border-color:#e73e34;}
-.btn_gray{background-color:#7f7d7e;border-color:#7f7d7e;}
+.btn_gray{background-color: #7f7d7e; border-color:#7f7d7e;}
 .ico_btn{background:transparent;border:none;font-size:0;overflow:hidden;}
 .ico_btn::before{display:inline-block;content:"";background-image:url(../img/btn_ico.png);width:17px;height:18px;line-height:0;margin-top:4px;}
 .ico_pdf::before{background-position:0 -84px;}

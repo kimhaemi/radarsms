@@ -121,7 +121,7 @@ select {
 #search_field fieldset{border:2px solid #E8D0EB;min-height: 48px;height:48px;}
 .sf_start{padding-top:10px;margin-bottom:10px;}
 /* Layout */
-#wrap{margin-left:0px;width:100%;height:59px;}
+#wrap{margin-left:0px;width:100%;height:59px;background:#fff;}
 #topnavi{float:left; width:100%;height:40px;margin-top:10px;background-color:#866DAB}
 #topnavi ul{list-style-type:none;padding-top:13px;padding-left:0px;}
 #topnavi li{display:inline;font-size:110%;color:#727272;font-weight:bold;padding-right:10px;padding-left:10px;}

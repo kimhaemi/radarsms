@@ -29,308 +29,73 @@
 			});
 		  </script>
 
-		<div id="contentMain">
-			
-			<table class="noticeTbl mainSeries">
-				<colgroup>
-					<col style="width:auto">
-					<col style="width:70px;">
-					<col style="width:105px;">
-					<col style="width:70px;">
-					<col style="width:130px;">
-				</colgroup>
-				<thead>
-					<tr>
-						<th class="left">
-						</th>
-						<th class="left">알람설정:</th>
-						<th class="center toggle-light">
-							<div class="toggle" id="s" data-toggle-on="1" style="height: 20px;">
-								<div class="toggle-slide">
-									<div class="toggle-inner" style="width: 180px; margin-left: 0px;">
-										<div class="toggle-on active" style="height: 20px; width: 90px; text-indent: -10px; line-height: 20px;">&nbsp;<i class="fa fa-bell"> ON</i></div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 90px; margin-left: -10px; text-indent: 10px; line-height: 20px;">
-											<i class="fa fa-bell-slash-o"> OFF</i>&nbsp;
-										</div>
+		<table class="noticeTbl mainSeries">
+			<colgroup>
+				<col style="width:auto">
+				<col style="width:70px;">
+				<col style="width:105px;">
+				<col style="width:70px;">
+				<col style="width:130px;">
+			</colgroup>
+			<thead>
+				<tr>
+					<th class="left">
+					</th>
+					<th class="left">알람설정:</th>
+					<th class="center toggle-light">
+						<div class="toggle" id="s" data-toggle-on="1" style="height: 20px;">
+							<div class="toggle-slide">
+								<div class="toggle-inner" style="width: 180px; margin-left: 0px;">
+									<div class="toggle-on active" style="height: 20px; width: 90px; text-indent: -10px; line-height: 20px;">&nbsp;<i class="fa fa-bell"> ON</i></div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 90px; margin-left: -10px; text-indent: 10px; line-height: 20px;">
+										<i class="fa fa-bell-slash-o"> OFF</i>&nbsp;
 									</div>
 								</div>
 							</div>
-							<input type="hidden" name="alert_activity" id="alert_activity" value="1">
-							<input type="hidden" name="alert_lasttime" id="alert_lasttime" value="">
-							<input type="hidden" name="alert_checksite" id="alert_checksite" value="ALL">
-						</th>
-						<th class="left">현재시간:</th>
-						<th class="right" id="nowTime"></th>
-					</tr>
-				</thead>
-			</table>
-		
-			<div id="f5content" class="mainSeries">
-				<div class="alertMap">
-					<div class="map"><img src="/images/map.png" alt="지도"></div>
-					<!--  table join 해야함
-						SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
-						FROM watchdog.receive_condition; 
-					-->
-					
-					<div th:each="sList : ${list.stationList}" th:classappend="${'radar '+sList.siteCd+' '+ 'ORDI'}" th:id="${sList.siteCd}">
-						<div><a th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a></div>
-					</div>
+						</div>
+						<input type="hidden" name="alert_activity" id="alert_activity" value="1">
+						<input type="hidden" name="alert_lasttime" id="alert_lasttime" value="">
+						<input type="hidden" name="alert_checksite" id="alert_checksite" value="ALL">
+					</th>
+					<th class="left">현재시간:</th>
+					<th class="right" id="nowTime"></th>
+				</tr>
+			</thead>
+		</table>
+	
+		<div id="f5content" class="mainSeries">
+			<div class="alertMap">
+				<div class="map"><img src="/images/map.png" alt="지도"></div>
+				<!--  table join 해야함
+					SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
+					FROM watchdog.receive_condition; 
+				-->
+				
+				<div th:each="sList : ${list.stationList}" th:classappend="${'radar '+sList.siteCd+' '+ 'ORDI'}" th:id="${sList.siteCd}">
+					<div><a th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a></div>
 				</div>
+			</div>
 
-				<div class="alertTbls">
+			<div class="alertTbls">
 
-					<table th:each="sList : ${list.stationList}" class="mainTbl " th:id="${sList.siteCd}" summary="">
-						<caption class="hidden" th:text="${sList.name_kr}"></caption>
-						<colgroup>
-							<col style="width:40px;">
-							<col>
-						</colgroup>
-						<thead>
-							<tr>
-								<th colspan="2"><a th:href="${'/station/'+sList.siteCd}" class="radar" th:text="${sList.name_kr+' 레이더'}"></a></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<!-- 여기도 수정필요 -->
-								<td><div th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></div></td>
-								<td th:text="${'최종 수신 '+ '2022.07.29 14:15'}"></td>
-							</tr>
-						</tbody>
-					</table>
-
-
-
-<!-- 
-				<table class="mainTbl " id="KWK" summary="">
-					<caption class="hidden">관악산</caption>
+				<table th:each="sList : ${list.stationList}" class="mainTbl " th:id="${sList.siteCd}" summary="">
+					<caption class="hidden" th:text="${sList.name_kr}"></caption>
 					<colgroup>
 						<col style="width:40px;">
 						<col>
 					</colgroup>
 					<thead>
 						<tr>
-							<th colspan="2"><a href="/station/kwk.do" class="radar">관악산 레이더</a></th>
+							<th colspan="2"><a th:href="${'/station/'+sList.siteCd}" class="radar" th:text="${sList.name_kr+' 레이더'}"></a></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
+							<!-- 여기도 수정필요 -->
+							<td><div th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></div></td>
+							<td th:text="${'최종 수신 '+ '2022.07.29 14:15'}"></td>
 						</tr>
 					</tbody>
 				</table>
-
-				<table class="mainTbl " id="IIA" summary="">
-					<caption class="hidden">영종도</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/iia.do" class="radar">영종도 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status WARN" title="경고"></div></td>
-							<td>최종 수신 2015.12.23 12:13</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table class="mainTbl " id="GDK" summary="">
-					<caption class="hidden">광덕산</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/gdk.do" class="radar">광덕산 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<table class="mainTbl " id="GNG" summary="">
-					<caption class="hidden">강릉</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/gng.do" class="radar">강릉 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table class="mainTbl " id="MYN" summary="">
-					<caption class="hidden">면봉산</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/myn.do" class="radar">면봉산 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table class="mainTbl " id="PSN" summary="">
-					<caption class="hidden">구덕산</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/psn.do" class="radar">구덕산 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table class="mainTbl " id="KSN" summary="">
-					<caption class="hidden">오성산</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/ksn.do" class="radar">오성산 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table class="mainTbl " id="JNI" summary="">
-					<caption class="hidden">진도</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/jni.do" class="radar">진도 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<table class="mainTbl " id="GSN" summary="">
-					<caption class="hidden">고산</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/gsn.do" class="radar">고산 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<table class="mainTbl " id="SSP" summary="">
-					<caption class="hidden">성산</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/ssp.do" class="radar">성산 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<table class="mainTbl " id="BRI" summary="">
-					<caption class="hidden">백령도</caption>
-					<colgroup>
-						<col style="width:40px;">
-						<col>
-					</colgroup>
-					<thead>
-						<tr>
-							<th colspan="2"><a href="/station/bri.do" class="radar">백령도 레이더</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><div class="status ORDI" title="정상"></div></td>
-							<td>최종 수신 2022.07.29 14:15</td>
-						</tr>
-					</tbody>
-				</table>
-				</div>
-				
-				<div class="alertTbls">
-					<table class="mainTbl " id="small" summary="">
-						<caption class="hidden">소형</caption>
-						<colgroup>
-							<col style="width:40px;">
-							<col>
-						</colgroup>
-						<thead>
-							<tr>
-								<th colspan="2"><a href="/station/bri.do" class="radar">소형 레이더</a></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><div class="status ORDI" title="정상"></div></td>
-								<td>최종 수신 2022.07.29 14:15</td>
-							</tr>
-						</tbody>
-					</table> -->
 			</div>
 		</div>
 	</th:block>

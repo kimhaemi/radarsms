@@ -4,7 +4,7 @@ html{overflow-y:scroll}
 /* body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0} */
 form,fieldset{border:0;margin:0;padding:0;}
 /* body,input,textarea,select,button,table,th,td{font-family:'굴림','Gulim','돋움',Dotum,Helvetica,AppleGothic,sans-serif;font-size:12px;line-height:18px;color:#4b4b4b} */
-ol,ul,li{list-style: none;}
+/* ol,ul,li{list-style: none;} */
 img{border:0 none;}
 /* table { */
 	/* border-collapse:collapse; */
@@ -554,15 +554,17 @@ input, select {
 #headerMain .siteLogo { float: left; margin: 4px 0px;}
 #headerMain .kmipaLogo {  float: right;  margin: 8px 0px 0px;}
 
-#contentMain {width: 95%; margin: 0.2em auto 1em auto;}
+#contentMain {
+	/* width: 95%;  */
+	margin: 0.2em auto 1em auto;}
 #container {width: 100%; height: 100%; margin: 0 auto;}
 
 #f5content {width: 805px;}
 #f5content.mainSeries{width:1000px;}
 
-.noticeTbl {/* border:1px solid #838383;*/ width:800px; margin:2px;}
-.noticeTbl.timeSeries {width:800px;}
-.noticeTbl.searchSeries {width:800px;}
+.noticeTbl {/* border:1px solid #838383;*/ width:1000px;  padding: 5px; } /* 알람설정 부분 */
+.noticeTbl.timeSeries {width:1000px;}
+.noticeTbl.searchSeries {width:1000px;}
 .noticeTbl.settingSeries {width:1000px;}
 .noticeTbl.mainSeries {width:1000px;}
 /* .noticeTbl thead th {
@@ -637,10 +639,10 @@ input, select {
   padding-left: 17px;}
 
 .mainTbl.timeSeries {
-	width:800px;
+	width:1000px;
 }
 .mainTbl.searchSeries{
-	width:800px;
+	width:1000px;
 }
 .mainTbl th.phead{
   border-right-style: hidden;
@@ -688,7 +690,7 @@ input, select {
 	width:800px;
 }
 .mainTbl.statTbl{
-	width:800px;
+	width:970px;
 	margin-bottom:20px;
 }
 #contentMain .monthTable col.month {width:61px;}

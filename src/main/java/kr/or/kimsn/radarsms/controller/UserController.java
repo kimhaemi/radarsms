@@ -24,8 +24,8 @@ public class UserController {
     @Autowired
     private MenuService menuService;
 
-    @Autowired
-    private UserRepository userReository;
+    // @Autowired
+    // private UserRepository userReository;
 
     // @Autowired
     // private BCryptPasswordEncoder bCryptPasswordEncoder;

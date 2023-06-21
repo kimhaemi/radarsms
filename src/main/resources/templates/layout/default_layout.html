@@ -17,14 +17,14 @@
   <body style="zoom: 1;">
     
     <!-- header -->
-    <div id="wrap">
+    <div class="wrap">
       <th:block th:replace="layout/header :: headerFragment"></th:block>
     </div>
     
     <div id="wrap">
       <div class="container">
         <div id="contents" class="wide">
-          <div id="contentMain">
+            <div class="cont max_width">
               <!-- content -->
               <th:block layout:fragment="content"></th:block>
           </div>

@@ -28,8 +28,8 @@ public class UserDto {
     private String roles;
     private String provider;
     private String provider_id;
-    private String updated_at;
-    private String created_at;
+    // private String updated_at;
+    // private String created_at;
 
     // public List<String> getUserList(){
     //     if(this.username.isEmpty()){

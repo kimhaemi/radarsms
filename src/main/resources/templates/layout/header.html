@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="headerFragment">
         <script type="text/javascript">
-            // var menuList;
+            var menuList;
             // var stationList;
             $(document).ready(function () {
 
-                // menuData();
+                menuData();
 
                 var path = window.location.pathname;
                 
@@ -26,7 +26,7 @@
                     $(this).css("cursor", "pointer");
                 });
 
-                $('.nav > div> li').on({
+                $('.nav > div > li').on({
                     mouseenter: function () {
                         var sub = $(this).children('.sub');
                         sub.stop();
@@ -49,7 +49,11 @@
                     dataType : 'json',
                     success: function (data) {
                         console.log(data);
-                        //$("#data").replaceWith(data);
+                        menuList = data.menuList;
+
+                        $("#navbar").innerHtml = "<div>dfsdfsdfsdfsdfsdfsdfsdfsdfsd</div>";
+                        
+                        // $(".data").replaceWith(data);
                     },
                     error :function (request, status, error) {
                         console.log("error");
@@ -60,63 +64,62 @@
 
         </script>
 
-        <div class="wrap">
-            <div class="header">
-                <div class="gnb_wrap max_width">
-                    <h1 style="cursor: pointer;">
-                        <a href="/">자료 수신 모니터링 시스템</a>
-                    </h1>
-                    <ul class="gnb fr">
-                        <li><a href="/logout" class="btn btn_gray">logout</a></li>
-                        <li>
-                            <div class="util">
-                                <button class="btn_hambuger" toggle_menu="">
-                                    <span class="ico">메뉴</span>
-                                </button>
-                            </div>
-                        </li>
+        <div class="header">
+            <div class="gnb_wrap max_width">
+                <h1 style="cursor: pointer;">
+                    <a href="/"><b>자료 수신 모니터링 시스템</b></a>
+                </h1>
+                <ul class="gnb fr util">
+                    <li><a href="/logout" class="btn btn_grayline">logout</a></li>
+                    <li>
+                        <div >
+                            <!-- <button class="btn_hambuger" toggle_menu="">
+                                <span class="ico">메뉴</span>
+                            </button> -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="lnb">
+                <div class="lnb_wrap clearfix">
+                    <ul class="nav" role="navigation" id="navbar">
+                        <div th:each="mList : ${list.menuList}">
+                            <li th:if="${mList.depth == 1}">
+                                <a th:href="${mList.path}" th:text="${mList.menuName}"></a><!-- 대메뉴 -->
+                                <ul th:if="${mList.id != 1000 && mList.id != 6000}"
+                                class="sub" style="display: none; height: 600px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                                    <li th:if="${mList.id} != '5000'"><a href="#">대형</a></li>
+                                    <li th:if="${mList.id} != '5000'" th:each="sList : ${list.stationList}">
+                                        <a th:if="${mList.id} == '2000'" th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
+                                        <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
+                                        <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
+                                    </li>
+                                    <li th:if="${mList.id != 5000}"><a href="#">소형</a></li>
+                                    <li th:if="${mList.id} != '5000'">
+                                        <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형1'}" th:text="소형1"></a>
+                                        <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형2'}" th:text="소형2"></a>
+                                        <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형3'}" th:text="소형3"></a>
+                                        
+                                        <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+'소형1'}" th:text="소형1"></a>
+                                        <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+'소형2'}" th:text="소형2"></a>
+                                        <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+'소형3'}" th:text="소형3"></a>
+
+                                        <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+'소형1'}" th:text="소형1"></a>
+                                        <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+'소형2'}" th:text="소형2"></a>
+                                        <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+'소형3'}" th:text="소형3"></a>
+                                    </li>
+    
+                                    <li th:if="${mList.depth == 2 && mList.id > 5000}" th:each="mList : ${list.menuList}">
+                                        <a th:href="'/manage'+${mList.path}" th:text="${mList.menuName}"></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
                     </ul>
                 </div>
+            </div>
 
-                <div class="lnb">
-                    <div class="lnb_wrap clearfix">
-                        <ul class="nav" role="navigation">
-                            <div th:each="mList : ${list.menuList}">
-                                <li th:if="${mList.depth == 1}">
-                                    <a th:href="${mList.path}" th:text="${mList.menuName}"></a>
-                                    <ul th:if="${mList.id != 1000 && mList.id != 6000}"
-                                    class="sub" style="display: none; height: 600px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
-                                        <li th:if="${mList.id} != '5000'"><a href="#">대형</a></li>
-                                        <li th:if="${mList.id} != '5000'" th:each="sList : ${list.stationList}">
-                                            <a th:if="${mList.id} == '2000'" th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
-                                            <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
-                                            <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
-                                        </li>
-                                        <li th:if="${mList.id != 5000}"><a href="#">소형</a></li>
-                                        <li th:if="${mList.id} != '5000'">
-                                            <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형1'}" th:text="소형1"></a>
-                                            <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형2'}" th:text="소형2"></a>
-                                            <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형3'}" th:text="소형3"></a>
-                                            
-                                            <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+'소형1'}" th:text="소형1"></a>
-                                            <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+'소형2'}" th:text="소형2"></a>
-                                            <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+'소형3'}" th:text="소형3"></a>
-
-                                            <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+'소형1'}" th:text="소형1"></a>
-                                            <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+'소형2'}" th:text="소형2"></a>
-                                            <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+'소형3'}" th:text="소형3"></a>
-                                        </li>
-        
-                                        <li th:if="${mList.depth == 2 && mList.id > 5000}" th:each="mList : ${list.menuList}">
-                                            <a th:href="'/manage'+${mList.path}" th:text="${mList.menuName}"></a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </div>
-                        </ul>
-                    </div>
-                </div>
-            
 
                 <!-- 현재 사용자가 보고있는 페이지 메뉴를 감싼 li에 class='on'을 추가해주세요. -->
                 <!-- <div class="lnb">
@@ -310,6 +313,7 @@
                     </li>
                 </ul>
             </div> -->
-        </div><!-- <div class="wrap"> -->
+        <!-- </div> -->
+        <!-- <div class="wrap"> -->
     </th:block>
 </html>
