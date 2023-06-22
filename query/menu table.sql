@@ -13,7 +13,7 @@ CREATE TABLE `menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='메뉴 테이블';
 
 
-select * from menu;
+delete from menu;
 
 commit;
 
@@ -41,6 +41,49 @@ INSERT INTO watchdog.menu
 (ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
 VALUES(6000, '사용자 관리', '/users/admin_user', 1, 6, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5101, '지점/자료별 문자 발송 설정', '/sms_set_rc', 2, 1, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5102, '경고 기준 설정', '/sms_set_rcc', 2, 2, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5103, '자료 수신 감시 설정', '/sms_set_rs', 2, 3, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5104, '문자 메시지 패턴 설정', '/sms_set_msg', 2, 4, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5105, '지점별 운영상태 설정', '/station_status', 2, 5, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5106, '문자 수신 그룹 관리', '/sms_target_group', 2, 6, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5107, '문자 수신자 관리', '/sms_target_member', 2, 7, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5108, '상시 문자 수신 그룹 관리', '/sms_target_monitorgroup', 2, 8, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5109, '문자 발송', '/sms_send', 2, 9, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5110, '문자 발송 대기 내역', '/sms_send_result', 2, 10, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO watchdog.menu
+(ID, menu_name, `path`, `depth`, `order`, status, created_at, updated_at)
+VALUES(5111, '문자 발송 기능 ON/OFF 설정', '/sms_send_onoff', 2, 11, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 
 

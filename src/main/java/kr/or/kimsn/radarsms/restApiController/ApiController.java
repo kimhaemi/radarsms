@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
+import kr.or.kimsn.radarsms.dto.SmsSendOnOffDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MenuService;
 
@@ -56,4 +57,11 @@ public class ApiController {
         System.out.println(menuDto);
         return "redirect:/config/menu/menuSave";
     }
+
+    //문자 발송 기능 ON/OFF 설정 저장
+    // @GetMapping("/manage/sms_send_onoff/save")
+    // public String smsSendOnOffSave(SmsSendOnOffDto smsSendOnOffDto) {
+
+    //     return "redirect:/manage/sms_send_onoff";
+    // }
 }

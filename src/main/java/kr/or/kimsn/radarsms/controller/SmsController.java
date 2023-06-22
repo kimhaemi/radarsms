@@ -10,14 +10,19 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
+import kr.or.kimsn.radarsms.dto.SmsSendOnOffDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MenuService;
+import kr.or.kimsn.radarsms.service.SmsService;
 
 @Controller
 public class SmsController {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private SmsService smsService;
     
     //문자 발송
     @GetMapping("/manage/sms_send")
@@ -68,6 +73,10 @@ public class SmsController {
 
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        List<SmsSendOnOffDto> smsSendOnOffData = smsService.getSmsSendOnOffData();
+
+        map.put("smsSendOnOffData", smsSendOnOffData);
         
         model.addAttribute("list", map);
         return "views/manage/sms/sms_send_onoff";
