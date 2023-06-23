@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='사용자 관리'">
 
     <th:block layout:fragment="content">
         <div id="contentMain">
@@ -12,9 +12,9 @@
                         관리 &gt; 사용자 관리
                     </th>
                     <th class="right">
-                        <form action="admin_user_form.do" method="post">
+                        <form action="/users/admin_user_form" method="get">
                             <input type="hidden" name="mode" value="I">
-                            <input type="submit" value="새로운 사용자">
+                            <input type="submit" class="btn btn_grayline" value="새로운 사용자">
                         </form>
                     </th>
                 </tr>
@@ -53,7 +53,7 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="admin_user_form.do?mode=U&amp;u=3" role="button"><span class="ui-button-text">관리</span></a>
+                            <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" href="admin_user_form" role="button"><span class="ui-button-text">관리</span></a>
                         </td>
                     </tr>
                     

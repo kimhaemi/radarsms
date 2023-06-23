@@ -1,283 +1,128 @@
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>자료수신모니터링 - 한국기상산업진흥원</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="/css/default.css">
-    <link rel="stylesheet" type="text/css" href="/css/topnav.css">
-    <link rel="stylesheet" type="text/css" href="/css/toggles-full.css">
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
-    <script type="text/javascript" src="/js/jquery-1.11.1.js"></script>
-    <script type="text/javascript" src="/js/jquery-ui-1.11.1.js"></script>
-    <script type="text/javascript" src="/js/topnav.js"></script>
-    <script type="text/javascript" src="/js/toggles.min.js"></script>
-    <script type="text/javascript" src="/js/default.js"></script>
-    <script type="text/javascript">
-    $(function() {
-        $('a.btn').button();
-    });
-    function fnGoList(){
-        location.href="admin_user.do";
-    }
-    function fnUserDel(){
-        
-        if(confirm("사용자를 삭제하시겠습니까?")){
-            location.href="admin_user_del.do?mode=D&uid="+$("#uid").val();
-        }
-    }
-    function fnSubmit(){
-        
-        return false;
-    }
-    </script>
-    
-    </head>
-    <body>
-    
-    <div id="wrap">
-        <div id="header">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='사용자 생성/삭제'">
+
+    <th:block layout:fragment="content">
+        <script type="text/javascript">
+            $(function() {
+                $('a.btn').button();
+            });
+            function fnGoList(){
+                location.href="admin_user.do";
+            }
+            function fnUserDel(){
+                
+                if(confirm("사용자를 삭제하시겠습니까?")){
+                    location.href="admin_user_del.do?mode=D&uid="+$("#uid").val();
+                }
+            }
+            function fnSubmit(){
+                
+                return false;
+            }
+        </script>
+
+        <div id="contentMain">
+            <table class="noticeTbl searchSeries">
+                <thead>
+                <tr>
+                    <th class="left">
+                        관리 &gt; 새로운 사용자
+                    </th>
+                    <th class="right">
+                    </th>
+                </tr>
+                </thead>
+            </table>
             
-    
-    
-    
-    
-    
-            <div id="headerMain">
-                <a href="/main.do"><img src="/images/site_logo.png" alt="Main" class="siteLogo"></a>
-                <a href="http://www.kmipa.or.kr" target="_blank"><img src="/images/kmipa_logo.png" alt="기상산업진흥원" class="kmipaLogo"></a>
-            </div>
-            <ul class="topnav">
-                <li>
-                    <a href="/main.do" class="">전체 감시</a>
-                </li>
-                <li>
-                    <a href="#" class="">지점별 감시</a>
-                    <ul class="subnav">
-                        
-                        <li><a href="/station/kwk.do" class="rdr">관악산 레이더</a></li>
-                        
-                        <li><a href="/station/iia.do" class="rdr">영종도 레이더</a></li>
-                        
-                        <li><a href="/station/gdk.do" class="rdr">광덕산 레이더</a></li>
-                        
-                        <li><a href="/station/gng.do" class="rdr">강릉 레이더</a></li>
-                        
-                        <li><a href="/station/myn.do" class="rdr">면봉산 레이더</a></li>
-                        
-                        <li><a href="/station/psn.do" class="rdr">구덕산 레이더</a></li>
-                        
-                        <li><a href="/station/ksn.do" class="rdr">오성산 레이더</a></li>
-                        
-                        <li><a href="/station/jni.do" class="rdr">진도 레이더</a></li>
-                        
-                        <li><a href="/station/gsn.do" class="rdr">고산 레이더</a></li>
-                        
-                        <li><a href="/station/ssp.do" class="rdr">성산 레이더</a></li>
-                        
-                        <li><a href="/station/bri.do" class="rdr">백령도 레이더</a></li>
-                        
-                        <li><a href="/station/lgt.do" class="lgt">낙뢰</a></li>
-                    </ul>
-                <span></span></li>
-                <li>
-                    <a href="#" class="">과거자료 검색</a>
-                    <ul class="subnav">
-                        
-                        <li><a href="/station/search_kwk.do" class="rdr">관악산 레이더</a></li>
-                        
-                        <li><a href="/station/search_iia.do" class="rdr">영종도 레이더</a></li>
-                        
-                        <li><a href="/station/search_gdk.do" class="rdr">광덕산 레이더</a></li>
-                        
-                        <li><a href="/station/search_gng.do" class="rdr">강릉 레이더</a></li>
-                        
-                        <li><a href="/station/search_myn.do" class="rdr">면봉산 레이더</a></li>
-                        
-                        <li><a href="/station/search_psn.do" class="rdr">구덕산 레이더</a></li>
-                        
-                        <li><a href="/station/search_ksn.do" class="rdr">오성산 레이더</a></li>
-                        
-                        <li><a href="/station/search_jni.do" class="rdr">진도 레이더</a></li>
-                        
-                        <li><a href="/station/search_gsn.do" class="rdr">고산 레이더</a></li>
-                        
-                        <li><a href="/station/search_ssp.do" class="rdr">성산 레이더</a></li>
-                        
-                        <li><a href="/station/search_bri.do" class="rdr">백령도 레이더</a></li>
-                        
-                        <li><a href="/station/search_lgt.do" class="lgt">낙뢰</a></li>
-                    </ul>
-                <span></span></li>
-                <li>
-                    <a href="#" class="">지점별 통계</a>
-                    <ul class="subnav">
-                        
-                        <li><a href="/stat/month_rdr_kwk.do" class="rdr">관악산 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_iia.do" class="rdr">영종도 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_gdk.do" class="rdr">광덕산 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_gng.do" class="rdr">강릉 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_myn.do" class="rdr">면봉산 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_psn.do" class="rdr">구덕산 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_ksn.do" class="rdr">오성산 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_jni.do" class="rdr">진도 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_gsn.do" class="rdr">고산 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_ssp.do" class="rdr">성산 레이더</a></li>
-                        
-                        <li><a href="/stat/month_rdr_bri.do" class="rdr">백령도 레이더</a></li>
-                        
-                        <li><a href="/stat/month_lgt.do" class="lgt">낙뢰</a></li>
-                    </ul>
-                <span></span></li>
-                
-                
-                <li>
-                    <a href="#" class="">관리</a>
-                    <ul class="subnav manage">
-                        <li><a href="/manage/sms_set_rc.do" class="">지점/자료별 문자 발송 설정</a></li>
-                        <li><a href="/manage/sms_set_rcc.do" class="">경고 기준 설정</a></li>
-                        <li><a href="/manage/sms_set_rs.do" class="">자료 수신 감시 설정</a></li>
-                        <li><a href="/manage/sms_set_msg.do" class="">문자 메시지 패턴 설정</a></li>
-                        <li><a href="/manage/station_status.do" class="">지점별 운영상태 설정</a></li>
-                        <li><a href="/manage/sms_target_group.do" class="">문자 수신 그룹 관리</a></li>
-                        <li><a href="/manage/sms_target_member.do" class="">문자 수신자 관리</a></li>
-                        <li><a href="/manage/sms_target_monitorgroup.do" class="">상시 문자 수신 그룹 관리</a></li>
-                        <li><a href="/manage/sms_send.do" class="">문자 발송</a></li>
-                        <li><a href="/manage/sms_send_result.do" class="">문자 발송 대기 내역</a></li>
-                        <li><a href="/manage/sms_send_onoff.do" class="">문자 발송 기능 ON/OFF 설정</a></li>
-                        <li><a href="/manage/admin_user.do" class="">사용자 관리</a></li>
-                    </ul>
-                <span></span></li>
-                <li>
-                    <a href="/user/actionLogout.do" class="">로그아웃</a>
-                </li>
-                
-                
-                
-                
-            </ul>
-        </div><!-- header -->
-        
-        <div id="container">
-        <div id="contents" class="wide">
-            <div id="contentMain">
-                <table class="noticeTbl searchSeries">
-                    <thead>
+            <form id="userForm" modelattribute="userForm" action="admin_user_form_action" method="post" target="_self">
+            <input type="hidden" name="mode" value="I">
+            <table class="mainTbl searchSeries" summary="">
+                <caption class="hidden">관리자 정보 수정</caption>
+                <colgroup>
+                    <col style="width:300px;">
+                    <col>
+                </colgroup>
+                <thead>
                     <tr>
-                        <th class="left">
-                            관리 &gt;
-                            
-                                새로운 사용자
-                                
-                            
-                        </th>
-                        <th class="right">
-                        </th>
                     </tr>
-                    </thead>
-                </table>
-                
-                <form id="userForm" modelattribute="userForm" action="admin_user_form_action.do" method="post" target="_self">
-                <input type="hidden" name="mode" value="I">
-                <table class="mainTbl searchSeries" summary="">
-                    <caption class="hidden">관리자 정보 수정</caption>
-                    <colgroup>
-                        <col style="width:300px;">
-                        <col>
-                    </colgroup>
-                    <thead>
-                        <tr>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>사용자 ID<i class="fa fa-asterisk required_ico"></i></th>
-                            <td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>사용자 ID<i class="fa fa-asterisk required_ico"></i></th>
+                        <td>
+                            
                                 
-                                    
-                                    
-                                        <input id="id" name="id" class="user_input" type="text" value="">
-                                    
                                 
-                                <input id="uid" name="uid" type="hidden" value="">
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>비밀번호<i class="fa fa-asterisk required_ico"></i></th>
-                            <td>
-                                <input id="password" name="password" class="user_input" type="password" value="">
-                                <span></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>비밀번호 확인<i class="fa fa-asterisk required_ico"></i></th>
-                            <td><input id="password2" name="password2" class="user_input" type="password" value=""></td>
-                        </tr>
-                        <tr>
-                            <th>사용자 등급<i class="fa fa-asterisk required_ico"></i></th>
-                            <td>
-                                <select id="level" name="level" class="user_input">
-                                    <option value="U">사용자</option>
-                                    <option value="A">관리자</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>성명<i class="fa fa-asterisk required_ico"></i></th>
-                            <td><input id="name" name="name" class="user_input" type="text" value=""></td>
-                        </tr>
-                        <tr>
-                            <th>직책</th>
-                            <td><input id="pos" name="pos" class="user_input" type="text" value=""></td>
-                        </tr>
-                        <tr>
-                            <th>부서</th>
-                            <td><input id="dept" name="dept" class="user_input" type="text" value=""></td>
-                        </tr>
-                        <tr>
-                            <th>소속</th>
-                            <td><input id="org" name="org" class="user_input" type="text" value=""></td>
-                        </tr>
-                        <tr>
-                            <th>연락처</th>
-                            <td><input id="phone" name="phone" class="user_input" type="text" value=""></td>
-                        </tr>
-                        <tr>
-                            <th>E-Mail</th>
-                            <td><input id="email" name="email" class="user_input" type="text" value=""></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
+                                    <input id="id" name="id" class="user_input" type="text" value="">
                                 
-                                    
-                                        <input type="submit" class="login_btn submit" value="생 성">
-                                    
-                                    
+                            
+                            <input id="uid" name="uid" type="hidden" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>비밀번호<i class="fa fa-asterisk required_ico"></i></th>
+                        <td>
+                            <input id="password" name="password" class="user_input" type="password" value="">
+                            <span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>비밀번호 확인<i class="fa fa-asterisk required_ico"></i></th>
+                        <td><input id="password2" name="password2" class="user_input" type="password" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>사용자 등급<i class="fa fa-asterisk required_ico"></i></th>
+                        <td>
+                            <select id="level" name="level" class="user_input">
+                                <option value="U">사용자</option>
+                                <option value="A">관리자</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>성명<i class="fa fa-asterisk required_ico"></i></th>
+                        <td><input id="name" name="name" class="user_input" type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>직책</th>
+                        <td><input id="pos" name="pos" class="user_input" type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>부서</th>
+                        <td><input id="dept" name="dept" class="user_input" type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>소속</th>
+                        <td><input id="org" name="org" class="user_input" type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>연락처</th>
+                        <td><input id="phone" name="phone" class="user_input" type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <th>E-Mail</th>
+                        <td><input id="email" name="email" class="user_input" type="text" value=""></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            
                                 
-                                <input type="reset" class="login_btn" value="다시 입력">
+                                    <input type="submit" class="login_btn submit" value="생 성">
                                 
-                                <input type="button" class="login_btn" value="리스트" onclick="fnGoList();return false;">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                </form>
-            </div>
-    
-        </div><!-- #contents -->
-    
-        </div><!-- #container -->
-    </div><!-- #wrap -->
-    
-    
-    </body></html>
+                                
+                            
+                            <input type="reset" class="login_btn" value="다시 입력">
+                            
+                            <input type="button" class="login_btn" value="리스트" onclick="fnGoList();return false;">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            </form>
+        </div>
+
+
+    </th:block>
+</html>

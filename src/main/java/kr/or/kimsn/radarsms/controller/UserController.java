@@ -80,12 +80,23 @@ public class UserController {
 
     // 사용자 등록 화면
     @GetMapping("/users/admin_user_form")
-    public ModelAndView admin_user_form() {
-        ModelAndView mav = new ModelAndView();
-        System.out.println("ffsdfsdfsdfsdfsdfsd");
+    public String admin_user_form(ModelMap model) {
+
+        System.out.println("dfsdfsdfsdsf");
+        Map<String, Object> map = new HashMap<>();
+
+        List<MenuDto> menuList = menuService.getMenuList();
+        // table join 필요
+        // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
+		// 				FROM watchdog.receive_condition; 
+        List<StationDto> stationList = menuService.getStationList();
+
+        map.put("menuList", menuList);
+        map.put("stationList", stationList);
         
-        mav.setViewName("views/users/admin_user_form");
-        return mav;
+        model.addAttribute("list", map);
+        
+        return "views/users/admin_user_form";
     }
 
     // 사용자 등록
