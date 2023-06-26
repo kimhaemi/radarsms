@@ -9,16 +9,15 @@
                 $('a.btn').button();
             });
             function fnGoList(){
-                location.href="admin_user.do";
+                location.href="/users/admin_user";
             }
             function fnUserDel(){
                 
                 if(confirm("사용자를 삭제하시겠습니까?")){
-                    location.href="admin_user_del.do?mode=D&uid="+$("#uid").val();
+                    location.href="/users/admin_user_del?mode=D&uid="+$("#uid").val();
                 }
             }
             function fnSubmit(){
-                
                 return false;
             }
         </script>
@@ -36,7 +35,7 @@
                 </thead>
             </table>
             
-            <form id="userForm" modelattribute="userForm" action="admin_user_form_action" method="post" target="_self">
+            <form id="userForm" modelattribute="userForm" action="/users/admin_user_add" method="post" target="_self">
             <input type="hidden" name="mode" value="I">
             <table class="mainTbl searchSeries" summary="">
                 <caption class="hidden">관리자 정보 수정</caption>
@@ -51,13 +50,7 @@
                 <tbody>
                     <tr>
                         <th>사용자 ID<i class="fa fa-asterisk required_ico"></i></th>
-                        <td>
-                            
-                                
-                                
-                                    <input id="id" name="id" class="user_input" type="text" value="">
-                                
-                            
+                        <td><input id="id" name="id" class="user_input" type="text" value="">
                             <input id="uid" name="uid" type="hidden" value="">
                         </td>
                     </tr>
@@ -107,15 +100,12 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            
-                                
-                                    <input type="submit" class="login_btn submit" value="생 성">
-                                
-                                
-                            
+                            <!-- <input type="submit" class="login_btn submit" value="생 성">
                             <input type="reset" class="login_btn" value="다시 입력">
-                            
-                            <input type="button" class="login_btn" value="리스트" onclick="fnGoList();return false;">
+                            <input type="button" class="login_btn" value="리스트" onclick="fnGoList();return false;"> -->
+                            <input type="submit" class="btn login_btn submit" value="생 성">
+                            <input type="reset"  class="btn login_btn" value="다시 입력">
+                            <input type="button" class="btn login_btn" value="리스트" onclick="fnGoList();return false;">
                         </td>
                     </tr>
                 </tbody>

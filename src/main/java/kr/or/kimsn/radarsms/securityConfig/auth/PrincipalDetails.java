@@ -6,7 +6,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import kr.or.kimsn.radarsms.dto.UserDto;
+import kr.or.kimsn.radarsms.dto.UsersDto;
 
 
 //시큐리티가 /login 주소 요청이 오면 낚아채서 로그인을 진행시킨다.
@@ -18,9 +18,9 @@ import kr.or.kimsn.radarsms.dto.UserDto;
 //Security Sesstion => Authentication => UserDetails(PrincipalDetails)
 public class PrincipalDetails implements UserDetails {
 
-    private UserDto user; // 콤포지션
+    private UsersDto user; // 콤포지션
 
-    public PrincipalDetails(UserDto user) {
+    public PrincipalDetails(UsersDto user) {
         this.user = user;
     }
 

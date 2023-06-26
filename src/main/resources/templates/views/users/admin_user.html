@@ -37,16 +37,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <tr th:each="uList : ${list.usersList}">
+                        <td th:text="${uList.id}"></td><!-- id -->
+                        <td th:text="${uList.username}"></td><!-- 성명 -->
+                        <td ></td><!-- 등급 -->
+                        <td ></td><!-- 직책 -->
+                        <td ></td><!-- 부서 -->
+                        <td ></td><!-- 소속 -->
+                        <td ></td><!-- 연락처 -->
+                        <td ></td><!-- e-mail -->
+                        <td>
+                            <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" th:href="'/users/admin_user_form?id='+${uList.id}" role="button"><span class="ui-button-text">관리</span></a>
+                        </td>
+                    </tr>
                     <tr>
                         <td>radar</td>
                         <td>레이더</td>
-                        <td>
-                            
-                                관리자
-                                
-                            
-                        </td>
+                        <td>관리자</td>
                         <td></td>
                         <td></td>
                         <td></td>

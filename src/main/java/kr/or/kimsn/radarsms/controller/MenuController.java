@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MenuService;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 메뉴
  */
+@RequiredArgsConstructor
 @Controller
 public class MenuController {
     
-    @Autowired
-    private MenuService menuService;
+    private final MenuService menuService;
 
     //메인 화면(전체 감시)
     @GetMapping({"", "/"})

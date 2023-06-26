@@ -18,6 +18,8 @@ repositories {
 	mavenCentral()
 }
 
+// ext['log4j2.version'] = '2.15.0' // prevent log4j security issue
+
 dependencies {
 	//thymeleaf layout
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'

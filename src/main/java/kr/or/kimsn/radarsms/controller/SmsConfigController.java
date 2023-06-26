@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,17 +11,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MenuService;
+import lombok.RequiredArgsConstructor;
 /**
  * 설정
  */
+@RequiredArgsConstructor
 @Controller
 public class SmsConfigController {
 
-    @Autowired
-    private MenuService menuService;
-
-    // @Autowired
-    // private HistoricalDataService historicalDataService;
+    private final MenuService menuService;
+    // private final historicalDataService historicalDataService;
 
     //지점/자료별 문자 발송 설정
     @GetMapping("/manage/sms_set_rc")

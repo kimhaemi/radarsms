@@ -4,54 +4,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
-import kr.or.kimsn.radarsms.repository.UserRepository;
+import kr.or.kimsn.radarsms.dto.UsersDto;
+import kr.or.kimsn.radarsms.repository.UsersRepository;
 import kr.or.kimsn.radarsms.service.MenuService;
-
+import kr.or.kimsn.radarsms.service.UsersService;
+import lombok.RequiredArgsConstructor;
+/**
+ * 사용자
+ */
+@RequiredArgsConstructor
 @Controller
-public class UserController {
+public class UsersController {
 
-    @Autowired
-    private MenuService menuService;
+    private final MenuService menuService;
 
-    // @Autowired
-    // private UserRepository userReository;
+    private final UsersService usersService;
 
     // @Autowired
     // private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    // @GetMapping({ "", "/"})
-    // public String login() {
-    // return "loginForm";
-    // }
-
-    // // login 후
-    // @GetMapping("/index")
-    // public String index() {
-    //     return "index";
-    // }
-
-    @GetMapping("/logout")
-    public String logout() {
-        System.out.println("logout===========================");
-        return "views/logout";
-    }
-
-    // 로그인 화면
-    @GetMapping({ "/login" })
-    public String login() {
-        return "views/users/loginForm";
-    }
 
     // 사용자 등록 화면
     @GetMapping("/users/joinForm")
@@ -70,8 +49,12 @@ public class UserController {
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
 
+        List<UsersDto> usersList = usersService.getUsersList();
+
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        map.put("usersList", usersList);
         
         model.addAttribute("list", map);
         

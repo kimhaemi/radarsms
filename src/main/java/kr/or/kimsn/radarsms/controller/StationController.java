@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,20 +13,19 @@ import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MenuService;
 import kr.or.kimsn.radarsms.service.StationService;
+import lombok.RequiredArgsConstructor;
 /**
  * 지점별 감시
  */
+@RequiredArgsConstructor
 @Controller
 public class StationController {
 
     // @Autowired
     // private HistoricalDataService historicalDataService;
 
-    @Autowired
-    private MenuService menuService;
-
-    @Autowired
-    private StationService stationService;
+    private final MenuService menuService;
+    private final StationService stationService;
 
     //조회
     @GetMapping("/station/{name}")
