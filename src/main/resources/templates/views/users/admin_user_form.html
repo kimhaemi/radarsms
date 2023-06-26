@@ -4,19 +4,25 @@
       th:with="metaTitle='사용자 생성/삭제'">
 
     <th:block layout:fragment="content">
+        <script th:inline="javascript">
+            var userId = [[${membersData}]];
+            console.log(userId);
+        </script>
         <script type="text/javascript">
             $(function() {
                 $('a.btn').button();
             });
+
             function fnGoList(){
                 location.href="/users/admin_user";
             }
+
             function fnUserDel(){
-                
                 if(confirm("사용자를 삭제하시겠습니까?")){
                     location.href="/users/admin_user_del?mode=D&uid="+$("#uid").val();
                 }
             }
+
             function fnSubmit(){
                 return false;
             }

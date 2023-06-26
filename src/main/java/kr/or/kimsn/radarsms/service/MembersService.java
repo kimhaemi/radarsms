@@ -1,6 +1,7 @@
 package kr.or.kimsn.radarsms.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -19,6 +20,11 @@ public class MembersService {
     //사용자 조회
     public List<MembersDto> getUsersList(){
         return membersRepository.findAll();
+    }
+
+    //사용자 단건 조회
+    public MembersDto getUsersData(Long id){
+        return membersRepository.findById(id).get();
     }
 
     //사용자 등록

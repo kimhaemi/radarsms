@@ -3,10 +3,12 @@ package kr.or.kimsn.radarsms.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.dto.MenuDto;
@@ -55,9 +57,9 @@ public class MembersController {
 
     // 사용자 등록 화면
     @GetMapping("/users/admin_user_form")
-    public String admin_user_form(ModelMap model) {
+    public String admin_user_form(ModelMap model, @RequestParam(required = false) Long id) {
 
-        System.out.println("dfsdfsdfsdsf");
+        System.out.println("id ::: " + id);
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -66,8 +68,15 @@ public class MembersController {
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
 
+        MembersDto memberData = membersService.getUsersData(id);
+
+        System.out.println("memberData :::; " + memberData.getId());
+
+
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        map.put("membersData", memberData);
         
         model.addAttribute("list", map);
         

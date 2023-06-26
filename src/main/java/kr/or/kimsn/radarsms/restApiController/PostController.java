@@ -1,19 +1,11 @@
 package kr.or.kimsn.radarsms.restApiController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.or.kimsn.radarsms.common.ApiResult;
-import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.UsersDto;
-import kr.or.kimsn.radarsms.service.MenuService;
+// import kr.or.kimsn.radarsms.service.MenuService;
 import kr.or.kimsn.radarsms.service.UsersService;
 import lombok.RequiredArgsConstructor;
 // import lombok.extern.slf4j.Slf4j;
@@ -23,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class PostController {
 
-    private final MenuService menuService;
+    // private final MenuService menuService;
     private final UsersService usersService;
     
     //메뉴 저장
