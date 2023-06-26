@@ -4,33 +4,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
-import kr.or.kimsn.radarsms.dto.UsersDto;
-import kr.or.kimsn.radarsms.repository.UsersRepository;
+import kr.or.kimsn.radarsms.service.MembersService;
 import kr.or.kimsn.radarsms.service.MenuService;
-import kr.or.kimsn.radarsms.service.UsersService;
 import lombok.RequiredArgsConstructor;
+
 /**
  * 사용자
  */
 @RequiredArgsConstructor
 @Controller
-public class UsersController {
-
+public class MembersController {
     private final MenuService menuService;
-
-    private final UsersService usersService;
-
-    // @Autowired
-    // private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final MembersService membersService;
 
     // 사용자 등록 화면
     @GetMapping("/users/joinForm")
@@ -49,12 +41,12 @@ public class UsersController {
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
 
-        List<UsersDto> usersList = usersService.getUsersList();
+        List<MembersDto> membersList = membersService.getUsersList();
 
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        map.put("usersList", usersList);
+        map.put("membersList", membersList);
         
         model.addAttribute("list", map);
         
@@ -81,39 +73,4 @@ public class UsersController {
         
         return "views/users/admin_user_form";
     }
-
-    // 사용자 등록
-    /* @PostMapping("/join")
-    public String join(UserDto user) {
-        System.out.println(user);
-        // 비밀번호 암호화
-        String rawPwd = user.getPassword();
-        String encPwd = bCryptPasswordEncoder.encode(rawPwd);
-        user.setPassword(encPwd);
-        // 임의로 넣어줌.
-        user.setRoles("ROLE_USER");
-        userReository.save(user);
-        return "redirect:/login";
-    } */
-
-    @GetMapping("/joinProc")
-    public @ResponseBody String joinProc() {
-        return "가입 완료";
-    }
-
-    // 에러
-    @GetMapping("/common/error")
-    public String error() {
-        System.out.println("errordfsdfsdfsd");
-        return "views/common/error";
-    }
-
-    // @PostMapping("/loginProc")
-    // public String loginProc(@RequestParam("username") String username,
-    // @RequestParam("password") String password,
-    // Model model) {
-    // model.addAttribute("username", username);
-    // model.addAttribute("password", password);
-    // return "redirect:/";
-    // }
 }
