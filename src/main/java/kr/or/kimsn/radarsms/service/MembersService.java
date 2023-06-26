@@ -1,6 +1,7 @@
 package kr.or.kimsn.radarsms.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -24,7 +25,7 @@ public class MembersService {
 
     //사용자 단건 조회
     public MembersDto getUsersData(Long id){
-        return membersRepository.findById(id).get();
+        return membersRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Member Not Found"));
     }
 
     //사용자 등록
