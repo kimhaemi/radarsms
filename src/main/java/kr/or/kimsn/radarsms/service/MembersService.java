@@ -54,13 +54,13 @@ public class MembersService {
 
     //사용자 삭제
     @Transactional
-    public void userDelete (Long userId) {
+    public Long userDelete (Long userId) {
         try {
             System.out.println("사용자 삭제 userDelete");
             membersRepository.deleteById(userId);
         } catch (Exception e) {
             System.out.println("delete error : " +e);
         }
+        return userId;
     }
-
 }

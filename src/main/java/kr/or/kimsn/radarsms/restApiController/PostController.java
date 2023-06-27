@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.or.kimsn.radarsms.common.ApiResult;
 import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.service.MembersService;
 // import kr.or.kimsn.radarsms.service.MenuService;
@@ -64,10 +65,10 @@ public class PostController {
 
     // 사용자 삭제
     @PostMapping("/users/admin_user_del")
-    public String userDelete(@RequestParam Long id){
+    public ApiResult<Long> userDelete(@RequestParam Long id){
         System.out.println("userId : " + id);
         System.out.println("사용자 삭제 api");
         membersService.userDelete(id);
-        return "삭제완료";
+        return ApiResult.success(membersService.userDelete(id));
     }
 }
