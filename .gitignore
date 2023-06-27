@@ -37,4 +37,5 @@ out/
 .vscode/
 
 .history
-log/
+/log/
+.gitignore
