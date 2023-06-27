@@ -62,11 +62,11 @@ public class PostController {
     }
 
     // 사용자 삭제
-    // @PostMapping("/users/admin_user_delete")
-    // public String userDelete(Long userId){
-    //     System.out.println("userId : " + userId);
-    //     System.out.println("사용자 삭제 api");
-    //     usersService.userDelete(userId);
-    //     return "삭제완료";
-    // }
+    @PostMapping("/users/admin_user_delete")
+    public String userDelete(Long id){
+        System.out.println("userId : " + id);
+        System.out.println("사용자 삭제 api");
+        membersService.userDelete(id);
+        return "삭제완료";
+    }
 }
