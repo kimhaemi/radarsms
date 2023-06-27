@@ -5,11 +5,22 @@
 
     <th:block layout:fragment="content">
         <script th:inline="javascript">
+            const urlparams = new URL(location.href).searchParams;
+            const id = urlparams.get('id');
             /* <![CDATA[ */
             $(document).ready(function (){
-                
+                $('#uid').val(id);
+
                 var mData = /*[[${list.memberData}]]*/;
                 console.log(mData);
+
+                // if(flag == 'insert'){
+                //     $("#userForm").attr("action", "/users/admin_user_add");
+                // }
+
+                // if(flag == 'modity'){
+                //     $("#userForm").attr("action", "/users/admin_user_modity");
+                // }
                 
                 if(mData != null){
                     $("#memberId").val(mData.memberId);
@@ -31,15 +42,15 @@
             function fnGoList(){
                 location.href="/users/admin_user";
             }
-
+            
+            function fnSubmit(){
+                return false;
+            }
+            
             function fnUserDel(){
                 if(confirm("사용자를 삭제하시겠습니까?")){
                     location.href="/users/admin_user_del?id="+$("#uid").val();
                 }
-            }
-
-            function fnSubmit(){
-                return false;
             }
 
             function fnSave(mode){
@@ -66,31 +77,28 @@
                     return false;
                 }
 
-                if(mode == 'add'){ text = "사용자를 등록하시겠습니까?" }
+                if(mode == 'insert'){ text = "사용자를 등록하시겠습니까?" }
                 if(mode == 'modify'){ text = "사용자를 수정하시겠습니까?" }
                 
                 if(confirm(text)){
-                    var url = '/users/admin_user_'+mode;
-                    // location.href="/users/admin_user_"+mode+"?id="+$("#uid").val();
-                    $.ajax({
-                        type : 'post',           // 타입 (get, post, put 등등)
-                        url : url,           // 요청할 서버url
-                        async : true,            // 비동기화 여부 (default : true)
-                        headers : {              // Http header
-                        "Content-Type" : "application/json",
-                        "X-HTTP-Method-Override" : "POST"
-                        },
-                        dataType : 'json',       // 데이터 타입 (html, xml, json, text 등등)
-                        data : JSON.stringify({  // 보낼 데이터 (Object , String, Array)
-                            "id" : $('#uid').val()
-                        }),
-                        success : function(result) { // 결과 성공 콜백함수
-                            console.log(result);
-                        },
-                        error : function(request, status, error) { // 결과 에러 콜백함수
-                            console.log(error)
-                        }
-                    });
+                    const params = {
+                        id: $("#uid").val(),
+                        memberId: $("#memberId").val(),
+                        password: $("#password").val(),
+                        passwordHint: $("#passwordHint").val(),
+                        passwordAnswer: $("#passwordAnswer").val(),
+                        memberName: $("#memberName").val(),
+                        memberClass: $("#memberClass").val(),
+                        memberEmail: $("#email").val(),
+                        memberPhone: $("#phone").val(),
+                        memberOrg: $("#org").val(),
+                        memberDept: $("#dept").val(),
+                        memberPos: $("#pos").val(),
+                    }
+                    console.log(params);
+                    const result = fnCall('post', '/users/admin_user_'+mode, params);
+                    
+                    console.log("result :: "+ result);
                 }
             }
 
@@ -109,8 +117,8 @@
                 </thead>
             </table>
             
-            <!-- <form id="userForm" modelattribute="userForm" action="/users/admin_user_add" method="post" target="_self"> -->
-            <form id="userForm" modelattribute="userForm" action="" method="post" target="_self"></form>
+            <!-- <form id="userForm" modelattribute="userForm" action="/users/admin_user_add" th:object="${membersDto}" method="post" target="_self"> -->
+            <!-- <form id="userForm"> -->
             <input type="hidden" name="mode" value="I">
             <table class="mainTbl searchSeries" summary="">
                 <caption class="hidden">관리자 정보 수정</caption>
@@ -125,7 +133,7 @@
                 <tbody>
                     <tr>
                         <th>사용자 ID<i class="fa fa-asterisk required_ico"></i></th>
-                        <td><input id="memberId" name="memberId" class="user_input" type="text" value="123">
+                        <td><input id="memberId" name="memberId" class="user_input" type="text" value="">
                             <input id="uid" name="uid" type="hidden" value="">
                         </td>
                     </tr>
@@ -178,8 +186,8 @@
                             <!-- <input type="submit" class="login_btn submit" value="생 성">
                             <input type="reset" class="login_btn" value="다시 입력">
                             <input type="button" class="login_btn" value="리스트" onclick="fnGoList();return false;"> -->
-                            <input type="submit" th:if="${list.memberData == null}" id="insert" class="btn login_btn submit" value="생 성" onclick="fnSave('add')" >
-                            <input type="submit" th:if="${list.memberData != null}" id="update" class="btn login_btn submit" value="수 정" onclick="fnSave('modify')" >
+                            <input type="submit" th:if="${list.memberData == null}" id="insert" class="btn login_btn submit" value="생 성" onclick="fnSave('insert')">
+                            <input type="submit" th:if="${list.memberData != null}" id="modify" class="btn login_btn submit" value="수 정" onclick="fnSave('modify')">
                             <input type="reset"  id="reset"  class="btn login_btn"        value="다시 입력">
                             <input type="submit" th:if="${list.memberData != null}" id="delete" class="btn login_btn del"    value="삭 제" onclick="fnUserDel()">
                             <input type="button" id="list"   class="btn login_btn"        value="리스트" onclick="fnGoList();return false;">
@@ -187,7 +195,7 @@
                     </tr>
                 </tbody>
             </table>
-            </form>
+            <!-- </form> -->
         </div>
 
 

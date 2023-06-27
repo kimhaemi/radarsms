@@ -1,12 +1,11 @@
 package kr.or.kimsn.radarsms.restApiController;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.kimsn.radarsms.dto.MembersDto;
-import kr.or.kimsn.radarsms.dto.UsersDto;
 import kr.or.kimsn.radarsms.service.MembersService;
 // import kr.or.kimsn.radarsms.service.MenuService;
 // import kr.or.kimsn.radarsms.service.UsersService;
@@ -43,20 +42,23 @@ public class PostController {
     // }
 
     // 사용자 등록
-    // @PostMapping("/users/admin_user_add")
-    // public ResponseEntity<UsersDto> userSave(UsersDto usersDto){
-    //     System.out.println("사용자 등록 api");
-    //     return ResponseEntity.ok(membersService.userAdd(usersDto));
-    // }
+    @PostMapping("/users/admin_user_add")
+    public ResponseEntity<MembersDto> userSave(@ModelAttribute MembersDto membersDto){
+        System.out.println("사용자 등록 api");
+        System.out.println("membersDto :::: " + membersDto);
+        return ResponseEntity.ok(membersService.userAdd(membersDto));
+    }
 
     // 사용자 수정
     @PostMapping("/users/admin_user_modify")
-    public ResponseEntity<MembersDto> userModify(){
+    public ResponseEntity<MembersDto> userModify(@ModelAttribute MembersDto membersDto){
+
+        System.out.println("membersDto ::: " + membersDto);
         // System.out.println("id ::: " + id);
-        // System.out.println("membersDto ::: " + membersDto);
         System.out.println("사용자 수정 api");
         // return ResponseEntity.ok(membersService.userModify(membersDto));
-        return null;
+        // return null;
+        return ResponseEntity.ok(membersDto);
     }
 
     // 사용자 삭제
