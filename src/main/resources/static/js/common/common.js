@@ -4,8 +4,8 @@ function fnCall(method, url, params){
         url : url,           // 요청할 서버url
         async : false,            // 비동기화 여부 (default : true)
         headers : {              // Http header
-        // "Content-Type" : "application/json",
-        "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8"
+        "Content-Type" : "application/json",
+        // "Content-Type" : "application/x-www-form-urlencoded; charset=UTF-8"
         // "X-HTTP-Method-Override" : "POST"
         },
         dataType : 'json',       // 데이터 타입 (html, xml, json, text 등등)

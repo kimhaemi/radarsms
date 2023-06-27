@@ -1,8 +1,9 @@
 package kr.or.kimsn.radarsms.restApiController;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.kimsn.radarsms.dto.MembersDto;
@@ -43,7 +44,7 @@ public class PostController {
 
     // 사용자 등록
     @PostMapping("/users/admin_user_add")
-    public ResponseEntity<MembersDto> userSave(@ModelAttribute MembersDto membersDto){
+    public ResponseEntity<MembersDto> userSave(@RequestBody MembersDto membersDto){
         System.out.println("사용자 등록 api");
         System.out.println("membersDto :::: " + membersDto);
         return ResponseEntity.ok(membersService.userAdd(membersDto));
@@ -51,7 +52,7 @@ public class PostController {
 
     // 사용자 수정
     @PostMapping("/users/admin_user_modify")
-    public ResponseEntity<MembersDto> userModify(@ModelAttribute MembersDto membersDto){
+    public ResponseEntity<MembersDto> userModify(@RequestBody MembersDto membersDto){
 
         System.out.println("membersDto ::: " + membersDto);
         // System.out.println("id ::: " + id);
@@ -62,8 +63,8 @@ public class PostController {
     }
 
     // 사용자 삭제
-    @PostMapping("/users/admin_user_delete")
-    public String userDelete(Long id){
+    @PostMapping("/users/admin_user_del")
+    public String userDelete(@RequestParam Long id){
         System.out.println("userId : " + id);
         System.out.println("사용자 삭제 api");
         membersService.userDelete(id);
