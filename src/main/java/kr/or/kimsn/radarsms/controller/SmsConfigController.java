@@ -9,7 +9,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
+import kr.or.kimsn.radarsms.dto.ReceiveConditionDto;
+import kr.or.kimsn.radarsms.dto.ReceiveDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
+import kr.or.kimsn.radarsms.service.ManageService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import lombok.RequiredArgsConstructor;
 /**
@@ -20,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class SmsConfigController {
 
     private final MenuService menuService;
+    private final ManageService manageService;
     // private final historicalDataService historicalDataService;
 
     //지점/자료별 문자 발송 설정
@@ -32,9 +36,14 @@ public class SmsConfigController {
         // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
-
+        
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        //자료 수신 상태
+        List<ReceiveDto> receiveList =  manageService.getReceiveConditionList();
+        System.out.println("receiveList : " + receiveList);
+        map.put("receiveList", receiveList);
         
         model.addAttribute("list", map);
 
