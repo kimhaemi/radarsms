@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout/default_layout"
+      th:with="metaTitle='전체 감시'">
+
+	<th:block layout:fragment="content">
+        <script type="text/javascript">
+        
+        $(function() {
+            $('.toggle').toggles({
+                text : {
+                    on : '정상운영',
+                    off : '유지보수'
+                }
+            });
+            $('.toggle').on('toggle', function (e, active) {
+                var targetId=e.target.id.replace("toggle","activation");
+                if (active) {
+                    $("#"+targetId).val("RUN");
+                } else {
+                    $("#"+targetId).val("MRO");
+                }
+            });
+        });
+
+        function fnSave(){
+            if(confirm("설정된 데이터를 저장하시겠습니까?")){
+                    const params = {
+                        siteCd: "",
+                        siteName: "",
+                        siteStatus: "",
+                    }
+                    console.log(params);
+                    const result = fnCall('post', '/manager/admin_user_'+mode, params);
+                    
+                    console.log("result :: "+ result);
+                }
+        }
+        </script>
+    
+        <form action="/manage/station_status_update" method="post" target="_self" id="searchDate">
+        <table class="noticeTbl searchSeries">
+            <thead>
+            <tr>
+                <th class="left">
+                    관리 &gt; 지점별 운영상태 설정
+                </th>
+                <th class="right">
+                    <input type="submit" value="설정저장">
+                </th>
+            </tr>
+            </thead>
+        </table>
+        
+        <table class="mainTbl searchSeries" summary="">
+            <caption class="hidden">지점별 운영상태 </caption>
+            <colgroup>
+                <col>
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>지점</th>
+                    <th>운영상태</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="stationStatusList : ${list.stationStatusList}">
+                    <td th:text="${stationStatusList.siteName +'('+ stationStatusList.siteCd +')'}">
+                        <!-- 백령도 ( BRI ) -->
+                    </td>
+                    <td>
+                        <div class="toggle wide toggle-light" th:id="${'toggle_' + stationStatusList.siteCd}" data-toggle-on="1" style="height: 20px;">
+                            <div class="toggle-slide">
+                                <div class="toggle-inner" style="width: 380px; margin-left: 0px;">
+                                    <div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div>
+                                    <div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div>
+                                    <div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" th:name="${stationStatusList.siteCd}" th:id="${'activation_'+stationStatusList.siteCd}" th:value="${stationStatusList.siteStatus}">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </form>
+    </th:block>
+</html>
