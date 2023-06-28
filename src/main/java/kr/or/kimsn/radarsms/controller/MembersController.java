@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.dto.MenuDto;
@@ -41,12 +40,10 @@ public class MembersController {
         // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
-
-        List<MembersDto> membersList = membersService.getUsersList();
-
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
+        List<MembersDto> membersList = membersService.getUsersList();
         map.put("membersList", membersList);
         
         model.addAttribute("list", map);
@@ -66,6 +63,8 @@ public class MembersController {
         // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
+        map.put("menuList", menuList);
+        map.put("stationList", stationList);
 
         MembersDto memberData = null;
 
@@ -73,9 +72,6 @@ public class MembersController {
             memberData = membersService.getUsersData(id);
             System.out.println("memberData :::; " + memberData);
         }
-
-        map.put("menuList", menuList);
-        map.put("stationList", stationList);
 
         map.put("memberData", memberData);
         

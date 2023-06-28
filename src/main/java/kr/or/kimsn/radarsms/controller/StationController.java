@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
+import kr.or.kimsn.radarsms.dto.ReceiveConditionDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MenuService;
 import kr.or.kimsn.radarsms.service.StationService;
@@ -28,8 +29,16 @@ public class StationController {
     private final StationService stationService;
 
     //조회
-    @GetMapping("/station/{name}")
-    public String getStation(@PathVariable("name") String name, ModelMap model){
+    @GetMapping("/station/{site}")
+    public String getStation(@PathVariable("site") String site, ModelMap model){
+
+        //lgt :낙뢰
+        //rdr : radar(대형)
+        //sml : 스몰
+        String dataKind = !site.equals("LGT") ? "RDR" : "LGT";
+
+        //자료 수신 처리 설정
+        stationService.getReceiveSetting(dataKind);
         
         Map<String, Object> map = new HashMap<>();
 
@@ -39,12 +48,18 @@ public class StationController {
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
 
-        //지점별 감시
-        List<StationDto> stationDtl = stationService.getStationDetail(name);
-
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+        
+        //지점별 감시
+        List<StationDto> stationDtl = stationService.getStationDetail(site);
         map.put("stationDtl", stationDtl);
+
+        //최종 수신
+        List<ReceiveConditionDto> stationLastCheck = stationService.getStationLastCheck(site, "NQC");
+        map.put("stationLastCheck", stationLastCheck);
+
+
         
         model.addAttribute("list", map);
         

@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kr.or.kimsn.radarsms.dto.StationDto;
 
-public interface StationRepository extends JpaRepository<StationDto, Long> {
+public interface StationRepository extends JpaRepository<StationDto, String> {
 
-    List<StationDto> findAll();
+    List<StationDto> findByOrderBySortOrder();
 
     List<StationDto> findBySiteCd(String siteCd);
 }
