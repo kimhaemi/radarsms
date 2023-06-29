@@ -1,24 +1,31 @@
 package kr.or.kimsn.radarsms.dto;
 
+import java.io.Serializable;
+
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
+import kr.or.kimsn.radarsms.dto.pkColumn.SmsSendPatternPk;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "sms_send_pattern_1")
+@Table(name = "sms_send_pattern")
+@IdClass(SmsSendPatternPk.class)
 public class SmsSendPatternDto {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    // @EmbeddedId
+    // private SmsSendPatternPk smsSendPatternPk;
 
+    @Id
     private String code;
+    @Id
     private String mode;
     private String activation;
     private String pattern;
 }
+

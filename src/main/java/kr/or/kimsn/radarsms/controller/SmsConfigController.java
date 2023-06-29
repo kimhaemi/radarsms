@@ -13,6 +13,7 @@ import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionDto;
 import kr.or.kimsn.radarsms.dto.ReceiveDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
+import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.repository.entity.ReceiveEntity.SmsSetRcEntity;
 import kr.or.kimsn.radarsms.service.ManageService;
@@ -106,9 +107,12 @@ public class SmsConfigController {
         // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
-
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        List<SmsSendPatternDto> smsSendPatternList = manageService.getSmsSendPatternList();
+        map.put("smsSendPatternList", smsSendPatternList);
+        System.out.println("smsSendPatternList : \n" + smsSendPatternList);
         
         model.addAttribute("list", map);
         return "views/manage/smsConfig/sms_set_msg";
