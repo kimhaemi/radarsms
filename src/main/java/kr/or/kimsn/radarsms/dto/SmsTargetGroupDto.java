@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "sms_target_group_1")
+@Table(name = "sms_target_group")
 public class SmsTargetGroupDto {
     
     @Id

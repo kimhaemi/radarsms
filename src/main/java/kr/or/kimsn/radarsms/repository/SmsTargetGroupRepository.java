@@ -8,5 +8,4 @@ import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
 
 public interface SmsTargetGroupRepository extends JpaRepository<SmsTargetGroupDto, Long>{
     
-    List<SmsTargetGroupDto> findAll();
 }

@@ -9,7 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
+import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
+import kr.or.kimsn.radarsms.service.ManageService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class SmsGroupController {
     
     private final MenuService menuService;
+    private final ManageService manageService;
 
     //문자 수신 그룹 관리
     @GetMapping("/manage/sms_target_group")
@@ -32,9 +35,11 @@ public class SmsGroupController {
         // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
-
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        List<SmsTargetGroupDto> smsTargetGroupList = manageService.getSmsTargetGroupList();
+        map.put("smsTargetGroupList", smsTargetGroupList);
         
         model.addAttribute("list", map);
         return "views/manage/smsGroup/sms_target_group";
