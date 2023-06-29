@@ -9,9 +9,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
+import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionDto;
 import kr.or.kimsn.radarsms.dto.ReceiveDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
+import kr.or.kimsn.radarsms.repository.entity.ReceiveEntity.SmsSetRcEntity;
 import kr.or.kimsn.radarsms.service.ManageService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +43,7 @@ public class SmsConfigController {
         map.put("stationList", stationList);
 
         //자료 수신 상태
-        List<ReceiveDto> receiveList =  manageService.getReceiveConditionList();
+        List<SmsSetRcEntity> receiveList =  manageService.getReceiveConditionList();
         System.out.println("receiveList : " + receiveList);
         map.put("receiveList", receiveList);
         
@@ -60,9 +62,13 @@ public class SmsConfigController {
         // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
-
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        //경고 기준
+        List<ReceiveConditionCriteriaDto> criteriaList = manageService.getReceiveConditionCriteriaList();
+        System.out.println("criteriaList ::: " + criteriaList);
+        map.put("criteriaList", criteriaList);
         
         model.addAttribute("list", map);
         return "views/manage/smsConfig/sms_set_rcc";
