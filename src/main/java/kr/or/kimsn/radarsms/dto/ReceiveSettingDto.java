@@ -13,14 +13,14 @@ import lombok.Data;
 public class ReceiveSettingDto {
 
     @Id
-    @Column(name="data_kind") private String dataKind;
     @Column(name="data_type") private String dataType;
+    @Column(name="data_kind") private String dataKind;
     private String data_name;
     private String time_zone;
     private String filename_pattern;
     private String filename_regex;
-    private String recv_interval;
-    private String delay_tolerance;
-    private String permitted_watch;
+    private Integer recv_interval;
+    private Integer delay_tolerance;
+    @Column(name="permitted_watch") private Integer permittedWatch;
     
 }
