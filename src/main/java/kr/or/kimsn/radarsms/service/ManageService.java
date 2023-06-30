@@ -1,6 +1,7 @@
 package kr.or.kimsn.radarsms.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
@@ -30,37 +31,45 @@ public class ManageService {
 
     private final SmsSendPatternRepository smsSendPatternRepository;
     private final SmsTargetGroupRepository smsTargetGroupRepository;
- 
+
     /*
-    * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
-    */
-    public List<StationStatusDto> getStationStatusList () {
+     * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
+     */
+    public List<StationStatusDto> getStationStatusList() {
         return stationStatusRepository.findAll();
     }
 
-    //자료 수신 상태
-    public List<SmsSetRcEntity> getReceiveConditionList () {
-        // List<ReceiveDto> result = mapper.map(receiveConditionRepository.findReceiveConditionStationRdrReceiveSetting(), ReceiveDto.class);
+    // 자료 수신 상태
+    public List<SmsSetRcEntity> getReceiveConditionList() {
+        // List<ReceiveDto> result =
+        // mapper.map(receiveConditionRepository.findReceiveConditionStationRdrReceiveSetting(),
+        // ReceiveDto.class);
         return receiveConditionRepository.findReceiveConditionStationRdrReceiveSetting();
     }
 
-    //경고 기준 설정
-    public List<ReceiveConditionCriteriaDto> getReceiveConditionCriteriaList () {
+    // 경고 기준 설정
+    public List<ReceiveConditionCriteriaDto> getReceiveConditionCriteriaList() {
         return receiveConditionCriteriaRepository.findAll();
     }
 
-    //자료 수신 감시 설정
-    public List<ReceiveSettingDto> getReceiveSettingList () {
+    // 자료 수신 감시 설정
+    public List<ReceiveSettingDto> getReceiveSettingList() {
         return receiveSettingRepository.findByOrderByDataKindDescPermittedWatchDesc();
     }
 
-    //문자 메시지 패턴
-    public List<SmsSendPatternDto> getSmsSendPatternList () {
+    // 문자 메시지 패턴
+    public List<SmsSendPatternDto> getSmsSendPatternList() {
         return smsSendPatternRepository.findByOrderByCodeAscModeDesc();
     }
-    
-    //문자 수신 그룹 관리
-    public List<SmsTargetGroupDto> getSmsTargetGroupList () {
+
+    // 문자 수신 그룹 관리
+    public List<SmsTargetGroupDto> getSmsTargetGroupList() {
         return smsTargetGroupRepository.findAll();
     }
+
+    // 문자 수신 그룹 그룹 멤버 관리
+    public SmsTargetGroupDto getSmsTargetGroupMemberList(Long id) {
+        return smsTargetGroupRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Member Not Found"));
+    }
+
 }

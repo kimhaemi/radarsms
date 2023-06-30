@@ -51,7 +51,7 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr th:each="rclist : ${list.receiveList}">
+                <tr th:each="rclist : ${list.receiveList}">
                     <td th:if="${rclist.data_kind == 'RDR'}">
                         레이더
                     </td>
@@ -82,7 +82,7 @@
                         <div class="toggle toggle-light" id="toggle-${rclist.site}-${rclist.data_type}" data-toggle-on="${rclist.sms_send_activation }"></div>
                         <input type="hidden" id="id-${rclist.site}-${rclist.data_type}" name="id-${rclist.site}-${rclist.data_type}" value="${rclist.sms_send_activation }" />
                     </td>
-                </tr> -->
+                </tr>
             </tbody>
         </table>
         <!-- </form> -->

@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
 
-public interface SmsTargetGroupRepository extends JpaRepository<SmsTargetGroupDto, Long>{
-    
+public interface SmsTargetGroupRepository extends JpaRepository<SmsTargetGroupDto, Long> {
+
 }
