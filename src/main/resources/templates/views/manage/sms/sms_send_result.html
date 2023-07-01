@@ -4,6 +4,12 @@
       th:with="metaTitle='전체 감시'">
 
 	<th:block layout:fragment="content">
+        <script th:inline="javascript">
+            /* <![CDATA[ */
+                var mData = /*[[${list.smsRsultList}]]*/;
+                console.log(mData);
+            /* ]]> */
+        </script>
         <style type="text/css">
         div.paginate a {
             font-weight : normal;
@@ -113,34 +119,54 @@
                 </tr>
             </thead>
             <tbody>
-                
+                  <tr th:each="smsList, smsListStat : ${list.smsRsultList}">
+                    <td><span th:text="${smsListStat.index+1}"></span></td>
+                    <td><span th:text="${smsList.TYPE}"></span></td>
+                    <td><span th:text="${smsList.MSGKEY}"></span></td>
+                    <td th:switch="${smsList.STATUS}">
+                        <label th:case="0">전송대기</label>
+                        <label th:case="1">전송완료</label>
+                        <label th:case="2" th:if="${smsList.TYPE == 'SMS'}">결과 수신</label>
+                        <label th:case="2" th:if="${smsList.TYPE == 'MMS'}">전송 완료</label>
+                        <label th:case="3">결과수신</label>
+                        <label th:case="">없음</label>
+                    </td>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" th:text="${smsList.REQDATE }" /></td>
+                    
+                    <td th:if="${smsList.PHONE.length} ge 11">
+                        <span th:text="${smsList.PHONE.substring(0,3)}"></span> - 
+                        <span th:text="${smsList.PHONE.substring(3,7)}"></span> - 
+                        <span th:text="${smsList.PHONE.substring(7,11)}"></span>
+                    </td>
+                    <td th:if="${smsList.PHONE.length} lt 11">
+                        <span th:text="${smsList.PHONE.substring(0,3) == '010' ? smsList.PHONE.substring(0,3) : smsList.PHONE.substring(0,2)}"></span> - 
+                        <span th:text="${smsList.PHONE.substring(0,3) == '010' ? smsList.PHONE.substring(3,6) : smsList.PHONE.substring(2,6)}"></span> -
+                        <span th:text="${smsList.PHONE.substring(6,10)}"></span>
+                    </td>
+                    <td th:utext="${smsList.MSG}"></td>
+                    <!--<td>${fn:replace(fn:escapeXml(sms.msg), newLineChar, "<br />")}</td> -->
+                </tr>
             </tbody>
         </table>
         
+        <!-- <th:block th:include="/common/pages"></th:block> -->
         <table class="noticeTbl settingSeries">
             <thead>
             <tr>
                 <th>
-    
-
-
-<div class="paginate">
-<a href="javascript:goPage(0)" class="first">처음 페이지</a>
-<a href="javascript:goPage(0)" class="prev">이전 페이지</a>
-<span>
-    
-        
-            
-            <a href="javascript:goPage(0)">0</a>
-        
-    
-</span>
-<a href="javascript:goPage(0)" class="next">다음 페이지</a>
-<a href="javascript:goPage(0)" class="last">마지막 페이지</a>
-</div>
+                    <div class="paginate">
+                    <a href="javascript:goPage(0)" class="first">처음 페이지</a>
+                    <a href="javascript:goPage(0)" class="prev">이전 페이지</a>
+                    <span>
+                        <a href="javascript:goPage(0)">0</a>
+                    </span>
+                    <a href="javascript:goPage(0)" class="next">다음 페이지</a>
+                    <a href="javascript:goPage(0)" class="last">마지막 페이지</a>
+                    </div>
                 </th>
             </tr>
             </thead>
         </table>
+        
     </th:block>
 </html>

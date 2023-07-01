@@ -9,11 +9,13 @@ import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
+import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionCriteriaRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveSettingRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendPatternRepository;
+import kr.or.kimsn.radarsms.repository.SmsTargetGroupMemberRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetGroupRepository;
 import kr.or.kimsn.radarsms.repository.StationStatusRepository;
 import kr.or.kimsn.radarsms.repository.entity.ReceiveEntity.SmsSetRcEntity;
@@ -31,6 +33,7 @@ public class ManageService {
 
     private final SmsSendPatternRepository smsSendPatternRepository;
     private final SmsTargetGroupRepository smsTargetGroupRepository;
+    private final SmsTargetGroupMemberRepository smsTargetGroupMemberRepository;
 
     /*
      * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
@@ -70,6 +73,11 @@ public class ManageService {
     // 문자 수신 그룹 그룹 멤버 관리
     public SmsTargetGroupDto getSmsTargetGroupMemberList(Long id) {
         return smsTargetGroupRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Member Not Found"));
+    }
+
+    //문자 수신 그룹 멤버
+    public List<SmsTargetGroupMemberDto> getSmsTargetGroupMemberList() {
+        return smsTargetGroupMemberRepository.getSmsTargetGroupMemberList();
     }
 
 }

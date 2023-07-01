@@ -4,61 +4,28 @@
       th:with="metaTitle='전체 감시'">
 
 	<th:block layout:fragment="content">
-
         <style type="text/css">
         .mainTbl tbody td {
             text-align: left;
             padding-left: 10px;
         }
         </style>
-    
-        <script type="text/javascript">
-            var mems = [];
-            mems.push(['2', '110', '김성원', '기상청', '레이더운영과', '주무관', '010-4658-5229']);
-            mems.push(['2', '144', '김용제', '인탭', '유지보수업체', '', '010-9618-1205']);
-            mems.push(['2', '143', '나기생', '인탭', '유지보수업체', '', '010-7353-9496']);
-            mems.push(['2', '134', '남호진', '기상청', '레이더운영과', '주무관', '010-4613-2205']);
-            mems.push(['2', '133', '박충신', '레이더운영과', '레이더운영과', '사무관', '010-2738-7539']);
-            mems.push(['2', '156', '백승록', '기상청', '레이더운영과', '주무관', '010-6694-1364']);
-            mems.push(['2', '53', '오창록', '기상청', '레이더운영과', '주무관', '010-4613-8677']);
-            mems.push(['2', '160', '유충길', '기상청', '레이더운영과', '주무관', '010-9774-0010']);
-            mems.push(['2', '142', '이승표', '기상청', '레이더운영과', '주무관', '010-9116-3178']);
-            mems.push(['2', '159', '이종환', '기상청', '레이더운영과', '주무관', '010-2215-7654']);
-            mems.push(['2', '138', '임병희', '기상청', '레이더운영과', '주무관', '010-2704-7408']);
-            mems.push(['2', '97', '장복수', '기상청', '레이더운영과', '주무관', '010-2479-2685']);
-            mems.push(['2', '96', '정시목', '코엠정보통신', '유지보수업체', '이사', '010-3300-9365']);
-            mems.push(['2', '47', '정준석', '코엠정보통신', '유지보수업체', '대리', '010-8820-4829']);
-            mems.push(['2', '140', '조민호', '코엠정보통싱', '유지보수업체', '대리', '010-7224-1905']);
-            mems.push(['2', '112', '조수만', '코엠정보통신', '유지보수업체', '대표이사', '010-7235-9365']);
-            mems.push(['2', '145', '최성호', '인탭', '유지보수업체', '', '010-2860-7962']);
-            mems.push(['2', '141', '홍경화', '코엠정보통신', '유지보수업체', '', '010-4208-7098']);
-            mems.push(['3', '110', '김성원', '기상청', '레이더운영과', '주무관', '010-4658-5229']);
-            mems.push(['3', '122', '김지훈', '킴스앤', '유지보수업체', '책임기술자', '010-4249-4214']);
-            mems.push(['3', '134', '남호진', '기상청', '레이더운영과', '주무관', '010-4613-2205']);
-            mems.push(['3', '147', '노수명', '세인에스앤씨', '유지보수업체', '', '010-6277-6545']);
-            mems.push(['3', '124', '노준상', '킴스앤', '유지보수업체', '참여기술자', '010-8518-6240']);
-            mems.push(['3', '133', '박충신', '레이더운영과', '레이더운영과', '사무관', '010-2738-7539']);
-            mems.push(['3', '156', '백승록', '기상청', '레이더운영과', '주무관', '010-6694-1364']);
-            mems.push(['3', '123', '서현옥', '킴스앤', '유지보수업체', '참여기술자', '010-3745-6629']);
-            mems.push(['3', '113', '신상창', '세인에스앤씨', '유지보수업체', '부장', '010-4264-7793']);
-            mems.push(['3', '50', '오윤석', '세인에스앤씨', '유지보수업체', '대리', '010-9138-7513']);
-            mems.push(['3', '53', '오창록', '기상청', '레이더운영과', '주무관', '010-4613-8677']);
-            mems.push(['3', '160', '유충길', '기상청', '레이더운영과', '주무관', '010-9774-0010']);
-            mems.push(['3', '142', '이승표', '기상청', '레이더운영과', '주무관', '010-9116-3178']);
-            mems.push(['3', '159', '이종환', '기상청', '레이더운영과', '주무관', '010-2215-7654']);
-            mems.push(['3', '153', '임무승', '킴스앤', '유지보수업체', '', '010-3370-6843']);
-            mems.push(['3', '138', '임병희', '기상청', '레이더운영과', '주무관', '010-2704-7408']);
-            mems.push(['3', '97', '장복수', '기상청', '레이더운영과', '주무관', '010-2479-2685']);
-            mems.push(['3', '146', '조재욱', '세인에스앤씨', '유지보수업체', '', '010-8765-1276']);
-            mems.push(['5', '154', '권두순', '기상청', '레이더운영과', '사무관', '010-4464-6988']);
-            mems.push(['5', '117', '김경희', '기상청', '레이더운영과', '주무관', '010-7160-2959']);
-            mems.push(['5', '158', '김성수', '기상청', '레이더운영과', '주무관', '010-6291-3978']);
-            mems.push(['5', '139', '임덕빈', '기상청', '레이더운영과', '과장', '010-8287-7357']);
-            mems.push(['5', '108', '전종혁', '기상청', '레이더운영과', '주무관', '010-9316-2113']);
-        
-            function fnGoList(){
-                location.href="/manage/sms_send_result";
-            }
+
+        <script th:inline="javascript">
+            /* <![CDATA[ */
+                var members = /*[[${list.memberList}]]*/;
+                console.log(members);
+                var groups = /*[[${list.groups}]]*/;
+                console.log(groups);
+
+            /* ]]> */
+
+            $(document).ready(function (){
+                const mems = [];
+                members.forEach(e => {
+                    mems.push([e.gid.toString(), e.mid.toString(), e.name, e.organization, e.position, e.phone_num]);
+                });
+
             function fnSubmit(){
                 if($("input[name='groups']:checked").length==0){
                     alert("문자를 수신받을 그룹을 선택해주세요.");
@@ -198,6 +165,16 @@
                     $(this).parent().remove();
                 });
             }
+            });
+
+            
+        </script>
+
+        <script type="text/javascript">
+            function fnGoList(){
+                location.href="/manage/sms_send_result";
+            }
+            
         </script>
     
         <table class="noticeTbl searchSeries">
@@ -233,50 +210,15 @@
                 </tr>
                 <tr>
                     <td id="groupsCell">
-                        <input type="hidden" name="check_groups" id="check_groups" value="">
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_2" name="groups" value="2"><label for="groups_2" style="margin-right:10px"> [1그룹] 관악 백령 광덕 면봉</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_3" name="groups" value="3"><label for="groups_3" style="margin-right:10px"> [2그룹] 오성 진도 구덕 고산 성산</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_4" name="groups" value="4"><label for="groups_4" style="margin-right:10px"> 관악산</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_5" name="groups" value="5"><label for="groups_5" style="margin-right:10px"> 전지점</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_6" name="groups" value="6"><label for="groups_6" style="margin-right:10px"> 구덕산</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_7" name="groups" value="7"><label for="groups_7" style="margin-right:10px"> 백령도</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_8" name="groups" value="8"><label for="groups_8" style="margin-right:10px"> 오성산</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_9" name="groups" value="9"><label for="groups_9" style="margin-right:10px"> 면봉산</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_10" name="groups" value="10"><label for="groups_10" style="margin-right:10px"> 강릉</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_11" name="groups" value="11"><label for="groups_11" style="margin-right:10px"> 성산,고산</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_12" name="groups" value="12"><label for="groups_12" style="margin-right:10px"> 광덕산</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_13" name="groups" value="13"><label for="groups_13" style="margin-right:10px"> 진도</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_14" name="groups" value="14"><label for="groups_14" style="margin-right:10px"> 네트워크 문자 수신</label></span>
-                        
-                        
-                        <span id="" style="margin-right:10px;white-space: nowrap;"><input type="checkbox" id="groups_15" name="groups" value="15"><label for="groups_15" style="margin-right:10px"> 낙뢰</label></span>
-                        
-                        
+                        <input type="hidden" name="check_groups" id="check_groups" value="" />
+                        <th:block th:each="groups, groupsStat : ${list.groups}" th:if="${groups.id > 1}">
+                        <span id="" style="margin-right:10px;white-space: nowrap;">
+                            <input type="checkbox" th:id="${'groups_'+groups.id}" name="groups" th:value="${groups.id}" />
+                            <label th:for="${'groups_'+groups.id}" style="margin-right:10px" th:text="${groups.name}"></label>
+                        </span>
+                        <c:if test="${not groupsStat.last }"></c:if>
+                        </th:block>
+                        </c:forEach>
                     </td>
                 </tr>
                 <tr id="targetMembers" style="display:none;">
@@ -298,9 +240,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="radio" name="setReqDate" value="RSV" id="setReqDateRSV"><label for="setReqDateRSV">예약 전송</label>
-                        <input type="text" name="reqDate" id="reqDate" readonly="" value="2023.05.31" style="width: 90px;text-align: center;" disabled="" class="hasDatepicker">
-                            <input type="text" name="reqTime" id="reqTime" readonly="" value="21:46" style="width: 70px;text-align: center;" disabled="" class="hasDatepicker">
+                        <input type="radio" name="setReqDate" value="RSV" id="setReqDateRSV"/><label for="setReqDateRSV">예약 전송</label>
+                        <input type="text" name="reqDate" id="reqDate" readonly th:value="${list.nowDate}" style="width: 90px;text-align: center;" disabled />
+                         <input type="text" name="reqTime" id="reqTime" readonly th:value="${list.nowTime}" style="width: 70px;text-align: center;" disabled />
                     </td>
                 </tr>
                 <tr>

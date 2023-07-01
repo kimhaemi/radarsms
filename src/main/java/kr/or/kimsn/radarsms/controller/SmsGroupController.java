@@ -70,7 +70,7 @@ public class SmsGroupController {
 
     // 그룹 관리 > [ [1그룹] 관악 백령 광덕 면봉 ] 그룹 감시 자료 설정
     @GetMapping("/manage/sms_target_group_link")
-    public String sms_target_group_link(ModelMap model) {
+    public String sms_target_group_link(ModelMap model, Long id) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();

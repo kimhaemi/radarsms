@@ -51,7 +51,7 @@
             <tbody th:each="tgList, tgListStat : ${list.smsTargetGroupList}">
                 <tr>
                     <td>
-                        <input type="hidden" th:name="${'smsTargetGroups['+tgListStat.index+'].gid'}" th:value="${tgList.id }"/>
+                        <input type="hidden" th:name="${'smsTargetGroups['+tgListStat.index+'].id'}" th:value="${tgList.id }"/>
                         <input type="text" th:name="${'smsTargetGroups['+tgListStat.index+'].name' }" th:value="${tgList.name }" class="groupName"/>
                     </td>
                     <td>
