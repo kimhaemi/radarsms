@@ -4,6 +4,12 @@
       th:with="metaTitle='전체 감시'">
 
 	<th:block layout:fragment="content">
+        <script th:inline="javascript">
+            /* <![CDATA[ */
+                var mData = /*[[${list.targetmembers}]]*/;
+                console.log(mData);
+            /* ]]> */
+        </script>
         <script type="text/javascript">
             $(function() {
                 $('.toggle').toggles();
@@ -55,37 +61,35 @@
                     <th>관리</th>
                 </tr>
             </thead>
-            <tbody th:each="tmList : ${list.}">
-                <c:forEach var="member" items="${members }" varStatus="idx">
-                <tr>
-                <form action="sms_target_member_update.do" name="smsTargetMember[${idx.index }]" method="post" target="_self" id="searchDate${idx.index }" >
+            <tbody>
+                <tr th:each="tmList, tmListStat : ${list.targetmembers}">
+                <!-- <form action="sms_target_member_update" name="smsTargetMember[${idx.index }]" method="post" target="_self" id="searchDate${idx.index }" > -->
                     <td>
-                        <input type="hidden" name="mid" value="${member.mid }"/>
-                        <input type="text" name="name" value="${member.name }"/>
+                        <input type="hidden" name="mid" th:value="${tmList.id }"/>
+                        <input type="text" name="name" th:value="${tmList.name }"/>
                     </td>
                     <td>
-                        <input type="text" name="position" value="${member.position }"/>
+                        <input type="text" name="position" th:value="${tmList.position }"/>
                     </td>
                     <td>
-                        <input type="text" name="department" value="${member.department }"/>
+                        <input type="text" name="department" th:value="${tmList.department }"/>
                     </td>
                     <td>
-                        <input type="text" name="organization" value="${member.organization }"/>
+                        <input type="text" name="organization" th:value="${tmList.organization }"/>
                     </td>
                     <td>
-                        <input type="text" name="phone_num" value="${member.phone_num }"/>
+                        <input type="text" name="phone_num" th:value="${tmList.phone_num }"/>
                     </td>
                     <td>
-                        <div class="toggle toggle-light" id="act-${idx.index}" data-toggle-on="${member.activation }"></div>
-                        <input type="hidden" name="activation" id="aci-${idx.index}" value="${member.activation }"/>
+                        <div class="toggle toggle-light" th:id="${'act-'+tmListStat.index}" th:data-toggle-on="${tmList.activation }"></div>
+                        <input type="hidden" name="activation" th:id="${'aci-'+tmListStat.index}" th:value="${tmList.activation }"/>
                     </td>
                     <td>
                         <input type="submit" class="btn" name="" value="수정"/>
-                        <a class="btn" href="sms_target_member_remove.do?m=${member.mid}">삭제</a>
+                        <a class="btn" href="sms_target_member_remove?m=${member.mid}">삭제</a>
                     </td>
-                </form>
+                <!-- </form> -->
                 </tr>
-                </c:forEach>
             </tbody>
         </table>
         <table class="noticeTbl settingSeries" >
@@ -124,7 +128,7 @@
             </thead>
             <tbody>
                 <tr>
-                <form action="sms_target_member_add.do" name="smsTargetMemberAdd" method="post" target="_self" id="smsTargetMemberAdd" >
+                <form action="manager/sms_target_member_add" name="smsTargetMemberAdd" method="post" target="_self" id="smsTargetMemberAdd" >
                     <td>
                         <input type="hidden" name="mid" value="0"/>
                         <input type="text" name="name" value=""/>

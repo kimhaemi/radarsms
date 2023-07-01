@@ -93,7 +93,7 @@
                                         <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                         <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                     </li>
-                                    <li th:if="${mList.id != 5000}">소형</li>
+                                    <li th:if="${mList.id}!= '5000'">소형</li>
                                     <li th:if="${mList.id} != '5000'">
                                         <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형1'}" th:text="소형1"></a>
                                         <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형2'}" th:text="소형2"></a>

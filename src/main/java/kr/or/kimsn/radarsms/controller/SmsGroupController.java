@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
+import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.ManageService;
 import kr.or.kimsn.radarsms.service.MenuService;
@@ -101,9 +102,11 @@ public class SmsGroupController {
         // last_check_time, sms_send, sms_send_activation
         // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
-
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        List<SmsTargetMemberDto> targetmembers = manageService.getSmsTargetMemberList();
+        map.put("targetmembers", targetmembers);
 
         model.addAttribute("list", map);
         return "views/manage/smsGroup/sms_target_member";

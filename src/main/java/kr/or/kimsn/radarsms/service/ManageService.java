@@ -11,6 +11,7 @@ import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
 import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
+import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionCriteriaRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionRepository;
@@ -19,8 +20,8 @@ import kr.or.kimsn.radarsms.repository.SmsSendPatternRepository;
 import kr.or.kimsn.radarsms.repository.SmsSetRcRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetGroupMemberRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetGroupRepository;
+import kr.or.kimsn.radarsms.repository.SmsTargetMemberRepository;
 import kr.or.kimsn.radarsms.repository.StationStatusRepository;
-import kr.or.kimsn.radarsms.repository.entity.ReceiveEntity.SmsSetRcEntity;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -28,7 +29,6 @@ import lombok.RequiredArgsConstructor;
 public class ManageService {
 
     private final StationStatusRepository stationStatusRepository;
-    private final ReceiveConditionRepository receiveConditionRepository;
 
     private final ReceiveConditionCriteriaRepository receiveConditionCriteriaRepository;
     private final ReceiveSettingRepository receiveSettingRepository;
@@ -38,6 +38,7 @@ public class ManageService {
     private final SmsTargetGroupMemberRepository smsTargetGroupMemberRepository;
 
     private final SmsSetRcRepository smsSetRcRepository;
+    private final SmsTargetMemberRepository smsTargetMemberRepository;
 
     /*
      * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
@@ -82,6 +83,11 @@ public class ManageService {
     //문자 수신 그룹 멤버
     public List<SmsTargetGroupMemberDto> getSmsTargetGroupMemberList() {
         return smsTargetGroupMemberRepository.getSmsTargetGroupMemberList();
+    }
+
+    //문자 수신자 관리
+    public List<SmsTargetMemberDto> getSmsTargetMemberList(){
+        return smsTargetMemberRepository.findByOrderByName();
     }
 
 }

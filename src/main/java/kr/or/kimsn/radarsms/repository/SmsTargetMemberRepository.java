@@ -9,4 +9,6 @@ import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 public interface SmsTargetMemberRepository extends JpaRepository<SmsTargetMemberDto, Long>{
     
     List<SmsTargetMemberDto> findAll();
+
+    List<SmsTargetMemberDto> findByOrderByName();
 }
