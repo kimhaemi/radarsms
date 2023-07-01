@@ -4,6 +4,15 @@
       th:with="metaTitle='전체 감시'">
 
 	<th:block layout:fragment="content">
+        <script th:inline="javascript">
+            /* <![CDATA[ */
+                var group = /*[[${list.groupName}]]*/;
+                console.log(group);
+                var links = /*[[${list.links}]]*/;
+                console.log(links);
+            /* ]]> */
+        </script>
+
         <script type="text/javascript">
         $(function() {
             $('.toggle').toggles();
@@ -11,22 +20,22 @@
                 var vs=e.target.id.split("_");
                 var tf=active?1:0;
         
-                $.post("/manage/sms_target_group_member_sendstep.do", {mid:vs[1],gid:vs[2],step:vs[0],activate:tf}, function(data,status){
-                    if(data.result<1){
-                        var n = noty({
-                            text:'문자전송상태 변환에 실패하였습니다.',
-                            type:'error',
-                            closeWith:['click'],
-                            layout:'center',
-                            modal:true,
-                            callback : {
-                                afterClose: function(){
-                                    location.reload();
-                                }
-                            }
-                        });
-                    }
-                });
+                // $.post("/manage/sms_target_group_member_sendstep.do", {mid:vs[1],gid:vs[2],step:vs[0],activate:tf}, function(data,status){
+                //     if(data.result<1){
+                //         var n = noty({
+                //             text:'문자전송상태 변환에 실패하였습니다.',
+                //             type:'error',
+                //             closeWith:['click'],
+                //             layout:'center',
+                //             modal:true,
+                //             callback : {
+                //                 afterClose: function(){
+                //                     location.reload();
+                //                 }
+                //             }
+                //         });
+                //     }
+                // });
         
             });
             $('a.btn').button();
@@ -60,13 +69,14 @@
                 <col />
                 <col />
                 <col />
+                <!-- <col /> -->
                 <col />
                 <col style="width:120px" />
             </colgroup>
-            <thead th:each="memberList : ${list.smsTargetGroupMemberList}">
+            <thead>
                 <tr>
                     <th colspan="10">
-                        <span th:text="${memberList.groupName }"></span> 그룹에 속한 사용자
+                        <span th:text="${list.groupName }"></span> 그룹에 속한 사용자
                     </th>
                 </tr>
                 <tr>
@@ -82,59 +92,49 @@
                 <tr>
                     <th>주의</th>
                     <th>경고</th>
+                    <!-- <th>네트워크</th> -->
                     <th>복구</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="link" items="${links }" varStatus="idx">
-                <tr>
+                <tr th:each="link : ${list.links}">
                     <td>
-                        ${link.name }
+                        <span th:text="${link.name }"></span>
                     </td>
                     <td>
-                        ${link.position }
+                        <span th:text="${link.position }"></span>
                     </td>
                     <td>
-                        ${link.department }
+                        <span th:text="${link.department }"></span>
                     </td>
                     <td>
-                        ${link.organization }
+                        <span th:text="${link.organization }"></span>
                     </td>
                     <td>
-                        ${link.phone_num }
+                        <span th:text="${link.phone_num }">
                     </td>
                     <td>
-                        <div class="toggle toggle-light" id="noti_${link.mid }_${link.gid}" data-toggle-on="${link.noti }"></div>
+                        <div class="toggle toggle-light" th:id="${'noti_'+link.mid+'_'+link.gid}" th:data-toggle-on="${link.noti}"></div>
                     </td>
                     <td>
-                        <div class="toggle toggle-light" id="warn_${link.mid }_${link.gid}" data-toggle-on="${link.warn }"></div>
+                        <div class="toggle toggle-light" th:id="${'warn_'+link.mid+'_'+link.gid}" th:data-toggle-on="${link.warn}"></div>
+                    </td>
+                    <!-- <td>
+                        <div class="toggle toggle-light" id="tota_${link.mid }_${link.gid}" data-toggle-on="${link.tota }"></div>
+                    </td> -->
+                    <td>
+                        <div class="toggle toggle-light" th:id="${'retr_'+link.mid+'_'+link.gid}" th:data-toggle-on="${link.retr}"></div>
                     </td>
                     <td>
-                        <div class="toggle toggle-light" id="retr_${link.mid }_${link.gid}" data-toggle-on="${link.retr }"></div>
+                        <div class="toggle toggle-light" th:id="${'sms_'+link.mid+'_'+link.gid}" th:data-toggle-on="${link.sms}"></div>
                     </td>
                     <td>
-                        <div class="toggle toggle-light" id="sms_${link.mid }_${link.gid}" data-toggle-on="${link.sms }"></div>
-                    </td>
-                    <td>
-                        <a class="btn" href="sms_target_group_member_unlink.do?id=${group.gid }&m=${link.mid}">연결 삭제</a>
+                        <a class="btn" th:href="@{/manage/sms_target_group_member_unlink(gid=${list.groupId})(mid=${link.mid})}">연결 삭제</a>
                     </td>
                 </tr>
-                </c:forEach>
             </tbody>
         </table>
-        <table class="mainTbl settingSeries" >
-            <thead>
-            <tr>
-                <th class="phead">
-
-                </th>
-                <th class="ptail">
-                    <input type="button" class="back" value="그룹관리로 돌아가기"/>
-                </th>
-            </tr>
-            </thead>
-        </table>
-
+        
         <table class="mainTbl settingSeries" summary="">
             <caption class="hidden">그룹 관리</caption>
             <colgroup>
@@ -161,28 +161,26 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="link" items="${notlinks }" varStatus="idx">
-                <tr>
+                <tr th:each="notLink : ${list.notlinks}">
                     <td>
-                        ${link.name }
+                        <span th:text="${notLink.name }"></span>
                     </td>
                     <td>
-                        ${link.position }
+                        <span th:text="${notLink.position }"></span>
                     </td>
                     <td>
-                        ${link.department }
+                        <span th:text="${notLink.department }"></span>
                     </td>
                     <td>
-                        ${link.organization }
+                        <span th:text="${notLink.organization }"></span>
                     </td>
                     <td>
-                        ${link.phone_num }
+                        <span th:text="${notLink.phone_num }"></span>
                     </td>
                     <td>
-                        <a class="btn" href="sms_target_group_member_mklink.do?id=${group.gid }&m=${link.mid}">연결 추가</a>
+                        <a class="btn" href="/manage/sms_target_group_member_mklink.do?gid=${list.groupId }&mid=${notLink.mid}">연결 추가</a>
                     </td>
                 </tr>
-                </c:forEach>
             </tbody>
         </table>
     </th:block>

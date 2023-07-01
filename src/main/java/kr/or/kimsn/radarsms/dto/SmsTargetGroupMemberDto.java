@@ -18,4 +18,10 @@ public class SmsTargetGroupMemberDto {
     private String position;
     private String phone_num;
 
+    private String noti;
+    private String warn;
+    private String tota;
+    private String retr;
+    private String sms;
+
 }

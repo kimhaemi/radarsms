@@ -79,17 +79,12 @@ public class ManageService {
         return smsSendPatternRepository.findByOrderByCodeAscModeDesc();
     }
 
-    // 문자 수신 그룹 관리
-    public List<SmsTargetGroupDto> getSmsTargetGroupList() {
-        return smsTargetGroupRepository.findAll();
-    }
-
     //그룹관리 > 그룹 감시 자료 설정
     public List<SmsTargetGroupLinkDto> getTableJoinAll(Long id){
         return smsTargetGroupLinkRepository.getTableJoinAll(id);
     }
 
-    //그룹관리 > 그룹 감시 자료 설정(아님)
+    //그룹관리 > 그룹 감시 자료 설정 되지 않음
     public List<ReceiveDto> getSmsTargetGroupNotLink(List<SmsTargetGroupLinkDto> links){
         List<ReceiveDto> rclist = receiveRepository.getReceiveTableJoin();
         List<ReceiveDto> rmlist = new ArrayList<ReceiveDto>();
@@ -112,15 +107,47 @@ public class ManageService {
         return rclist;
     }
 
-    // 문자 수신 그룹 그룹 멤버 관리
-    public SmsTargetGroupDto getSmsTargetGroupMemberList(Long id) {
+    // 문자 수신 그룹 관리
+    public List<SmsTargetGroupDto> getSmsTargetGroupList() {
+        return smsTargetGroupRepository.findAll();
+    }
+
+    // 문자 수신 그룹 > [ admin ] 그룹 관리
+    public SmsTargetGroupDto getSmsTargetGroupId(Long id) {
         return smsTargetGroupRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Member Not Found"));
     }
 
-    //문자 수신 그룹 멤버
-    public List<SmsTargetGroupMemberDto> getSmsTargetGroupMemberList() {
+    //문자 수신 그룹 멤버 
+    public List<SmsTargetGroupMemberDto> getSmsTargetGroupMemberList(Long id) {
+
         return smsTargetGroupMemberRepository.getSmsTargetGroupMemberList();
     }
+
+    //문자 수신 그룹 멤버 ([ admin ] 그룹에 속한 사용자)
+    public List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberId(Long id) {
+        return smsTargetGroupMemberRepository.getSmsTargetGroupsMemberId(id);
+    }
+
+    //문자 수신 그룹 멤버 ([ admin ] 그룹에 속하지 않은 사용자)
+    public List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberIdNot(List<SmsTargetGroupMemberDto> links) {
+        List<SmsTargetGroupMemberDto> mlist = smsTargetGroupMemberRepository.getSmsTargetGroupMemberList();
+        List<SmsTargetGroupMemberDto> rmlist = new ArrayList<SmsTargetGroupMemberDto>();
+        for (SmsTargetGroupMemberDto link : links) {
+          for (SmsTargetGroupMemberDto m : mlist) {
+            if (link.getMid() == m.getMid()) {
+              rmlist.add(m);
+              break;
+            } 
+          } 
+        } 
+        if (rmlist.size() > 0) {
+          for (SmsTargetGroupMemberDto rm : rmlist) {
+            mlist.remove(rm);
+          }
+        }
+        return mlist;
+    }
+
 
     //문자 수신자 관리
     public List<SmsTargetMemberDto> getSmsTargetMemberList(){

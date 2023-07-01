@@ -12,6 +12,7 @@ import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.ReceiveDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupLinkDto;
+import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.ManageService;
@@ -63,12 +64,39 @@ public class SmsGroupController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        SmsTargetGroupDto smsTargetGroupMemberData = manageService.getSmsTargetGroupMemberList(id);
-        map.put("smsTargetGroupMemberData", smsTargetGroupMemberData);
-        map.put("groupName", smsTargetGroupMemberData.getName());
+        if( id != null ){
+            //수신 그룹
+            SmsTargetGroupDto group = manageService.getSmsTargetGroupId(id);
+            map.put("group", group);
+            map.put("groupId", group.getId());
+            map.put("groupName", group.getName());
+
+            //그룹에 속한 사용자
+            List<SmsTargetGroupMemberDto> links = manageService.getSmsTargetGroupsMemberId(id);
+            map.put("links", links);
+
+            //그룹에 속하지 않은 멤버
+            List<SmsTargetGroupMemberDto> notlinks = manageService.getSmsTargetGroupsMemberIdNot(links);
+            map.put("notlinks", notlinks);
+            System.out.println("notlinks ::: " + notlinks);
+
+            //그룹에 속한 사용자
+            // List<> links = manageService.getSmsTargetGroupsMember(id);
+            // map.put("links", links);
+            
+
+//             List<SmsTargetMemberVO> links = this.manageService.getSmsTargetGroupsMember(groupid);
+// /* 214 */       model.addAttribute("links", links);
+// /*     */       
+// /* 216 */       model.addAttribute("notlinks", this.manageService.getSmsTargetGroupsNotMembers(links));
+
+            model.addAttribute("list", map);
+            return "views/manage/smsGroup/sms_target_group_member";
+        }
 
         model.addAttribute("list", map);
-        return "views/manage/smsGroup/sms_target_group_member";
+        return "redirect:/manage/sms_target_group";
+        
     }
 
     // 그룹 관리 > [ [1그룹] 관악 백령 광덕 면봉 ] 그룹 감시 자료 설정
@@ -85,11 +113,11 @@ public class SmsGroupController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        SmsTargetGroupDto smsTargetGroupMemberData = manageService.getSmsTargetGroupMemberList(id);
-        map.put("smsTargetGroupMemberData", smsTargetGroupMemberData);
+        SmsTargetGroupDto smsTargetGroupId = manageService.getSmsTargetGroupId(id);
+        map.put("smsTargetGroupId", smsTargetGroupId);
         //그룹명
-        map.put("groupName", smsTargetGroupMemberData.getName());
-        map.put("groupId", smsTargetGroupMemberData.getId());
+        map.put("groupName", smsTargetGroupId.getName());
+        map.put("groupId", smsTargetGroupId.getId());
 
         List<SmsTargetGroupLinkDto> links = manageService.getTableJoinAll(id);
         map.put("links", links);
