@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
-import kr.or.kimsn.radarsms.dto.ReceiveConditionDto;
 import kr.or.kimsn.radarsms.dto.ReceiveDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
@@ -18,7 +17,6 @@ import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionCriteriaRepository;
-import kr.or.kimsn.radarsms.repository.ReceiveConditionRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveSettingRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendPatternRepository;
