@@ -12,8 +12,8 @@ import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
+import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
-import kr.or.kimsn.radarsms.repository.entity.ReceiveEntity.SmsSetRcEntity;
 import kr.or.kimsn.radarsms.service.ManageService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import lombok.RequiredArgsConstructor;
@@ -38,12 +38,11 @@ public class SmsConfigController {
         // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
 		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
-        
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
         //자료 수신 상태
-        List<SmsSetRcEntity> receiveList =  manageService.getReceiveConditionList();
+        List<SmsSetRcDto> receiveList =  manageService.getReceiveConditionList();
         System.out.println("receiveList : " + receiveList);
         map.put("receiveList", receiveList);
         

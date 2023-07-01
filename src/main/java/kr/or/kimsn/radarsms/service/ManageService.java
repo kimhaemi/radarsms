@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
+import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
@@ -15,6 +16,7 @@ import kr.or.kimsn.radarsms.repository.ReceiveConditionCriteriaRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveSettingRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendPatternRepository;
+import kr.or.kimsn.radarsms.repository.SmsSetRcRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetGroupMemberRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetGroupRepository;
 import kr.or.kimsn.radarsms.repository.StationStatusRepository;
@@ -35,6 +37,8 @@ public class ManageService {
     private final SmsTargetGroupRepository smsTargetGroupRepository;
     private final SmsTargetGroupMemberRepository smsTargetGroupMemberRepository;
 
+    private final SmsSetRcRepository smsSetRcRepository;
+
     /*
      * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
      */
@@ -43,11 +47,11 @@ public class ManageService {
     }
 
     // 자료 수신 상태
-    public List<SmsSetRcEntity> getReceiveConditionList() {
+    public List<SmsSetRcDto> getReceiveConditionList() {
         // List<ReceiveDto> result =
         // mapper.map(receiveConditionRepository.findReceiveConditionStationRdrReceiveSetting(),
         // ReceiveDto.class);
-        return receiveConditionRepository.findReceiveConditionStationRdrReceiveSetting();
+        return smsSetRcRepository.findReceiveConditionStationRdrReceiveSetting();
     }
 
     // 경고 기준 설정
