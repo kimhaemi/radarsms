@@ -15,7 +15,7 @@ public class ReceiveConditionDto {
     @Id
     private String site;
     private String data_kind;
-    @Column(name="data_type") private String dataType;
+    @Column(name = "data_type") private String dataType;
     private String recv_condition;
     private String apply_time;
     private String last_check_time;

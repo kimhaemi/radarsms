@@ -9,7 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
+import kr.or.kimsn.radarsms.dto.ReceiveDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
+import kr.or.kimsn.radarsms.dto.SmsTargetGroupLinkDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.ManageService;
@@ -85,7 +87,16 @@ public class SmsGroupController {
 
         SmsTargetGroupDto smsTargetGroupMemberData = manageService.getSmsTargetGroupMemberList(id);
         map.put("smsTargetGroupMemberData", smsTargetGroupMemberData);
+        //그룹명
         map.put("groupName", smsTargetGroupMemberData.getName());
+        map.put("groupId", smsTargetGroupMemberData.getId());
+
+        List<SmsTargetGroupLinkDto> links = manageService.getTableJoinAll(id);
+        map.put("links", links);
+        // System.out.println("links ::: " + links);
+        List<ReceiveDto> notlinks = manageService.getSmsTargetGroupNotLink(links);
+        map.put("notlinks", notlinks);
+        System.out.println("notlinks ::: " + notlinks);
 
         model.addAttribute("list", map);
         return "views/manage/smsGroup/sms_target_group_link";

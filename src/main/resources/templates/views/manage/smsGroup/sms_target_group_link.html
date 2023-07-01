@@ -4,6 +4,16 @@
       th:with="metaTitle='전체 감시'">
 
 	<th:block layout:fragment="content">
+        <script th:inline="javascript">
+            /* <![CDATA[ */
+                var group = /*[[${list.groupName}]]*/;
+                console.log(group);
+                var links = /*[[${list.links}]]*/;
+                console.log(links);
+                var notlinks = /*[[${list.notlinks}]]*/;
+                console.log(notlinks);
+            /* ]]> */
+        </script>
         <script type="text/javascript">
         $(function() {
             $('.toggle').toggles();
@@ -26,7 +36,7 @@
             <thead>
             <tr>
                 <th class="left">
-                    관리 > 그룹 관리 > [ ${group.name } ] 그룹 감시 자료 설정
+                    관리 > 그룹 관리 > [ <span th:text="${list.groupName}"></span> ] 그룹 감시 자료 설정
                 </th>
                 <th class="right">
                     <input type="button" class="back" value="그룹관리로 돌아가기"/>
@@ -47,7 +57,7 @@
             <thead>
                 <tr>
                     <th colspan="5">
-                        ${group.name } 그룹에게 문자가 통보되는 지점별 데이터 목록
+                        <span th:text="${list.groupName}"></span> 그룹에게 문자가 통보되는 지점별 데이터 목록
                     </th>
                 </tr>
                 <tr>
@@ -58,47 +68,29 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="link" items="${links }" varStatus="idx">
-                <tr>
-                    <td>
-                        <c:choose>
-                            <c:when test="${link.data_kind eq 'RDR' }">레이더</c:when>
-                            <c:when test="${link.data_kind eq 'all' }">네트워크</c:when>
-                            <c:otherwise>낙뢰</c:otherwise>
-                        </c:choose>
+                <tr th:each="link : ${list.links}">
+                    <td th:switch="${link.data_kind}">
+                        <span th:case="RDR">레이더</span>
+                        <span th:case="all">네트워크</span>
+                        <span th:case="LGT">낙뢰</span>
                     </td>
                     <td>
-                        <c:choose>
-                            <c:when test="${link.data_kind eq 'RDR' }">${link.name_kr }</c:when>
-                            <c:otherwise>-</c:otherwise>
-                        </c:choose>
+                        <span th:if="${link.data_kind == 'RDR'}" th:text="${link.name_kr}"></span>
+                        <span th:unless="${link.data_kind == 'RDR'}" >-</span>
                     </td>
                     <td>
-                        ${link.data_type }
+                        <span th:text="${link.data_type}"></span>
                     </td>
                     <td>
-                        ${link.data_name }
+                        <spen th:text="${link.data_name}"></spen>
                     </td>
                     <td>
-                        <a class="btn" href="sms_target_group_unlink.do?id=${group.gid }&k=${link.data_kind}&t=${link.data_type}&s=${link.site}">연결 삭제</a>
+                        <a class="btn" th:href="@{/manage/sms_target_group_unlink?id=${list.groupId}&k=${link.data_kind}&t=${link.data_type}&s=${link.site}}">연결 삭제</a>
                     </td>
                 </tr>
-                </c:forEach>
             </tbody>
         </table>
-        <table class="noticeTbl searchSeries" >
-            <thead>
-            <tr>
-                <th class="left">
-
-                </th>
-                <th class="right">
-                    <input type="button" class="back" value="그룹관리로 돌아가기"/>
-                </th>
-            </tr>
-            </thead>
-        </table>
-
+        
         <table class="mainTbl searchSeries" summary="">
             <caption class="hidden">그룹 관리</caption>
             <colgroup>
@@ -111,7 +103,7 @@
             <thead>
                 <tr>
                     <th colspan="5">
-                        ${group.name } 그룹에게 문자가 통보되도록 추가할 수 있는 지점별 데이터 목록
+                        <spen th:text="${list.groupName}"></spen> 그룹에게 문자가 통보되도록 추가할 수 있는 지점별 데이터 목록
                     </th>
                 </tr>
                 <tr>
@@ -122,32 +114,26 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="link" items="${notlinks }" varStatus="idx">
-                <tr>
-                    <td>
-                        <c:choose>
-                            <c:when test="${link.data_kind eq 'RDR' }">레이더</c:when>
-                            <c:when test="${link.data_kind eq 'all' }">네트워크</c:when>
-                            <c:otherwise>낙뢰</c:otherwise>
-                        </c:choose>
+                <tr th:each="notLink : ${list.notlinks}">
+                    <td th:switch="${notLink.data_kind}">
+                        <span th:case="RDR">레이더</span>
+                        <span th:case="all">네트워크</span>
+                        <span th:case="LGT">낙뢰</span>
                     </td>
                     <td>
-                        <c:choose>
-                            <c:when test="${link.data_kind eq 'RDR' }">${link.name_kr }</c:when>
-                            <c:otherwise>-</c:otherwise>
-                        </c:choose>
+                        <span th:if="${notLink.data_kind == 'RDR'}" th:text="${notLink.name_kr}"></span>
+                        <span th:unless="${notLink.data_kind == 'RDR'}">-</span>
                     </td>
                     <td>
-                        ${link.data_type }
+                        <span th:text="${notLink.data_type}"></span>
                     </td>
                     <td>
-                        ${link.data_name }
+                        <spen th:text="${notLink.data_name}"></spen>
                     </td>
                     <td>
-                        <a class="btn" href="sms_target_group_mklink.do?id=${group.gid }&k=${link.data_kind}&t=${link.data_type}&s=${link.site}">연결 추가</a>
+                        <a class="btn" href="sms_target_group_mklink.do?id=${list.groupId }&k=${notLink.data_kind}&t=${notLink.data_type}&s=${notLink.site}">연결 추가</a>
                     </td>
                 </tr>
-                </c:forEach>
             </tbody>
         </table>
     </th:block>

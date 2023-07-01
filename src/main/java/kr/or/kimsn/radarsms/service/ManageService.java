@@ -1,23 +1,29 @@
 package kr.or.kimsn.radarsms.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
+import kr.or.kimsn.radarsms.dto.ReceiveConditionDto;
+import kr.or.kimsn.radarsms.dto.ReceiveDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
 import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
+import kr.or.kimsn.radarsms.dto.SmsTargetGroupLinkDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionCriteriaRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionRepository;
+import kr.or.kimsn.radarsms.repository.ReceiveRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveSettingRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendPatternRepository;
 import kr.or.kimsn.radarsms.repository.SmsSetRcRepository;
+import kr.or.kimsn.radarsms.repository.SmsTargetGroupLinkRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetGroupMemberRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetGroupRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetMemberRepository;
@@ -39,6 +45,9 @@ public class ManageService {
 
     private final SmsSetRcRepository smsSetRcRepository;
     private final SmsTargetMemberRepository smsTargetMemberRepository;
+    private final SmsTargetGroupLinkRepository smsTargetGroupLinkRepository;
+
+    private final ReceiveRepository receiveRepository;
 
     /*
      * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
@@ -73,6 +82,34 @@ public class ManageService {
     // 문자 수신 그룹 관리
     public List<SmsTargetGroupDto> getSmsTargetGroupList() {
         return smsTargetGroupRepository.findAll();
+    }
+
+    //그룹관리 > 그룹 감시 자료 설정
+    public List<SmsTargetGroupLinkDto> getTableJoinAll(Long id){
+        return smsTargetGroupLinkRepository.getTableJoinAll(id);
+    }
+
+    //그룹관리 > 그룹 감시 자료 설정(아님)
+    public List<ReceiveDto> getSmsTargetGroupNotLink(List<SmsTargetGroupLinkDto> links){
+        List<ReceiveDto> rclist = receiveRepository.getReceiveTableJoin();
+        List<ReceiveDto> rmlist = new ArrayList<ReceiveDto>();
+
+        for (SmsTargetGroupLinkDto link : links) {
+        for (ReceiveDto rc : rclist) {
+            if (link.getData_kind().equals(rc.getData_kind()) && link.getSite().equals(rc.getSite()) && 
+                link.getData_type().equals(rc.getData_type())) {
+                rmlist.add(rc);
+                break;
+                } 
+            } 
+        } 
+        if (rmlist.size() > 0) {
+            for (ReceiveDto rm : rmlist) {
+                rclist.remove(rm);
+            }
+        }
+
+        return rclist;
     }
 
     // 문자 수신 그룹 그룹 멤버 관리

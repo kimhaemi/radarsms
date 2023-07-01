@@ -5,22 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+// import javax.persistence.Table;
 
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "sms_target_group_link_1")
+// @Table(name = "sms_target_group_link")
 public class SmsTargetGroupLinkDto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     private String site;
-    @Column(name = "data_kind") private String dataKind;
-    @Column(name = "data_type") private String dataType;
-    @Column(name = "group_id")  private String groupId;
+    private String data_kind;
+    private String data_type;
+    private String group_id;
+
+    private String name_kr;
+    private String data_name;
+    
     
 }
