@@ -6,6 +6,10 @@
       <th:block layout:fragment="content">
         <script type="text/javascript">
             $(document).ready(function(){
+                var toDay = new Date();
+                var str1 = toDay.getFullYear()+'년 '+(toDay.getMonth()+1)+'월 '+toDay.getDate()+'일';
+                
+                $('#datePick').val(str1);
                 //window.setInterval("reloadWarning()",60000);
             });
             $(function() {
@@ -38,57 +42,76 @@
         </script>
         
         <form action="" method="post" target="_self" id="searchDate">
-            <input type="hidden" name="termStart" id="termStart">
-            <input type="hidden" name="termClose" id="termClose">
-            <table class="noticeTbl searchSeries">
-            <colgroup>
-                <col style="width:auto;">
-                <col style="width:130px;">
-                <col style="width:40px;">
-            </colgroup>
-                <thead>
-                <tr>
-                    <th class="left">
-                        과거자료 검색 &gt; <span class="radar"> 관악산 레이더</span>
-                    </th>
-                    <th class="center">
-                        <label for="datePick" class="hidden">년월일 선택</label>
-                        <input type="text" readonly="" value="2023년 05월 31일" id="datePick" class="hasDatepicker">
-                            <img class="ui-datepicker-trigger" src="/images/calendar.gif" alt="Select date" title="Select date">
-                    </th>
-                    <th class="right">
-                        <img src="/images/search_icon.png" class="ui-datepicker-search" onclick="javascript:searchDate();"></th>
-                </tr>
-                </thead>
-            </table>
-            </form>
-            
-            <table class="mainTbl searchSeries" summary="">
-                <caption class="hidden">관악산 레이더</caption>
-                <colgroup>
-                    <col>
-                    <col style="width:36px">
-                    <col style="width:129px">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th rowspan="2">시간</th>
-                        <th colspan="2">이진자료<br>(NQC)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            
-                        </td>
-                        
-                        <td>
-                            <div class="recv " title=""></div>
-                        </td>
-                        <td> - </td>
-                    </tr>
-                </tbody>
-            </table>
+			<input type="hidden" name="termStart" id="termStart"/>
+			<input type="hidden" name="termClose" id="termClose"/>
+			<table class="noticeTbl searchSeries">
+			<colgroup>
+				<col style="width:auto;"/>
+				<col style="width:130px;"/>
+				<col style="width:100px;"/>
+			</colgroup>
+				<thead>
+				<tr th:each="stationDtl : ${list.stationDtl}">
+					<th class="left">
+						과거자료 검색 > <span class="radar" th:text="${stationDtl.name_kr+' 레이더'}"></span>
+					</th>
+					<th class="center">
+						<label for="datePick" class="hidden">년월일 선택</label>
+						<input type="text" value="" id="datePick" readonly />
+					</th>
+					<th class="right">
+                        <button class="btn">검색</button>
+						<!-- <img src="${pageContext.request.contextPath}/images/search_icon.png" class="ui-datepicker-search" onclick="javascript:searchDate();"/></th> -->
+				</tr>
+				</thead>
+			</table>
+			</form>
+			
+			<table class="mainTbl searchSeries" summary="">
+				<caption class="hidden">${site.name_kr } 레이더</caption>
+				<colgroup>
+					<col />
+					<c:forEach var="rdrs" items="${rdrSet }">
+					<col style="width:36px"/>
+					<col style="width:129px"/>
+					</c:forEach>
+				</colgroup>
+				<thead>
+					<tr>
+						<th rowspan="2" width="100">시간</th>
+					<c:forEach var="rdrs" items="${rdrSet }">
+						<th colspan="2" width="500">${fn:replace(rdrs.data_name,"레이더","") }<br />(${rdrs.data_type })</th>
+					</c:forEach>	
+					</tr>
+				</thead>
+				<tbody>
+					<c:set var="forEnd" value="${fn:length(recvData[0])-1 }" />
+					<c:if test="${forEnd < 0 }">
+						<c:set var="forEnd" value="0" />
+					</c:if>
+					<c:forEach begin="0" end="${forEnd}" varStatus="idx">
+					<tr>
+						<td>
+							<fmt:formatDate value="${recvData[0][idx.index].data_time }" pattern="yyyy.MM.dd HH:mm"/>
+						</td>
+						<c:forEach var="rdrs" items="${rdrSet }" varStatus="jdx">
+						<td>
+							<div class="recv ${recvData[jdx.index][idx.index].recv_condition }" title="${recvAlt[recvData[jdx.index][idx.index].recv_condition] }"></div>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${not empty recvData[jdx.index][idx.index].recv_time }">
+									<fmt:formatDate value="${recvData[jdx.index][idx.index].recv_time }" pattern="yyyy.MM.dd HH:mm"/>
+								</c:when>
+								<c:otherwise>-
+								</c:otherwise>
+							</c:choose>
+						</td>
+						</c:forEach>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
       </th:block>
                 
     <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
