@@ -1,6 +1,5 @@
 package kr.or.kimsn.radarsms.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,12 +12,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+// import org.apache.commons.lang3.time.DateUtils;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionDto;
+import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MenuService;
 import kr.or.kimsn.radarsms.service.StationService;
+import kr.or.kimsn.radarsms.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 /**
  * 지점별 감시
@@ -32,7 +34,7 @@ public class StationController {
 
     private final MenuService menuService;
     private final StationService stationService;
-
+    
     //지점별 감시
     @GetMapping("/station/{site}")
     public String getStation(@PathVariable("site") String site, ModelMap model){
@@ -83,29 +85,69 @@ public class StationController {
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+        model.addAttribute("list", map);
 
         //parameter
         String termStart = request.getParameter("termStart");
-        String dateClose = request.getParameter("dateClose");
-
-        //지점별 감시
-        List<StationDto> stationDtl = stationService.getStationDetail(site);
-        map.put("stationDtl", stationDtl);
+        String termClose = request.getParameter("termClose");
 
         //오늘 날짜
-        Date today = new Date();
-        SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd");
-        SimpleDateFormat time = new SimpleDateFormat("hh:mm");
-    
-        map.put("nowDate", date.format(today));
-        map.put("nowTime", time.format(today));
-        model.addAttribute("searchDate", date);
+        Date now = new Date();
+        Date dateStart = null;
+        Date dateClose = null;
 
-        //과거자료 검색
-        System.out.println("termStart ::: " + termStart);
+        dateStart = DateUtil.stringToDate("yyyyMMddHHmm", termStart);
+        dateClose = DateUtil.stringToDate("yyyyMMddHHmm", termClose);
+
+        if (dateStart == null) {
+        //   dateStart = DateUtils.addDays(now, -1);
+        dateStart = now;
+        }
+        if (dateClose == null) {
+          dateClose = now;
+        }
+
+        // model.addAttribute("recvAlt", this.watchService.getPropertyMap(this.propertyService.getString("Web.RecvIconAlt")));
+        // model.addAttribute("searchDate", DateUtil.formatDate("yyyy'년 'MM'월 'dd'일'", dateClose));
+
+
+
+        // //과거자료 검색
+        // System.out.println("termStart ::: " + termStart);
+
+        //레이더
+        if(!site.equals("LGT")){
+            //지점별 감시
+            List<StationDto> stationDtl = stationService.getStationDetail(site);
+            model.addAttribute("siteName", stationDtl.get(0).getName_kr());
+
+            List<ReceiveSettingDto> rdrSet = stationService.getReceiveSetting("RDR", 1);
+            model.addAttribute("rdrSet", rdrSet);
+            System.out.println("rdrSet :::: " + rdrSet);
+
+            
+            
+
+            // List<ReceiveSettingVO> list = this.watchService.getReceiveSetting("RDR");
+
+            // List<StationRdrVO> stationRdrList = this.watchService.getStationRdrList();
+
+            // for (StationRdrVO vo : stationRdrList) {
+            // if (vo.getSite_cd().equals(site)) {
+            //     model.addAttribute("site", vo);
+            // }
+            // } 
+            // model.addAttribute("stationRdrList", stationRdrList);
+            // model.addAttribute("rdrSet", list);
+
+            // model.addAttribute("recvData", this.watchService.getReceiveData("RDR", site, list, dateStart, dateClose));
+
+
+            return "views/station/stationHistory";
+        }
+
+        //낙뢰
         
-        model.addAttribute("list", map);
-
         return "views/station/stationHistory";
     }
 

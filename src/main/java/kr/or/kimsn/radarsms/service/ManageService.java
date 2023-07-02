@@ -67,7 +67,7 @@ public class ManageService {
         return receiveConditionCriteriaRepository.findAll();
     }
 
-    // 자료 수신 감시 설정
+    // 자료 수신 감시 설정(자료 수신 처리 설정 테이블)
     public List<ReceiveSettingDto> getReceiveSettingList() {
         return receiveSettingRepository.findByOrderByDataKindDescPermittedWatchDesc();
     }
@@ -116,8 +116,7 @@ public class ManageService {
     }
 
     //문자 수신 그룹 멤버 
-    public List<SmsTargetGroupMemberDto> getSmsTargetGroupMemberList(Long id) {
-
+    public List<SmsTargetGroupMemberDto> getSmsTargetGroupMemberList() {
         return smsTargetGroupMemberRepository.getSmsTargetGroupMemberList();
     }
 

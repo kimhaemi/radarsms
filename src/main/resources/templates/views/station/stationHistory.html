@@ -3,7 +3,13 @@
       layout:decorate="layout/default_layout"
       th:with="metaTitle='전체 감시'">
 
-      <th:block layout:fragment="content">
+    <th:block layout:fragment="content">
+		<script th:inline="javascript">
+            /* <![CDATA[ */
+                var rdrSet = /*[[${rdrSet}]]*/;
+                console.log(rdrSet);
+            /* ]]> */
+        </script>
         <script type="text/javascript">
             $(document).ready(function(){
                 var toDay = new Date();
@@ -51,9 +57,9 @@
 				<col style="width:100px;"/>
 			</colgroup>
 				<thead>
-				<tr th:each="stationDtl : ${list.stationDtl}">
+				<tr>
 					<th class="left">
-						과거자료 검색 > <span class="radar" th:text="${stationDtl.name_kr+' 레이더'}"></span>
+						과거자료 검색 > <span class="radar" th:text="${siteName+' 레이더'}"></span>
 					</th>
 					<th class="center">
 						<label for="datePick" class="hidden">년월일 선택</label>
@@ -61,27 +67,29 @@
 					</th>
 					<th class="right">
                         <button class="btn">검색</button>
-						<!-- <img src="${pageContext.request.contextPath}/images/search_icon.png" class="ui-datepicker-search" onclick="javascript:searchDate();"/></th> -->
+						<!-- <img src="/images/search_icon.png" class="ui-datepicker-search" onclick="javascript:searchDate();"/></th> -->
 				</tr>
 				</thead>
 			</table>
 			</form>
 			
 			<table class="mainTbl searchSeries" summary="">
-				<caption class="hidden">${site.name_kr } 레이더</caption>
+				<caption class="hidden" th:text="${siteName+' 레이더'}"></caption>
 				<colgroup>
 					<col />
-					<c:forEach var="rdrs" items="${rdrSet }">
-					<col style="width:36px"/>
-					<col style="width:129px"/>
-					</c:forEach>
+					<th:block th:each="rdrs : ${rdrSet}">
+						<col style="width:36px" />
+						<col style="width:129px"/>
+					</th:block>
 				</colgroup>
 				<thead>
 					<tr>
-						<th rowspan="2" width="100">시간</th>
-					<c:forEach var="rdrs" items="${rdrSet }">
-						<th colspan="2" width="500">${fn:replace(rdrs.data_name,"레이더","") }<br />(${rdrs.data_type })</th>
-					</c:forEach>	
+						<th rowspan="2" width="500">시간</th>
+						<th th:each="rdrs : ${rdrSet}" colspan="2" width="500">
+							<span th:text="${rdrs.data_name.replace('레이더','')}"></span>
+							<br />
+							<span th:text="${'('+rdrs.dataType+')'}"></span>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -96,8 +104,10 @@
 						</td>
 						<c:forEach var="rdrs" items="${rdrSet }" varStatus="jdx">
 						<td>
+							<!-- <div class="recv RECV" title="수신"></div> -->
 							<div class="recv ${recvData[jdx.index][idx.index].recv_condition }" title="${recvAlt[recvData[jdx.index][idx.index].recv_condition] }"></div>
 						</td>
+						<!-- <td>2017.07.01 23:50</td> -->
 						<td>
 							<c:choose>
 								<c:when test="${not empty recvData[jdx.index][idx.index].recv_time }">
@@ -112,6 +122,5 @@
 					</c:forEach>
 				</tbody>
 			</table>
-      </th:block>
-                
-    <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+    </th:block>
+</html>
