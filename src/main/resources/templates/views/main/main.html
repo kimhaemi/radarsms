@@ -76,23 +76,86 @@
 			</div>
 
 			<div class="alertTbls">
-
-				<table th:each="sList : ${list.stationList}" class="mainTbl " th:id="${sList.siteCd}" summary="">
-					<caption class="hidden" th:text="${sList.name_kr}"></caption>
+				<table class="table subTbl table-hover" summary="">
 					<colgroup>
-						<col style="width:40px;">
+						<col width="200px">
 						<col>
 					</colgroup>
 					<thead>
-						<tr>
-							<th colspan="2"><a th:href="${'/station/'+sList.siteCd}" class="radar" th:text="${sList.name_kr+' 레이더'}"></a></th>
+						<th colspan="2">대형 레이더</th>
+					</thead>
+					<tbody>
+						<tr th:each="sList : ${list.stationList}" th:if="${sList.siteCd != 'IIA'}">
+							<!-- 여기도 수정필요 -->
+							<td class="subThead">
+								<a th:href="${'/station/'+sList.siteCd}" class="radar" th:text="${sList.name_kr+' 레이더'}"></a>
+							</td>
+							<td>
+								<span th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></span>
+								<span th:text="${'최종 수신 '+ '2022.07.29 14:15'}"></span>
+							</td>
 						</tr>
+					</tbody>
+				</table>
+				<table class="table subTbl table-hover" summary="">
+					<colgroup>
+						<col width="200px">
+						<col>
+					</colgroup>
+					<thead>
+						<th colspan="2">소형 레이더</th>
 					</thead>
 					<tbody>
 						<tr>
 							<!-- 여기도 수정필요 -->
-							<td><div th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></div></td>
-							<td th:text="${'최종 수신 '+ '2022.07.29 14:15'}"></td>
+							<td class="subThead">
+								<a href="#" class="radar" >망일산</a>
+							</td>
+							<td>
+								<!-- <span th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></span> -->
+								<span>최종 수신 2022.07.29 14:15</span>
+							</td>
+						</tr>
+						<tr>
+							<!-- 여기도 수정필요 -->
+							<td class="subThead">
+								<a href="#" class="radar" >수리산</a>
+							</td>
+							<td>
+								<!-- <span th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></span> -->
+								<span>최종 수신 2022.07.29 14:15</span>
+							</td>
+						</tr>
+						<tr>
+							<!-- 여기도 수정필요 -->
+							<td class="subThead">
+								<a href="#" class="radar" >덕적도</a>
+							</td>
+							<td>
+								<!-- <span th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></span> -->
+								<span>최종 수신 2022.07.29 14:15</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table subTbl table-hover" summary="">
+					<colgroup>
+						<col width="200px">
+						<col>
+					</colgroup>
+					<thead>
+						<th colspan="2">공항 레이더</th>
+					</thead>
+					<tbody>
+						<tr>
+							<!-- 여기도 수정필요 -->
+							<td class="subThead">
+								<a href="#" class="radar" >인천공항</a>
+							</td>
+							<td>
+								<!-- <span th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></span> -->
+								<span>최종 수신 2022.07.29 14:15</span>
+							</td>
 						</tr>
 					</tbody>
 				</table>

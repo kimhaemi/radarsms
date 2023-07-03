@@ -34,13 +34,14 @@
                     관리 &gt; 지점/자료별 문자 발송 설정
                 </th>
                 <th class="right">
-                    <input type="submit" value="설정저장">
+                    <input type="submit" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
         </table>
 
-        <table class="mainTbl searchSeries" summary="">
+        <!-- <table class="mainTbl searchSeries" summary=""> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">이벤트 문자 발송 설정</caption>
             <colgroup>
                 <col>
@@ -48,7 +49,7 @@
                 <col>
                 <col>
             </colgroup>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th>구분</th>
                     <th>지점</th>
@@ -56,7 +57,7 @@
                     <th>문자 발송 설정</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <tr th:each="rclist : ${list.receiveList}">
                     <td th:if="${rclist.dataKind == 'RDR'}">
                         레이더

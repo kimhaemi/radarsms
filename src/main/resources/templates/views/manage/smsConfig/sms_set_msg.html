@@ -34,19 +34,20 @@
                     관리 &gt; 문자 메시지 패턴
                 </th>
                 <th class="right">
-                    <input type="submit" value="설정저장">
+                    <input type="submit" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
         </table>
         
-        <table class="mainTbl searchSeries" summary="">
+        <!-- <table class="mainTbl searchSeries" summary=""> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">문자 전송 메시지 패턴</caption>
             <colgroup>
                 <col style="width:100px"/>
                 <col />
             </colgroup>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th rowspan="2">구분</th>
                     <th colspan="2">설정값</th>
@@ -56,7 +57,7 @@
                     <th>유지보수 상태</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <tr>
                     <td rowspan="2" th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'NOTI' && patternList.mode == 'RUN'}">
                         주의

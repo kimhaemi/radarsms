@@ -20,53 +20,24 @@
                 </tr>
                 </thead>
             </table>
-
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
             
-            <table class="mainTbl settingSeries" summary="">
+            <!-- <table class="mainTbl settingSeries" summary=""> -->
+            <table class="table subTbl table-hover" summary="">
                 <caption class="hidden">사용자 관리</caption>
-                <thead>
+                <thead class="subThead">
                     <tr>
-                        <th>ID</th>
-                        <th>성명</th>
-                        <th>등급</th>
-                        <th>직책</th>
-                        <th>부서</th>
-                        <th>소속</th>
-                        <th>연락처</th>
-                        <th>E-Mail</th>
-                        <th>관리</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">성명</th>
+                        <th scope="col">등급</th>
+                        <th scope="col">직책</th>
+                        <th scope="col">부서</th>
+                        <th scope="col">소속</th>
+                        <th scope="col">연락처</th>
+                        <th scope="col">E-Mail</th>
+                        <th scope="col">관리</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                     <tr th:each="mlist : ${list.membersList}">
                         <td th:text="${mlist.memberId}"></td><!-- id -->
                         <td th:text="${mlist.memberName}"></td><!-- 성명 -->
@@ -77,8 +48,9 @@
                         <td ></td><!-- 연락처 -->
                         <td ></td><!-- e-mail -->
                         <td>
-                            <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" th:href="'/users/admin_user_form?id='+${mlist.id}" role="button">
-                                <span class="ui-button-text">관리</span>
+                            <button type="button" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="">관리</button>
+                            <!-- <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" th:href="'/users/admin_user_form?id='+${mlist.id}" role="button">
+                                <span class="ui-button-text">관리</span> -->
                             </a>
                         </td>
                     </tr>

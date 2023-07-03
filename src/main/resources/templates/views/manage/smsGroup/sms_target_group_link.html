@@ -39,13 +39,14 @@
                     관리 > 그룹 관리 > [ <span th:text="${list.groupName}"></span> ] 그룹 감시 자료 설정
                 </th>
                 <th class="right">
-                    <input type="button" class="back" value="그룹관리로 돌아가기"/>
+                    <input type="button" class="btn btn_grayline back" value="그룹관리로 돌아가기"/>
                 </th>
             </tr>
             </thead>
         </table>
 
-        <table class="mainTbl searchSeries" summary="">
+        <!-- <table class="mainTbl searchSeries" summary=""> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">그룹 관리</caption>
             <colgroup>
                 <col style="width:100px" />
@@ -54,7 +55,7 @@
                 <col />
                 <col style="width:140px"/>
             </colgroup>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th colspan="5">
                         <span th:text="${list.groupName}"></span> 그룹에게 문자가 통보되는 지점별 데이터 목록
@@ -67,7 +68,7 @@
                     <th>삭제</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <tr th:each="link : ${list.links}">
                     <td th:switch="${link.data_kind}">
                         <span th:case="RDR">레이더</span>
@@ -91,7 +92,8 @@
             </tbody>
         </table>
         
-        <table class="mainTbl searchSeries" summary="">
+        <!-- <table class="mainTbl searchSeries" summary=""> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">그룹 관리</caption>
             <colgroup>
                 <col style="width:100px" />
@@ -100,7 +102,7 @@
                 <col />
                 <col style="width:140px"/>
             </colgroup>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th colspan="5">
                         <spen th:text="${list.groupName}"></spen> 그룹에게 문자가 통보되도록 추가할 수 있는 지점별 데이터 목록
@@ -113,7 +115,7 @@
                     <th>추가</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <tr th:each="notLink : ${list.notlinks}">
                     <td th:switch="${notLink.data_kind}">
                         <span th:case="RDR">레이더</span>

@@ -46,25 +46,26 @@
                     관리 &gt; 지점별 운영상태 설정
                 </th>
                 <th class="right">
-                    <input type="submit" value="설정저장">
+                    <input type="submit" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
         </table>
         
-        <table class="mainTbl searchSeries" summary="">
+        <!-- <table class="mainTbl searchSeries" summary=""> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">지점별 운영상태 </caption>
             <colgroup>
                 <col>
                 <col>
             </colgroup>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th>지점</th>
                     <th>운영상태</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <tr th:each="stationStatusList : ${list.stationStatusList}">
                     <td th:text="${stationStatusList.siteName +'('+ stationStatusList.siteCd +')'}">
                         <!-- 백령도 ( BRI ) -->

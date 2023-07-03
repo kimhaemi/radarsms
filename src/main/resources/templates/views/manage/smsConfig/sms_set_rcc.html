@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='경고 기준 설정'">
 
 	<th:block layout:fragment="content">
         <script type="text/javascript">
@@ -18,25 +18,26 @@
                     관리 &gt; 경고 기준 설정
                 </th>
                 <th class="right">
-                    <input type="submit" value="설정저장">
+                    <input type="submit" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
         </table>
 
-        <table class="mainTbl searchSeries" summary="">
+        <!-- <table class="mainTbl searchSeries" summary=""> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">경고 기준 설정</caption>
             <colgroup>
                 <col />
                 <col />
             </colgroup>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th>구분</th>
                     <th>설정값</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <tr th:each="list : ${list.criteriaList}" th:if="${list.code} == 'NOTI'">
                     <td>
                         주의 기준

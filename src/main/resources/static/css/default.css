@@ -718,8 +718,8 @@ input, select {
   left: 0px;
   top: 0px;}
 .alertMap .radar { 
-  width: 48px;
-  height: 48px;
+  width: 60px;
+  height: 60px;
   z-index: 40;
   position: absolute;}
 .alertMap .RETR {background:url('../images/watchcon/radar_ordi.png') no-repeat;}
@@ -768,3 +768,40 @@ input, select {
   font-size: 1.0em;  letter-spacing: 0.1em;}
 .user_input.readonly {background: rgba(249, 249, 249, 0.1); border: 1px solid rgba(217, 217, 217, 0.5);}
 .required_ico {color: rgba(237, 28, 36, 0.3);  font-size: 0.8em;  vertical-align: top;  margin-left: 3px;}
+
+.subTbl {
+	width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+	margin-top: 10px;
+	border-collapse: collapse;
+	/* padding: 0.75rem;
+	border-top: 1px solid #dee2e6; */
+}
+.subTbl thead th {
+	font-weight: bold;
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+.subTbl td, .subTbl th {
+    padding: 0.75rem;
+    vertical-align: text-bottom;
+    border-top: 1px solid #dee2e6;
+}
+
+.subTbl .subThead {
+	/* border-color: #b6aeff; */
+	background-color: #b8b8b8;
+}
+.subTbl .toggle{
+	width:100px;margin: 0 auto;
+}
+.subTbl td.left {text-align:left; padding-left: 10px;}
+.subTbl input.rccset {text-align:center; width:30px;}
+.subTbl .settingSeries .toggle {width:50px;}
+.subTbl input.namePattern {text-align:center; width:280px;}
+.subTbl input.nameRegex {text-align:center; width:200px;}
+.subTbl textarea.msgPtn {width:98%;height:60px;padding:4px;}
+.subTbl input.groupName {text-align:center; width:95%; height: 95%; }
+.subTbl .toggle.wide {width:200px;}

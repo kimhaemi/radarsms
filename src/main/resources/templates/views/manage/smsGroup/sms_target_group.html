@@ -28,31 +28,32 @@
                     관리 &gt; 문자 수신 그룹 관리
                 </th>
                 <th class="right">
-                    <input type="submit" value="설정저장">
+                    <input type="submit" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
         </table>
 
-        <table class="mainTbl searchSeries" summary="">
+        <!-- <table class="mainTbl searchSeries" summary=""> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">문자 수신 그룹 관리</caption>
             <colgroup>
                 <col style="width:33%" />
                 <col style="width:33%" />
                 <col />
             </colgroup>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th>그룹이름</th>
                     <th>그룹 활성화</th>
                     <th>그룹 관리</th>
                 </tr>
             </thead>
-            <tbody th:each="tgList, tgListStat : ${list.smsTargetGroupList}">
+            <tbody class="table-group-divider" th:each="tgList, tgListStat : ${list.smsTargetGroupList}">
                 <tr>
                     <td>
                         <input type="hidden" th:name="${'smsTargetGroups['+tgListStat.index+'].id'}" th:value="${tgList.id }"/>
-                        <input type="text" th:name="${'smsTargetGroups['+tgListStat.index+'].name' }" th:value="${tgList.name }" class="groupName"/>
+                        <span th:name="${'smsTargetGroups['+tgListStat.index+'].name' }" th:text="${tgList.name }" class="groupName"/>
                     </td>
                     <td>
                         <div class="toggle toggle-light" th:id="${'toggle-'+tgList.id}" th:data-toggle-on="${tgList.activation }"></div>

@@ -39,7 +39,8 @@
             </thead>
         </table>
         
-        <table class="mainTbl settingSeries" summary="">
+        <!-- <table class="mainTbl settingSeries" summary=""> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">문자 수신자 관리</caption>
             <colgroup>
                 <col style="width:90px" />
@@ -50,7 +51,7 @@
                 <col />
                 <col style="width:140px" />
             </colgroup>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th>성명</th>
                     <th>직책</th>
@@ -61,7 +62,7 @@
                     <th>관리</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <tr th:each="tmList, tmListStat : ${list.targetmembers}">
                 <!-- <form action="sms_target_member_update" name="smsTargetMember[${idx.index }]" method="post" target="_self" id="searchDate${idx.index }" > -->
                     <td>
@@ -104,7 +105,8 @@
             </tr>
             </thead>
         </table>
-        <table class="mainTbl settingSeries" summary="">
+        <!-- <table class="mainTbl settingSeries" summary=""> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">문자 수신자 추가</caption>
             <colgroup>
                 <col style="width:90px" />
@@ -115,7 +117,7 @@
                 <col />
                 <col style="width:140px" />
             </colgroup>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th>성명</th>
                     <th>직책</th>
@@ -126,7 +128,7 @@
                     <th>추가</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 <tr>
                 <form action="manager/sms_target_member_add" name="smsTargetMemberAdd" method="post" target="_self" id="smsTargetMemberAdd" >
                     <td>
