@@ -13,13 +13,14 @@ import lombok.Data;
 @Entity
 @Table(name = "station_rdr")
 public class StationDto {
-    
+
     // @Id
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     // private Long id;
 
     @Id
-    @Column(name = "site_cd") private String siteCd;
+    @Column(name = "site_cd")
+    private String siteCd;
     private String site_num;
     private String name_kr;
     private String name_en;
@@ -34,9 +35,11 @@ public class StationDto {
     private String prod_company;
     private String prod_country;
     private String permitted_watch;
-    @Column(name = "sort_order") private String sortOrder;
+    @Column(name = "sort_order")
+    private String sortOrder;
+    private Integer gubun;
     // private String ip;
     // private String user_id;
     // private String pwd;
-   
+
 }

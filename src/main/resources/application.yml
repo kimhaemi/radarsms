@@ -1,6 +1,6 @@
 # server
 server:
-  port: 2023
+  port: 8080
   
 spring:
 # 콘솔 색상
@@ -49,6 +49,7 @@ logging:
     '[kr.or.kimsn.radarsms.restApiController.SaveController]': debug
 
   file:
-    name: ${user.dir}/log/test.log  # 로깅 파일 위치이다.
+    # name: ${user.dir}/log/test.log  # 로깅 파일 위치이다.
+    name: ../log/radarsms.log  # 로깅 파일 위치이다.
     max-history: 7 # 로그 파일 삭제 주기이다. 7일 이후 로그는 삭제한다.
     max-size: 10MB  # 로그 파일 하나당 최대 파일 사이즈이다.

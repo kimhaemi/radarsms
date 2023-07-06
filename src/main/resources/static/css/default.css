@@ -600,7 +600,7 @@ input, select {
 	width:24px;height:24px;background-position:center;margin:auto;background: url(../images/watchcon/status_unknown.png);background-size:100% 100%;
 }
 .status.TOTA{background:url(../images/watchcon/status_TOTA.png);background-size:100% 100%;}
-.status.ORDI{background:url(../images/watchcon/status_ORDI.png);background-size:100% 100%;}
+.status.ORDI{background:url(../images/watchcon/status_ORDI.png);background-size:80% 80%;background-repeat:no-repeat;}
 .status.NOTI{background:url(../images/watchcon/status_NOTI.png);background-size:100% 100%;}
 .status.WARN{background:url(../images/watchcon/status_WARN.png);background-size:100% 100%;}
 .status.RETR{background:url(../images/watchcon/status_ORDI.png);background-size:100% 100%;}

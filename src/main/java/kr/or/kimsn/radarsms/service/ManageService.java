@@ -67,7 +67,7 @@ public class ManageService {
         return receiveConditionCriteriaRepository.findAll();
     }
 
-    // 자료 수신 감시 설정(자료 수신 처리 설정 테이블)
+    // 자료 수신 감시 설정(자료 수신 처리 설정 테이블) - 상태가 사용인 것만
     public List<ReceiveSettingDto> getReceiveSettingList() {
         return receiveSettingRepository.findByOrderByDataKindDescPermittedWatchDesc();
     }
@@ -77,25 +77,25 @@ public class ManageService {
         return smsSendPatternRepository.findByOrderByCodeAscModeDesc();
     }
 
-    //그룹관리 > 그룹 감시 자료 설정
-    public List<SmsTargetGroupLinkDto> getTableJoinAll(Long id){
+    // 그룹관리 > 그룹 감시 자료 설정
+    public List<SmsTargetGroupLinkDto> getTableJoinAll(Long id) {
         return smsTargetGroupLinkRepository.getTableJoinAll(id);
     }
 
-    //그룹관리 > 그룹 감시 자료 설정 되지 않음
-    public List<ReceiveDto> getSmsTargetGroupNotLink(List<SmsTargetGroupLinkDto> links){
+    // 그룹관리 > 그룹 감시 자료 설정 되지 않음
+    public List<ReceiveDto> getSmsTargetGroupNotLink(List<SmsTargetGroupLinkDto> links) {
         List<ReceiveDto> rclist = receiveRepository.getReceiveTableJoin();
         List<ReceiveDto> rmlist = new ArrayList<ReceiveDto>();
 
         for (SmsTargetGroupLinkDto link : links) {
-        for (ReceiveDto rc : rclist) {
-            if (link.getData_kind().equals(rc.getData_kind()) && link.getSite().equals(rc.getSite()) && 
-                link.getData_type().equals(rc.getData_type())) {
-                rmlist.add(rc);
-                break;
-                } 
-            } 
-        } 
+            for (ReceiveDto rc : rclist) {
+                if (link.getData_kind().equals(rc.getData_kind()) && link.getSite().equals(rc.getSite()) &&
+                        link.getData_type().equals(rc.getData_type())) {
+                    rmlist.add(rc);
+                    break;
+                }
+            }
+        }
         if (rmlist.size() > 0) {
             for (ReceiveDto rm : rmlist) {
                 rclist.remove(rm);
@@ -115,39 +115,38 @@ public class ManageService {
         return smsTargetGroupRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Member Not Found"));
     }
 
-    //문자 수신 그룹 멤버 
+    // 문자 수신 그룹 멤버
     public List<SmsTargetGroupMemberDto> getSmsTargetGroupMemberList() {
         return smsTargetGroupMemberRepository.getSmsTargetGroupMemberList();
     }
 
-    //문자 수신 그룹 멤버 ([ admin ] 그룹에 속한 사용자)
+    // 문자 수신 그룹 멤버 ([ admin ] 그룹에 속한 사용자)
     public List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberId(Long id) {
         return smsTargetGroupMemberRepository.getSmsTargetGroupsMemberId(id);
     }
 
-    //문자 수신 그룹 멤버 ([ admin ] 그룹에 속하지 않은 사용자)
+    // 문자 수신 그룹 멤버 ([ admin ] 그룹에 속하지 않은 사용자)
     public List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberIdNot(List<SmsTargetGroupMemberDto> links) {
         List<SmsTargetGroupMemberDto> mlist = smsTargetGroupMemberRepository.getSmsTargetGroupMemberList();
         List<SmsTargetGroupMemberDto> rmlist = new ArrayList<SmsTargetGroupMemberDto>();
         for (SmsTargetGroupMemberDto link : links) {
-          for (SmsTargetGroupMemberDto m : mlist) {
-            if (link.getMid() == m.getMid()) {
-              rmlist.add(m);
-              break;
-            } 
-          } 
-        } 
+            for (SmsTargetGroupMemberDto m : mlist) {
+                if (link.getMid() == m.getMid()) {
+                    rmlist.add(m);
+                    break;
+                }
+            }
+        }
         if (rmlist.size() > 0) {
-          for (SmsTargetGroupMemberDto rm : rmlist) {
-            mlist.remove(rm);
-          }
+            for (SmsTargetGroupMemberDto rm : rmlist) {
+                mlist.remove(rm);
+            }
         }
         return mlist;
     }
 
-
-    //문자 수신자 관리
-    public List<SmsTargetMemberDto> getSmsTargetMemberList(){
+    // 문자 수신자 관리
+    public List<SmsTargetMemberDto> getSmsTargetMemberList() {
         return smsTargetMemberRepository.findByOrderByName();
     }
 
