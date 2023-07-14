@@ -1,6 +1,6 @@
 # server
 server:
-  port: 8080
+  port: 80
   
 spring:
 # 콘솔 색상
@@ -11,9 +11,12 @@ spring:
 # DB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/watchdog
+    url: jdbc:mysql://175.197.48.213:3306/watchdog
+    # url: jdbc:mysql://175.197.48.213:23307/watchdog
     username: root
-    password: test123
+    #local
+    # password: test123
+    password: Test123~!@
 
 # query
   jpa:

@@ -1,6 +1,5 @@
 package kr.or.kimsn.radarsms.restApiController;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,10 +16,8 @@ import lombok.RequiredArgsConstructor;
 // @Slf4j
 @RequiredArgsConstructor
 @RestController
-public class PostController {
+public class UserPostController {
 
-    // private final MenuService menuService;
-    // private final UsersService usersService;
     private final MembersService membersService;
     
     //메뉴 저장
@@ -44,31 +41,20 @@ public class PostController {
     // }
 
     // 사용자 등록
-    @PostMapping("/users/admin_user_add")
-    public ResponseEntity<MembersDto> userSave(@RequestBody MembersDto membersDto){
-        System.out.println("사용자 등록 api");
-        System.out.println("membersDto :::: " + membersDto);
-        return ResponseEntity.ok(membersService.userAdd(membersDto));
+    @PostMapping("/users/admin_user_create")
+    public ApiResult<MembersDto> userSave(@RequestBody MembersDto membersDto){
+        return ApiResult.success(membersService.userAdd(membersDto));
     }
 
     // 사용자 수정
     @PostMapping("/users/admin_user_modify")
-    public ResponseEntity<MembersDto> userModify(@RequestBody MembersDto membersDto){
-
-        System.out.println("membersDto ::: " + membersDto);
-        // System.out.println("id ::: " + id);
-        System.out.println("사용자 수정 api");
-        // return ResponseEntity.ok(membersService.userModify(membersDto));
-        // return null;
-        return ResponseEntity.ok(membersDto);
+    public ApiResult<MembersDto> userModify(@RequestBody MembersDto membersDto){
+        return ApiResult.success(membersService.userModify(membersDto));
     }
 
     // 사용자 삭제
     @PostMapping("/users/admin_user_del")
     public ApiResult<Long> userDelete(@RequestParam Long id){
-        System.out.println("userId : " + id);
-        System.out.println("사용자 삭제 api");
-        membersService.userDelete(id);
         return ApiResult.success(membersService.userDelete(id));
     }
 }

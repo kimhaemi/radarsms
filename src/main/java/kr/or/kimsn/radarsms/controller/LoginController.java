@@ -12,7 +12,7 @@ public class LoginController {
     // 로그인 화면
     @GetMapping({ "/login" })
     public String login() {
-        return "views/users/loginForm";
+        return "views/login";
     }
 
     // 로그 아웃

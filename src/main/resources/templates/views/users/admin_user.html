@@ -48,7 +48,7 @@
                         <td ></td><!-- 연락처 -->
                         <td ></td><!-- e-mail -->
                         <td>
-                            <button type="button" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="">관리</button>
+                            <button type="button" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" th:onclick="| location.href='@{/users/admin_user_form(id=${mlist.id})}' |" id="">관리</button>
                             <!-- <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" th:href="'/users/admin_user_form?id='+${mlist.id}" role="button">
                                 <span class="ui-button-text">관리</span> -->
                             </a>
