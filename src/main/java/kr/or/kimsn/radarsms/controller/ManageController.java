@@ -14,7 +14,7 @@ import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
-import kr.or.kimsn.radarsms.service.ManageService;
+import kr.or.kimsn.radarsms.service.ManageGetService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class ManageController {
 
     private final MenuService menuService;
-    private final ManageService manageService;
+    private final ManageGetService manageGetService;
 
     // 지점/자료별 문자 발송 설정
     @GetMapping("/manage/station_set_rc")
@@ -40,7 +40,7 @@ public class ManageController {
         map.put("stationList", stationList);
 
         // 자료 수신 상태
-        List<SmsSetRcDto> receiveList = manageService.getReceiveConditionList();
+        List<SmsSetRcDto> receiveList = manageGetService.getReceiveConditionList();
         System.out.println("receiveList : " + receiveList);
         map.put("receiveList", receiveList);
 
@@ -64,7 +64,7 @@ public class ManageController {
         map.put("stationList", stationList);
 
         // 경고 기준
-        List<ReceiveConditionCriteriaDto> criteriaList = manageService.getReceiveConditionCriteriaList();
+        List<ReceiveConditionCriteriaDto> criteriaList = manageGetService.getReceiveConditionCriteriaList();
         System.out.println("criteriaList ::: " + criteriaList);
         map.put("criteriaList", criteriaList);
 
@@ -86,7 +86,7 @@ public class ManageController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        List<ReceiveSettingDto> receiveSettingList = manageService.getReceiveSettingList();
+        List<ReceiveSettingDto> receiveSettingList = manageGetService.getReceiveSettingList();
         map.put("receiveSettingList", receiveSettingList);
         System.out.println("receiveSettingList : \n" + receiveSettingList);
 
@@ -108,7 +108,7 @@ public class ManageController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        List<StationStatusDto> stationStatusList = manageService.getStationStatusList();
+        List<StationStatusDto> stationStatusList = manageGetService.getStationStatusList();
         map.put("stationStatusList", stationStatusList);
 
         model.addAttribute("list", map);

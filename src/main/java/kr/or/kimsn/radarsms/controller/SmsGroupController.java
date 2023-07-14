@@ -15,7 +15,7 @@ import kr.or.kimsn.radarsms.dto.SmsTargetGroupLinkDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
-import kr.or.kimsn.radarsms.service.ManageService;
+import kr.or.kimsn.radarsms.service.ManageGetService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class SmsGroupController {
 
     private final MenuService menuService;
-    private final ManageService manageService;
+    private final ManageGetService manageGetService;
 
     // 문자 수신 그룹 관리
     @GetMapping("/manage/sms_target_group")
@@ -43,7 +43,7 @@ public class SmsGroupController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        List<SmsTargetGroupDto> smsTargetGroupList = manageService.getSmsTargetGroupList();
+        List<SmsTargetGroupDto> smsTargetGroupList = manageGetService.getSmsTargetGroupList();
         map.put("smsTargetGroupList", smsTargetGroupList);
 
         model.addAttribute("list", map);
@@ -66,17 +66,17 @@ public class SmsGroupController {
 
         if( id != null ){
             //수신 그룹
-            SmsTargetGroupDto group = manageService.getSmsTargetGroupId(id);
+            SmsTargetGroupDto group = manageGetService.getSmsTargetGroupId(id);
             map.put("group", group);
             map.put("groupId", group.getId());
             map.put("groupName", group.getName());
 
             //그룹에 속한 사용자
-            List<SmsTargetGroupMemberDto> links = manageService.getSmsTargetGroupsMemberId(id);
+            List<SmsTargetGroupMemberDto> links = manageGetService.getSmsTargetGroupsMemberId(id);
             map.put("links", links);
 
             //그룹에 속하지 않은 멤버
-            List<SmsTargetGroupMemberDto> notlinks = manageService.getSmsTargetGroupsMemberIdNot(links);
+            List<SmsTargetGroupMemberDto> notlinks = manageGetService.getSmsTargetGroupsMemberIdNot(links);
             map.put("notlinks", notlinks);
             System.out.println("notlinks ::: " + notlinks);
 
@@ -113,16 +113,16 @@ public class SmsGroupController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        SmsTargetGroupDto smsTargetGroupId = manageService.getSmsTargetGroupId(id);
+        SmsTargetGroupDto smsTargetGroupId = manageGetService.getSmsTargetGroupId(id);
         map.put("smsTargetGroupId", smsTargetGroupId);
         //그룹명
         map.put("groupName", smsTargetGroupId.getName());
         map.put("groupId", smsTargetGroupId.getId());
 
-        List<SmsTargetGroupLinkDto> links = manageService.getTableJoinAll(id);
+        List<SmsTargetGroupLinkDto> links = manageGetService.getTableJoinAll(id);
         map.put("links", links);
         // System.out.println("links ::: " + links);
-        List<ReceiveDto> notlinks = manageService.getSmsTargetGroupNotLink(links);
+        List<ReceiveDto> notlinks = manageGetService.getSmsTargetGroupNotLink(links);
         map.put("notlinks", notlinks);
         System.out.println("notlinks ::: " + notlinks);
 
@@ -144,7 +144,7 @@ public class SmsGroupController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        List<SmsTargetMemberDto> targetmembers = manageService.getSmsTargetMemberList();
+        List<SmsTargetMemberDto> targetmembers = manageGetService.getSmsTargetMemberList();
         map.put("targetmembers", targetmembers);
 
         model.addAttribute("list", map);

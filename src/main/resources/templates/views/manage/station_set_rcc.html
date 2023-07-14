@@ -4,8 +4,40 @@
       th:with="metaTitle='경고 기준 설정'">
 
 	<th:block layout:fragment="content">
+        <script th:inline="javascript">
+            /* <![CDATA[ */
+                var mData = /*[[${list.criteriaList}]]*/
+                console.log(mData);
+            /* ]]> */
+        </script>
         <script type="text/javascript">
-        
+            $(function() {
+                $("#configSave").on("click", function(){
+                    let list = new Array();
+                    mData.forEach(e => {
+                        if(e.code != 'ORDI'){
+                            let jObj = new Object();
+                            jObj.code=e.code;
+                            jObj.name=e.name;
+                            jObj.criterion=$("#"+e.code).val();
+                            jObj.comment=e.comment;
+                            list.push(jObj);
+                        }
+                    });
+
+                    if(confirm("저장 하시겠습니까?")){
+                    let result = fnCall('post', '/manage/station_set_rcc_modify', JSON.stringify(list));
+                    
+                    console.log("result :: "+ result.status);
+                    if(result.status == "success"){
+                        alert("저장되었습니다.");
+                        location.href="/manage/station_set_rcc"; //다시 로딩
+                    } else {
+                        alert("저장에 실패하였습니다. \n" + result.data);
+                    }
+                }
+                });
+            });
         </script>
     
         <!-- <form action="/manage/sms_set_rcc_update" method="post" target="_self" id="searchDate"> -->
@@ -18,7 +50,7 @@
                     관리 &gt; 경고 기준 설정
                 </th>
                 <th class="right">
-                    <input type="submit" class="btn btn_grayline" value="설정저장">
+                    <input type="submit" id="configSave" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
@@ -38,44 +70,27 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="list : ${list.criteriaList}" th:if="${list.code} == 'NOTI'">
+                <!-- <tr th:if="${list.code} == 'NOTI'"> -->
+                <tr th:each="list : ${list.criteriaList}" th:if="${list.code} != 'ORDI'">
                     <td>
-                        주의 기준
+                        <span th:text="${list.name + ' 기준'}"></span>
                     </td>
                     <td class="left">
-                        자료가 연속으로 <input type="text" name="NOTI" id="NOTI" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
-                    </td>
-                </tr>
-                <tr th:each="list : ${list.criteriaList}" th:if="${list.code} == 'WARN'">
-                    <td>
-                        경고 기준
-                    </td>
-                    <td class="left">
-                        자료가 연속으로 <input type="text" name="WARN" id="WARN" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
-                    </td>
-                </tr>
-                <tr th:each="list : ${list.criteriaList}" th:if="${list.code} == 'RETR'">
-                    <td>
-                        복구 기준
-                    </td>
-                    <td class="left">
-                        주의 또는 경고 상태에서 자료가 연속으로 <input type="text" name="RETR" id="RETR" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
-                    </td>
-                </tr>
-                <tr th:each="list : ${list.criteriaList}" th:if="${list.code} == 'TOTA'">
-                    <td>
-                        네트워크 장애 기준
-                    </td>
-                    <td class="left">
-                        전 사이트가 연속으로 <input type="text" name="TOTA" id="TOTA" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
-                    </td>
-                </tr>
-                <tr th:each="list : ${list.criteriaList}" th:if="${list.code} == 'TORE'">
-                    <td>
-                        네트워크 복구 기준
-                    </td>
-                    <td class="left">
-                        어느 한 사이트가 연속으로 <input type="text" name="TORE" id="TORE" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
+                        <span th:if="${list.code} == 'NOTI'">
+                            자료가 연속으로 <input type="text" name="NOTI" id="NOTI" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
+                        </span>
+                        <span th:if="${list.code} == 'WARN'">
+                            자료가 연속으로 <input type="text" name="WARN" id="WARN" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
+                        </span>
+                        <span th:if="${list.code} == 'RETR'">
+                            주의 또는 경고 상태에서 자료가 연속으로 <input type="text" name="RETR" id="RETR" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
+                        </span>
+                        <span th:if="${list.code} == 'TOTA'">
+                            전 사이트가 연속으로 <input type="text" name="TOTA" id="TOTA" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
+                        </span>
+                        <span th:if="${list.code} == 'TORE'">
+                            어느 한 사이트가 연속으로 <input type="text" name="TORE" id="TORE" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
+                        </span>
                     </td>
                 </tr>
             </tbody>

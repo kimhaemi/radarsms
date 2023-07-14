@@ -16,7 +16,7 @@ import kr.or.kimsn.radarsms.dto.SmsSendOnOffDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
-import kr.or.kimsn.radarsms.service.ManageService;
+import kr.or.kimsn.radarsms.service.ManageGetService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import kr.or.kimsn.radarsms.service.SmsService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class SmsController {
 
     private final MenuService menuService;
     private final SmsService smsService;
-    private final ManageService manageService;
+    private final ManageGetService manageGetService;
     
     //문자 발송
     @GetMapping("/manage/sms_send")
@@ -52,11 +52,11 @@ public class SmsController {
         map.put("nowTime", time.format(today));
 
         //문자 수신 그룹
-        List<SmsTargetGroupDto> groups = manageService.getSmsTargetGroupList();
+        List<SmsTargetGroupDto> groups = manageGetService.getSmsTargetGroupList();
         map.put("groups", groups);
 
         //문자 수신 그룹 멤버
-        List<SmsTargetGroupMemberDto> memberList = manageService.getSmsTargetGroupMemberList();
+        List<SmsTargetGroupMemberDto> memberList = manageGetService.getSmsTargetGroupMemberList();
         map.put("memberList", memberList);
         
         model.addAttribute("list", map);

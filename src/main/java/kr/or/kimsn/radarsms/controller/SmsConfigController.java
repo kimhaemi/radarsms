@@ -9,12 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
-import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
-import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
-import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
-import kr.or.kimsn.radarsms.service.ManageService;
+import kr.or.kimsn.radarsms.service.ManageGetService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class SmsConfigController {
 
     private final MenuService menuService;
-    private final ManageService manageService;
+    private final ManageGetService manageGetService;
     // private final historicalDataService historicalDataService;
 
     // 문자 메시지 패턴
@@ -43,7 +40,7 @@ public class SmsConfigController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        List<SmsSendPatternDto> smsSendPatternList = manageService.getSmsSendPatternList();
+        List<SmsSendPatternDto> smsSendPatternList = manageGetService.getSmsSendPatternList();
         map.put("smsSendPatternList", smsSendPatternList);
         System.out.println("smsSendPatternList : \n" + smsSendPatternList);
 

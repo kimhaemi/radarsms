@@ -34,7 +34,7 @@
                 });
 
                 if(confirm("저장 하시겠습니까?")){
-                    let result = fnCall('post', '/manage/station_set_rc_update', JSON.stringify(list));
+                    let result = fnCall('post', '/manage/station_set_rc_modify', JSON.stringify(list));
                     
                     console.log("result :: "+ result.status);
                     if(result.status == "success"){
