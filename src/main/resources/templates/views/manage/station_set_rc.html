@@ -1,27 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='지점/자료별 문자 발송 설정'">
 
 	<th:block layout:fragment="content">
         <script th:inline="javascript">
             /* <![CDATA[ */
-                var mData = /*[[${list.receiveList}]]*/;
+                var mData = /*[[${list.receiveList}]]*/
                 console.log(mData);
             /* ]]> */
         </script>
         <script type="text/javascript">
         $(function() {
-            $('.toggle').toggles();
-            $('.toggle').on('toggle', function (e, active) {
-                var targetId=e.target.id.replace("toggle","id");
-                if (active) {
-                    $("#"+targetId).val("true");
-                } else {
-                    $("#"+targetId).val("false");
+            $("#configSave").on("click", function(){
+                let list = new Array();
+                $("input[name=config]").each(function(idx, item){
+                    let jObj = new Object();
+                    let site = item.id.split("-")[0];
+                    let dataType = item.id.split("-")[1];
+
+                    mData.forEach(e => {
+                        // console.log(e);
+                        if(e.site == site && e.dataType == dataType){
+                            jObj.site=e.site;
+                            jObj.dataKind=e.dataKind;
+                            jObj.dataType=e.dataType;
+                            jObj.data_name=e.data_name;
+                            jObj.sms_send_activation=$(item).is(":checked") ? 1 : 0;
+                            jObj.status=e.status;
+                            list.push(jObj);
+                        }
+                    });
+                });
+
+                if(confirm("저장 하시겠습니까?")){
+                    let result = fnCall('post', '/manage/station_set_rc_update', JSON.stringify(list));
+                    
+                    console.log("result :: "+ result.status);
+                    if(result.status == "success"){
+                        alert("저장되었습니다.");
+                        location.href="/manage/station_set_rc"; //다시 로딩
+                    } else {
+                        alert("저장에 실패하였습니다. \n" + result.data);
+                    }
                 }
+                
             });
         });
+
         </script>
     
         <!-- <form action="/manage/sms_set_rc_update" method="post" target="_self" id="searchDate"> -->
@@ -34,7 +60,7 @@
                     관리 &gt; 지점/자료별 문자 발송 설정
                 </th>
                 <th class="right">
-                    <input type="submit" class="btn btn_grayline" value="설정저장">
+                    <input type="submit" id="configSave" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
@@ -58,7 +84,7 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="rclist : ${list.receiveList}">
+                <tr th:each="rclist : ${list.receiveList}" th:if="${rclist.status == 1}">
                     <td th:if="${rclist.dataKind == 'RDR'}">
                         레이더
                     </td>
@@ -86,8 +112,16 @@
                         <div th:text="${rclist.data_name}"></div>
                     </td>
                     <td>
-                        <div class="toggle toggle-light" th:id="${'toggle-'+rclist.site+'-'+rclist.dataType}" th:data-toggle-on="${rclist.sms_send_activation}"></div>
-                        <input type="hidden" id="${'id-'+rclist.site+'-'+rclist.dataType}" th:name="${'id-'+rclist.site+'-'+rclist.dataType}" th:value="${rclist.sms_send_activation }" />
+                        <!-- <div class="toggle toggle-light" th:id="${'toggle-'+rclist.site+'-'+rclist.dataType}" th:data-toggle-on="${rclist.sms_send_activation}"></div> -->
+                        <label class="toggle" data-size="">
+                            <input type="checkbox" name="config" 
+                                th:id="${rclist.site+'-'+rclist.dataType}" 
+                                th:checked="${rclist.sms_send_activation}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                 </tr>
             </tbody>

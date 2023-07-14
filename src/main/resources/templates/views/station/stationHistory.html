@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='지점별 과거자료'">
 
     <th:block layout:fragment="content">
+		
+    	<link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap-datepicker3.css">
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap-datepicker3.standalone.css">
+		<script type="application/json" src="/js/bootstrap/bootstrap-datepicker.js"></script>
+		<script type="application/json" src="/js/bootstrap/bootstrap-datepicker.kr.min.js"></script>
+		<script type="application/json" src="/js/jquery.js"></script>
+
 		<script th:inline="javascript">
             /* <![CDATA[ */
-                var rdrSet = /*[[${rdrSet}]]*/;
+                var rdrSet = /*[[${rdrSet}]]*/
                 console.log(rdrSet);
             /* ]]> */
         </script>
@@ -16,46 +23,58 @@
                 var str1 = toDay.getFullYear()+'년 '+(toDay.getMonth()+1)+'월 '+toDay.getDate()+'일';
                 
                 $('#datePick').val(str1);
+				$('#datePick').datepicker({
+					format : "yyyy-mm-dd",
+					language : "kr"
+				});
+
+				
+
                 //window.setInterval("reloadWarning()",60000);
             });
-            $(function() {
-                $( "#datePick" ).datepicker({
-                    showOn: "button",
-                    buttonImage: "/images/calendar.gif",
-                    buttonImageOnly: true,
-                    buttonText: "Select date",
-                    changeMonth: true,
-                    changeYear: true,
-                    prevText: '이전 달',
-                    nextText: '다음 달',
-                    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                    dayNames: ['일','월','화','수','목','금','토'],
-                    dayNamesShort: ['일','월','화','수','목','금','토'],
-                    dayNamesMin: ['일','월','화','수','목','금','토'],
-                    showMonthAfterYear: true,
-                    yearSuffix: '년',
-                    dateFormat: 'yy년 mm월 dd일',
-                    minDate: (new Date(2009, 1 - 1, 1)), maxDate: "+0D"/*(new Date(2014, 11, 31)) /*"+1Y +1M +10D"*/
-                });
+
+            $(function() {	
+				$("#search").on('click', function (e) {
+					alert("검색");
+				});
+            //     $( "#datePick" ).datepicker({
+            //         showOn: "button",
+            //         buttonImage: "/images/calendar.gif",
+            //         buttonImageOnly: true,
+            //         buttonText: "Select date",
+            //         changeMonth: true,
+            //         changeYear: true,
+            //         prevText: '이전 달',
+            //         nextText: '다음 달',
+            //         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            //         monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+            //         dayNames: ['일','월','화','수','목','금','토'],
+            //         dayNamesShort: ['일','월','화','수','목','금','토'],
+            //         dayNamesMin: ['일','월','화','수','목','금','토'],
+            //         showMonthAfterYear: true,
+            //         yearSuffix: '년',
+            //         dateFormat: 'yy년 mm월 dd일',
+            //         minDate: (new Date(2009, 1 - 1, 1)), maxDate: "+0D"/*(new Date(2014, 11, 31)) /*"+1Y +1M +10D"*/
+            //     });
             });
-            var searchDate = function(){
-                var selDate = $("#datePick").val().replace(/ |년|월|일/g, "");
-                $("#termClose").val(selDate+"2350");
-                $("#termStart").val(selDate+"0000");
-                $("#searchDate").submit();
-            };
+            // var searchDate = function(){
+            //     var selDate = $("#datePick").val().replace(/ |년|월|일/g, "");
+            //     $("#termClose").val(selDate+"2350");
+            //     $("#termStart").val(selDate+"0000");
+            //     $("#searchDate").submit();
+            // };
+			
         </script>
         
-        <form action="" method="post" target="_self" id="searchDate">
+        <!-- <form action="" method="post" target="_self" id="searchDate"> -->
 			<input type="hidden" name="termStart" id="termStart"/>
 			<input type="hidden" name="termClose" id="termClose"/>
 			<table class="noticeTbl searchSeries">
-			<colgroup>
-				<col style="width:auto;"/>
-				<col style="width:130px;"/>
-				<col style="width:100px;"/>
-			</colgroup>
+				<colgroup>
+					<col style="width:auto;"/>
+					<col style="width:130px;"/>
+					<col style="width:50px;"/>
+				</colgroup>
 				<thead>
 				<tr>
 					<th class="left">
@@ -66,12 +85,12 @@
 						<input type="text" value="" id="datePick" readonly />
 					</th>
 					<th class="right">
-                        <button class="btn">검색</button>
+                        <button class="btn" id="search">검색</button>
 						<!-- <img src="/images/search_icon.png" class="ui-datepicker-search" onclick="javascript:searchDate();"/></th> -->
 				</tr>
 				</thead>
 			</table>
-			</form>
+			<!-- </form> -->
 			
 			<table class="table subTbl table-hover" summary="">
 				<caption class="hidden" th:text="${siteName+' 레이더'}"></caption>

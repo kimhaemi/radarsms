@@ -17,6 +17,7 @@ import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionCriteriaRepository;
+import kr.or.kimsn.radarsms.repository.ReceiveConditionRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveSettingRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendPatternRepository;
@@ -46,6 +47,29 @@ public class ManageService {
     private final SmsTargetGroupLinkRepository smsTargetGroupLinkRepository;
 
     private final ReceiveRepository receiveRepository;
+    private final ReceiveConditionRepository receiveConditionRepository;
+
+    //지점/자료별 문자 발송 설정 저장
+    public Integer receiveConditionModify (List<SmsSetRcDto> req){
+        Integer result = 0;
+        try {
+            for(SmsSetRcDto list : req){
+                int sms_send_activation = list.getSms_send_activation();
+                String data_kind = list.getDataKind();
+                String site = list.getSite();
+                String dataType = list.getDataType();
+                System.out.println("sms_send_activation : " + sms_send_activation);
+                System.out.println("data_kind : " + data_kind);
+                System.out.println("site : " + site);
+                System.out.println("dataType : " + dataType);
+                receiveConditionRepository.receiveConditionModify(sms_send_activation, data_kind, site, dataType);
+                result++;
+            }
+        } catch (Exception e) {
+            System.out.println("insert error : " +e);
+        }
+        return result;
+    }
 
     /*
      * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)

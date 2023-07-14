@@ -21,5 +21,6 @@ public class SmsSetRcDto {
     private String name_kr;
     private String data_name;
     private Integer sms_send_activation;
+    private Integer status;
 
 }

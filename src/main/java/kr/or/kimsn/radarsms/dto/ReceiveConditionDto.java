@@ -1,11 +1,14 @@
 package kr.or.kimsn.radarsms.dto;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
@@ -21,5 +24,5 @@ public class ReceiveConditionDto {
     private String last_check_time;
     private String sms_send;
     private String sms_send_activation;
-
+    private Integer status;
 }
