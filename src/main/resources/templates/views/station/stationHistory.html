@@ -73,7 +73,7 @@
 			</table>
 			</form>
 			
-			<table class="mainTbl searchSeries" summary="">
+			<table class="table subTbl table-hover" summary="">
 				<caption class="hidden" th:text="${siteName+' 레이더'}"></caption>
 				<colgroup>
 					<col />
@@ -82,9 +82,9 @@
 						<col style="width:129px"/>
 					</th:block>
 				</colgroup>
-				<thead>
+				<thead class="subThead">
 					<tr>
-						<th rowspan="2" width="500">시간</th>
+						<th rowspan="2" width="300">시간</th>
 						<th th:each="rdrs : ${rdrSet}" colspan="2" width="500">
 							<span th:text="${rdrs.data_name.replace('레이더','')}"></span>
 							<br />
@@ -92,7 +92,7 @@
 						</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="table-group-divider">
 					<c:set var="forEnd" value="${fn:length(recvData[0])-1 }" />
 					<c:if test="${forEnd < 0 }">
 						<c:set var="forEnd" value="0" />
