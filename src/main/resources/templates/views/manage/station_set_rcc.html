@@ -40,7 +40,6 @@
             });
         </script>
     
-        <!-- <form action="/manage/sms_set_rcc_update" method="post" target="_self" id="searchDate"> -->
         <input type="hidden" name="termStart" id="termStart">
         <input type="hidden" name="termClose" id="termClose">
         <table class="noticeTbl searchSeries">
@@ -56,7 +55,6 @@
             </thead>
         </table>
 
-        <!-- <table class="mainTbl searchSeries" summary=""> -->
         <table class="table subTbl table-hover" summary="">
             <caption class="hidden">경고 기준 설정</caption>
             <colgroup>
@@ -70,7 +68,6 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <!-- <tr th:if="${list.code} == 'NOTI'"> -->
                 <tr th:each="list : ${list.criteriaList}" th:if="${list.code} != 'ORDI'">
                     <td>
                         <span th:text="${list.name + ' 기준'}"></span>

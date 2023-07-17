@@ -4,35 +4,51 @@
       th:with="metaTitle='자료 수신 감시 설정'">
 
 	<th:block layout:fragment="content">
+        <script th:inline="javascript">
+            /* <![CDATA[ */
+                var mData = /*[[${list.receiveSettingList}]]*/
+                console.log(mData);
+            /* ]]> */
+        </script>
         <script type="text/javascript">
         $(function() {
-            $('.toggle.pmt').toggles();
-            $('.toggle.pmt').on('toggle', function (e, active) {
-                var targetId=e.target.id.replace("pmt","pmi");
-                if (active) {
-                    $("#"+targetId).val("1");
-                } else {
-                    $("#"+targetId).val("0");
+            $("#configSave").on("click", function(){
+                let list = new Array();
+                $("input[name=config]").each(function(idx, item){
+                    let jObj = new Object();
+                    let site = item.id.split("-")[0];
+                    let dataType = item.id.split("-")[1];
+
+                    mData.forEach(e => {
+                        // console.log(e);
+                        if(e.site == site && e.dataType == dataType){
+                            jObj.site=e.site;
+                            jObj.dataKind=e.dataKind;
+                            jObj.dataType=e.dataType;
+                            jObj.data_name=e.data_name;
+                            jObj.sms_send_activation=$(item).is(":checked") ? 1 : 0;
+                            jObj.status=e.status;
+                            list.push(jObj);
+                        }
+                    });
+                });
+
+                if(confirm("저장 하시겠습니까?")){
+                    let result = fnCall('post', '/manage/station_set_rc_modify', JSON.stringify(list));
+                    
+                    console.log("result :: "+ result.status);
+                    if(result.status == "success"){
+                        alert("저장되었습니다.");
+                        location.href="/manage/station_set_rc"; //다시 로딩
+                    } else {
+                        alert("저장에 실패하였습니다. \n" + result.data);
+                    }
                 }
-            });
-            $('.toggle.tz').toggles({
-                text: {
-                    on: 'UTC',
-                    off: 'KST'
-                }
-            });
-            $('.toggle.tz').on('toggle', function (e, active) {
-                var targetId=e.target.id.replace("tzt","tzi");
-                if (active) {
-                    $("#"+targetId).val("U");
-                } else {
-                    $("#"+targetId).val("K");
-                }
+                
             });
         });
         </script>
     
-        <!-- <form id="searchDate" modelattribute="receiveSettingForm" action="sms_set_rs_update.do" method="post" target="_self"> -->
         <input type="hidden" name="termStart" id="termStart">
         <input type="hidden" name="termClose" id="termClose">
         <table class="noticeTbl settingSeries">
@@ -42,15 +58,14 @@
                     관리 &gt; 자료 수신 감시 설정
                 </th>
                 <th class="right">
-                    <input type="submit" class="btn btn_grayline" value="설정저장">
+                    <input type="submit" id="configSave" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
         </table>
         
-        <!-- <table class="mainTbl settingSeries" summary=""> -->
         <table class="table subTbl table-hover" summary="">
-            <caption class="hidden">이벤트 문자 발송 설정</caption>
+            <caption class="hidden">자료 수신 감시 설정</caption>
             <colgroup>
                 <!-- <col style="width:50px" />
                 <col style="width:180px" />
@@ -89,9 +104,16 @@
                         <input type="hidden" th:name="${'receiveSettings['+rsListStat.index+'].data_name'}" th:value="${rsList.data_name }" />
                         <div th:text="${rsList.data_name}"></div>
                     </td>
-                    <td class="settingSeries">
-                        <div class="toggle toggle-light tz" th:id="${'tzt-'+rsListStat.index}" th:data-toggle-on="${rsList.time_zone == 'U' }"></div>
-                        <input type="hidden" th:name="${'receiveSettings['+rsListStat.index+'].time_zone'}" th:id="${'tzi-'+rsListStat.index }" th:value="${rsList.time_zone }" />
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-input-checked-content:'UTC'; --a8z-ts-input-unchecked-content: 'KST'; --a8z-ts-width: 60px;">
+                            <input type="checkbox" name="timeConfig" 
+                                th:id="${'time-'+rsListStat.index}"
+                                th:checked="${rsList.time_zone == 'U'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                     <td>
                         <input type="text" th:name="${'receiveSettings['+rsListStat.index+'].filename_pattern'}" class="namePattern" th:value="${rsList.filename_pattern }" />
@@ -102,9 +124,16 @@
                     <td>
                         <input type="text" th:name="${'receiveSettings['+rsListStat.index+'].delay_tolerance'}" class="rccset" th:value="${rsList.delay_tolerance }" />분
                     </td>
-                    <td class="settingSeries">
-                        <div class="toggle toggle-light pmt" th:id="${'pmt-'+rsListStat.index}" th:data-toggle-on="${rsList.permittedWatch }"></div>
-                        <input type="hidden" th:name="${'receiveSettings['+rsListStat.index+'].permittedWatch'}"th:id="${'pmi-'+rsListStat.index}" th:value="${rsList.permittedWatch}" />
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+                            <input type="checkbox" name="config" 
+                                th:id="${'pmt-'+rsListStat.index}"
+                                th:checked="${rsList.permittedWatch}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                 </tr>
             </tbody>

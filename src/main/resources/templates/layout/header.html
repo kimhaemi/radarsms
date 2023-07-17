@@ -88,24 +88,16 @@
                                 <ul th:if="${mList.id != 1000 && mList.id != 6000}"
                                     class="sub" style="display: none; height: 550px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
                                     <li th:if="${mList.id} != '5000'">대형</li>
-                                    <li th:if="${mList.id} != '5000'" th:each="sList : ${list.stationList}">
+                                    <li th:each="sList : ${list.stationList}" th:if="${sList.gubun == 1}">
                                         <a th:if="${mList.id} == '2000'" th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                         <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                         <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                     </li>
                                     <li th:if="${mList.id}!= '5000'">소형</li>
-                                    <li th:if="${mList.id} != '5000'">
-                                        <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형1'}" th:text="소형1"></a>
-                                        <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형2'}" th:text="소형2"></a>
-                                        <a th:if="${mList.id} == '2000'" th:href="${'/station/'+'소형3'}" th:text="소형3"></a>
-                                        
-                                        <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+'소형1'}" th:text="소형1"></a>
-                                        <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+'소형2'}" th:text="소형2"></a>
-                                        <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+'소형3'}" th:text="소형3"></a>
-
-                                        <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+'소형1'}" th:text="소형1"></a>
-                                        <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+'소형2'}" th:text="소형2"></a>
-                                        <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+'소형3'}" th:text="소형3"></a>
+                                    <li th:each="sList : ${list.stationList}" th:if="${sList.gubun == 2}">
+                                        <a th:if="${mList.id} == '2000'" th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
+                                        <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
+                                        <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                     </li>
     
                                     <li th:if="${mList.id == 5000 && subList.depth == 2}" th:each="subList : ${list.menuList}">

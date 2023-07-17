@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='지점별 운영상태 설정'">
 
 	<th:block layout:fragment="content">
+        <script th:inline="javascript">
+            /* <![CDATA[ */
+                var mData = /*[[${stationStatusList}]]*/
+                console.log(mData);
+            /* ]]> */
+        </script>
         <script type="text/javascript">
         
         $(function() {
-            $('.toggle').toggles({
-                text : {
-                    on : '정상운영',
-                    off : '유지보수'
-                }
-            });
-            $('.toggle').on('toggle', function (e, active) {
-                var targetId=e.target.id.replace("toggle","activation");
-                if (active) {
-                    $("#"+targetId).val("RUN");
-                } else {
-                    $("#"+targetId).val("MRO");
+            $("#configSave").on("click", function(){
+                let list = new Array();
+                $("input[name=config]").each(function(idx, item){
+                    console.log(item.id+"//"+$("#"+item.id).is(":checked"));
+                    let jObj = new Object();
+                    mData.forEach(e => {
+                        if(e.siteCd == item.id){
+                            jObj.siteCd=e.siteCd;
+                            jObj.siteName=e.siteName;
+                            jObj.siteStatus=$("#"+item.id).is(":checked") ? 'RUN' : 'MRO';
+                            list.push(jObj);
+                        }
+                    });
+                });
+
+                console.log(list);
+
+                if(confirm("저장 하시겠습니까?")){
+                    let result = fnCall('post', '/manage/station_status_modify', JSON.stringify(list));
+                    console.log("result :: "+ result.status);
+                    if(result.status == "success"){
+                        alert("저장되었습니다.");
+                        location.href="/manage/station_status"; //다시 로딩
+                    } else {
+                        alert("저장에 실패하였습니다. \n" + result.data);
+                    }
                 }
             });
         });
 
-        function fnSave(){
-            if(confirm("설정된 데이터를 저장하시겠습니까?")){
-                    const params = {
-                        siteCd: "",
-                        siteName: "",
-                        siteStatus: "",
-                    }
-                    console.log(params);
-                    const result = fnCall('post', '/manager/admin_user_'+mode, params);
-                    
-                    console.log("result :: "+ result);
-                }
-        }
         </script>
     
-        <form action="/manage/station_status_update" method="post" target="_self" id="searchDate">
         <table class="noticeTbl searchSeries">
             <thead>
             <tr>
@@ -46,13 +52,12 @@
                     관리 &gt; 지점별 운영상태 설정
                 </th>
                 <th class="right">
-                    <input type="submit" class="btn btn_grayline" value="설정저장">
+                    <input type="submit" id="configSave" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
         </table>
         
-        <!-- <table class="mainTbl searchSeries" summary=""> -->
         <table class="table subTbl table-hover" summary="">
             <caption class="hidden">지점별 운영상태 </caption>
             <colgroup>
@@ -65,26 +70,33 @@
                     <th>운영상태</th>
                 </tr>
             </thead>
-            <tbody class="table-group-divider">
-                <tr th:each="stationStatusList : ${list.stationStatusList}">
-                    <td th:text="${stationStatusList.siteName +'('+ stationStatusList.siteCd +')'}">
-                        <!-- 백령도 ( BRI ) -->
+            <tbody class="table-group-divider" th:each="stationStatusList : ${stationStatusList}" th:if="${stationStatusList.status == '1'}">
+                <tr class="subThead">
+                    <td colspan="2" th:if="${stationStatusList.gubun == '1' && stationStatusList.sortOrder == '1'}">
+                        대형 레이더
                     </td>
+                    <td colspan="2" th:if="${stationStatusList.gubun == '2' && stationStatusList.sortOrder == '20'}">
+                        소형 레이더
+                    </td>
+                    <td colspan="2" th:if="${stationStatusList.gubun == '3' && stationStatusList.sortOrder == '30'}">
+                        공항 레이더
+                    </td>
+                </tr>
+                <tr >
+                    <td><span th:text="${stationStatusList.siteName +'('+ stationStatusList.siteCd +')'}"></span><!-- 백령도 ( BRI ) --></td>
                     <td>
-                        <div class="toggle wide toggle-light" th:id="${'toggle_' + stationStatusList.siteCd}" data-toggle-on="1" style="height: 20px;">
-                            <div class="toggle-slide">
-                                <div class="toggle-inner" style="width: 380px; margin-left: 0px;">
-                                    <div class="toggle-on active" style="height: 20px; width: 190px; text-indent: -10px; line-height: 20px;">정상운영</div>
-                                    <div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div>
-                                    <div class="toggle-off" style="height: 20px; width: 190px; margin-left: -10px; text-indent: 10px; line-height: 20px;">유지보수</div>
-                                </div>
-                            </div>
-                        </div>
-                        <input type="hidden" th:name="${stationStatusList.siteCd}" th:id="${'activation_'+stationStatusList.siteCd}" th:value="${stationStatusList.siteStatus}">
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-input-checked-content:'정상운영'; --a8z-ts-input-unchecked-content: '유지보수'; --a8z-ts-width: 200px;">
+                            <input type="checkbox" name="config" 
+                                th:id="${stationStatusList.siteCd}"
+                                th:checked="${stationStatusList.siteStatus == 'RUN'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                 </tr>
             </tbody>
         </table>
-        </form>
     </th:block>
 </html>

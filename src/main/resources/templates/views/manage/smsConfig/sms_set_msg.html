@@ -1,30 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='문자 메시지 패턴'">
 
 	<th:block layout:fragment="content">
         <script th:inline="javascript">
             /* <![CDATA[ */
-                var mData = /*[[${list.smsSendPatternList}]]*/;
+                var mData = /*[[${smsSendPatternList}]]*/
                 console.log(mData);
             /* ]]> */
         </script>
         <script type="text/javascript">
             $(function() {
-                $('.toggle').toggles();
-                $('.toggle').on('toggle', function (e, active) {
-                    var targetId=e.target.id.replace("toggle","activation");
-                    if (active) {
-                        $("#"+targetId).val("1");
-                    } else {
-                        $("#"+targetId).val("0");
+                $("#configSave").on("click", function(){
+
+                    let list = new Array();
+                    
+                    list.push({ "code":"NOTI", "mode":"RUN", "activation":$("input[name='NOTI_RUN_activation']").is(":checked") ? 1 : 0, "pattern":$("#NOTI_RUN_pattern").val() });
+                    list.push({ "code":"NOTI", "mode":"MRO", "activation":$("input[name='NOTI_MRO_activation']").is(":checked") ? 1 : 0, "pattern":$("#NOTI_MRO_pattern").val() });
+
+                    list.push({ "code":"WARN", "mode":"RUN", "activation":$("input[name='WARN_RUN_activation']").is(":checked") ? 1 : 0, "pattern":$("#WARN_RUN_pattern").val() });
+                    list.push({ "code":"WARN", "mode":"MRO", "activation":$("input[name='WARN_MRO_activation']").is(":checked") ? 1 : 0, "pattern":$("#WARN_MRO_pattern").val() });
+                    
+                    list.push({ "code":"RETR", "mode":"RUN", "activation":$("input[name='RETR_RUN_activation']").is(":checked") ? 1 : 0, "pattern":$("#RETR_RUN_pattern").val() });
+                    list.push({ "code":"RETR", "mode":"MRO", "activation":$("input[name='RETR_MRO_activation']").is(":checked") ? 1 : 0, "pattern":$("#RETR_MRO_pattern").val() });
+
+                    list.push({ "code":"TOTA", "mode":"RUN", "activation":$("input[name='TOTA_RUN_activation']").is(":checked") ? 1 : 0, "pattern":$("#TOTA_RUN_pattern").val() });
+                    list.push({ "code":"TOTA", "mode":"MRO", "activation":$("input[name='TOTA_MRO_activation']").is(":checked") ? 1 : 0, "pattern":$("#TOTA_MRO_pattern").val() });
+
+                    list.push({ "code":"TORE", "mode":"RUN", "activation":$("input[name='TORE_RUN_activation']").is(":checked") ? 1 : 0, "pattern":$("#TORE_RUN_pattern").val() });
+                    list.push({ "code":"TORE", "mode":"MRO", "activation":$("input[name='TORE_MRO_activation']").is(":checked") ? 1 : 0, "pattern":$("#TORE_MRO_pattern").val() });
+
+                    console.log(list);
+
+                    if(confirm("저장 하시겠습니까?")){
+                        let result = fnCall('post', '/manage/sms_set_msg_modify', JSON.stringify(list));
+                        
+                        console.log("result :: "+ result.status);
+                        if(result.status == "success"){
+                            alert("저장되었습니다.");
+                            location.href="/manage/sms_set_msg"; //다시 로딩
+                        } else {
+                            alert("저장에 실패하였습니다. \n" + result.data);
+                        }
                     }
+                    
                 });
+
             });
         </script>
     
-        <!-- <form action="/manage/sms_set_msg_update" method="post" target="_self" id="searchDate"> -->
         <input type="hidden" name="termStart" id="termStart">
         <input type="hidden" name="termClose" id="termClose">
         <table class="noticeTbl searchSeries">
@@ -34,13 +59,12 @@
                     관리 &gt; 문자 메시지 패턴
                 </th>
                 <th class="right">
-                    <input type="submit" class="btn btn_grayline" value="설정저장">
+                    <input type="submit" id="configSave" class="btn btn_grayline" value="설정저장">
                 </th>
             </tr>
             </thead>
         </table>
         
-        <!-- <table class="mainTbl searchSeries" summary=""> -->
         <table class="table subTbl table-hover" summary="">
             <caption class="hidden">문자 전송 메시지 패턴</caption>
             <colgroup>
@@ -57,112 +81,177 @@
                     <th>유지보수 상태</th>
                 </tr>
             </thead>
-            <tbody class="table-group-divider">
+            <tbody class="table-group-divider" >
                 <tr>
-                    <td rowspan="2" th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'NOTI' && patternList.mode == 'RUN'}">
-                        주의
+                    <td rowspan="2">주의</td>
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="NOTI_RUN_activation" 
+                                id="NOTI_RUN_activation" 
+                                th:checked="${smsSendPatternList.NOTI_RUN_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
-                    <td th:each="patternList: ${list.smsSendPatternList}" th:if="${patternList.code == 'NOTI' && patternList.mode == 'RUN'}">
-                        <div class="toggle toggle-light" id="toggle_NOTI_RUN" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="NOTI_RUN_activation" id="activation_NOTI_RUN" th:value="${patternList.activation}" />
-                    </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'NOTI' && patternList.mode == 'MRO'}">
-                        <div class="toggle toggle-light" id="toggle_NOTI_MRO" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="NOTI_MRO_activation" id="activation_NOTI_MRO" th:value="${patternList.activation}" />
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="NOTI_MRO_activation" 
+                                id="NOTI_MRO_activation" 
+                                th:checked="${smsSendPatternList.NOTI_MRO_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                 </tr>
                 <tr>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'NOTI' && patternList.mode == 'RUN'}">
-                        <textarea name="NOTI_RUN" id="NOTI_RUN" class="msgPtn" th:text="${patternList.pattern }"></textarea>
+                    <td>
+                        <textarea name="NOTI_RUN_pattern" id="NOTI_RUN_pattern" class="msgPtn" th:text="${smsSendPatternList.NOTI_RUN_pattern}"></textarea>
                     </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'NOTI' && patternList.mode == 'MRO'}">
-                        <textarea name="NOTI_MRO" id="NOTI_MRO" class="msgPtn" th:text="${patternList.pattern }"></textarea>
+                    <td>
+                        <textarea name="NOTI_MRO_pattern" id="NOTI_MRO_pattern" class="msgPtn" th:text="${smsSendPatternList.NOTI_MRO_pattern}"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td rowspan="2">경고</td>
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="WARN_RUN_activation" 
+                                id="WARN_RUN_activation" 
+                                th:checked="${smsSendPatternList.WARN_RUN_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="WARN_MRO_activation" 
+                                id="WARN_MRO_activation" 
+                                th:checked="${smsSendPatternList.WARN_MRO_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                 </tr>
                 <tr>
-                    <td rowspan="2" th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'WARN' && patternList.mode == 'RUN'}">
-                        경고
+                    <td>
+                        <textarea name="WARN_RUN_pattern" id="WARN_RUN_pattern" class="msgPtn" th:text="${smsSendPatternList.WARN_RUN_pattern}"></textarea>
                     </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'WARN' && patternList.mode == 'RUN'}">
-                        <div class="toggle toggle-light" id="toggle_WARN_RUN" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="WARN_RUN_activation" id="activation_WARN_RUN" th:value="${patternList.activation}" />
+                    <td>
+                        <textarea name="WARN_MRO_pattern" id="WARN_MRO_pattern" class="msgPtn" th:text="${smsSendPatternList.WARN_MRO_pattern}"></textarea>
                     </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'WARN' && patternList.mode == 'MRO'}">
-                        <div class="toggle toggle-light" id="toggle_WARN_MRO" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="WARN_MRO_activation" id="activation_WARN_MRO" value="${patternList.activation}" />
+                </tr>
+
+                <tr>
+                    <td rowspan="2">복구</td>
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="RETR_RUN_activation" 
+                                id="RETR_RUN_activation" 
+                                th:checked="${smsSendPatternList.RETR_RUN_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="RETR_MRO_activation" 
+                                id="RETR_MRO_activation" 
+                                th:checked="${smsSendPatternList.RETR_MRO_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                 </tr>
                 <tr>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'WARN' && patternList.mode == 'RUN'}">
-                        <textarea name="WARN_RUN" id="WARN_RUN" class="msgPtn" th:text="${patternList.pattern }"></textarea>
+                    <td>
+                        <textarea name="RETR_RUN_pattern" id="RETR_RUN_pattern" class="msgPtn" th:text="${smsSendPatternList.RETR_RUN_pattern}"></textarea>
                     </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'WARN' && patternList.mode == 'MRO'}">
-                        <textarea name="WARN_MRO" id="WARN_MRO" class="msgPtn" th:text="${patternList.pattern }"></textarea>
+                    <td>
+                        <textarea name="RETR_MRO_pattern" id="RETR_MRO_pattern" class="msgPtn" th:text="${smsSendPatternList.RETR_MRO_pattern}"></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td rowspan="2">네트워크 장애</td>
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="TOTA_RUN_activation" 
+                                id="TOTA_RUN_activation" 
+                                th:checked="${smsSendPatternList.TOTA_RUN_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="TOTA_MRO_activation" 
+                                id="TOTA_MRO_activation" 
+                                th:checked="${smsSendPatternList.TOTA_MRO_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                 </tr>
                 <tr>
-                    <td rowspan="2" th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'RETR' && patternList.mode == 'RUN'}">
-                        복구
+                    <td>
+                        <textarea name="TOTA_RUN_pattern" id="TOTA_RUN_pattern" class="msgPtn" th:text="${smsSendPatternList.TOTA_RUN_pattern}"></textarea>
                     </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'RETR' && patternList.mode == 'RUN'}">
-                        <div class="toggle toggle-light" id="toggle_RETR_RUN" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="RETR_RUN_activation" id="activation_RETR_RUN" th:value="${patternList.activation}" />
+                    <td>
+                        <textarea name="TOTA_MRO_pattern" id="TOTA_MRO_pattern" class="msgPtn" th:text="${smsSendPatternList.TOTA_MRO_pattern}"></textarea>
                     </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'RETR' && patternList.mode == 'MRO'}">
-                        <div class="toggle toggle-light" id="toggle_RETR_MRO" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="RETR_MRO_activation" id="activation_RETR_MRO" th:value="${patternList.activation}" />
+                </tr>
+
+                <tr>
+                    <td rowspan="2">네트워크 복구</td>
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="TORE_RUN_activation" 
+                                id="TORE_RUN_activation" 
+                                th:checked="${smsSendPatternList.TORE_RUN_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
+                    </td>
+                    <td>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 100px;">
+                            <input type="checkbox" name="TORE_MRO_activation" 
+                                id="TORE_MRO_activation" 
+                                th:checked="${smsSendPatternList.TORE_MRO_activation == '1'}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                 </tr>
                 <tr>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'RETR' && patternList.mode == 'RUN'}">
-                        <textarea name="RETR_RUN" id="RETR_RUN" class="msgPtn" th:text="${patternList.pattern }"></textarea>
+                    <td>
+                        <textarea name="TORE_RUN_pattern" id="TORE_RUN_pattern" class="msgPtn" th:text="${smsSendPatternList.TORE_RUN_pattern}"></textarea>
                     </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'RETR' && patternList.mode == 'MRO'}">
-                        <textarea name="RETR_MRO" id="RETR_MRO" class="msgPtn" th:text="${patternList.pattern }"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td rowspan="2" th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TOTA' && patternList.mode == 'RUN'}">
-                        네트워크 장애
-                    </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TOTA' && patternList.mode == 'RUN'}">
-                        <div class="toggle toggle-light" id="toggle_TOTA_RUN" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="TOTA_RUN_activation" id="activation_TOTA_RUN" th:value="${patternList.activation}" />
-                    </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TOTA' && patternList.mode == 'MRO'}">
-                        <div class="toggle toggle-light" id="toggle_TOTA_MRO" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="TOTA_MRO_activation" id="activation_TOTA_MRO" th:value="${patternList.activation}" />
+                    <td>
+                        <textarea name="TORE_MRO_pattern" id="TORE_MRO_pattern" class="msgPtn" th:text="${smsSendPatternList.TORE_MRO_pattern}"></textarea>
                     </td>
                 </tr>
-                <tr>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TOTA' && patternList.mode == 'RUN'}">
-                        <textarea name="TOTA_RUN" id="TOTA_RUN" class="msgPtn" th:text="${patternList.pattern }"></textarea>
-                    </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TOTA' && patternList.mode == 'MRO'}">
-                        <textarea name="TOTA_MRO" id="TOTA_MRO" class="msgPtn" th:text="${patternList.pattern }"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td rowspan="2" th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TORE' && patternList.mode == 'RUN'}">
-                        네트워크 복구
-                    </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TOTA' && patternList.mode == 'RUN'}">
-                        <div class="toggle toggle-light" id="toggle_TORE_RUN" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="TORE_RUN_activation" id="activation_TORE_RUN" th:value="${patternList.activation}" />
-                    </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TOTA' && patternList.mode == 'MRO'}">
-                        <div class="toggle toggle-light" id="toggle_TORE_MRO" th:data-toggle-on="${patternList.activation }"></div>
-                        <input type="hidden" name="TORE_MRO_activation" id="activation_TORE_MRO" th:value="${patternList.activation}" />
-                    </td>
-                </tr>
-                <tr>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TORE' && patternList.mode == 'RUN'}">
-                        <textarea name="TORE_RUN" id="TORE_RUN" class="msgPtn" th:text="${patternList.pattern }"></textarea>
-                    </td>
-                    <td th:each="patternList : ${list.smsSendPatternList}" th:if="${patternList.code == 'TORE' && patternList.mode == 'MRO'}">
-                        <textarea name="TORE_MRO" id="TORE_MRO" class="msgPtn" th:text="${patternList.pattern }"></textarea>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
     </th:block>

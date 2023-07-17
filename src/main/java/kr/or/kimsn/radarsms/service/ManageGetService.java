@@ -1,7 +1,9 @@
 package kr.or.kimsn.radarsms.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
@@ -52,7 +54,7 @@ public class ManageGetService {
      * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
      */
     public List<StationStatusDto> getStationStatusList() {
-        return stationStatusRepository.findAll();
+        return stationStatusRepository.findByOrderBySortOrder();
     }
 
     // 지점/자료별 문자 발송 설정 조회(자료 수신 상태)
@@ -74,8 +76,18 @@ public class ManageGetService {
     }
 
     // 문자 메시지 패턴
-    public List<SmsSendPatternDto> getSmsSendPatternList() {
-        return smsSendPatternRepository.findByOrderByCodeAscModeDesc();
+    public Map<String, String> getSmsSendPatternList() {
+        Map<String, String> map = new HashMap<String, String>();
+
+        List<SmsSendPatternDto> list = smsSendPatternRepository.findByOrderByCodeAscModeDesc();
+
+        for (SmsSendPatternDto vo : list) {
+          String key = String.valueOf(vo.getCode()) + "_" + vo.getMode();
+          map.put(String.valueOf(key) + "_activation", vo.getActivation());
+          map.put(String.valueOf(key) + "_pattern", vo.getPattern());
+        }
+        return map;
+        // return smsSendPatternRepository.findByOrderByCodeAscModeDesc();
     }
 
     // 그룹관리 > 그룹 감시 자료 설정

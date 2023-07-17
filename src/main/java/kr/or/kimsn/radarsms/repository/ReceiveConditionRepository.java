@@ -28,6 +28,7 @@ public interface ReceiveConditionRepository extends JpaRepository<ReceiveConditi
     )
     @Transactional
     @Modifying
+    // 지점/자료별 문자 발송 설정 일괄 수정
     Integer receiveConditionModify(
         @Param("sms_send_activation") int sms_send_activation,
         @Param("data_kind") String data_kind,

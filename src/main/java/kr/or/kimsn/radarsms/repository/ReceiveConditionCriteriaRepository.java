@@ -20,6 +20,7 @@ public interface ReceiveConditionCriteriaRepository extends JpaRepository<Receiv
     )
     @Transactional
     @Modifying
+    // 경고 기준 설정 일괄 수정
     Integer receiveConditionCriteriaModify(
         @Param("criterion") String criterion,
         @Param("code") String code
