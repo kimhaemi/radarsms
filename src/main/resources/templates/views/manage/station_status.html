@@ -16,13 +16,12 @@
             $("#configSave").on("click", function(){
                 let list = new Array();
                 $("input[name=config]").each(function(idx, item){
-                    console.log(item.id+"//"+$("#"+item.id).is(":checked"));
                     let jObj = new Object();
                     mData.forEach(e => {
                         if(e.siteCd == item.id){
                             jObj.siteCd=e.siteCd;
                             jObj.siteName=e.siteName;
-                            jObj.siteStatus=$("#"+item.id).is(":checked") ? 'RUN' : 'MRO';
+                            jObj.siteStatus=$(item).is(":checked") ? 'RUN' : 'MRO';
                             list.push(jObj);
                         }
                     });
@@ -30,7 +29,7 @@
 
                 console.log(list);
 
-                if(confirm("저장 하시겠습니까?")){
+                if(confirm("저장 하겠습니까?")){
                     let result = fnCall('post', '/manage/station_status_modify', JSON.stringify(list));
                     console.log("result :: "+ result.status);
                     if(result.status == "success"){

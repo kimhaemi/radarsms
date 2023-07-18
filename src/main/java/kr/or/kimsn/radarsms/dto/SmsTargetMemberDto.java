@@ -24,6 +24,6 @@ public class SmsTargetMemberDto {
     private String department;
     private String position;
     private String phone_num;
-    private String activation;
+    private Integer activation;
 
 }

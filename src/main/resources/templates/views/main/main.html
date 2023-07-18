@@ -6,7 +6,7 @@
 	<th:block layout:fragment="content">
 		<script th:inline="javascript">
 			/* <![CDATA[ */
-			var site = /*[[${list.stationList}]]*/;
+			var site = /*[[${list.stationList}]]*/
                 console.log(site);
             /* ]]> */
 		</script>
@@ -23,16 +23,7 @@
 			  },30000);
 			  alertToggle=$('.toggle').data('toggles');
 			});
-			$(function(){
-			  $('.toggle').toggles();
-			  $('.toggle').on('toggle', function (e, active) {
-				if (active) {
-				  $("#alert_activity").val("1");
-				} else {
-				  $("#alert_activity").val("0");
-				}
-			  });
-			});
+			
 		  </script>
 
 		<table class="noticeTbl mainSeries">
@@ -49,7 +40,7 @@
 					</th>
 					<th class="left">알람설정:</th>
 					<th class="center toggle-light">
-						<div class="toggle" id="s" data-toggle-on="1" style="height: 20px;">
+						<!-- <div class="toggle" id="s" data-toggle-on="1" style="height: 20px;">
 							<div class="toggle-slide">
 								<div class="toggle-inner" style="width: 180px; margin-left: 0px;">
 									<div class="toggle-on active" style="height: 20px; width: 90px; text-indent: -10px; line-height: 20px;">&nbsp;<i class="fa fa-bell"> ON</i></div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 90px; margin-left: -10px; text-indent: 10px; line-height: 20px;">
@@ -57,7 +48,15 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
+						<label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+                            <input type="checkbox" th:name="notiConfig" 
+                                
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
 						<input type="hidden" name="alert_activity" id="alert_activity" value="1">
 						<input type="hidden" name="alert_lasttime" id="alert_lasttime" value="">
 						<input type="hidden" name="alert_checksite" id="alert_checksite" value="ALL">

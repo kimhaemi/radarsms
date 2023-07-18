@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
-import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
 import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
@@ -28,7 +27,7 @@ public class ManageController {
 
     // 지점/자료별 문자 발송 설정
     @GetMapping("/manage/station_set_rc")
-    public String sms_set_rc(ModelMap model) {
+    public String smsSetRc(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -52,7 +51,7 @@ public class ManageController {
 
     // 경고 기준 설정
     @GetMapping("/manage/station_set_rcc")
-    public String sms_set_rcc(ModelMap model) {
+    public String smsSetRcc(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -75,7 +74,7 @@ public class ManageController {
 
     // 자료 수신 감시 설정
     @GetMapping("/manage/station_set_rs")
-    public String sms_set_rs(ModelMap model) {
+    public String smsSetRs(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -97,7 +96,7 @@ public class ManageController {
 
     // 문자 메시지 패턴
     @GetMapping("/manage/sms_set_msg")
-    public String sms_set_msg(ModelMap model) {
+    public String smsSetMsg(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -120,7 +119,7 @@ public class ManageController {
 
     // 지점별 운영상태 설정
     @GetMapping("/manage/station_status")
-    public String station_status(ModelMap model) {
+    public String stationStatus(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();

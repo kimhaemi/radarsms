@@ -30,7 +30,7 @@ public interface SmsSendPatternRepository extends JpaRepository<SmsSendPatternDt
     @Transactional
     @Modifying
     // 문자 메시지 패턴 일괄 수정
-    Integer smsSetMsgModify(
+    Integer setSmsSetMsgModify(
         @Param("pattern") String pattern,
         @Param("activation") String activation,
         @Param("code") String code,

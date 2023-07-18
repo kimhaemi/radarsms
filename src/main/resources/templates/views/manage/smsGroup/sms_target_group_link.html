@@ -1,42 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='그룹 감시 자료 설정'">
 
 	<th:block layout:fragment="content">
         <script th:inline="javascript">
             /* <![CDATA[ */
-                var group = /*[[${list.groupName}]]*/;
+                var group = /*[[${smsTargetGroup}]]*/
                 console.log(group);
-                var links = /*[[${list.links}]]*/;
+                var links = /*[[${links}]]*/
                 console.log(links);
-                var notlinks = /*[[${list.notlinks}]]*/;
+                var notlinks = /*[[${notlinks}]]*/
                 console.log(notlinks);
             /* ]]> */
         </script>
         <script type="text/javascript">
         $(function() {
-            $('.toggle').toggles();
-            $('.toggle').on('toggle', function (e, active) {
-                var targetId=e.target.id.replace("toggle","id");
-                if (active) {
-                    $("#"+targetId).val("1");
-                } else {
-                    $("#"+targetId).val("0");
-                }
-            });
-            $('a.btn').button();
             $('input.back').click(function(e){
                 window.location.href = "/manage/sms_target_group";
             });
         });
+
+        //연결 해제
+        function fnUnLink(link){
+            //if(confirm("연결을 해제하겠습니까?")){
+                let result = fnCall('post', '/manage/sms_target_group_unlink', JSON.stringify(link));
+                if(result.status == "success"){
+                    alert("연결 해제되었습니다.");
+                    location.href="/manage/sms_target_group_link?gid="+group.id;
+                } else {
+                    alert("연결 해제에 실패했습니다.\n" + result.data);
+                }
+                console.log("result :: "+ result);
+            //}
+        }
+
+        //연결 추가
+        function fnLink(unlink){
+            unlink.group_id = group.id;
+            console.log(unlink);
+            // if(confirm("추가 하겠습니까?")){
+                let result = fnCall('post', '/manage/sms_target_group_addlink', JSON.stringify(unlink));
+                if(result.status == "success"){
+                    alert("추가 되었습니다.");
+                    location.href="/manage/sms_target_group_link?gid="+group.id;
+                } else {
+                    alert("연결 추가에 실패했습니다.\n" + result.data);
+                }
+                console.log("result :: "+ result);
+            // }
+        }
         </script>
 
         <table class="noticeTbl searchSeries" >
             <thead>
             <tr>
                 <th class="left">
-                    관리 > 그룹 관리 > [ <span th:text="${list.groupName}"></span> ] 그룹 감시 자료 설정
+                    관리 > 그룹 관리 > [ <span th:text="${smsTargetGroup.name}"></span> ] 그룹 감시 자료 설정
                 </th>
                 <th class="right">
                     <input type="button" class="btn btn_grayline back" value="그룹관리로 돌아가기"/>
@@ -58,7 +78,7 @@
             <thead class="subThead">
                 <tr>
                     <th colspan="5">
-                        <span th:text="${list.groupName}"></span> 그룹에게 문자가 통보되는 지점별 데이터 목록
+                        <span th:text="${smsTargetGroup.name}"></span> 그룹에게 문자가 통보되는 지점별 데이터 목록
                     </th>
                 </tr>
                 <tr>
@@ -69,7 +89,7 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="link : ${list.links}">
+                <tr th:each="link : ${links}">
                     <td th:switch="${link.data_kind}">
                         <span th:case="RDR">레이더</span>
                         <span th:case="all">네트워크</span>
@@ -86,13 +106,12 @@
                         <spen th:text="${link.data_name}"></spen>
                     </td>
                     <td>
-                        <a class="btn" th:href="@{/manage/sms_target_group_unlink?id=${list.groupId}&k=${link.data_kind}&t=${link.data_type}&s=${link.site}}">연결 삭제</a>
+                        <input type="submit" id="bthUnLink" class="btn btn_grayline" value="연결 해제" th:onclick="fnUnLink([[${link}]])"/>
                     </td>
                 </tr>
             </tbody>
         </table>
         
-        <!-- <table class="mainTbl searchSeries" summary=""> -->
         <table class="table subTbl table-hover" summary="">
             <caption class="hidden">그룹 관리</caption>
             <colgroup>
@@ -105,7 +124,7 @@
             <thead class="subThead">
                 <tr>
                     <th colspan="5">
-                        <spen th:text="${list.groupName}"></spen> 그룹에게 문자가 통보되도록 추가할 수 있는 지점별 데이터 목록
+                        <spen th:text="${smsTargetGroup.name}"></spen> 그룹에게 문자가 통보되도록 추가할 수 있는 지점별 데이터 목록
                     </th>
                 </tr>
                 <tr>
@@ -116,7 +135,7 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="notLink : ${list.notlinks}">
+                <tr th:each="notLink : ${notlinks}">
                     <td th:switch="${notLink.data_kind}">
                         <span th:case="RDR">레이더</span>
                         <span th:case="all">네트워크</span>
@@ -133,7 +152,7 @@
                         <spen th:text="${notLink.data_name}"></spen>
                     </td>
                     <td>
-                        <a class="btn" href="sms_target_group_mklink.do?id=${list.groupId }&k=${notLink.data_kind}&t=${notLink.data_type}&s=${notLink.site}">연결 추가</a>
+                        <input type="submit" id="bthLink" class="btn btn_grayline" value="연결 추가" th:onclick="fnLink([[${notLink}]])"/>
                     </td>
                 </tr>
             </tbody>

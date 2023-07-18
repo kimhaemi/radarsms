@@ -103,8 +103,8 @@ public class SmsController {
         map.put("stationList", stationList);
 
         List<SmsSendOnOffDto> smsSendOnOffData = smsService.getSmsSendOnOffData();
-        System.out.println("smsSendOnOffData : " + smsSendOnOffData);
-        map.put("onOffData", smsSendOnOffData);
+        // System.out.println("smsSendOnOffData : " + smsSendOnOffData);
+        model.addAttribute("onOffData", smsSendOnOffData);
         
         model.addAttribute("list", map);
         return "views/manage/sms/sms_send_onoff";

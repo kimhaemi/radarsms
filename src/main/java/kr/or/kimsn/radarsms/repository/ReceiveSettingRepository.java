@@ -28,13 +28,13 @@ public interface ReceiveSettingRepository extends JpaRepository<ReceiveSettingDt
 		"  delay_tolerance  = :delay_tolerance, \n"+
 		"  permitted_watch  = :permitted_watch \n"+
 	    "where 1=1 \n"+
-		"  and data_kind = :data_kind: \n"+
-		"  and data_type = :data_type: \n"
+		"  and data_kind = :data_kind \n"+
+		"  and data_type = :data_type \n"
     )
     @Transactional
     @Modifying
     //자료 수신 감시 설정 일괄 수정
-    Integer receiveSettingModify(
+    Integer setReceiveSettingModify(
         @Param("time_zone") String time_zone,
         @Param("filename_pattern") String filename_pattern,
         @Param("filename_regex") String filename_regex,

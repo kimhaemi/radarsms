@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.ReceiveDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
-import kr.or.kimsn.radarsms.dto.SmsTargetGroupLinkDto;
+import kr.or.kimsn.radarsms.dto.SmsTargetGroupLinkListDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
@@ -31,7 +31,7 @@ public class SmsGroupController {
 
     // 문자 수신 그룹 관리
     @GetMapping("/manage/sms_target_group")
-    public String sms_target_group(ModelMap model) {
+    public String smsTargetGroup(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -44,15 +44,15 @@ public class SmsGroupController {
         map.put("stationList", stationList);
 
         List<SmsTargetGroupDto> smsTargetGroupList = manageGetService.getSmsTargetGroupList();
-        map.put("smsTargetGroupList", smsTargetGroupList);
+        model.addAttribute("smsTargetGroupList", smsTargetGroupList);
 
         model.addAttribute("list", map);
         return "views/manage/smsGroup/sms_target_group";
     }
 
-    // 문자 수신 그룹 관리 > [ ADMIN ] 그룹 멤버 관리
+    // 문자 수신 그룹 관리 > [ *** ] 그룹 멤버 관리
     @GetMapping("/manage/sms_target_group_member")
-    public String sms_target_group_member(ModelMap model, Long id) {
+    public String smsTargetGroupMember(ModelMap model, Long gid) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -64,31 +64,19 @@ public class SmsGroupController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        if( id != null ){
+        if( gid != null ){
             //수신 그룹
-            SmsTargetGroupDto group = manageGetService.getSmsTargetGroupId(id);
-            map.put("group", group);
-            map.put("groupId", group.getId());
-            map.put("groupName", group.getName());
+            SmsTargetGroupDto group = manageGetService.getSmsTargetGroupId(gid);
+            model.addAttribute("group", group);
 
             //그룹에 속한 사용자
-            List<SmsTargetGroupMemberDto> links = manageGetService.getSmsTargetGroupsMemberId(id);
-            map.put("links", links);
+            List<SmsTargetGroupMemberDto> links = manageGetService.getSmsTargetGroupsMemberId(gid);
+            model.addAttribute("links", links);
 
             //그룹에 속하지 않은 멤버
-            List<SmsTargetGroupMemberDto> notlinks = manageGetService.getSmsTargetGroupsMemberIdNot(links);
-            map.put("notlinks", notlinks);
-            System.out.println("notlinks ::: " + notlinks);
-
-            //그룹에 속한 사용자
-            // List<> links = manageService.getSmsTargetGroupsMember(id);
-            // map.put("links", links);
-            
-
-//             List<SmsTargetMemberVO> links = this.manageService.getSmsTargetGroupsMember(groupid);
-// /* 214 */       model.addAttribute("links", links);
-// /*     */       
-// /* 216 */       model.addAttribute("notlinks", this.manageService.getSmsTargetGroupsNotMembers(links));
+            List<SmsTargetMemberDto> notlinks = manageGetService.getSmsTargetGroupsMemberIdNot(gid);
+            model.addAttribute("notlinks", notlinks);
+            // System.out.println("notlinks ::: " + notlinks);
 
             model.addAttribute("list", map);
             return "views/manage/smsGroup/sms_target_group_member";
@@ -99,9 +87,9 @@ public class SmsGroupController {
         
     }
 
-    // 그룹 관리 > [ [1그룹] 관악 백령 광덕 면봉 ] 그룹 감시 자료 설정
+    // 그룹 관리 > [ *** ] 그룹 감시 자료 설정
     @GetMapping("/manage/sms_target_group_link")
-    public String sms_target_group_link(ModelMap model, Long id) {
+    public String smsTargetGroupLink(ModelMap model, Long gid) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -113,26 +101,22 @@ public class SmsGroupController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        SmsTargetGroupDto smsTargetGroupId = manageGetService.getSmsTargetGroupId(id);
-        map.put("smsTargetGroupId", smsTargetGroupId);
-        //그룹명
-        map.put("groupName", smsTargetGroupId.getName());
-        map.put("groupId", smsTargetGroupId.getId());
-
-        List<SmsTargetGroupLinkDto> links = manageGetService.getTableJoinAll(id);
-        map.put("links", links);
+        SmsTargetGroupDto smsTargetGroup = manageGetService.getSmsTargetGroupId(gid);
+        model.addAttribute("smsTargetGroup", smsTargetGroup);
+        
+        List<SmsTargetGroupLinkListDto> links = manageGetService.getTableJoinAll(gid);
+        model.addAttribute("links", links);
         // System.out.println("links ::: " + links);
         List<ReceiveDto> notlinks = manageGetService.getSmsTargetGroupNotLink(links);
-        map.put("notlinks", notlinks);
-        System.out.println("notlinks ::: " + notlinks);
-
+        model.addAttribute("notlinks", notlinks);
+        
         model.addAttribute("list", map);
         return "views/manage/smsGroup/sms_target_group_link";
     }
 
     // 문자 수신자 관리
     @GetMapping("/manage/sms_target_member")
-    public String sms_target_member(ModelMap model) {
+    public String smsTargetMember(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -145,7 +129,7 @@ public class SmsGroupController {
         map.put("stationList", stationList);
 
         List<SmsTargetMemberDto> targetmembers = manageGetService.getSmsTargetMemberList();
-        map.put("targetmembers", targetmembers);
+        model.addAttribute("targetmembers", targetmembers);
 
         model.addAttribute("list", map);
         return "views/manage/smsGroup/sms_target_member";
@@ -153,7 +137,7 @@ public class SmsGroupController {
 
     // 상시 문자 수신 그룹 관리
     @GetMapping("/manage/sms_target_monitorgroup")
-    public String sms_target_monitorgroup(ModelMap model) {
+    public String smsTargetMonitorgroup(ModelMap model) {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -167,6 +151,15 @@ public class SmsGroupController {
         map.put("stationList", stationList);
 
         model.addAttribute("list", map);
+
+        //그룹에 속한 사용자
+        List<SmsTargetGroupMemberDto> links = manageGetService.getSmsTargetGroupsMemberId(1L);
+        model.addAttribute("links", links);
+
+        //그룹에 속하지 않은 멤버
+        List<SmsTargetMemberDto> notlinks = manageGetService.getSmsTargetGroupsMemberIdNot(1L);
+        model.addAttribute("notlinks", notlinks);
+
         return "views/manage/smsGroup/sms_target_monitorgroup";
     }
 }

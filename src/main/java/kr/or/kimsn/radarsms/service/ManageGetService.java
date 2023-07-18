@@ -14,7 +14,7 @@ import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
 import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupDto;
-import kr.or.kimsn.radarsms.dto.SmsTargetGroupLinkDto;
+import kr.or.kimsn.radarsms.dto.SmsTargetGroupLinkListDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
@@ -23,7 +23,7 @@ import kr.or.kimsn.radarsms.repository.ReceiveRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveSettingRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendPatternRepository;
 import kr.or.kimsn.radarsms.repository.SmsSetRcRepository;
-import kr.or.kimsn.radarsms.repository.SmsTargetGroupLinkRepository;
+import kr.or.kimsn.radarsms.repository.SmsTargetGroupLinkListRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetGroupMemberRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetGroupRepository;
 import kr.or.kimsn.radarsms.repository.SmsTargetMemberRepository;
@@ -45,7 +45,7 @@ public class ManageGetService {
 
     private final SmsSetRcRepository smsSetRcRepository;
     private final SmsTargetMemberRepository smsTargetMemberRepository;
-    private final SmsTargetGroupLinkRepository smsTargetGroupLinkRepository;
+    private final SmsTargetGroupLinkListRepository smsTargetGroupLinkListRepository;
 
     private final ReceiveRepository receiveRepository;
     
@@ -91,16 +91,16 @@ public class ManageGetService {
     }
 
     // 그룹관리 > 그룹 감시 자료 설정
-    public List<SmsTargetGroupLinkDto> getTableJoinAll(Long id) {
-        return smsTargetGroupLinkRepository.getTableJoinAll(id);
+    public List<SmsTargetGroupLinkListDto> getTableJoinAll(Long id) {
+        return smsTargetGroupLinkListRepository.getTableJoinAll(id);
     }
 
     // 그룹관리 > 그룹 감시 자료 설정 되지 않음
-    public List<ReceiveDto> getSmsTargetGroupNotLink(List<SmsTargetGroupLinkDto> links) {
+    public List<ReceiveDto> getSmsTargetGroupNotLink(List<SmsTargetGroupLinkListDto> links) {
         List<ReceiveDto> rclist = receiveRepository.getReceiveTableJoin();
         List<ReceiveDto> rmlist = new ArrayList<ReceiveDto>();
 
-        for (SmsTargetGroupLinkDto link : links) {
+        for (SmsTargetGroupLinkListDto link : links) {
             for (ReceiveDto rc : rclist) {
                 if (link.getData_kind().equals(rc.getData_kind()) && link.getSite().equals(rc.getSite()) &&
                         link.getData_type().equals(rc.getData_type())) {
@@ -123,9 +123,9 @@ public class ManageGetService {
         return smsTargetGroupRepository.findAll();
     }
 
-    // 문자 수신 그룹 > [ admin ] 그룹 관리
-    public SmsTargetGroupDto getSmsTargetGroupId(Long id) {
-        return smsTargetGroupRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Member Not Found"));
+    // 문자 수신 그룹 > [ *** ] 그룹 관리
+    public SmsTargetGroupDto getSmsTargetGroupId(Long gid) {
+        return smsTargetGroupRepository.findById(gid).orElseThrow(() -> new NoSuchElementException("Member Not Found"));
     }
 
     // 문자 수신 그룹 멤버
@@ -133,29 +133,14 @@ public class ManageGetService {
         return smsTargetGroupMemberRepository.getSmsTargetGroupMemberList();
     }
 
-    // 문자 수신 그룹 멤버 ([ admin ] 그룹에 속한 사용자)
-    public List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberId(Long id) {
-        return smsTargetGroupMemberRepository.getSmsTargetGroupsMemberId(id);
+    // 문자 수신 그룹 멤버 ([ *** ] 그룹에 속한 사용자)
+    public List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberId(Long gid) {
+        return smsTargetGroupMemberRepository.getSmsTargetGroupsMemberId(gid);
     }
 
-    // 문자 수신 그룹 멤버 ([ admin ] 그룹에 속하지 않은 사용자)
-    public List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberIdNot(List<SmsTargetGroupMemberDto> links) {
-        List<SmsTargetGroupMemberDto> mlist = smsTargetGroupMemberRepository.getSmsTargetGroupMemberList();
-        List<SmsTargetGroupMemberDto> rmlist = new ArrayList<SmsTargetGroupMemberDto>();
-        for (SmsTargetGroupMemberDto link : links) {
-            for (SmsTargetGroupMemberDto m : mlist) {
-                if (link.getMid() == m.getMid()) {
-                    rmlist.add(m);
-                    break;
-                }
-            }
-        }
-        if (rmlist.size() > 0) {
-            for (SmsTargetGroupMemberDto rm : rmlist) {
-                mlist.remove(rm);
-            }
-        }
-        return mlist;
+    // 문자 수신 그룹 멤버 ([ *** ] 그룹에 속하지 않은 사용자)
+    public List<SmsTargetMemberDto> getSmsTargetGroupsMemberIdNot(Long gid) {
+        return smsTargetMemberRepository.getSmsTargetGroupsMemberIdNot(gid);
     }
 
     // 문자 수신자 관리

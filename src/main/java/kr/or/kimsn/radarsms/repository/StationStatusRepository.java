@@ -26,7 +26,7 @@ public interface StationStatusRepository extends JpaRepository<StationStatusDto,
     @Transactional
     @Modifying
     // 지점별 운영상태 설정 일괄 수정
-    Integer stationStatusModify(
+    Integer setStationStatusModify(
         @Param("site_cd") String site_cd,
         @Param("site_status") String site_status
     );

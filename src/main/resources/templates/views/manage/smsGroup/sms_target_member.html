@@ -1,30 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='문자 수신자 관리'">
 
 	<th:block layout:fragment="content">
         <script th:inline="javascript">
             /* <![CDATA[ */
-                var mData = /*[[${list.targetmembers}]]*/;
-                console.log(mData);
+                var tData = /*[[${targetmembers}]]*/
+                console.log(tData);
             /* ]]> */
         </script>
         <script type="text/javascript">
-            $(function() {
-                $('.toggle').toggles();
-                $('.toggle').on('toggle', function (e, active) {
-                    var targetId=e.target.id.replace("act","aci");
-                    if (active) {
-                        $("#"+targetId).val("1");
+            //수정
+            function fnModify(mid){
+                const params = {
+                    id: mid,
+                    name: $("#name").val(),
+                    organization: $("#organization").val(),
+                    department: $("#department").val(),
+                    position: $("#position").val(),
+                    phone_num: $("#phone_num").val(),
+                    activation: $("#activation_"+mid).is(":checked") ? 1 : 0
+                }
+                if(confirm("수정 하겠습니까?")){
+                    let result = fnCall('post', '/manage/sms_target_member_modify', JSON.stringify(params));
+                    if(result.status == "success"){
+                        alert("수정 되었습니다.");
+                        location.href="/manage/sms_target_member";
                     } else {
-                        $("#"+targetId).val("0");
+                        alert("수정에 실패했습니다.\n" + result.data);
                     }
-                });
-                $('input.back').click(function(e){
-                    window.location.href = "/manage/sms_target_group";
-                });
-            });
+                    console.log("result :: "+ result);
+                }
+            }
+
+            //삭제
+            function fnDelete(mid){
+                if(confirm("삭제 하겠습니까?")){
+                    let result = fnCall('post', '/manage/sms_target_member_delete?mid='+mid, {});
+                    if(result.status == "success"){
+                        alert("삭제 되었습니다.");
+                        location.href="/manage/sms_target_member";
+                    } else {
+                        alert("삭제에 실패했습니다.\n" + result.data);
+                    }
+                    console.log("result :: "+ result);
+                }
+            }
+
+            //추가
+            function fnAdd(){
+                const params = {
+                    name: $("#add_name").val(),
+                    organization: $("#add_organization").val(),
+                    department: $("#add_department").val(),
+                    position: $("#add_position").val(),
+                    phone_num: $("#add_phone_num").val(),
+                    activation: $("#add_activation").is(":checked") ? 1 : 0
+                }
+                console.log(params);
+                if(confirm("등록 하겠습니까?")){
+                        let result = fnCall('post', '/manage/sms_target_member_add', JSON.stringify(params));
+                    if(result.status == "success"){
+                        alert("등록 되었습니다.");
+                        location.href="/manage/sms_target_member";
+                    } else {
+                        alert("등록에 실패했습니다.\n" + result.data);
+                    }
+                    console.log("result :: "+ result);
+                }
+            }
         </script>
     
         <table class="noticeTbl settingSeries">
@@ -39,14 +84,13 @@
             </thead>
         </table>
         
-        <!-- <table class="mainTbl settingSeries" summary=""> -->
         <table class="table subTbl table-hover" summary="">
             <caption class="hidden">문자 수신자 관리</caption>
             <colgroup>
                 <col style="width:90px" />
                 <col style="width:120px" />
                 <col style="width:120px" />
-                <col style="width:200px" />
+                <col style="width:150px" />
                 <col />
                 <col />
                 <col style="width:140px" />
@@ -63,33 +107,37 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="tmList, tmListStat : ${list.targetmembers}">
-                <!-- <form action="sms_target_member_update" name="smsTargetMember[${idx.index }]" method="post" target="_self" id="searchDate${idx.index }" > -->
+                <tr th:each="tmList, tmListStat : ${targetmembers}">
                     <td>
-                        <input type="hidden" name="mid" th:value="${tmList.id }"/>
-                        <input type="text" name="name" th:value="${tmList.name }"/>
+                        <input type="text" name="name" id="name" size="16" th:value="${tmList.name }"/>
                     </td>
                     <td>
-                        <input type="text" name="position" th:value="${tmList.position }"/>
+                        <input type="text" name="position" id="position" size="16" th:value="${tmList.position }"/>
                     </td>
                     <td>
-                        <input type="text" name="department" th:value="${tmList.department }"/>
+                        <input type="text" name="department" id="department" size="16" th:value="${tmList.department }"/>
                     </td>
                     <td>
-                        <input type="text" name="organization" th:value="${tmList.organization }"/>
+                        <input type="text" name="organization" id="organization" size="16" th:value="${tmList.organization }"/>
                     </td>
                     <td>
-                        <input type="text" name="phone_num" th:value="${tmList.phone_num }"/>
+                        <input type="text" name="phone_num" id="phone_num" size="16" th:value="${tmList.phone_num }"/>
                     </td>
                     <td>
-                        <div class="toggle toggle-light" th:id="${'act-'+tmListStat.index}" th:data-toggle-on="${tmList.activation }"></div>
-                        <input type="hidden" name="activation" th:id="${'aci-'+tmListStat.index}" th:value="${tmList.activation }"/>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+                            <input type="checkbox" th:name="activation" 
+                                th:id="${'activation_'+tmList.id}"
+                                th:checked="${tmList.activation}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                     <td>
-                        <input type="submit" class="btn" name="" value="수정"/>
-                        <a class="btn" href="sms_target_member_remove?m=${member.mid}">삭제</a>
+                        <input type="submit" class="btn" name="" id="modify" value="수정" th:onclick="fnModify([[${tmList.id}]])"/>
+                        <input type="submit" class="btn" name="" id="delete" value="삭제" th:onclick="fnDelete([[${tmList.id}]])"/>
                     </td>
-                <!-- </form> -->
                 </tr>
             </tbody>
         </table>
@@ -105,14 +153,14 @@
             </tr>
             </thead>
         </table>
-        <!-- <table class="mainTbl settingSeries" summary=""> -->
+        
         <table class="table subTbl table-hover" summary="">
             <caption class="hidden">문자 수신자 추가</caption>
             <colgroup>
                 <col style="width:90px" />
                 <col style="width:120px" />
                 <col style="width:120px" />
-                <col style="width:200px" />
+                <col style="width:150px" />
                 <col />
                 <col />
                 <col style="width:140px" />
@@ -130,31 +178,35 @@
             </thead>
             <tbody class="table-group-divider">
                 <tr>
-                <form action="manager/sms_target_member_add" name="smsTargetMemberAdd" method="post" target="_self" id="smsTargetMemberAdd" >
                     <td>
-                        <input type="hidden" name="mid" value="0"/>
-                        <input type="text" name="name" value=""/>
+                        <input type="text" name="add_name" id="add_name" size="16" value=""/>
                     </td>
                     <td>
-                        <input type="text" name="position" value=""/>
+                        <input type="text" name="add_position" id="add_position" size="16" value=""/>
                     </td>
                     <td>
-                        <input type="text" name="department" value=""/>
+                        <input type="text" name="add_department" id="add_department" size="16" value=""/>
                     </td>
                     <td>
-                        <input type="text" name="organization" value=""/>
+                        <input type="text" name="add_organization" id="add_organization" size="16" value=""/>
                     </td>
                     <td>
-                        <input type="text" name="phone_num" value=""/>
+                        <input type="text" name="add_phone_num" id="add_phone_num" size="16" value=""/>
                     </td>
                     <td>
-                        <div class="toggle toggle-light" id="act-Add" data-toggle-on="1"></div>
-                        <input type="hidden" name="activation" id="aci-Add" value="1"/>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+                            <input type="checkbox" th:name="add_activation" 
+                                id="add_activation"
+                                checked="1"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                     <td>
-                        <input type="submit" class="btn" name="" value="사용자 추가"/>
+                        <input type="submit" class="btn" name="" value="사용자 추가" th:onclick="fnAdd()"/>
                     </td>
-                </form>
                 </tr>
             </tbody>
         </table>

@@ -21,5 +21,6 @@ public class SmsTargetGroupDto {
     
     private String name;
     private String activation;
+    private String status;
 
 }

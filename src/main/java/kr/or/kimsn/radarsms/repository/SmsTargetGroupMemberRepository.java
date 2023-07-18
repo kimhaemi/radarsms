@@ -57,11 +57,11 @@ public interface SmsTargetGroupMemberRepository extends JpaRepository<SmsTargetG
         " , T2.sms as sms \n" +
         "from\n" +
         "  sms_target_member T1,\n" +
-        "  sms_target_member_link T2\n" +
-        "where\n" +
-        "  T1.mid = T2.mid and\n" +
-        "  T2.gid = :id\n" +
-        "order by T1.name"
+        "  sms_target_member_link T2 \n" +
+        "where 1=1 \n" +
+        "  and T1.mid = T2.mid \n" +
+        "  and T2.gid = :gid \n" +
+        "order by T1.organization, T1.name"
     )
-    List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberId(@Param("id") Long id);
+    List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberId(@Param("gid") Long gid);
 }

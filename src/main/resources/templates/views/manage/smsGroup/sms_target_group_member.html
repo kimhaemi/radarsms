@@ -1,55 +1,96 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout/default_layout"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='그룹 멤버 관리'">
 
 	<th:block layout:fragment="content">
         <script th:inline="javascript">
             /* <![CDATA[ */
-                var group = /*[[${list.groupName}]]*/;
+                var group = /*[[${group}]]*/
                 console.log(group);
-                var links = /*[[${list.links}]]*/;
+                var links = /*[[${links}]]*/
                 console.log(links);
+                var notlinks = /*[[${notlinks}]]*/
+                console.log(notlinks);
             /* ]]> */
         </script>
 
         <script type="text/javascript">
         $(function() {
-            $('.toggle').toggles();
-            $('.toggle').on('toggle', function (e, active) {
+            // $('.toggle').toggles();
+            $('.a8z-toggle-switch').on('change', function (e, active) {
+                let jObj = new Object();
                 var vs=e.target.id.split("_");
-                var tf=active?1:0;
-        
-                // $.post("/manage/sms_target_group_member_sendstep.do", {mid:vs[1],gid:vs[2],step:vs[0],activate:tf}, function(data,status){
-                //     if(data.result<1){
-                //         var n = noty({
-                //             text:'문자전송상태 변환에 실패하였습니다.',
-                //             type:'error',
-                //             closeWith:['click'],
-                //             layout:'center',
-                //             modal:true,
-                //             callback : {
-                //                 afterClose: function(){
-                //                     location.reload();
-                //                 }
-                //             }
-                //         });
-                //     }
-                // });
-        
+                var checked=$(e.target).is(":checked") ? 1 : 0;
+
+                links.forEach(e => {
+                    // console.log(e);
+                    if(e.mid == vs[1] && e.gid == vs[2]){
+                        jObj.id = Number(vs[1]);
+                        jObj.gid = Number(vs[2]);
+                        jObj.noti = vs[0] == "noti" ? checked : e.noti;
+                        jObj.warn = vs[0] == "warn" ? checked : e.warn;
+                        jObj.tota = vs[0] == "tota" ? checked : e.tota;
+                        jObj.retr = vs[0] == "retr" ? checked : e.retr;
+                        jObj.sms  = vs[0] == "sms"  ? checked : e.sms;
+                        // jObj.department = e.department;
+                        // jObj.name = e.name;
+                        // jObj.organization = e.organization;
+                        // jObj.phone_num = e.phone_num
+                        // jObj.position = e.position
+                        //list.push(jObj);
+                    }
+                });
+
+                let result = fnCall('post', '/manage/sms_target_group_member_modify', JSON.stringify(jObj));
+                if(result.status == "success"){
+                    // alert("저장되었습니다.");
+                    location.href="/manage/sms_target_group_member?gid="+vs[2]; //다시 로딩
+                } else {
+                    alert("저장에 실패하였습니다. \n" + result.data);
+                }
             });
-            $('a.btn').button();
+            // $('a.btn').button();
             $('input.back').click(function(e){
                 window.location.href = "/manage/sms_target_group";
             });
+
         });
+
+        //연결 해제
+        function fnUnLink(mid, gid){
+            //if(confirm("연결을 해제하겠습니까?")){
+                let result = fnCall('post', '/manage/sms_target_group_member_unlink?gid='+gid+'&mid='+mid, {});
+                if(result.status == "success"){
+                    alert("연결 해제되었습니다.");
+                    location.href="/manage/sms_target_group_member?gid="+gid;
+                } else {
+                    alert("연결 해제에 실패했습니다.\n" + result.data);
+                }
+                console.log("result :: "+ result);
+            //}
+        }
+
+        //연결 추가
+        function fnLink(mid, gid){
+            // if(confirm("추가 하겠습니까?")){
+                let result = fnCall('post', '/manage/sms_target_group_member_addlink?gid='+gid+'&mid='+mid, {});
+                if(result.status == "success"){
+                    alert("추가 되었습니다.");
+                    location.href="/manage/sms_target_group_member?gid="+gid;
+                } else {
+                    alert("연결 추가에 실패했습니다.\n" + result.data);
+                }
+                console.log("result :: "+ result);
+            // }
+        }
         </script>
     
         <table class="noticeTbl settingSeries" >
             <thead>
             <tr>
                 <th class="left">
-                    관리 > 문자 수신 그룹 관리 > [ <span th:text="${list.groupName }"></span> ] 그룹 멤버 관리
+                    관리 > 문자 수신 그룹 관리 > [ <span th:text="${group.name}"></span> ] 그룹 멤버 관리
                 </th>
                 <th class="right">
                     <input type="button" class="btn btn_grayline back" value="그룹관리로 돌아가기"/>
@@ -58,14 +99,13 @@
             </thead>
         </table>
 
-        <!-- <table class="mainTbl settingSeries" summary=""> -->
         <table class="table subTbl table-hover" summary="">
             <caption class="hidden">그룹 관리</caption>
             <colgroup>
                 <col style="width:80px" />
                 <col style="width:100px" />
+                <col style="width:100px" />
                 <col style="width:120px" />
-                <col style="width:150px" />
                 <col />
                 <col />
                 <col />
@@ -77,7 +117,7 @@
             <thead class="subThead">
                 <tr>
                     <th colspan="10">
-                        <span th:text="${list.groupName }"></span> 그룹에 속한 사용자
+                        <span th:text="${group.name}"></span> 그룹에 속한 사용자
                     </th>
                 </tr>
                 <tr>
@@ -98,35 +138,66 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="link : ${list.links}">
+                <tr th:each="link : ${links}">
                     <td><span th:text="${link.name }"></span></td>
                     <td><span th:text="${link.position }"></span></td>
                     <td><span th:text="${link.department }"></span></td>
                     <td><span th:text="${link.organization }"></span></td>
                     <td><span th:text="${link.phone_num }"></td>
                     <td class="settingSeries">
-                        <div class="toggle toggle-light" th:id="${'noti_'+link.mid+'_'+link.gid}" th:data-toggle-on="${link.noti}"></div>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+                            <input type="checkbox" th:name="notiConfig" 
+                                th:id="${'noti_'+link.mid+'_'+link.gid}"
+                                th:checked="${link.noti == 1}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                     <td class="settingSeries">
-                        <div class="toggle toggle-light" th:id="${'warn_'+link.mid+'_'+link.gid}" th:data-toggle-on="${link.warn}"></div>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+                            <input type="checkbox" th:name="warnConfig" 
+                                th:id="${'warn_'+link.mid+'_'+link.gid}"
+                                th:checked="${link.warn == 1}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                     <!-- <td>
                         <div class="toggle toggle-light" id="tota_${link.mid }_${link.gid}" data-toggle-on="${link.tota }"></div>
                     </td> -->
                     <td class="settingSeries">
-                        <div class="toggle toggle-light" th:id="${'retr_'+link.mid+'_'+link.gid}" th:data-toggle-on="${link.retr}"></div>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+                            <input type="checkbox" th:name="retrConfig" 
+                                th:id="${'retr_'+link.mid+'_'+link.gid}"
+                                th:checked="${link.retr == 1}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                     <td class="settingSeries">
-                        <div class="toggle toggle-light" th:id="${'sms_'+link.mid+'_'+link.gid}" th:data-toggle-on="${link.sms}"></div>
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+                            <input type="checkbox" th:name="smsConfig" 
+                                th:id="${'sms_'+link.mid+'_'+link.gid}"
+                                th:checked="${link.sms == 1}"
+                            />
+                            <span class="toggle">
+                                <span class="switch"></span>
+                            </span>
+                        </label>
                     </td>
                     <td>
-                        <a class="btn" th:href="@{/manage/sms_target_group_member_unlink(gid=${list.groupId})(mid=${link.mid})}">연결 삭제</a>
+                        <input type="submit" id="bthUnLink" class="btn btn_grayline" value="연결 해제" th:onclick="fnUnLink([[${link.mid}]], [[${link.gid}]])"/>
                     </td>
                 </tr>
             </tbody>
         </table>
         
-        <!-- <table class="mainTbl settingSeries" summary=""> -->
         <table class="table subTbl table-hover" summary="">
             <caption class="hidden">그룹 관리</caption>
             <colgroup>
@@ -140,7 +211,7 @@
             <thead class="subThead">
                 <tr>
                     <th colspan="6">
-                        <span th:text="${list.groupName }"></span> 그룹에 속하지 않은 사용자
+                        <span th:text="${group.name}"></span> 그룹에 속하지 않은 사용자
                     </th>
                 </tr>
                 <tr>
@@ -153,14 +224,14 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="notLink : ${list.notlinks}">
+                <tr th:each="notLink : ${notlinks}">
                     <td><span th:text="${notLink.name }"></span></td>
                     <td><span th:text="${notLink.position }"></span></td>
                     <td><span th:text="${notLink.department }"></span></td>
                     <td><span th:text="${notLink.organization }"></span></td>
                     <td><span th:text="${notLink.phone_num }"></span></td>
                     <td>
-                        <a class="btn" href="/manage/sms_target_group_member_mklink.do?gid=${list.groupId }&mid=${notLink.mid}">연결 추가</a>
+                        <input type="submit" id="btnLink" class="btn btn_grayline" value="연결 추가" th:onclick="fnLink([[${notLink.id}]], [[${group.id}]])" />
                     </td>
                 </tr>
             </tbody>

@@ -48,7 +48,7 @@
             }
             
             function fnUserDel(){
-                if(confirm("사용자를 삭제하시겠습니까?")){
+                if(confirm("사용자를 삭제하겠습니까?")){
                     let result = fnCall('post', '/users/admin_user_del?id='+$("#uid").val(), {});
                     
                     if(result.status == "success"){
@@ -84,8 +84,8 @@
                     return false;
                 }
 
-                if(mode == 'create'){ text = "사용자를 등록하시겠습니까?" }
-                if(mode == 'modify'){ text = "사용자를 수정하시겠습니까?" }
+                if(mode == 'create'){ text = "사용자를 등록하겠습니까?" }
+                if(mode == 'modify'){ text = "사용자를 수정하겠습니까?" }
                 
                 if(confirm(text)){
                     const params = {

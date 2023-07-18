@@ -13,5 +13,5 @@ public class SmsSendOnOffDto {
     
     @Id
     private String code; 
-    private String value;
+    private Integer value;
 }
