@@ -420,8 +420,8 @@ input, select {
 #headerMain .kmipaLogo {  float: right;  margin: 8px 0px 0px;}
 
 /* Layout */
-#wrap{width:1000px;background:#fff;margin-left: 150px;margin: 0 auto;}
-/* #container{margin-top:0px;min-height:440px; height:auto !important; } */
+#wrap{width:1000px;background:#fff;margin: 0 auto;}
+#container{margin-top:0px;min-height:440px; height:auto !important; }
 #container {width:1100px; height: 100%; margin:0 auto;}
 #contents {position: relative; float: right; width: 95%; right: 3px;}
 /* #contents.wide {position: relative; } */
@@ -431,7 +431,6 @@ input, select {
 #content{width:100%;}
 #header{width:970px;margin:0 auto;position:relative;}
 #container:after,#header:after,div.gnb ul li:after,div.lnb:after,div.sj:after,#footer div:after,#footer:after,div.btnA:after,div.sear:after{clear:both;content:'';display:block;}
-
 
 
 #contentMain {
@@ -445,10 +444,10 @@ input, select {
 
 .noticeTbl {/* border:1px solid #838383;*/
 	float: right; margin: 0 auto ;width:100%;  padding: 5px 0 5px 0; } /* 알람설정 부분 */
-.noticeTbl.timeSeries {width:990;}
-.noticeTbl.searchSeries {width:990;}
+/* .noticeTbl.timeSeries {width:990px;}
+.noticeTbl.searchSeries {width:990px;}
 .noticeTbl.settingSeries {width:100%;}
-.noticeTbl.mainSeries {width:990;}
+.noticeTbl.mainSeries {width:990px;} */
 /* .noticeTbl thead th {
 	background: url(../images/tbl_head_bar1.png) repeat-x;
 	background-size: 10px 41px;
@@ -637,9 +636,10 @@ input, select {
 }
 
 .alertTbls {
-	width: 500px;
+	/* width: 500px; */
 	position: relative;
-	float: right;
+	/* float: right; */
+	float: left;
 }
 
 .alarmAudio {visibility: hidden;display: none;}

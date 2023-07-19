@@ -689,12 +689,6 @@ input, select {
 	left:20px;
 }
 
-.alertTbls {
-	width: 500px;
-	position: relative;
-	float: right;
-}
-
 .alarmAudio {visibility: hidden;display: none;}
 
 .login_input {margin:0 auto; background:#f9f9f9;border:1px solid #d9d9d9;padding:3px 4px; text-align:center; vertical-align:middle; color:#333; width:250px;}

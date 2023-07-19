@@ -87,7 +87,7 @@
                     <td><span th:text="${link.organization }"></span></td>
                     <td><span th:text="${link.phone_num }"></span></td>
                     <td>
-                        <input type="submit" id="bthUnLink" class="btn btn_grayline" value="연결 해제" th:onclick="fnUnLink([[${link.mid}]])"/>
+                        <input type="submit" id="bthUnLink" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="연결 해제" th:onclick="fnUnLink([[${link.mid}]])"/>
                     </td>
                 </tr>
                 <tr th:if="${links.size() == 0 }">
@@ -129,7 +129,7 @@
                     <td><span th:text="${unlink.organization }"></span></td>
                     <td><span th:text="${unlink.phone_num }"></span></td>
                     <td>
-                        <input type="submit" id="btnLink" class="btn btn_grayline" value="연결 추가" th:onclick="fnLink([[${unlink.id}]])" />
+                        <input type="submit" id="btnLink" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="연결 추가" th:onclick="fnLink([[${unlink.id}]])" />
                         <!-- <a class="btn" href="sms_target_monitorgroup_mklink.do?m=${link.mid}">연결 추가</a> -->
                     </td>
                 </tr>

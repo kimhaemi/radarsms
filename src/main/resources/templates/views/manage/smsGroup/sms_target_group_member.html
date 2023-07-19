@@ -93,7 +93,7 @@
                     관리 > 문자 수신 그룹 관리 > [ <span th:text="${group.name}"></span> ] 그룹 멤버 관리
                 </th>
                 <th class="right">
-                    <input type="button" class="btn btn_grayline back" value="그룹관리로 돌아가기"/>
+                    <input type="button" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only back" value="그룹관리로 돌아가기"/>
                 </th>
             </tr>
             </thead>
@@ -192,7 +192,7 @@
                         </label>
                     </td>
                     <td>
-                        <input type="submit" id="bthUnLink" class="btn btn_grayline" value="연결 해제" th:onclick="fnUnLink([[${link.mid}]], [[${link.gid}]])"/>
+                        <input type="submit" id="bthUnLink" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="연결 해제" th:onclick="fnUnLink([[${link.mid}]], [[${link.gid}]])"/>
                     </td>
                 </tr>
             </tbody>
@@ -231,7 +231,7 @@
                     <td><span th:text="${notLink.organization }"></span></td>
                     <td><span th:text="${notLink.phone_num }"></span></td>
                     <td>
-                        <input type="submit" id="btnLink" class="btn btn_grayline" value="연결 추가" th:onclick="fnLink([[${notLink.id}]], [[${group.id}]])" />
+                        <input type="submit" id="btnLink" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" value="연결 추가" th:onclick="fnLink([[${notLink.id}]], [[${group.id}]])" />
                     </td>
                 </tr>
             </tbody>
