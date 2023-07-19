@@ -52,13 +52,6 @@
 					$("#searchDate").submit();
 				});
             });
-            // var btnSearch = function(){
-            //     var selDate = $("#datePick").val().replace(/ |년|월|일/g, "");
-            //     $("#termClose").val(selDate+"2350");
-            //     $("#termStart").val(selDate+"0000");
-            //     $("#searchDate").submit();
-            // };
-			
         </script>
         
         <form action="" method="post" target="_self" id="searchDate">
@@ -92,20 +85,20 @@
 			<table class="table subTbl table-hover" summary="">
 				<caption class="hidden" th:text="${siteName+' 레이더'}"></caption>
 				<colgroup>
-					<col style="width:400px" />
+					<col style="width:400px;" />
 					<col style="width:50px" />
 					<col style="width:150px" />
 				</colgroup>
 				<thead class="subThead">
 					<tr>
-						<th rowspan="2">시간</th>
+						<th>시간</th>
 						<th th:each="rdrs : ${rdrList}" colspan="2">
-							<div th:text="${rdrs.data_name.replace('레이더','')}"></div>
-							<div th:text="${'('+rdrs.dataType+')'}"></div>
+							<div th:text="${rdrs.data_name.replace('레이더','')+'('+rdrs.dataType+')'}"></div>
+							<!-- <div th:text="${'('+rdrs.dataType+')'}"></div> -->
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-group-divider">
+				<tbody>
 					<tr th:each="recvDt : ${recvData}">
 						<td>
 							<span th:text="${recvDt.data_time}"></span>

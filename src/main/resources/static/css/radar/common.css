@@ -81,7 +81,7 @@ img,fieldset,iframe{border:none;}
 fieldset{display:inline-block;}
 img,input,select{vertical-align:middle;}
 span,
-a{display:inline-block;text-decoration:none;box-sizing:border-box;}
+a{vertical-align: middle;display:inline-block;text-decoration:none;box-sizing:border-box;}
 a:hover{text-decoration:none;}
 caption{width:0;height:0;overflow:hidden;visibility:hidden;font-size:0;line-height:0;}
 em,address{font-style:normal;}

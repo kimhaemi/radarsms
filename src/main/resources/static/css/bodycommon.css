@@ -470,22 +470,24 @@ input, select {
 .toggle{text-align:center;border-collapse:separate;}
 
 .status{
-	width:24px;height:24px;background-position:center;margin:auto;background: url(../images/watchcon/status_unknown.png);background-size:100% 100%;
+	width:24px;height:24px;background-position:center;margin:auto;background: url(../images/watchcon/status_unknown.png);background-size:70% 70%;
+	background-repeat:no-repeat;
 }
-.status.TOTA{background:url(../images/watchcon/status_TOTA.png);background-size:100% 100%;}
-.status.ORDI{background:url(../images/watchcon/status_ORDI.png);background-size:80% 80%;background-repeat:no-repeat;}
-.status.NOTI{background:url(../images/watchcon/status_NOTI.png);background-size:100% 100%;}
-.status.WARN{background:url(../images/watchcon/status_WARN.png);background-size:100% 100%;}
-.status.RETR{background:url(../images/watchcon/status_ORDI.png);background-size:100% 100%;}
-.status.MRO {background:url(../images/watchcon/status_MRO.png);background-size:100% 100%;}
+.status.TOTA{background:url(../images/watchcon/status_TOTA.png);background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
+.status.ORDI{background:url(../images/watchcon/status_ORDI.png);background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
+.status.NOTI{background:url(../images/watchcon/status_NOTI.png);background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
+.status.WARN{background:url(../images/watchcon/status_WARN.png);background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
+.status.RETR{background:url(../images/watchcon/status_ORDI.png);background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
+.status.MRO {background:url(../images/watchcon/status_MRO.png);background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
 
 .recv{
-	width:24px;height:24px;background-position:center;margin:auto;background: url(../images/watchcon/recv_unknown.png);background-size:100% 100%;
+	width:24px;height:24px;background-position:center;margin:auto;background: url(../images/watchcon/recv_unknown.png);background-size:80% 80%;
+	background-repeat:no-repeat;
 }
-.recv.INIT{background:url(../images/watchcon/recv_INIT.png);}
-.recv.MISS{background:url(../images/watchcon/recv_MISS.png);}
-.recv.RECV{background:url(../images/watchcon/recv_RECV.png);}
-.recv.RETR{background:url(../images/watchcon/recv_RETR.png);}
+.recv.INIT{background:url(../images/watchcon/recv_INIT.png);background-size:80% 80%;background-repeat:no-repeat;background-position:center;}
+.recv.MISS{background:url(../images/watchcon/recv_MISS.png);background-size:80% 80%;background-repeat:no-repeat;background-position:center;}
+.recv.RECV{background:url(../images/watchcon/recv_RECV.png);background-size:80% 80%;background-repeat:no-repeat;background-position:center;}
+.recv.RETR{background:url(../images/watchcon/recv_RETR.png);background-size:80% 80%;background-repeat:no-repeat;background-position:center;}
  
 .mainTbl {border:1px solid #0461c0; width:246px; float:left; margin:2px; border-radius: 8px;} 
 .mainTbl.on {background: #EBF6FC;font-weight:bold;}
@@ -644,8 +646,8 @@ input, select {
 
 .subTbl {
 	width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
+	max-width: 100%;
+    margin-bottom: 0.1rem;
     background-color: transparent;
 	margin-top: 10px;
 	border-collapse: collapse;
@@ -653,13 +655,15 @@ input, select {
 	border-top: 1px solid #dee2e6; */
 }
 .subTbl thead th {
+	height: 40px;
 	font-weight: bold;
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6;
 	vertical-align: middle;
 }
 .subTbl td, .subTbl th {
-    padding: 0.75rem;
+	height: 30px;
+	padding: 0.1rem;
     vertical-align: text-bottom;
     border-top: 1px solid #dee2e6;
 	vertical-align: middle;
