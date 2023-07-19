@@ -44,9 +44,4 @@ public class StatisticsController {
 
         return "views/statistics/statistics";
     }
-
-    //저장
-
-    //수정
-
 }

@@ -4,60 +4,55 @@
       th:with="metaTitle='지점별 과거자료'">
 
     <th:block layout:fragment="content">
+    	<!-- <link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap-datepicker3.css">
 		
-    	<link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap-datepicker3.css">
 		<link rel="stylesheet" type="text/css" href="/css/bootstrap/bootstrap-datepicker3.standalone.css">
 		<script type="application/json" src="/js/bootstrap/bootstrap-datepicker.js"></script>
 		<script type="application/json" src="/js/bootstrap/bootstrap-datepicker.kr.min.js"></script>
-		<script type="application/json" src="/js/jquery.js"></script>
+		<script type="application/json" src="/js/jquery.js"></script> -->
 
 		<script th:inline="javascript">
             /* <![CDATA[ */
-                var rdrSet = /*[[${rdrSet}]]*/
-                console.log(rdrSet);
+                var rdrList = /*[[${rdrList}]]*/
+                console.log(rdrList);
+				let recvData = /*[[${recvData}]]*/
+				console.log(recvData);
+				let site = /*[[${site}]]*/
+				console.log(site);
             /* ]]> */
         </script>
         <script type="text/javascript">
             $(document).ready(function(){
-                var toDay = new Date();
-                var str1 = toDay.getFullYear()+'년 '+(toDay.getMonth()+1)+'월 '+toDay.getDate()+'일';
-                
-                $('#datePick').val(str1);
-				$('#datePick').datepicker({
-					format : "yyyy-mm-dd",
-					language : "kr"
+                $('#datepicker').datepicker({
+					buttonImageOnly: true,
+                    sbuttonText: "Select date",
+                    changeMonth: true,
+                    changeYear: true,
+                    prevText: '이전 달',
+                    nextText: '다음 달',
+                    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                    dayNames: ['일','월','화','수','목','금','토'],
+                    dayNamesShort: ['일','월','화','수','목','금','토'],
+                    dayNamesMin: ['일','월','화','수','목','금','토'],
+                    showMonthAfterYear: true,
+                    yearSuffix: '년',
+                    dateFormat: 'yy년 mm월 dd일',
+                    minDate: (new Date(2009, 1 - 1, 1)), maxDate: "+0D",
+					startView: 2,
+					autoclose: true,
+					// buttonText: "Select date"
 				});
-
-				
-
-                //window.setInterval("reloadWarning()",60000);
             });
 
             $(function() {	
-				$("#search").on('click', function (e) {
-					alert("검색");
+				$("#btnSearch").on('click', function (e) {
+					var selDate = $("#datepicker").val().replace(/ |년|월|일/g, "");
+					$("#sDt").val(selDate);
+					$("#searchDate").submit();
 				});
-            //     $( "#datePick" ).datepicker({
-            //         showOn: "button",
-            //         buttonImage: "/images/calendar.gif",
-            //         buttonImageOnly: true,
-            //         buttonText: "Select date",
-            //         changeMonth: true,
-            //         changeYear: true,
-            //         prevText: '이전 달',
-            //         nextText: '다음 달',
-            //         monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-            //         monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-            //         dayNames: ['일','월','화','수','목','금','토'],
-            //         dayNamesShort: ['일','월','화','수','목','금','토'],
-            //         dayNamesMin: ['일','월','화','수','목','금','토'],
-            //         showMonthAfterYear: true,
-            //         yearSuffix: '년',
-            //         dateFormat: 'yy년 mm월 dd일',
-            //         minDate: (new Date(2009, 1 - 1, 1)), maxDate: "+0D"/*(new Date(2014, 11, 31)) /*"+1Y +1M +10D"*/
-            //     });
             });
-            // var searchDate = function(){
+            // var btnSearch = function(){
             //     var selDate = $("#datePick").val().replace(/ |년|월|일/g, "");
             //     $("#termClose").val(selDate+"2350");
             //     $("#termStart").val(selDate+"0000");
@@ -66,9 +61,8 @@
 			
         </script>
         
-        <!-- <form action="" method="post" target="_self" id="searchDate"> -->
-			<input type="hidden" name="termStart" id="termStart"/>
-			<input type="hidden" name="termClose" id="termClose"/>
+        <form action="" method="post" target="_self" id="searchDate">
+			<input type="hidden" name="sDt" id="sDt"/>
 			<table class="noticeTbl searchSeries">
 				<colgroup>
 					<col style="width:auto;"/>
@@ -81,64 +75,53 @@
 						과거자료 검색 > <span class="radar" th:text="${siteName+' 레이더'}"></span>
 					</th>
 					<th class="center">
-						<label for="datePick" class="hidden">년월일 선택</label>
-						<input type="text" value="" id="datePick" readonly />
+						<!-- <label for="datePick" class="hidden">년월일 선택</label> -->
+						<!-- <input type="text" th:value="${searchDate}" name="datePick" id="datePick"  /> -->
+
+						<input type="text" id="datepicker" th:value="${searchDate}" readonly />
+						<!-- <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div> -->
+
 					</th>
 					<th class="right">
-                        <button class="btn" id="search">검색</button>
-						<!-- <img src="/images/search_icon.png" class="ui-datepicker-search" onclick="javascript:searchDate();"/></th> -->
+                        <button class="btn" id="btnSearch">검색</button>
 				</tr>
 				</thead>
 			</table>
-			<!-- </form> -->
+		</form>
 			
 			<table class="table subTbl table-hover" summary="">
 				<caption class="hidden" th:text="${siteName+' 레이더'}"></caption>
 				<colgroup>
-					<col />
-					<th:block th:each="rdrs : ${rdrSet}">
-						<col style="width:36px" />
-						<col style="width:129px"/>
-					</th:block>
+					<col style="width:400px" />
+					<col style="width:50px" />
+					<col style="width:150px" />
 				</colgroup>
 				<thead class="subThead">
 					<tr>
-						<th rowspan="2" width="300">시간</th>
-						<th th:each="rdrs : ${rdrSet}" colspan="2" width="500">
-							<span th:text="${rdrs.data_name.replace('레이더','')}"></span>
-							<br />
-							<span th:text="${'('+rdrs.dataType+')'}"></span>
+						<th rowspan="2">시간</th>
+						<th th:each="rdrs : ${rdrList}" colspan="2">
+							<div th:text="${rdrs.data_name.replace('레이더','')}"></div>
+							<div th:text="${'('+rdrs.dataType+')'}"></div>
 						</th>
 					</tr>
 				</thead>
 				<tbody class="table-group-divider">
-					<c:set var="forEnd" value="${fn:length(recvData[0])-1 }" />
-					<c:if test="${forEnd < 0 }">
-						<c:set var="forEnd" value="0" />
-					</c:if>
-					<c:forEach begin="0" end="${forEnd}" varStatus="idx">
-					<tr>
+					<tr th:each="recvDt : ${recvData}">
 						<td>
-							<fmt:formatDate value="${recvData[0][idx.index].data_time }" pattern="yyyy.MM.dd HH:mm"/>
+							<span th:text="${recvDt.data_time}"></span>
 						</td>
-						<c:forEach var="rdrs" items="${rdrSet }" varStatus="jdx">
 						<td>
-							<!-- <div class="recv RECV" title="수신"></div> -->
-							<div class="recv ${recvData[jdx.index][idx.index].recv_condition }" title="${recvAlt[recvData[jdx.index][idx.index].recv_condition] }"></div>
+							<span th:classappend="${'recv ' + recvDt.recv_condition}" th:title="${recvDt.recv_condition}"></span>
 						</td>
-						<!-- <td>2017.07.01 23:50</td> -->
 						<td>
-							<c:choose>
-								<c:when test="${not empty recvData[jdx.index][idx.index].recv_time }">
-									<fmt:formatDate value="${recvData[jdx.index][idx.index].recv_time }" pattern="yyyy.MM.dd HH:mm"/>
-								</c:when>
-								<c:otherwise>-
-								</c:otherwise>
-							</c:choose>
+							<th:block th:if="${recvDt.recv_time != '' }" >
+								<span th:text="${recvDt.recv_time}"></span>
+							</th:block>
+							<th:block th:if="${recvDt.recv_time =='' || recvDt.recv_time == null }" >
+								-
+							</th:block>
 						</td>
-						</c:forEach>
 					</tr>
-					</c:forEach>
 				</tbody>
 			</table>
     </th:block>

@@ -1,6 +1,6 @@
 (function init($) {
     // navigator
-    var menu1Deps = $('.nav > li'),
+    var menu1Deps = $('.navi > div > li'),
         $locate = $('.locate_list>li'),
         headerUtil = $('.header .util'),
         fullnav = $('.full_lnb');

@@ -11,6 +11,6 @@ public interface StationRepository extends JpaRepository<StationDto, String> {
 
     List<StationDto> findByOrderBySortOrder();
 
-    List<StationDto> findBySiteCdOrderBySortOrder(String siteCd);
+    StationDto findBySiteCdOrderBySortOrder(String siteCd);
 
 }
