@@ -49,13 +49,14 @@ public class ManageGetService {
 
     private final ReceiveRepository receiveRepository;
     
-
     /*
      * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
      */
     public List<StationStatusDto> getStationStatusList() {
         return stationStatusRepository.findByOrderBySortOrder();
     }
+
+    
 
     // 지점/자료별 문자 발송 설정 조회(자료 수신 상태)
     public List<SmsSetRcDto> getReceiveConditionList() {

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/default_layout"
+      layout:decorate="~{layout/default_layout}"
       th:with="metaTitle='전체 감시'">
 
 	<th:block layout:fragment="content">
@@ -13,9 +13,9 @@
 
         <script th:inline="javascript">
             /* <![CDATA[ */
-                var members = /*[[${list.memberList}]]*/;
+                var members = /*[[${list.memberList}]]*/
                 console.log(members);
-                var groups = /*[[${list.groups}]]*/;
+                var groups = /*[[${list.groups}]]*/
                 console.log(groups);
 
             /* ]]> */

@@ -675,9 +675,9 @@ input, select {
 .subTbl td, .subTbl th {
 	height: 30px;
 	padding: 0.1rem;
-    vertical-align: text-bottom;
+    /* vertical-align: text-bottom; */
     border-top: 1px solid #dee2e6;
-	/* vertical-align: middle; */
+	vertical-align: middle;
 }
 
 .subTbl .subThead {

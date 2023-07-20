@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/default_layout"
+      layout:decorate="~{layout/default_layout}"
       th:with="metaTitle='지점별 과거자료'">
 
     <th:block layout:fragment="content">
@@ -114,6 +114,9 @@
 								-
 							</th:block>
 						</td>
+					</tr>
+					<tr th:if="${recvData.size() == 0}">
+						<td colspan="3">데이터가 없습니다.</td>
 					</tr>
 				</tbody>
 			</table>

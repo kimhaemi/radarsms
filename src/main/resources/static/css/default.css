@@ -12,7 +12,7 @@ img{border:0 none;}
 /* } */
 input, button {vertical-align:middle;}
 
-a {color: #006FBB; text-decoration: none;}
+/* a {color: #006FBB; text-decoration: none;} */
 /* a:hover { text-decoration: underline; color: #006FBB; } */
 
 .hidden, .blind {visibility: hidden; display: none;}

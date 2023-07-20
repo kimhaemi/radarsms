@@ -42,7 +42,7 @@ public class StationService {
         return receiveConditionRepository.findBySiteAndDataType(siteCd, date_Type);
     }
 
-    // 최종 수신 확인 시각(NQC)
+    // 전체 최종 수신 확인 시각(NQC)
     public List<ReceiveConditionDto> getStationLastCheck(String date_Type) {
         return receiveConditionRepository.findByDataTypeOrderBySite(date_Type);
     }

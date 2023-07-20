@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout/default_layout"
+      layout:decorate="~{layout/default_layout}"
       th:with="metaTitle='전체 감시'">
 
 	<th:block layout:fragment="content">
 		<script th:inline="javascript">
 			/* <![CDATA[ */
 			var site = /*[[${list.stationList}]]*/
-                console.log(site);
+			console.log(site);
+			var rcState = /*[[${rcState}]]*/
+			console.log(rcState);
             /* ]]> */
 		</script>
 		<script type="text/javascript">
@@ -40,18 +42,8 @@
 					</th>
 					<th class="left">알람설정:</th>
 					<th class="center toggle-light">
-						<!-- <div class="toggle" id="s" data-toggle-on="1" style="height: 20px;">
-							<div class="toggle-slide">
-								<div class="toggle-inner" style="width: 180px; margin-left: 0px;">
-									<div class="toggle-on active" style="height: 20px; width: 90px; text-indent: -10px; line-height: 20px;">&nbsp;<i class="fa fa-bell"> ON</i></div><div class="toggle-blob" style="height: 20px; width: 20px; margin-left: -10px;"></div><div class="toggle-off" style="height: 20px; width: 90px; margin-left: -10px; text-indent: 10px; line-height: 20px;">
-										<i class="fa fa-bell-slash-o"> OFF</i>&nbsp;
-									</div>
-								</div>
-							</div>
-						</div> -->
 						<label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
                             <input type="checkbox" th:name="notiConfig" 
-                                
                             />
                             <span class="toggle">
                                 <span class="switch"></span>
@@ -70,40 +62,36 @@
 		<div id="f5content" class="mainSeries">
 			<div class="alertMap">
 				<div class="map"><img src="/images/map.png" alt="지도"></div>
-				<!--  table join 해야함
-					SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
-					FROM watchdog.receive_condition; 
-				-->
-				
-				<div th:each="site : ${list.stationList}" th:if="${site.gubun == 1}" th:classappend="${'radar '+site.siteCd+' '+ 'ORDI'}" th:id="${site.siteCd}">
-					<div><a th:href="${'/station/'+site.siteCd}" th:text="${site.name_kr}"></a></div>
-				</div>
-				<!-- <div th:each="site : ${list.stationList}" th:if="${site.gubun == 2}" th:classappend="${'radar '+site.siteCd+' '+ 'ORDI'}" th:id="${site.siteCd}">
-					<div><a th:href="${'/station/'+site.siteCd}" th:text="${site.name_kr}"></a></div>
-				</div> -->
-				<div th:each="site : ${list.stationList}" th:if="${site.gubun == 3}" th:classappend="${'radar '+site.siteCd+' '+ 'ORDI'}" th:id="${site.siteCd}">
-					<div><a th:href="${'/station/'+site.siteCd}" th:text="${site.name_kr}"></a></div>
-				</div>
+				<th:block th:each="rcSite : ${rcState}">
+					<div th:if="${rcSite.gubun == 1}" th:classappend="${'radar '+rcSite.site+' '+ rcSite.recv_condition}" th:id="${rcSite.site}">
+						<div><a th:href="${'/station/'+rcSite.site}" th:text="${rcSite.name_kr}"></a></div>
+					</div>
+					<!-- <div th:each="site : ${rcSite}" th:if="${rcSite.gubun == 2}" th:classappend="${'radar '+rcSite.site+' '+ 'ORDI'}" th:id="${rcSite.site}">
+						<div><a th:href="${'/station/'+rcSite.site}" th:text="${site.name_kr}"></a></div>
+					</div> -->
+					<div th:if="${rcSite.gubun == 3}" th:classappend="${'radar '+rcSite.site+' '+ rcSite.recv_condition}" th:id="${rcSite.site}">
+						<div><a th:href="${'/station/'+rcSite.site}" th:text="${rcSite.name_kr}"></a></div>
+					</div>
+				</th:block>
 			</div>
 
 			<div class="alertTbls">
 				<table class="table subTbl table-hover" summary="">
 					<colgroup>
 						<col width="150px">
-						<col>
+						<col >
 					</colgroup>
 					<thead>
 						<th colspan="2">대형 레이더</th>
 					</thead>
 					<tbody>
-						<tr th:each="site : ${list.stationList}" th:if="${site.gubun == 1}">
+						<tr th:each="rcSite : ${rcState}" th:if="${rcSite.gubun == 1}">
 							<td class="subThead">
-								<a th:href="${'/station/'+site.siteCd}" class="radar" th:text="${site.name_kr+' 레이더'}"></a>
+								<a th:href="${'/station/'+rcSite.site}" class="radar" th:text="${rcSite.name_kr+' 레이더'}"></a>
 							</td>
 							<td>
-								<!--상태값 ordi 수정-->
-								<span th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></span>
-								<span th:text="${'최종 수신 '+ '2022.07.29 14:15'}"></span>
+								<span th:classappend="${'status '+ rcSite.recv_condition}"></span>
+								<span th:text="${'최종 수신 '+ rcSite.apply_time}"></span>
 							</td>
 						</tr>
 					</tbody>
@@ -117,13 +105,13 @@
 						<th colspan="2">소형 레이더</th>
 					</thead>
 					<tbody>
-						<tr th:each="site : ${list.stationList}" th:if="${site.gubun == 2}">
+						<tr th:each="rcSite : ${rcState}" th:if="${rcSite.gubun == 2}">
 							<td class="subThead">
-								<a th:href="${'/station/'+site.siteCd}" class="radar" th:text="${site.name_kr+' 레이더'}"></a>
+								<a th:href="${'/station/'+rcSite.site}" class="radar" th:text="${rcSite.name_kr+' 레이더'}"></a>
 							</td>
 							<td>
-								<span th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></span>
-								<span th:text="${'최종 수신 '+ '2022.07.29 14:15'}"></span>
+								<span th:classappend="${'status '+ rcSite.recv_condition}" ></span>
+								<span th:text="${'최종 수신 '+ rcSite.apply_time}"></span>
 							</td>
 						</tr>
 					</tbody>
@@ -137,13 +125,13 @@
 						<th colspan="2">공항 레이더</th>
 					</thead>
 					<tbody>
-						<tr th:each="site : ${list.stationList}" th:if="${site.gubun == 3}">
+						<tr th:each="rcSite : ${rcState}" th:if="${rcSite.gubun == 3}">
 							<td class="subThead">
-								<a th:href="${'/station/'+site.siteCd}" class="radar" th:text="${site.name_kr+' 레이더'}"></a>
+								<a th:href="${'/station/'+rcSite.site}" class="radar" th:text="${rcSite.name_kr+' 레이더'}"></a>
 							</td>
 							<td>
-								<span th:classappend="${'status '+ 'ORDI'}" th:title="${'정상'}"></span>
-								<span th:text="${'최종 수신 '+ '2022.07.29 14:15'}"></span>
+								<span th:classappend="${'status '+ rcSite.recv_condition}" ></span>
+								<span th:text="${'최종 수신 '+ rcSite.apply_time}"></span>
 							</td>
 						</tr>
 					</tbody>

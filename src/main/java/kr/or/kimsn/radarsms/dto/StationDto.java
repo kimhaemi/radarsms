@@ -34,7 +34,7 @@ public class StationDto {
     private String install_date;
     private String prod_company;
     private String prod_country;
-    private String permitted_watch;
+    private Integer permitted_watch;
     @Column(name = "sort_order")
     private String sortOrder;
     private Integer gubun;
