@@ -1,8 +1,10 @@
-package kr.or.kimsn.radarsms.securityConfig;
+package kr.or.kimsn.radarsms.config;
+
+import java.util.Collections;
 
 import javax.servlet.DispatcherType;
+import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,15 +14,17 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 
-import kr.or.kimsn.radarsms.securityConfig.auth.AuthenticationSuccess;
+import kr.or.kimsn.radarsms.config.auth.AuthenticationSuccess;
+import lombok.RequiredArgsConstructor;
 
-
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity // 활성화. 스프링 시큐리시 필터가 스프링 필터체인에 등록됨.
 public class SecurityConfig {
 
-    @Autowired
     private AuthenticationSuccess authenticationSuccess;
 
     @Bean
@@ -34,22 +38,26 @@ public class SecurityConfig {
         // user를 생성해주고, password encoder를 bean으로 선언해준다.
         http
             .csrf(AbstractHttpConfigurer::disable) // CSRF 공격에 대한 방어를 해제 합니다.
-            .cors((cors)-> 
-                cors.disable()
-            )
-            //인증/인가
-            .authorizeHttpRequests((authorizeRequests)->
-                authorizeRequests
+            // .cors((cors)-> cors.disable())
+            //resources(css, js 등) 의 경우 securityContext 등에 대한 조회가 불필요 하므로 disable 
+            .requestMatchers(matchers -> matchers.antMatchers( "/resources/**"))
+            //인증/인가 제외
+            .authorizeHttpRequests((authz)-> authz
                 .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() //JSP 등 컨트롤러에서 화면 파일명을 리턴해 화면을 바꾸는 경우
-            //     // .antMatchers("/users/**").permitAll()
-            //     // .antMatchers("/common/**").permitAll()
+                // .antMatchers("/manager/**").permitAll()
+                // .antMatchers("/users/**").permitAll()
+                // .antMatchers("/station/**").permitAll()
+                // .antMatchers("/stat/**").permitAll()
+                .anyRequest().authenticated()	// 어떠한 요청이라도 인증필요
             )
-            .formLogin(loginform->
-                loginform
+            .formLogin(login-> login
                 .loginPage("/login")
-                .successHandler(authenticationSuccess)
-                // .defaultSuccessUrl("/index", true)
-                .failureUrl("/common/error")
+                // .loginProcessingUrl("/login-process")	// [B] submit 받을 url
+                .usernameParameter("userId")	// [C] submit할 아이디
+                .passwordParameter("password")	// [D] submit할 비밀번호
+                .defaultSuccessUrl("/", true)
+                // .successHandler(authenticationSuccess)
+                // .failureUrl("/common/error")
                 .permitAll()
             )
         ;

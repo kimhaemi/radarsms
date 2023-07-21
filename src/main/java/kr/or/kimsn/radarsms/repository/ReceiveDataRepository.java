@@ -42,4 +42,59 @@ public interface ReceiveDataRepository extends JpaRepository<ReceiveDataDto, Rec
         @Param("dateStart") String dateStart,
         @Param("dateClose") String dateClose
     );
+
+    @Query(
+        nativeQuery = true,
+        value=
+        "select \n" +
+        "    data_kind,  \n" +
+        "    site,  \n" +
+        "    data_type,  \n" +
+        "    data_time, \n" + 
+        "    data_kst,  \n" +
+        "    recv_time,  \n" +
+        "    recv_condition,  \n" +
+        "    recv_condition_check_time,  \n" +
+        "    file_name,  \n" +
+        "    file_size  \n" +
+        "from receive_data \n" +
+        "where 1=1 \n" +
+        "  and data_time <= :now \n" +
+        "  and data_time >= subdate( :now , interval 3 hour ) \n" +
+        "  and data_kind  = :data_kind \n" +
+        "  and site       = :site \n" +
+        "  and data_type  = :data_type \n" +
+        "order by data_kind, site, data_type, data_time desc \n"        
+
+    )
+    //3시간 전까지 data
+    List<ReceiveDataDto> getReceiveDataThreeHour(
+        @Param("now") String now,
+        @Param("data_kind") String data_kind,
+        @Param("site") String site,
+        @Param("data_type") String data_type
+    );
+
+    // @Query(
+    //     nativeQuery = true,
+    //     value=
+    //     "select \n"+
+    //     "  DATE_FORMAT(data_time, '%Y-%c') as stat_time, \n"+
+    //     "  data_type as data_type, \n"+
+    //     "  recv_condition as recv_condition, \n"+
+    //     "  count(recv_condition) as cnt  \n"+
+    //     "from receive_data \n"+
+    //     "where 1=1 \n"+
+    //     "  and site = :site \n"+
+    //     "  and data_time >= :data_time \n"+
+    //     "  and data_time < :recv_time \n"+
+    //     "  and recv_condition <> 'INIT' \n"+
+    //     "group by DATE_FORMAT(data_time, '%Y-%c'), data_type, recv_condition"
+    // )
+    // List<ReceiveDataDto.ReceiveDataForSiteStatMonth> getReceiveDataForSiteStatMonth(
+    //     @Param("data_kind") String data_kind,
+    //     @Param("site") String site,
+    //     @Param("data_type") String data_type
+    // );
+
 }

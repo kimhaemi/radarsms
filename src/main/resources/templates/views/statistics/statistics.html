@@ -4,6 +4,12 @@
       th:with="metaTitle='지점별 통계'">
 
     <th:block layout:fragment="content">
+        <script th:inline="javascript">
+			/* <![CDATA[ */
+			var nowYear = /*[[${nowYear}]]*/
+			console.log("nowYear", nowYear);
+            /* ]]> */
+            </script>
         <link rel="stylesheet" type="text/css" href="/css/jquery.jqplot.css">
         <script type="text/javascript" src="/js/plugins/jquery.jqplot.min.js"></script>
         <script type="text/javascript" src="/js/plugins/jqplot.canvasTextRenderer.min.js"></script>
@@ -82,57 +88,36 @@
         <input type="hidden" name="termClose" id="termClose">
 
         <table class="noticeTbl searchSeries">
-        <colgroup>
+        <!-- <colgroup>
             <col style="width:auto;">
             <col style="width:100px;">
             <col style="width:34px;">
             <col style="width:205px;">
             <col style="width:34px;">
-        </colgroup>
+        </colgroup> -->
             <thead>
             <tr>
-                <th class="left">
-                    지점별 통계 &gt; <span class="radar"> 관악산 레이더</span>
+                <th class="phead">
+                    지점별 통계 &gt; <span class="radar" th:text="${siteName + ' 레이더'}"></span>
                 </th>
-                <th class="right">
+                <th class="ptail">
                     <select name="statYear" id="statYear" class="">
-                        
-                        <option value="2013">2013년도</option>
-                        
-                        <option value="2014">2014년도</option>
-                        
-                        <option value="2015">2015년도</option>
-                        
-                        <option value="2016">2016년도</option>
-                        
-                        <option value="2017">2017년도</option>
-                        
-                        <option value="2018">2018년도</option>
-                        
-                        <option value="2019">2019년도</option>
-                        
-                        <option value="2020">2020년도</option>
-                        
-                        <option value="2021">2021년도</option>
-                        
-                        <option value="2022">2022년도</option>
-                        
-                        <option value="2023" selected="selected">2023년도</option>
-                        
+                        <th:block th:each="year : ${#numbers.sequence(2013, nowYear)}">
+                            <option th:value="${year}" th:text="${year + '년도'}" th:selected="${#strings.toString(year) == nowYear}"></option>    
+                        </th:block>
                     </select>
-                </th>
-                <th class="right">
-                    <input type="button" onclick="getMonthStat()" value="조회" style="height:18px;/*line-height: 12px;*/">
-                </th>
-                <th class="right">
+                    
+                    <!-- <input type="button" onclick="getMonthStat()" value="조회" style="height:18px;/*line-height: 12px;*/" /> -->
+                    <button class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="btnMonthSearch"
+                    onclick="getMonthStat()">조회</button>
+                    
                     <select name="statType" id="statType" class="">
-                        
-                        <option value="NQC">이진자료</option>
-                        
+                        <th:block th:each="rs : ${rdrSet }">
+                            <option th:value="${rs.dataType }" th:text="${rs.data_name}"></option>
+                        </th:block>
                     </select>
-                </th>
-                <th class="right">
-                    <input type="button" onclick="drawPlot()" value="조회" style="height:18px;/*line-height: 12px;*/">
+                    <button class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="btnDrawSearch"
+                    onclick="drawPlot()">조회</button>
                 </th>
             </tr>
             </thead>

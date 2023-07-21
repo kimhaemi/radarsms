@@ -1,4 +1,4 @@
-package kr.or.kimsn.radarsms.securityConfig.auth;
+package kr.or.kimsn.radarsms.config.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -27,5 +27,14 @@ public class ReceiveDataDto {
     private String recv_condition_check_time;
     private String file_name;
     private Integer file_size;
+
+    public static class ReceiveDataForSiteStatMonth {
+        String stat_time;
+        String data_type;
+        String recv_condition;
+        Integer cnt;
+    }
+
+    
     
 }

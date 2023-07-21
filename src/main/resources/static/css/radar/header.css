@@ -43,7 +43,7 @@ div.top_link{position:absolute;right:10px;top:40px;}
     border-bottom:2px solid #0004ff8c;
 }
 /* .lnb a{color:#555;font-family:'notokrM';} */
-.navi{display:flex;width:calc(100% - 70px);height: 40px;}
+.navi{display:flex;width:calc(100% - 20px);height: 40px;}
 /* .nav{float:right;display:flex;width:calc(100% - 77px);} */
 /* .nav > li{position:relative;flex:0 1 auto;width:calc(100%/9);} */
 /* .nav > li > a{width:100%;font-size:18px;text-align:center;line-height:60px;} */

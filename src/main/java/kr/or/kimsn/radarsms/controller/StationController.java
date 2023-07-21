@@ -48,9 +48,6 @@ public class StationController {
         // sml : 스몰
         String dataKind = !site.equals("LGT") ? "RDR" : "LGT";
 
-        // 자료 수신 처리 설정
-        stationService.getReceiveSetting(dataKind);
-
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -65,12 +62,29 @@ public class StationController {
 
         // 지점별 감시
         StationDto stationDtl = stationService.getStationDetail(site);
-        map.put("stationDtl", stationDtl);
+        model.addAttribute("siteName", stationDtl.getName_kr());
+        model.addAttribute("siteCd", stationDtl.getSiteCd());
 
-        // 최종 수신
-        List<ReceiveConditionDto> stationLastCheck = stationService.getStationLastCheck(site, "NQC");
-        map.put("stationLastCheck", stationLastCheck);
+        Date now = new Date();
+        model.addAttribute("now", DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", now));
 
+        // 최종수신상태
+        List<ReceiveConditionDto> rcState = stationService.getStationLastCheck(site, "NQC");
+        model.addAttribute("rcState", rcState);
+        
+        // 자료 수신 처리 설정
+        ReceiveSettingDto rdrSet = stationService.getReceiveSetting(dataKind, 1);
+        model.addAttribute("rdrSet", rdrSet);
+
+        //3시간 전까지 data
+        List<ReceiveDataDto> rdrMap = stationService.getReceiveDataThreeHour(dataKind, site, rdrSet, now);
+        model.addAttribute("rdrMap", rdrMap);
+        System.out.println("rdrMap :::: " + rdrMap);
+
+        Map<String, List<String>> keySet = stationService.getReceiveTimeList(now, 3, rdrSet);
+        System.out.println("keySet ::::::: " + keySet);
+        model.addAttribute("keySet", keySet);
+        
         // receive_condition
 
         model.addAttribute("list", map);

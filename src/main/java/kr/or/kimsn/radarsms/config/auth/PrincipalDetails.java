@@ -1,4 +1,4 @@
-package kr.or.kimsn.radarsms.securityConfig.auth;
+package kr.or.kimsn.radarsms.config.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;

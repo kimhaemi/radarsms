@@ -443,7 +443,8 @@ input, select {
 #f5content.mainSeries{width:1000px;}
 
 .noticeTbl {/* border:1px solid #838383;*/
-	float: right; margin: 0 auto ;width:100%;  padding: 5px 0 5px 0; } /* 알람설정 부분 */
+	/* float: right;  */
+	margin: 0 auto ;width:100%;  padding: 5px 0 5px 0; } /* 알람설정 부분 */
 /* .noticeTbl.timeSeries {width:990px;}
 .noticeTbl.searchSeries {width:990px;}
 .noticeTbl.settingSeries {width:100%;}
