@@ -13,12 +13,6 @@ body{min-width:970px; position: relative;}
 h1.logo{text-align:center;padding:20px 0;}
 div.top_link{position:absolute;right:10px;top:40px;}
 
-.time_remort_mobile{display: none;}
-.header_mobile {display: none;}
-.nav_mobile {display: none;}
-.remote_mobile{display: none;}
-.mobile_content{display: none;}
-#unit_bar_mobile{display: none; }
 #web_gif{display: block;}
 .max_width{width:1000px;margin:0 auto;text-align:left;padding:0 10px;}
 .wrap{height:100%;padding-top:80px;box-sizing:border-box;}
@@ -42,17 +36,11 @@ div.top_link{position:absolute;right:10px;top:40px;}
     position:relative;background-color:#fff;border-top:1px solid #7f9cb1;z-index:1300;
     border-bottom:2px solid #0004ff8c;
 }
-/* .lnb a{color:#555;font-family:'notokrM';} */
 .navi{display:flex;width:calc(100% - 20px);height: 40px;}
-/* .nav{float:right;display:flex;width:calc(100% - 77px);} */
-/* .nav > li{position:relative;flex:0 1 auto;width:calc(100%/9);} */
-/* .nav > li > a{width:100%;font-size:18px;text-align:center;line-height:60px;} */
-/* .nav > li:hover > a, */
 .navi > div > li{position:relative;flex:0 1 auto;width:calc(100%/1);padding: 6px 30px 6px 30px;}
 .navi > div > li > a{width:100%;font-size:14px;text-align:center;font-weight: 550;}
 .navi > div > li:hover > a,
 .navi > div > .on > a{color:#1000f7; font-weight: bold;}
-/* .nav > li:hover::after, */
 .navi > div > li:hover::after,
 .navi > div > .on::after{display:inline-block;content:"";
     width:0;height:0;border:7px solid #1000f7;border-bottom-color:transparent;
@@ -70,8 +58,13 @@ div.top_link{position:absolute;right:10px;top:40px;}
 .sub li:first-child{padding-top:10px;}
 .sub li:last-child{padding-bottom:10px;}
 .sub li a{display:block;width:100%;color:#000000;
-    line-height:35px;font-size:12px;font-family:'notokrR';
+    line-height:25px;
+    font-size:12px;font-family:'notokrR';
     text-align:left;
     padding-left:0px;border-left:4px solid transparent;}
 .sub a:hover{color:#1000f7;}
 .sub .on a{color:#1000f7;border-left-color:#1000f7;font-weight: bold;}
+
+.subTitle {font-weight: bold; 
+    /* background-color: #666; */
+}

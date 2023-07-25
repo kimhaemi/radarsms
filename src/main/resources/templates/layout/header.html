@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="headerFragment">
+        <script th:inline="javascript">
+			/* <![CDATA[ */
+                var menuList = /*[[${menuList}]]*/
+                console.log("menuList", menuList);
+            /* ]]> */
+            </script>
         <script type="text/javascript">
             var menuList;
             // var stationList;
@@ -56,7 +62,7 @@
                     dataType : 'json',
                     success: function (data) {
                         console.log(data);
-                        menuList = data.menuList;
+                        // menuList = data.menuList;
                         
                         // $(".data").replaceWith(data);
                     },
@@ -93,15 +99,21 @@
                             <li>
                                 <a th:href="${mList.path}" th:text="${mList.menuName}"></a><!-- 대메뉴 -->
                                 <ul th:if="${mList.id != 1000 && mList.id != 6000}"
-                                    class="sub" style="display: none; height: 520px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
-                                    <li th:if="${mList.id} != '5000'">대형</li>
+                                    class="sub" style="display: none; height: 420px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                                    <li class="subTitle" th:if="${mList.id} != '5000'">대형</li>
                                     <li th:each="sList : ${list.stationList}" th:if="${sList.gubun == 1}">
                                         <a th:if="${mList.id} == '2000'" th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                         <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                         <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                     </li>
-                                    <li th:if="${mList.id}!= '5000'">소형</li>
+                                    <li class="subTitle" th:if="${mList.id}!= '5000'">소형</li>
                                     <li th:each="sList : ${list.stationList}" th:if="${sList.gubun == 2}">
+                                        <a th:if="${mList.id} == '2000'" th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
+                                        <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
+                                        <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
+                                    </li>
+                                    <li class="subTitle" th:if="${mList.id}!= '5000'">공항</li>
+                                    <li th:each="sList : ${list.stationList}" th:if="${sList.gubun == 3}">
                                         <a th:if="${mList.id} == '2000'" th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                         <a th:if="${mList.id} == '3000'" th:href="${'/station/hist/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
                                         <a th:if="${mList.id} == '4000'" th:href="${'/stat/'+sList.siteCd}" th:text="${sList.name_kr}"></a>

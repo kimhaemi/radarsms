@@ -1,9 +1,8 @@
 package kr.or.kimsn.radarsms.restApiController;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,13 +18,16 @@ public class GetController {
     
     //메뉴 리스트
     @GetMapping("/getMenuData")
-    public List<MenuDto> menuData(){
+    // public ModelMap menuData(ModelMap model){
+    public List<MenuDto> menuData(ModelMap model){
+        model.addAttribute("menuList", menuService.getMenuList());
         // Map<String, Object> map = new HashMap<>();
         // List<MenuDto> menuList = menuService.getMenuList();
         // List<StationDto> stationList = menuService.getStationList();
 
         // map.put("stationList", stationList);
         return menuService.getMenuList();
+        // return model;
     }
 
     

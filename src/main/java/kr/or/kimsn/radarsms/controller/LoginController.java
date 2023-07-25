@@ -15,6 +15,12 @@ public class LoginController {
         return "views/login";
     }
 
+    // 로그인 proc
+    @GetMapping({ "/loginProc" })
+    public String loginProc() {
+        return "/";
+    }
+
     // 로그 아웃
     @GetMapping("/logout")
     public String logout() {

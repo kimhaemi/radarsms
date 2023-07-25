@@ -4,12 +4,7 @@
       th:with="metaTitle='지점별 통계'">
 
     <th:block layout:fragment="content">
-        <script th:inline="javascript">
-			/* <![CDATA[ */
-			var nowYear = /*[[${nowYear}]]*/
-			console.log("nowYear", nowYear);
-            /* ]]> */
-            </script>
+
         <link rel="stylesheet" type="text/css" href="/css/jquery.jqplot.css">
         <script type="text/javascript" src="/js/plugins/jquery.jqplot.min.js"></script>
         <script type="text/javascript" src="/js/plugins/jqplot.canvasTextRenderer.min.js"></script>
@@ -17,66 +12,97 @@
         <script type="text/javascript" src="/js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
         <script type="text/javascript" src="/js/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
         <script type="text/javascript" src="/js/plugins/jqplot.enhancedLegendRenderer.min.js"></script>
+        <script th:inline="javascript">
+			/* <![CDATA[ */
+                var nowYear = /*[[${nowYear}]]*/
+                console.log("nowYear", nowYear);
+                var recvMap = /*[[${recvMap}]]*/
+                console.log("recvMap", recvMap);
+                var retrMap = /*[[${retrMap}]]*/
+                console.log("retrMap", retrMap);
+                var missMap = /*[[${missMap}]]*/
+                console.log("missMap", missMap);
+                var rdrSet = /*[[${rdrSet}]]*/
+                console.log("rdrSet", rdrSet);
+                
+            /* ]]> */
+            </script>
+        
         
         <script type="text/javascript">
-        var sColor = [ "#F7B9D9", "#FFCCCC", "#FFDDA6", "#CCD1FF", "#B8F3B8", "#A9E2C5", "#2ED7D2", "#EBDBC4"];
-        var sValue = [];
-        var sLabel = ["수신자료","지연수신","수신누락"];
-        var sTicks = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
-        var sVal = {
-        
-            "NQC" : [
-            [0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0] ]
-        };
-        
-        var getMonthStat = function(){
-            // var url = "month_rdr_kwk.do?statYear="+$("#statYear :selected").val();
-            // $(location).attr('href',url);
-        }
-        var drawPlot = function(){
-            $("#monthLine").empty();
-            sValue=sVal[$("#statType :selected").val()];
-            var plot1 = $.jqplot('monthLine', sValue, 
-                    {
-                        axes: {
-                            xaxis: {
-                                renderer:$.jqplot.CategoryAxisRenderer, 
-                                ticks:sTicks,
-                                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
-                                pad: 0
+            var dataType = rdrSet.dataType;
+            
+            let recvArray = new Array();
+            let retrArray = new Array();
+            let missArray = new Array();
+
+            for(let a=0; a<12; a++){
+                recvArray.push(recvMap[a].cnt);
+                retrArray.push(retrMap[a].cnt);
+                missArray.push(missMap[a].cnt);
+            }
+
+            var sColor = [ "#F7B9D9", "#FFCCCC", "#FFDDA6", "#CCD1FF", "#B8F3B8", "#A9E2C5", "#2ED7D2", "#EBDBC4"];
+            var sValue = [];
+            var sLabel = ["수신자료","지연수신","수신누락"];
+            var sTicks = ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+            
+            var sVal = {
+                "NQC" : [
+                recvArray,
+                retrArray,
+                missArray ]
+            };
+            console.log(sVal);
+            
+            var getMonthStat = function(){
+                // var url = "month_rdr_kwk.do?statYear="+$("#statYear :selected").val();
+                // $(location).attr('href',url);
+                console.log($("#statYear :selected").val());
+                location.href="/stat/KWK?statYear="+$("#statYear :selected").val();
+            }
+            var drawPlot = function(){
+                $("#monthLine").empty();
+                sValue=sVal[$("#statType :selected").val()];
+                var plot1 = $.jqplot('monthLine', sValue, 
+                        {
+                            axes: {
+                                xaxis: {
+                                    renderer:$.jqplot.CategoryAxisRenderer, 
+                                    ticks:sTicks,
+                                    tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                                    pad: 0
+                                },
+                                yaxis: {
+                                    label: "건수",
+                                    pad: 0
+                                }
                             },
-                            yaxis: {
-                                label: "건수",
-                                pad: 0
-                            }
-                        },
-                        seriesDefaults: {
-                            lineWidth:1, 
-                            markerOptions: { style:'circle', size:3 },
-                            rendererOptions: {
-                                smooth: true
-                            }
-                        },
-                        series:[
-                        ],
-                        legend: {
-                            renderer: $.jqplot.EnhancedLegendRenderer,
-                            placement: 'outsideGrid',
-                            labels: sLabel,
-                            marginTop: 0,
-                            show: true,
-                            location: 'e',
-                            rendererOptions: {
-                                seriesToggle: false,
-                                disableIEFading: true
-                            }
-                        },
-                        seriesColors: sColor 
-                    }
-                );
-        }
+                            seriesDefaults: {
+                                lineWidth:1, 
+                                markerOptions: { style:'circle', size:3 },
+                                rendererOptions: {
+                                    smooth: true
+                                }
+                            },
+                            series:[
+                            ],
+                            legend: {
+                                renderer: $.jqplot.EnhancedLegendRenderer,
+                                placement: 'outsideGrid',
+                                labels: sLabel,
+                                marginTop: 0,
+                                show: true,
+                                location: 'e',
+                                rendererOptions: {
+                                    seriesToggle: false,
+                                    disableIEFading: true
+                                }
+                            },
+                            seriesColors: sColor 
+                        }
+                    );
+            }
         
         $(document).ready(function(){
             drawPlot();
@@ -103,7 +129,7 @@
                 <th class="ptail">
                     <select name="statYear" id="statYear" class="">
                         <th:block th:each="year : ${#numbers.sequence(2013, nowYear)}">
-                            <option th:value="${year}" th:text="${year + '년도'}" th:selected="${#strings.toString(year) == nowYear}"></option>    
+                            <option th:value="${year}" th:text="${year + '년도'}" th:selected="${#strings.toString(year) == statYear}"></option>    
                         </th:block>
                     </select>
                     
@@ -124,70 +150,7 @@
         </table>
         </form>
         
-        <div class="monthLine jqplot-target" id="monthLine" style="position: relative;">
-            <canvas width="800" height="400" class="jqplot-base-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas>
-            <div class="jqplot-title" style="height: 0px; width: 0px;"></div>
-            <div class="jqplot-axis jqplot-xaxis" style="position: absolute; width: 800px; height: 15px; left: 0px; bottom: 0px;">
-                <canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 66.5417px;"></canvas>
-                <canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 121.625px;"></canvas>
-                <canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 176.708px;"></canvas>
-                <canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 231.792px;"></canvas>
-                <canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 286.875px;"></canvas>
-                <canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 341.958px;"></canvas>
-                <canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 397.042px;"></canvas>
-                <canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 452.125px;"></canvas>
-                <canvas width="20" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 507.208px;"></canvas>
-                <canvas width="27" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 558.792px;"></canvas>
-                <canvas width="27" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 613.875px;"></canvas>
-                <canvas width="27" height="15" class="jqplot-xaxis-tick" style="text-align: left; position: absolute; left: 668.958px;"></canvas>
-            </div>
-            <div class="jqplot-axis jqplot-yaxis" style="position: absolute; height: 400px; width: 39px; left: 0px; top: 0px;">
-                <div style="position: absolute; width: 25px; top: 174.5px; left: 0px;" class="jqplot-yaxis-label">건수</div>
-                <div class="jqplot-yaxis-tick" style="position: absolute; top: 366px;">0.0</div>
-                <div class="jqplot-yaxis-tick" style="position: absolute; top: 293px;">0.2</div>
-                <div class="jqplot-yaxis-tick" style="position: absolute; top: 220px;">0.4</div>
-                <div class="jqplot-yaxis-tick" style="position: absolute; top: 147px;">0.6</div>
-                <div class="jqplot-yaxis-tick" style="position: absolute; top: 74px;">0.8</div>
-                <div class="jqplot-yaxis-tick" style="position: absolute; top: 1px;">1.0</div>
-            </div>
-            <canvas width="800" height="400" class="jqplot-grid-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas>
-            <canvas width="661" height="365" class="jqplot-series-shadowCanvas" style="position: absolute; left: 49px; top: 10px;"></canvas>
-            <canvas width="661" height="365" class="jqplot-series-shadowCanvas" style="position: absolute; left: 49px; top: 10px;"></canvas>
-            <canvas width="661" height="365" class="jqplot-series-shadowCanvas" style="position: absolute; left: 49px; top: 10px;"></canvas>
-            <canvas width="661" height="365" class="jqplot-series-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas>
-            <canvas width="661" height="365" class="jqplot-series-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas>
-            <canvas width="661" height="365" class="jqplot-series-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas>
-            <table class="jqplot-table-legend" style="position: absolute; margin-top: 0px; right: 0px; top: 163.5px;">
-                <tbody>
-                    <tr class="jqplot-table-legend">
-                        <td class="jqplot-table-legend jqplot-table-legend-swatch" style="text-align: center; padding-top: 0px;">
-                            <div class="jqplot-table-legend-swatch-outline">
-                                <div class="jqplot-table-legend-swatch" style="background-color: rgb(247, 185, 217); border-color: rgb(247, 185, 217);"></div>
-                            </div>
-                        </td>
-                        <td class="jqplot-table-legend jqplot-table-legend-label" style="padding-top: 0px;">수신자료</td>
-                    </tr>
-                    <tr class="jqplot-table-legend">
-                        <td class="jqplot-table-legend jqplot-table-legend-swatch" style="text-align: center; padding-top: 0.5em;">
-                            <div class="jqplot-table-legend-swatch-outline">
-                                <div class="jqplot-table-legend-swatch" style="background-color: rgb(255, 204, 204); border-color: rgb(255, 204, 204);"></div>
-                            </div>
-                        </td>
-                        <td class="jqplot-table-legend jqplot-table-legend-label" style="padding-top: 0.5em;">지연수신</td>
-                    </tr>
-                    <tr class="jqplot-table-legend">
-                        <td class="jqplot-table-legend jqplot-table-legend-swatch" style="text-align: center; padding-top: 0.5em;">
-                            <div class="jqplot-table-legend-swatch-outline">
-                                <div class="jqplot-table-legend-swatch" style="background-color: rgb(255, 221, 166); border-color: rgb(255, 221, 166);"></div>
-                            </div>
-                        </td>
-                        <td class="jqplot-table-legend jqplot-table-legend-label" style="padding-top: 0.5em;">수신누락</td>
-                    </tr>
-                </tbody>
-            </table>
-            <canvas width="661" height="365" class="jqplot-lineRenderer-highlight-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas>
-            <canvas width="661" height="365" class="jqplot-event-canvas" style="position: absolute; left: 49px; top: 10px;"></canvas>
-        </div>	
+        <div class="monthLine" id="monthLine" ></div>	
         
         <div class="monthTable">
         
@@ -213,385 +176,65 @@
                 <thead class="subThead">
                     <tr>
                         <th rowspan="2" colspan="2">항목</th>
-                        <th colspan="12">관악산 레이더</th>
+                        <th colspan="12"><span th:text="${siteName + ' 레이더'}"></span></th>
                     </tr>
                     <tr>
-                    
-                        <th>1월</th>
-                    
-                        <th>2월</th>
-                    
-                        <th>3월</th>
-                    
-                        <th>4월</th>
-                    
-                        <th>5월</th>
-                    
-                        <th>6월</th>
-                    
-                        <th>7월</th>
-                    
-                        <th>8월</th>
-                    
-                        <th>9월</th>
-                    
-                        <th>10월</th>
-                    
-                        <th>11월</th>
-                    
-                        <th>12월</th>
-                        
+                        <th th:each="month : ${#numbers.sequence(1, 12)}" th:text="${month + '월'}"> </th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    
-                    <tr>
-                        <td rowspan="3">
-                            이진자료
-
-                        </td>
-                        <td>
-                            수신자료
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                    </tr>
-                    <tr>
-                        <td>
-                            지연수신
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                    </tr>
-                    <tr>
-                        <td>
-                            수신누락
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                        <td>
-                            
-                            
-                            
-                                - 
-                            
-                            
-                        </td>
-                        
-                    </tr>
-                    
+						<tr th:each="rdr : ${rdrSet}">
+							<td rowspan="3">
+                                <span th:text="${rdr.data_name}"></span>
+							</td>
+							<td>수신자료</td>
+                            <th:block th:each="month, monthStat : ${#numbers.sequence(1, 12)}">
+                                <td>
+                                    <th:block th:each="rcDt : ${recvMap}">
+                                        <th:block th:if="${rcDt.stat_month == month}">
+                                            <div th:text="${rcDt.cnt}"></div>
+                                            <div th:text="${'('+rcDt.percent+'%)'}"></div>
+                                        </th:block>
+                                        <!-- <th:block th:if="${rtDt.stat_month != month && rtDt.cnt != null}">
+                                            <span>-</span>
+                                        </th:block> -->
+                                    </th:block>
+                                </td>
+                            </th:block>
+						</tr>
+						<tr>
+							<td>지연수신</td>
+                            <th:block th:each="month, monthStat : ${#numbers.sequence(1, 12)}">
+                                <td>
+                                    <th:block th:each="rtDt : ${retrMap}">
+                                        <th:block th:if="${rtDt.stat_month == month}">
+                                            <div th:text="${rtDt.cnt}"></div>
+                                            <div th:text="${'('+rtDt.percent+'%)'}"></div>
+                                        </th:block>
+                                        <!-- <th:block th:if="${rtDt.stat_month != month && rtDt.cnt != null}">
+                                            <span>-</span>
+                                        </th:block> -->
+                                    </th:block>
+                                </td>
+                            </th:block>
+						</tr>
+						<tr>
+							<td>수신누락</td>
+                            <th:block th:each="month, monthStat : ${#numbers.sequence(1, 12)}">
+                                <td>
+                                    <th:block th:each="missDt : ${missMap}">
+                                        <th:block th:if="${missDt.stat_month == month}">
+                                            <div th:text="${missDt.cnt}"></div>
+                                            <div th:text="${'('+missDt.percent+'%)'}"></div>
+                                        </th:block>
+                                        <!-- <th:block th:if="${missDt.stat_month != month && missDt.cnt != null}">
+                                            <span>-</span>
+                                        </th:block> -->
+                                    </th:block>
+                                </td>
+                            </th:block>
+						</tr>
+					<!-- </c:forEach> -->
                 </tbody>
             </table>
         </div>

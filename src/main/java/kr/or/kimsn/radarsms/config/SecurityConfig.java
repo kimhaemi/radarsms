@@ -52,7 +52,7 @@ public class SecurityConfig {
             )
             .formLogin(login-> login
                 .loginPage("/login")
-                // .loginProcessingUrl("/login-process")	// [B] submit 받을 url
+                .loginProcessingUrl("/loginProc")	// [B] submit 받을 url
                 .usernameParameter("userId")	// [C] submit할 아이디
                 .passwordParameter("password")	// [D] submit할 비밀번호
                 .defaultSuccessUrl("/", true)

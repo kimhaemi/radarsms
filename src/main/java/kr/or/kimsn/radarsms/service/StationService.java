@@ -7,16 +7,17 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 import kr.or.kimsn.radarsms.common.util.DateUtil;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionDto;
 import kr.or.kimsn.radarsms.dto.ReceiveDataDto;
+import kr.or.kimsn.radarsms.dto.ReceiveDataForSiteStatMonthDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionRepository;
+import kr.or.kimsn.radarsms.repository.ReceiveDataForSiteStatMonthRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveDataRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveSettingRepository;
 import kr.or.kimsn.radarsms.repository.StationRepository;
@@ -33,6 +34,7 @@ public class StationService {
     private final ReceiveConditionRepository receiveConditionRepository;
     private final ReceiveSettingRepository receiveSettingRepository;
     private final ReceiveDataRepository receiveDataRepository;
+    private final ReceiveDataForSiteStatMonthRepository receiveDataForSiteStatMonthRepository;    
 
     // 지점 데이터
     public StationDto getStationDetail(String siteCd) {
@@ -107,4 +109,25 @@ public class StationService {
     public List<ReceiveDataDto> getReceiveDataList(String data_kind, String data_type, String site, String dateStart, String dateClose) {
         return receiveDataRepository.getReceiveDataList(data_kind, data_type, site, dateStart, dateClose);
     }
+
+    //통계
+    public ModelMap getReceiveDataSiteStatMonth(ReceiveSettingDto rsDto, String site, Date dateStart, Date dateClose, ModelMap model) {
+
+        String data_time = DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", dateStart);
+        String recv_time = DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", dateClose);
+
+        System.out.println("data_time :::: " + data_time);
+        System.out.println("recv_time :::: " + recv_time);
+
+        List<ReceiveDataForSiteStatMonthDto> recvData = receiveDataForSiteStatMonthRepository.getReceiveDataForSiteStatMonth(site, data_time, recv_time, "RECV", rsDto.getDataType());
+        List<ReceiveDataForSiteStatMonthDto> retrData = receiveDataForSiteStatMonthRepository.getReceiveDataForSiteStatMonth(site, data_time, recv_time, "RETR", rsDto.getDataType());
+        List<ReceiveDataForSiteStatMonthDto> missData = receiveDataForSiteStatMonthRepository.getReceiveDataForSiteStatMonth(site, data_time, recv_time, "MISS", rsDto.getDataType());
+        
+        model.addAttribute("recvMap", recvData);
+        model.addAttribute("retrMap", retrData);
+        model.addAttribute("missMap", missData);
+
+        return model;
+  }
+
 }

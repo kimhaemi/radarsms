@@ -74,27 +74,4 @@ public interface ReceiveDataRepository extends JpaRepository<ReceiveDataDto, Rec
         @Param("site") String site,
         @Param("data_type") String data_type
     );
-
-    // @Query(
-    //     nativeQuery = true,
-    //     value=
-    //     "select \n"+
-    //     "  DATE_FORMAT(data_time, '%Y-%c') as stat_time, \n"+
-    //     "  data_type as data_type, \n"+
-    //     "  recv_condition as recv_condition, \n"+
-    //     "  count(recv_condition) as cnt  \n"+
-    //     "from receive_data \n"+
-    //     "where 1=1 \n"+
-    //     "  and site = :site \n"+
-    //     "  and data_time >= :data_time \n"+
-    //     "  and data_time < :recv_time \n"+
-    //     "  and recv_condition <> 'INIT' \n"+
-    //     "group by DATE_FORMAT(data_time, '%Y-%c'), data_type, recv_condition"
-    // )
-    // List<ReceiveDataDto.ReceiveDataForSiteStatMonth> getReceiveDataForSiteStatMonth(
-    //     @Param("data_kind") String data_kind,
-    //     @Param("site") String site,
-    //     @Param("data_type") String data_type
-    // );
-
 }

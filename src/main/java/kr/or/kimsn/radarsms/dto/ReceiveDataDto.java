@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 @IdClass(ReceiveDataPk.class)
 public class ReceiveDataDto {
-
+    
     @Id
     private String data_kind;
     @Id
@@ -28,13 +28,4 @@ public class ReceiveDataDto {
     private String file_name;
     private Integer file_size;
 
-    public static class ReceiveDataForSiteStatMonth {
-        String stat_time;
-        String data_type;
-        String recv_condition;
-        Integer cnt;
-    }
-
-    
-    
 }

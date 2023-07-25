@@ -12,8 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.kimsn.radarsms.common.util.DateUtil;
 import kr.or.kimsn.radarsms.dto.MenuDto;
@@ -36,7 +37,7 @@ public class StatisticsController {
     // private HistoricalDataService historicalDataService;
 
     //조회
-    @GetMapping("/stat/{site}")
+    @RequestMapping(value="/stat/{site}", method = {RequestMethod.GET, RequestMethod.POST})
     public String getStation(@PathVariable("site") String site, 
         HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model){
         
@@ -59,6 +60,7 @@ public class StatisticsController {
         String dataKind = !site.equals("LGT") ? "RDR" : "LGT";
 
         String statYear = request.getParameter("statYear");
+        System.out.println("statYear :::: " + statYear );
 
         Date now = new Date();
         Date dateStart = null;
@@ -83,9 +85,20 @@ public class StatisticsController {
         ReceiveSettingDto rdrSet = stationService.getReceiveSetting(dataKind, 1);
         model.addAttribute("rdrSet", rdrSet);
 
+        //통계
+        model = stationService.getReceiveDataSiteStatMonth(rdrSet, site, dateStart, dateClose, model);
+        // model.addAttribute("recvData", recvData);
+        // System.out.println("model :::: " + model.get("recvData"));
+
         model.addAttribute("statYear", DateUtil.formatDate("yyyy", dateStart));
         model.addAttribute("nowYear", DateUtil.formatDate("yyyy", now));
         model.addAttribute("now", now);
+
+        // model.addAttribute("recv", null);
+        model.addAttribute("retr", null);
+        model.addAttribute("miss", null);
+        model.addAttribute("tota", null);
+
 
         return "views/statistics/statistics";
     }
