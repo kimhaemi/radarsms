@@ -45,8 +45,8 @@ public class MenuService {
                 if(sr.getSiteCd().equals(rc.getSite())){
                     ReceiveConditionJoinStationRdrDto rcDto = new ReceiveConditionJoinStationRdrDto();
                     rcDto.setSite(rc.getSite());
-                    rcDto.setData_kind(rc.getData_kind());
-                    rcDto.setData_type(rc.getDataType());
+                    rcDto.setDataKind(rc.getData_kind());
+                    rcDto.setDataType(rc.getDataType());
                     rcDto.setRecv_condition(rc.getRecv_condition());
                     rcDto.setApply_time(rc.getApply_time());
                     rcDto.setLast_check_time(rc.getLast_check_time());

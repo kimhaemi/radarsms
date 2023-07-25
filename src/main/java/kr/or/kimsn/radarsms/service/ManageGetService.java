@@ -103,8 +103,7 @@ public class ManageGetService {
 
         for (SmsTargetGroupLinkListDto link : links) {
             for (ReceiveDto rc : rclist) {
-                if (link.getData_kind().equals(rc.getData_kind()) && link.getSite().equals(rc.getSite()) &&
-                        link.getData_type().equals(rc.getData_type())) {
+                if (link.getData_kind().equals(rc.getDataKind()) && link.getSite().equals(rc.getSite()) && link.getData_type().equals(rc.getDataType())) {
                     rmlist.add(rc);
                     break;
                 }

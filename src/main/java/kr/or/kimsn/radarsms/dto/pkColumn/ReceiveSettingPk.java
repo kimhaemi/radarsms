@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReceiveConditionJoinStationRdrPk implements Serializable{
-    private String data_kind;
-    private String site;
-    private String data_type;
+public class ReceiveSettingPk implements Serializable{
+    private String dataKind;
+    private String dataType;
 }

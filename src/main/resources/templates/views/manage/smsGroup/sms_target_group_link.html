@@ -135,18 +135,18 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="notLink : ${notlinks}">
-                    <td th:switch="${notLink.data_kind}">
+                <tr th:each="notLink : ${notlinks}" th:if="${notLink.status == 1}">
+                    <td th:switch="${notLink.dataKind}">
                         <span th:case="RDR">레이더</span>
                         <span th:case="all">네트워크</span>
                         <span th:case="LGT">낙뢰</span>
                     </td>
                     <td>
-                        <span th:if="${notLink.data_kind == 'RDR'}" th:text="${notLink.name_kr}"></span>
-                        <span th:unless="${notLink.data_kind == 'RDR'}">-</span>
+                        <span th:if="${notLink.dataKind == 'RDR'}" th:text="${notLink.name_kr}"></span>
+                        <span th:unless="${notLink.dataKind == 'RDR'}">-</span>
                     </td>
                     <td>
-                        <span th:text="${notLink.data_type}"></span>
+                        <span th:text="${notLink.dataType}"></span>
                     </td>
                     <td>
                         <spen th:text="${notLink.data_name}"></spen>

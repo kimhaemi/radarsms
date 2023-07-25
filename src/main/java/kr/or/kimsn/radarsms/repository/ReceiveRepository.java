@@ -17,7 +17,8 @@ public interface ReceiveRepository extends JpaRepository<ReceiveDto, String>{
         "  T2.name_kr as name_kr,\n" +
         "  T1.data_type as data_type, \n"+
         "  T3.data_name as data_name,\n" +
-        "  T1.sms_send_activation as sms_send_activation\n" +
+        "  T1.sms_send_activation as sms_send_activation, \n" +
+        "  T1.status as status \n" +
         "from\n" +
         "  receive_condition T1\n" +
         "left outer join station_rdr T2\n" +

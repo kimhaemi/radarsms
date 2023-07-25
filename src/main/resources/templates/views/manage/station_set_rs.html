@@ -6,7 +6,7 @@
 	<th:block layout:fragment="content">
         <script th:inline="javascript">
             /* <![CDATA[ */
-                var mData = /*[[${list.receiveSettingList}]]*/
+                var mData = /*[[${receiveSettingList}]]*/
                 console.log(mData);
             /* ]]> */
         </script>
@@ -85,10 +85,13 @@
                     <th>자료 감시<br/> 설정 </th>
                 </tr>
             </thead>
-            <tbody class="table-group-divider" th:each="rsList, rsListStat : ${list.receiveSettingList}" th:if="${rsList.status == 1}">
+            <tbody class="table-group-divider" th:each="rsList, rsListStat : ${receiveSettingList}" th:if="${rsList.status == 1}">
                 <tr th:if="${rsList.permittedWatch} == 1">
                     <th colspan="7" th:if="${rsList.dataKind} == 'RDR'">
-                        레이더
+                        대형 레이더
+                    </th>
+                    <th colspan="7" th:if="${rsList.dataKind} == 'SDR'">
+                        소형 레이더
                     </th>
                     <th colspan="7" th:if="${rsList.dataKind} == 'LGT'">
                         낙뢰

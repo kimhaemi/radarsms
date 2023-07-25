@@ -4,12 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 
-import kr.or.kimsn.radarsms.dto.pkColumn.SmsSetRcPk;
+import kr.or.kimsn.radarsms.dto.pkColumn.CommonPk;
 import lombok.Data;
 
 @Data
 @Entity
-@IdClass(SmsSetRcPk.class)
+@IdClass(CommonPk.class)
 public class SmsSetRcDto {
 
     @Id

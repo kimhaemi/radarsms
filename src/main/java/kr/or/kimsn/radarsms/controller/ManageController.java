@@ -86,11 +86,11 @@ public class ManageController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        List<ReceiveSettingDto> receiveSettingList = manageGetService.getReceiveSettingList();
-        map.put("receiveSettingList", receiveSettingList);
-        System.out.println("receiveSettingList : \n" + receiveSettingList);
-
         model.addAttribute("list", map);
+
+        List<ReceiveSettingDto> receiveSettingList = manageGetService.getReceiveSettingList();
+        model.addAttribute("receiveSettingList", receiveSettingList);
+        
         return "views/manage/station_set_rs";
     }
 

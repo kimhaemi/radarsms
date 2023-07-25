@@ -1,23 +1,27 @@
 package kr.or.kimsn.radarsms.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 
-import kr.or.kimsn.radarsms.dto.pkColumn.ReceiveConditionJoinStationRdrPk;
+import kr.or.kimsn.radarsms.dto.pkColumn.CommonPk;
 import lombok.Data;
 
 @Data
 @Entity
-@IdClass(ReceiveConditionJoinStationRdrPk.class)
+@IdClass(CommonPk.class)
 public class ReceiveConditionJoinStationRdrDto {
 
     @Id
     private String site;
     @Id
-    private String data_kind;
+    @Column(name = "data_kind")
+    private String dataKind;
     @Id
-    private String data_type;
+    @Column(name = "data_type")
+    private String dataType;
+    
     private String recv_condition;
     private String apply_time;
     private String last_check_time;

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SmsSetRcPk implements Serializable{
+public class CommonPk implements Serializable{
     private String dataKind;
     private String site;
     private String dataType;
