@@ -68,7 +68,8 @@ public class ManageGetService {
 
     // 경고 기준 설정
     public List<ReceiveConditionCriteriaDto> getReceiveConditionCriteriaList() {
-        return receiveConditionCriteriaRepository.findAll();
+        // return receiveConditionCriteriaRepository.findAll();
+        return receiveConditionCriteriaRepository.findByOrderByGubunAsc();
     }
 
     // 자료 수신 감시 설정(자료 수신 처리 설정 테이블) - 상태가 사용인 것만
@@ -120,7 +121,8 @@ public class ManageGetService {
 
     // 문자 수신 그룹 관리
     public List<SmsTargetGroupDto> getSmsTargetGroupList() {
-        return smsTargetGroupRepository.findAll();
+        // return smsTargetGroupRepository.findAll();
+        return smsTargetGroupRepository.findByOrderBySortOrderAsc();
     }
 
     // 문자 수신 그룹 > [ *** ] 그룹 관리

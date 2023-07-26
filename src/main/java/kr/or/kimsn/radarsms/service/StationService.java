@@ -85,8 +85,12 @@ public class StationService {
 
         //이게 중요한것 같네~~
         for (int i = 0; i < hour; i++) {
-            // String key = String.valueOf(rsDto.getDataType()) + "#" + DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 10))).substring(0, 15) + "0";
-            String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 10))).substring(0, 15) + "0";
+            //10분단위
+            // String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 10))).substring(0, 15) + "0";
+            //5분단위
+            String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5)));
+            // System.out.println("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5))));
+            // System.out.println("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5))).substring(0, 15) + "0");
             list.add(key);
         }
 

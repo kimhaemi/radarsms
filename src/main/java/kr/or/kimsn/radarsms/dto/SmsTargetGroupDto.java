@@ -22,5 +22,7 @@ public class SmsTargetGroupDto {
     private String name;
     private String activation;
     private String status;
+    @Column(name="sort_order")
+    private Integer sortOrder;
 
 }

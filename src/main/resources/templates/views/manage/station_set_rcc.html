@@ -63,12 +63,22 @@
             </colgroup>
             <thead class="subThead">
                 <tr>
-                    <th>구분</th>
+                    <th >구분</th>
                     <th>설정값</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr th:each="list : ${list.criteriaList}" th:if="${list.code} != 'ORDI'">
+                <th:block th:each="list, listState : ${list.criteriaList}">
+                <tr th:if="${list.code == 'NOTI'}">
+                    <th colspan="2" th:if="${list.gubun} == 1" style="height: 40px;">
+                        대형 레이더
+                    </th>
+                    <th colspan="2" th:if="${list.gubun} == 2" style="height: 40px;">
+                        소형 레이더
+                    </th>
+                </tr>
+                
+                <tr th:if="${list.code != 'ORDI'}">
                     <td>
                         <span th:text="${list.name + ' 기준'}"></span>
                     </td>
@@ -90,6 +100,7 @@
                         </span>
                     </td>
                 </tr>
+            </th:block>
             </tbody>
         </table>
     </th:block>
