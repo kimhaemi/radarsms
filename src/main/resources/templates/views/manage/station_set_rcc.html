@@ -5,10 +5,10 @@
 
 	<th:block layout:fragment="content">
         <script th:inline="javascript">
-            /* <![CDATA[ */
-                var mData = /*[[${list.criteriaList}]]*/
-                console.log(mData);
-            /* ]]> */
+        /* <![CDATA[ */
+            var mData = /*[[${list.criteriaList}]]*/
+            console.log(mData);
+        /* ]]> */
         </script>
         <script type="text/javascript">
             $(function() {
@@ -40,8 +40,6 @@
             });
         </script>
     
-        <input type="hidden" name="termStart" id="termStart">
-        <input type="hidden" name="termClose" id="termClose">
         <table class="noticeTbl searchSeries">
             <thead>
             <tr>
