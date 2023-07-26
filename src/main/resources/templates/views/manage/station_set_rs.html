@@ -6,40 +6,47 @@
 	<th:block layout:fragment="content">
         <script th:inline="javascript">
             /* <![CDATA[ */
-                var mData = /*[[${receiveSettingList}]]*/
-                console.log(mData);
+                var rsData = /*[[${receiveSettingList}]]*/
+                console.log("rsData : ", rsData);
             /* ]]> */
         </script>
         <script type="text/javascript">
         $(function() {
             $("#configSave").on("click", function(){
                 let list = new Array();
-                $("input[name=config]").each(function(idx, item){
-                    let jObj = new Object();
-                    let site = item.id.split("-")[0];
-                    let dataType = item.id.split("-")[1];
 
-                    mData.forEach(e => {
-                        // console.log(e);
-                        if(e.site == site && e.dataType == dataType){
-                            jObj.site=e.site;
-                            jObj.dataKind=e.dataKind;
-                            jObj.dataType=e.dataType;
-                            jObj.data_name=e.data_name;
-                            jObj.sms_send_activation=$(item).is(":checked") ? 1 : 0;
-                            jObj.status=e.status;
-                            list.push(jObj);
-                        }
-                    });
+                rsData.forEach((e, idx) => {
+                    // console.log(e);
+                    // e.dataKind=e.dataKind;
+                    // e.dataType=e.dataType;
+                    // e.data_name=e.data_name;
+                    // e.recv_interval=e.recv_interval;
+                    // e.status=e.status;
+                    console.log("idx :: ", idx);
+                    let dataKind = $("#data_kind-"+idx).val();
+                    let dataType = $("#data_type-"+idx).val();
+                    // console.log("dataKind :: ", dataKind);
+                    // console.log("dataType :: ", dataType);
+                    if(e.dataKind == dataKind && e.dataType == dataType){
+                        e.time_zone=$("#time-"+idx).is(":checked") ? 1 : 0;
+                        e.filename_pattern=$("#filename_pattern-"+idx).val();
+                        e.filename_regex=$("#filename_regex-"+idx).val();
+                        e.permittedWatch=$("#pmt-"+idx).is(":checked") ? 1 : 0;
+                        e.delay_tolerance=$("#delay_tolerance-"+idx).val();
+                        list.push(e);
+                    }
                 });
 
+                // console.log("rsData ::: ", rsData);
+                console.log(list);
+                
                 if(confirm("저장 하겠습니까?")){
-                    let result = fnCall('post', '/manage/station_set_rc_modify', JSON.stringify(list));
+                    let result = fnCall('post', '/manage/station_set_rs_modify', JSON.stringify(list));
                     
                     console.log("result :: "+ result.status);
                     if(result.status == "success"){
                         alert("저장되었습니다.");
-                        location.href="/manage/station_set_rc"; //다시 로딩
+                        location.href="/manage/station_set_rs"; //다시 로딩
                     } else {
                         alert("저장에 실패하였습니다. \n" + result.data);
                     }
@@ -49,8 +56,6 @@
         });
         </script>
     
-        <input type="hidden" name="termStart" id="termStart">
-        <input type="hidden" name="termClose" id="termClose">
         <table class="noticeTbl settingSeries">
             <thead>
             <tr>
@@ -99,12 +104,12 @@
                 </tr>
                 <tr th:if="${rsList.dataKind} != 'all'">
                     <td>
-                        <input type="hidden" th:name="${'receiveSettings['+rsListStat.index+'].data_type'}" th:value="${rsList.dataType }" />
-                        <input type="hidden" th:name="${'receiveSettings['+rsListStat.index+'].data_kind'}" th:value="${rsList.dataKind }" />
+                        <input type="hidden" th:id="${'data_type-'+rsListStat.index}" th:value="${rsList.dataType }" />
+                        <input type="hidden" th:id="${'data_kind-'+rsListStat.index}" th:value="${rsList.dataKind }" />
                         <div th:text="${rsList.dataType}"></div>
                     </td>
                     <td>
-                        <input type="hidden" th:name="${'receiveSettings['+rsListStat.index+'].data_name'}" th:value="${rsList.data_name }" />
+                        <input type="hidden" th:id="${'data_name-'+rsListStat.index}" th:value="${rsList.data_name }" />
                         <div th:text="${rsList.data_name}"></div>
                     </td>
                     <td>
@@ -119,17 +124,17 @@
                         </label>
                     </td>
                     <td>
-                        <input type="text" th:name="${'receiveSettings['+rsListStat.index+'].filename_pattern'}" class="namePattern" th:value="${rsList.filename_pattern }" />
+                        <input type="text" th:id="${'filename_pattern-'+rsListStat.index}" class="namePattern" th:value="${rsList.filename_pattern }" />
                     </td>
                     <td>
-                        <input type="text" th:name="${'receiveSettings['+rsListStat.index+'].filename_regex'}" class="nameRegex" th:value="${rsList.filename_regex }" />
+                        <input type="text" th:id="${'filename_regex-'+rsListStat.index}" class="nameRegex" th:value="${rsList.filename_regex }" />
                     </td>
                     <td>
-                        <input type="text" th:name="${'receiveSettings['+rsListStat.index+'].delay_tolerance'}" class="rccset" th:value="${rsList.delay_tolerance }" />분
+                        <input type="text" th:id="${'delay_tolerance-'+rsListStat.index}" class="rccset" th:value="${rsList.delay_tolerance }" />분
                     </td>
                     <td>
                         <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
-                            <input type="checkbox" name="config" 
+                            <input type="checkbox" name="pmtConfig" 
                                 th:id="${'pmt-'+rsListStat.index}"
                                 th:checked="${rsList.permittedWatch}"
                             />
