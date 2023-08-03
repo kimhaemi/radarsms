@@ -160,52 +160,6 @@
         }
     });
 
-    $(".time_remort_mobile .btn").on('click', function () {
-        var getVal = $(this)[0].value,
-            iptDateTime = $("[dataformat='datetimepic']"),
-            now = new Date(),
-            timepic = iptDateTime.datetimepicker('getDate'),
-            calctime = timepic.addMinutes(parseInt(getVal));
-
-        var id = $("#cgiId").val();
-        if (id == "PR") {
-            $("#tab04 ul li").each(function () {
-                if ($(this).find("label").hasClass("on")) {
-                    $(this).find("label").removeClass("on");
-                }
-            });
-        }
-
-        if (getVal === "now") {
-            iptDateTime.datetimepicker('setDate', now);
-            nowTime();
-            return;
-        }
-        if (now >= calctime) {
-            iptDateTime.datetimepicker('setDate', calctime);
-            getTime($(this).val());
-        } else {
-            alert('선택한 시간이 현재 시간보다 앞섭니다.\n현재시간으로 조회합니다.');
-            nowTime();
-        }
-
-        if ($(this).hasClass("btn_greenline") == true) {
-            $("#prId").val("cgi");
-            $("#cgiOpt").val(getVal);
-            selectCGI();
-            return;
-        }
-
-
-        if (getVal === 'mobileInit') {
-            $("#cgiOpt").val(getVal);
-            selectCGI();
-            return;
-        }
-
-    });
-
-
     Date.prototype.addMinutes = function (minutes) {
         this.setMinutes(this.getMinutes() + minutes);
         return this;

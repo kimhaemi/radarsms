@@ -20,7 +20,9 @@ function fnCall(method, url, params){
             // return res;
         },
         error : function(request, status, error) { // 결과 에러 콜백함수
-            console.log("error : " + error)
+            console.log("request : " + request);
+            console.log("status : " + status);
+            console.log("error : " + error);
             result = error;
             // return error;
         }

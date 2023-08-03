@@ -173,7 +173,7 @@ hr{border:100px solid #a9a9a9;color:#333}
 .overlay{position:fixed;left:0;top:0;height:100%;background:rgba(0,0,0,.3);z-index:400;}
 
 /* input [ radio | checkbox ] */
-label{vertical-align:middle;}
+label{vertical-align:middle;margin-bottom: 0rem;}
 [required]::before,
 .required::after{content:" *";color:#f35857;font-size:11px;font-weight:600;}
 [required]::before{margin-right:5px;}
@@ -195,10 +195,6 @@ textarea[disabled]{border:1px solid #f5f5f5; color:#999;background-color:#fefefe
 .checkbox{margin: 0 4px 3px 0;margin:0 1px 0 0\9;}
 .to,
 .from,
-/* .datepicker,
-.date{width:96px;}
-.datetimepicker{width:155px;letter-spacing:0;}
-.timeform{width:50px;min-width:auto!important;} */
 .radio_wrap label{margin-right:5px;}
 label input{margin-top:-3px;}
 .period{line-height:24px;}

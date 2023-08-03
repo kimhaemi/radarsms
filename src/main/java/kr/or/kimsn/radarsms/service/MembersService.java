@@ -18,6 +18,11 @@ public class MembersService {
     private final MembersRepository membersRepository;
 
     //사용자 조회
+    public MembersDto getUserId(String userId){
+        return membersRepository.findByMemberId(userId);
+    }
+
+    //사용자 리스트 조회
     public List<MembersDto> getUsersList(){
         return membersRepository.findAll();
     }

@@ -6,7 +6,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import kr.or.kimsn.radarsms.dto.UsersDto;
+import kr.or.kimsn.radarsms.dto.MembersDto;
 
 
 //시큐리티가 /login 주소 요청이 오면 낚아채서 로그인을 진행시킨다.
@@ -18,9 +18,9 @@ import kr.or.kimsn.radarsms.dto.UsersDto;
 //Security Sesstion => Authentication => UserDetails(PrincipalDetails)
 public class PrincipalDetails implements UserDetails {
 
-    private UsersDto user; // 콤포지션
+    private MembersDto user; // 콤포지션
 
-    public PrincipalDetails(UsersDto user) {
+    public PrincipalDetails(MembersDto user) {
         this.user = user;
     }
 
@@ -31,7 +31,8 @@ public class PrincipalDetails implements UserDetails {
         collect.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return user.getRoles();
+                return "";
+                // return user.getRoles();
             }
         });
         // user.getRole();
@@ -45,7 +46,7 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getMemberId();
     }
 
     // 계정 만료

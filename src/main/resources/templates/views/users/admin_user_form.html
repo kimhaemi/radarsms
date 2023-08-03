@@ -116,7 +116,6 @@
                     }
                 }
             }
-
         </script>
 
         <div id="contentMain">
@@ -198,9 +197,9 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <input type="submit" th:if="${list.memberData == null}" id="create" class="btn login_btn submit" value="생 성" onclick="fnSave('create')">
-                                <input type="submit" th:if="${list.memberData != null}" id="modify" class="btn login_btn submit" value="수 정" onclick="fnSave('modify')">
-                                <input type="reset"  id="reset"  class="btn login_btn"        value="다시 입력">
+                                <input type="submit" th:if="${list.memberData == null}" id="create" class="btn login_btn" style="border-color: #8CC7F7;  background: #C4E4F1;" value="생 성" onclick="fnSave('create')">
+                                <input type="submit" th:if="${list.memberData != null}" id="modify" class="btn login_btn" style="border-color: #8CC7F7;  background: #C4E4F1;" value="수 정" onclick="fnSave('modify')">
+                                <input type="reset"  id="reset"  class="btn login_btn"  value="다시 입력" th:onclick="| location.href='@{/users/admin_user_form(id=${param.id})}' |" />
                                 <input type="submit" th:if="${list.memberData != null}" id="delete" class="btn login_btn del"    value="삭 제" onclick="fnUserDel()">
                                 <input type="button" id="list"   class="btn login_btn"        value="리스트" onclick="fnGoList();return false;">
                             </td>

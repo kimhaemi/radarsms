@@ -5,11 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.kimsn.radarsms.common.util.DateUtil;
+import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionJoinStationRdrDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
@@ -27,7 +32,16 @@ public class MenuController {
 
     //메인 화면(전체 감시)
     @GetMapping({"", "/"})
-    public String main(ModelMap model) {
+    public String main(@SessionAttribute(name = "loginUser", required = false)MembersDto MembersDto, ModelMap model, HttpServletRequest req, HttpServletResponse res) {
+        // HttpSession session = req.getSession();
+
+        // if( session.getAttribute("loginUser") == null){
+        //     return "views/login";
+        // }
+
+        // System.out.println("session.getAttribute(\"loginUser\") ::::: " + session.getAttribute("loginUser"));
+
+        // model.addAttribute("loginUser", MembersDto);
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();

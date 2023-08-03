@@ -24,7 +24,7 @@ div.top_link{position:absolute;right:10px;top:40px;}
 /* header */
 .gnb_wrap{position:relative;height:40px;}
 .header{position:absolute;top:0;left:0;width:100%;height:80px;background-color:#fff;box-sizing:border-box;}
-.header h1{position:absolute;left:0%;top:50%;width:400px;height:30px;background:url(../../images/unnamed.png) 0 0 no-repeat;background-size:contain;margin:-17px 0 00 35px;}
+.header h1{position:absolute;left:0%;top:50%;width:400px;height:30px;background:url(../../images/watchdog_icon.png) 0 0 no-repeat;background-size:contain;margin:-17px 0 00 35px;}
 .header h1 a{font-size:18px; margin: 5px 0 0 40px}
 /* .header h1 a{font-size:0;color:transparent;} */
 /* .gnb{margin-top:10px;} */

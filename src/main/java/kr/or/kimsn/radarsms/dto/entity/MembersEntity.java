@@ -1,6 +1,4 @@
-package kr.or.kimsn.radarsms.dto;
-
-import java.time.LocalDateTime;
+package kr.or.kimsn.radarsms.dto.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,15 +7,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity
-@Table(name = "watchdog_member")
-public class MembersDto {
+@Table(name="watchdog_member")
+@Getter
+@NoArgsConstructor
+public class MembersEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,18 +33,14 @@ public class MembersDto {
     @Column(name = "member_org")      private String memberOrg;
     @Column(name = "member_dept")     private String memberDept;
     @Column(name = "member_pos")      private String memberPos;
-    
-    @UpdateTimestamp
-    @Column(name = "member_join")
-    private LocalDateTime memberJoin;
 
     /**
     * 
     * @description 패스워드 저장시 자동 암호화
     */
-   public MembersDto encodePassword(PasswordEncoder passwordEncoder) {
-      this.password = passwordEncoder.encode(this.password);
-      return this;
-   }
-  
+    public MembersEntity encodePassword(PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(this.password);
+        return this;
+    }
+    
 }

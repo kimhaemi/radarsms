@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.or.kimsn.radarsms.common.ApiResult;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
+import kr.or.kimsn.radarsms.dto.SmsSendDto;
 import kr.or.kimsn.radarsms.dto.SmsSendOnOffDto;
 import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
 import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
@@ -19,6 +20,7 @@ import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberLinkDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
 import kr.or.kimsn.radarsms.service.ManagePostService;
+import kr.or.kimsn.radarsms.service.SmsService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -26,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class ManagePostController {
 
     private final ManagePostService managePostService;
+    private final SmsService smsService;
 
     // 지점/자료별 문자 발송 설정 일괄 수정
     @PostMapping("/manage/station_set_rc_modify")
@@ -115,6 +118,20 @@ public class ManagePostController {
     @PostMapping("/manage/sms_send_onoff_modify")
     public ApiResult<Integer> smsSendOnoffModify(@RequestBody List<SmsSendOnOffDto> dto){
         return ApiResult.success(managePostService.setSmsSendOnoffModify(dto));
+    }
+
+    //문자 발송
+    @PostMapping("/manage/sms_send_save")
+    public ApiResult<String> smsSendSave(@RequestBody List<SmsSendDto> dto){
+        String result = smsService.smsSendsave(dto);
+        System.out.println("result ::::: " + result);
+        if( result.equals("")){
+            return ApiResult.success(result);
+        } else {
+            return ApiResult.error(result, null, null);
+        }
+        
+        // return ;
     }
 
 }

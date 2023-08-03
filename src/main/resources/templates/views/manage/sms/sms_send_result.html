@@ -6,87 +6,44 @@
 	<th:block layout:fragment="content">
         <script th:inline="javascript">
             /* <![CDATA[ */
-                var mData = /*[[${list.smsRsultList}]]*/
-                console.log(mData);
+                var totalCnt = /*[[${totalCnt}]]*/
+                console.log("totalCnt", totalCnt);
+                var smsRsultList = /*[[${smsRsultList}]]*/
+                console.log("smsRsultList", smsRsultList);
             /* ]]> */
         </script>
-        <style type="text/css">
-        div.paginate a {
-            font-weight : normal;
-            margin : 0px 4px;
-        }
-        div.paginate span {
-            margin : 0px 10px;
-        }
-        div.paginate a.choice {
-            font-weight : bold;
-            text-decoration: underline;
-        }
-        /* div.paginate a.first {
-            
-        }
-        div.paginate a.prev {
-            
-        }
-        div.paginate a.next {
-            
-        }
-        div.paginate a.last {
-            
-        } */
-        </style>
-
-        <script type="text/javascript">
-        function goPage(p){
-            location.href = "?p=" + p;
-        }
-        $(function() {
-            $('a.btn').button();
-        });
-        /* 
-        * 
-        * 같은 값이 있는 열을 병합함
-        * 
-        * 사용법 : $('#테이블 ID').rowspan(0);
-        * 
-        */     
-        $.fn.rowspan = function(colIdx, isStats) {       
-            return this.each(function(){      
-                var that;     
-                $('tr', this).each(function(row) {      
-                    $('td:eq('+colIdx+')', this).filter(':visible').each(function(col) {
-                        
-                        if ($(this).html() == $(that).html()
-                            && (!isStats 
-                                    || isStats && $(this).prev().html() == $(that).prev().html()
-                                    )
-                            ) {            
-                            rowspan = $(that).attr("rowspan") || 1;
-                            rowspan = Number(rowspan)+1;
         
-                            $(that).attr("rowspan",rowspan);
-                            
-                            // do your action for the colspan cell here            
-                            $(this).hide();
-                            
-                            //$(this).remove(); 
-                            // do your action for the old cell here
-                            
-                        } else {            
-                            that = this;         
-                        }          
-                        
-                        // set the that if not already set
-                        that = (that == null) ? this : that;      
-                    });     
-                });    
-            });  
-        }; 
-        $(document).ready(function() {
-            $("#smsSendTab").rowspan(1);
-            $("#smsSendTab").rowspan(3);
-            $("#smsSendTab").rowspan(4);
-            $("#smsSendTab").rowspan(6);
+        <script type="text/javascript">
+        
+        $(document).ready(function(){
+            $('#datepicker').datepicker({
+                buttonImageOnly: true,
+                sbuttonText: "Select date",
+                changeMonth: true,
+                changeYear: true,
+                prevText: '이전 달',
+                nextText: '다음 달',
+                monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                dayNames: ['일','월','화','수','목','금','토'],
+                dayNamesShort: ['일','월','화','수','목','금','토'],
+                dayNamesMin: ['일','월','화','수','목','금','토'],
+                showMonthAfterYear: true,
+                yearSuffix: '년',
+                dateFormat: 'yy년 mm월 dd일',
+                minDate: (new Date(2009, 1 - 1, 1)), maxDate: "+0D",
+                startView: 2,
+                autoclose: true,
+                // buttonText: "Select date"
+            });
+        });
+
+        $(function() {	
+            $("#btnSearch").on('click', function (e) {
+                var selDate = $("#datepicker").val().replace(/ |년|월|일/g, "");
+                $("#sDt").val(selDate);
+                $("#searchDate").submit();
+            });
         });
         </script>
     
@@ -97,17 +54,37 @@
                     관리 &gt; 문자 발송 대기 내역 
                 </th>
                 <th class="right">
-                    <form action="/manage/sms_send" method="get">
-                        <input type="submit" value="문자 보내기">
-                    </form>
+                    <button class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                     onclick="location.href='/manage/sms_send'">문자 보내기</button>
                 </th>
             </tr>
             </thead>
         </table>
+        <form action="" method="post" target="_self" id="searchDate">
+			<input type="hidden" name="sDt" id="sDt"/>
+            <table class="noticeTbl searchSeries">
+                <colgroup>
+                    <col style="width:auto;"/>
+                    <col style="width:130px;"/>
+                    <col style="width:50px;"/>
+                </colgroup>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th class="center">
+                        <input type="text" id="datepicker" th:value="${searchDate}" readonly />
+                    </th>
+                    <th class="right">
+                        <button class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="btnSearch">검색</button>
+                </tr>
+                </thead>
+            </table>
+        </form>
         
-        <table class="mainTbl settingSeries" summary="" id="smsSendTab">
+        <!-- <table class="mainTbl settingSeries" summary="" id="smsSendTab"> -->
+        <table class="table subTbl table-hover" summary="">
             <caption class="hidden">문자 발송 대기 내역</caption>
-            <thead>
+            <thead class="subThead">
                 <tr>
                     <th>순번</th>
                     <th>문자 종류</th>
@@ -118,55 +95,104 @@
                     <th>발신 메시지</th>
                 </tr>
             </thead>
-            <tbody>
-                  <tr th:each="smsList, smsListStat : ${list.smsRsultList}">
+            <tbody class="table-group-divider">
+                  <tr th:each="smsList, smsListStat : ${smsRsultList}">
                     <td><span th:text="${smsListStat.index+1}"></span></td>
-                    <td><span th:text="${smsList.TYPE}"></span></td>
-                    <td><span th:text="${smsList.MSGKEY}"></span></td>
-                    <td th:switch="${smsList.STATUS}">
-                        <label th:case="0">전송대기</label>
-                        <label th:case="1">전송완료</label>
-                        <label th:case="2" th:if="${smsList.TYPE == 'SMS'}">결과 수신</label>
-                        <label th:case="2" th:if="${smsList.TYPE == 'MMS'}">전송 완료</label>
-                        <label th:case="3">결과수신</label>
-                        <label th:case="">없음</label>
+                    <td><span th:text="${smsList.msg_type == 6 ? '장문' : '단문'}"></span></td>
+                    <td><span th:text="${smsList.call_from}"></span></td>
+                    <td th:switch="${smsList.cur_state}">
+                        <!-- <label th:case="0">전송대기</label> -->
+                        <label th:case="1">전송대기</label>
+                        <label th:case="2">결과대기</label>
+                        <label th:case="3" th:if="${smsList.rslt_code2 != '0' }">전송 실패</label>
+                        <label th:case="3" th:unless="${smsList.rslt_code2 == '0' }">전송 완료</label>
                     </td>
-                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" th:text="${smsList.REQDATE }" /></td>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" th:text="${smsList.req_date }" /></td>
                     
-                    <td th:if="${smsList.PHONE.length} ge 11">
-                        <span th:text="${smsList.PHONE.substring(0,3)}"></span> - 
-                        <span th:text="${smsList.PHONE.substring(3,7)}"></span> - 
-                        <span th:text="${smsList.PHONE.substring(7,11)}"></span>
+                    <td th:if="${smsList.call_to.length} ge 11">
+                        <span th:text="${smsList.call_to.substring(0,3)}"></span> - 
+                        <span th:text="${smsList.call_to.substring(3,7)}"></span> - 
+                        <span th:text="${smsList.call_to.substring(7,11)}"></span>
                     </td>
-                    <td th:if="${smsList.PHONE.length} lt 11">
-                        <span th:text="${smsList.PHONE.substring(0,3) == '010' ? smsList.PHONE.substring(0,3) : smsList.PHONE.substring(0,2)}"></span> - 
-                        <span th:text="${smsList.PHONE.substring(0,3) == '010' ? smsList.PHONE.substring(3,6) : smsList.PHONE.substring(2,6)}"></span> -
-                        <span th:text="${smsList.PHONE.substring(6,10)}"></span>
+                    <td th:if="${smsList.call_to.length} lt 11">
+                        <span th:text="${smsList.call_to.substring(0,3) == '010' ? smsList.call_to.substring(0,3) : smsList.call_to.substring(0,2)}"></span> - 
+                        <span th:text="${smsList.call_to.substring(0,3) == '010' ? smsList.call_to.substring(3,6) : smsList.call_to.substring(2,6)}"></span> -
+                        <span th:text="${smsList.call_to.substring(6,10)}"></span>
                     </td>
-                    <td th:utext="${smsList.MSG}"></td>
-                    <!--<td>${fn:replace(fn:escapeXml(sms.msg), newLineChar, "<br />")}</td> -->
+                    <td th:utext="${smsList.sms_txt}"></td>
+                </tr>
+                <tr th:if="${smsRsultList.size == 0 }">
+                    <td colspan="7">데이터가 없습니다.</td>
                 </tr>
             </tbody>
         </table>
+
+        <nav aria-label="Page navigation" th:if="${smsRsultList.size > 0}">
+            <!--표에 사용될 변수값 초기화 -->
+            <ul class="pagination justify-content-center"
+                th:with="
+                    pageNumber = ${smsRsultList.pageable.pageNumber},
+                    pageSize = ${smsRsultList.pageable.pageSize},
+                    totalPages = ${smsRsultList.totalPages},
+                    startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
+                    tempEndPage = ${startPage + pageSize - 1},
+                    endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages})"
+                    >
+                    <!-- th:with="start=${T(java.lang.Math).floor(smsRsultList.number/10)*10 + 1},
+                        last=(${start + 9 < smsRsultList.totalPages ? start + 9 : smsRsultList.totalPages})"> -->
+
+                <li th:classappend="${smsRsultList.first} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="${smsRsultList.first} ? '#' : @{/manage/sms_send_result(page=${pageNumber - 1})}">
+                        <span aria-hidden="true">&lt;</span>
+                    </a>
+                </li>
         
-        <!-- <th:block th:include="/common/pages"></th:block> -->
-        <table class="noticeTbl settingSeries">
-            <thead>
-            <tr>
-                <th>
-                    <div class="paginate">
-                    <a href="javascript:goPage(0)" class="first">처음 페이지</a>
-                    <a href="javascript:goPage(0)" class="prev">이전 페이지</a>
-                    <span>
-                        <a href="javascript:goPage(0)">0</a>
-                    </span>
-                    <a href="javascript:goPage(0)" class="next">다음 페이지</a>
-                    <a href="javascript:goPage(0)" class="last">마지막 페이지</a>
-                    </div>
-                </th>
-            </tr>
-            </thead>
-        </table>
+                <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
+                    <a th:text="${page}" class="page-link" th:href="@{/manage/sms_send_result(page=${page - 1})}"></a>
+                </li>
         
+                <li th:classappend="${smsRsultList.last} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="${smsRsultList.last} ? '#' : @{/manage/sms_send_result(page=${pageNumber + 1})}" aria-label="Next">
+                        <span aria-hidden="true">&gt;</span>
+                    </a>
+                </li>
+                <!-- <th:block th:with="
+                    firstAddr=@{/manage/sms_send_result(page=1)},
+                    prevAddr=@{/manage/sms_send_result(page=${smsRsultList.number})},
+                    nextAddr=@{/manage/sms_send_result(page=${smsRsultList.number + 2})},
+                    lastAddr=@{/manage/sms_send_result(page=${smsRsultList.totalPages})}">
+                    <li th:class="${smsRsultList.first} ? 'disabled'" class="page-item">
+                        <a class="page-link" th:href="${firstAddr}" aria-label="First">
+                            <span aria-hidden="true">First</span>
+                        </a>
+                    </li>
+                    이전 페이지로 가기 버튼
+                    <li th:class="${smsRsultList.first} ? 'disabled'" class="page-item">
+                        <a class="page-link" th:href="${smsRsultList.first} ? '#' :${prevAddr}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&lt;</span>
+                        </a>
+                    </li>
+                    1,2,3,4,.. 등 페이지
+                    <li th:each="page: ${#numbers.sequence(start, last)}"
+                        th:class="${page == smsRsultList.number + 1} ? 'active'" class="page-item">
+                        <a class="page-link" th:text="${page}" th:href="@{/manage/sms_send_result(page=${page})}"></a>
+                    </li>
+                    다음 페이지로
+                    <li th:class="${smsRsultList.last} ? 'disabled'" class="page-item">
+                        <a class="page-link" th:href="${smsRsultList.last} ? '#' : ${nextAddr}"
+                           aria-label="Next">
+                            <span aria-hidden="true">&gt;</span>
+                        </a>
+                    </li>
+                    맨 마지막 페이지로 이동
+                    <li th:class="${smsRsultList.last} ? 'disabled'" class="page-item">
+                        <a class="page-link" th:href="${lastAddr}" aria-label="Last">
+                            <span aria-hidden="true">Last</span>
+                        </a>
+                    </li>
+                </th:block> -->
+            </ul>
+        </nav>
     </th:block>
 </html>

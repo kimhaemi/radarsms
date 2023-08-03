@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/default_layout}"
-      th:with="metaTitle='전체 감시'">
+      th:with="metaTitle='문자 발송'">
 
 	<th:block layout:fragment="content">
         <style type="text/css">
@@ -12,42 +12,32 @@
         </style>
 
         <script th:inline="javascript">
-            /* <![CDATA[ */
-                var members = /*[[${list.memberList}]]*/
-                console.log(members);
-                var groups = /*[[${list.groups}]]*/
-                console.log(groups);
+        /* <![CDATA[ */
+            var members = /*[[${memberList}]]*/
+            console.log("members : ", members);
+            var groups = /*[[${groups}]]*/
+            console.log("groups :: ", groups);
 
-            /* ]]> */
+        /* ]]> */
 
+        </script>
+
+        <script type="text/javascript">
+            const mems = [];
             $(document).ready(function (){
-                const mems = [];
                 members.forEach(e => {
                     mems.push([e.gid.toString(), e.mid.toString(), e.name, e.organization, e.position, e.phone_num]);
                 });
+            });
 
-            function fnSubmit(){
-                if($("input[name='groups']:checked").length==0){
-                    alert("문자를 수신받을 그룹을 선택해주세요.");
-                    $("#check_groups_all").focus();
-                    return false;
-                }
-                if($.trim($("#smsMsg").val()).length==0){
-                    alert("문자 내용을 입력해주세요.");
-                    $("#smsMsg").focus();
-                    return false;
-                }
-                return true;
-            }
-            
             $(function() {
                 $('a.btn').button();
-                $( "#reqTime" ).timepicker();
+                $( "#reqTime" ).timepicker({
+                    'minTime': '09:00am', // 조회하고자 할 시작 시간 ( 09시 부터 선택 가능하다. )
+                    'maxTime': '20:00pm', // 조회하고자 할 종료 시간 ( 20시 까지 선택 가능하다. )
+                    'timeFormat': 'HH:mm'
+                });
                 $( "#reqDate" ).datepicker({
-            //		showOn: "button",
-            //		buttonImage: "/images/calendar.gif",
-            //		buttonImageOnly: true,
-            //		buttonText: "Select date",
                     changeMonth: true,
                     changeYear: true,
                     prevText: '이전 달',
@@ -63,6 +53,8 @@
                     minDate: "+0D", 
                     maxDate: "+2Y"/*(new Date(2014, 11, 31)) /*"+1Y +1M +10D"*/
                 });
+                console.log("dsfsdfsdfsdfsd");
+                console.log($( "#reqTime" ));
             
                 $("#check_groups_all").click(function(){
                     if($("#check_groups_all").prop("checked")){
@@ -122,6 +114,7 @@
                     $("input[name=reqTime]").prop("disabled",true);
                 });
             });
+            
             function setGroupsMembers(){
                 var groups = $("td#groupsCell input[name='groups']:checked");
                 for(var i=0; i<groups.length; i++){
@@ -135,8 +128,8 @@
             function makeGroupsMember(member){
                 if(checkGroupsMember(member[1])){
                     var html = '<span id="member_'+ member[1] +'" style="margin-right:10px;white-space: nowrap;">'
-                    + '<input type="checkbox" id="members_'+ member[1] +'" name="members" value="'+ member[1] +'" checked/>'
-                    + '<label for="members_'+ member[1] + '" style="margin-right:10px"> '
+                    + '<input type="checkbox" id="members_'+ member[1] +'" name="members" value="'+ member[5] +'" checked/>'
+                    + '<label for="members_'+ member[1] + '" style="margin-right:10px" > '
                     + member[2] + ' ' + member[5] + ' (' + member[3] + ' ' + member[4] +')'
                     + '</label></span><br />';
                     $("tr#targetMembers>td").append(html);
@@ -165,15 +158,85 @@
                     $(this).parent().remove();
                 });
             }
-            });
 
-            
-        </script>
+            //문자 전송
+            function fnSubmit(){
 
-        <script type="text/javascript">
+                if($("input[name='groups']:checked").length==0){
+                    alert("문자를 수신받을 그룹을 선택해주세요.");
+                    $("#check_groups_all").focus();
+                    return false;
+                }
+                if($.trim($("#smsMsg").val()).length==0){
+                    alert("문자 내용을 입력해주세요.");
+                    $("#smsMsg").focus();
+                    return false;
+                }
+
+                let arr = new Array();
+                let groupsMembers = $("#check_groups_member").prop("checked");
+                let groups = $("td#groupsCell input[name='groups']:checked");
+                
+                if( groups.length > 0){
+                    for(let i=0; i<groups.length; i++){
+                        for(let j=0; j<mems.length; j++){
+                            if( groups.eq(i).val() == mems[j][0] ){
+                                if(groupsMembers){
+                                    if($("#members_"+mems[j][1]).prop("checked")){
+                                        let val = {
+                                            // id: mems[j][1],
+                                            req_date: $("#reqDate").val().replaceAll(".", "") + $("#reqTime").val().replaceAll(":", "") + "00",
+                                            cur_state: 0,
+                                            call_to: $("#members_"+mems[j][1]).val().replaceAll("-", ""),
+                                            call_from: "0",
+                                            sms_txt: $("#smsMsg").val(),
+                                            msg_type: 4, //4:SMS, 6:MMS
+                                            // CONT_SEQ: 0//mms 발송시 필요
+                                        }
+                                        arr.push(val);
+                                    }
+                                } else {
+                                    let val = {
+                                        // MSG_SEQ: 0,
+                                        // id: mems[j][1],
+                                        req_date: $("#reqDate").val().replaceAll(".", "") + $("#reqTime").val().replaceAll(":", ""),
+                                        cur_state: 0,
+                                        call_to: mems[j][5].replaceAll("-", ""),
+                                        call_from: "0",
+                                        sms_txt: $("#smsMsg").val(),
+                                        msg_type: 4, //4:SMS, 6:MMS
+                                        // CONT_SEQ: 0//mms 발송시 필요
+                                    };
+                                    arr.push(val);
+                                }
+                            }
+                        }
+                    }
+                } 
+                console.log(arr);
+
+                if(confirm("전송 하겠습니까?")){
+                    let result = fnCall('post', '/manage/sms_send_save', JSON.stringify(arr));
+                    
+                    console.log("result :: "+ result.status);
+                    if(result.status == "success"){
+                        alert("전송 되었습니다.");
+                        // location.href="/manage/sms_send"; //다시 로딩
+                    } else {
+                        alert("전송에 실패하였습니다. \n" + result.data);
+                    }
+                }
+                //return true;
+            }
+
+            //초기화
+            function fnReset(){
+                location.href="/manage/sms_send";
+            }
+
             function fnGoList(){
                 location.href="/manage/sms_send_result";
-            }
+            }            
             
         </script>
     
@@ -189,11 +252,11 @@
             </thead>
         </table>
         
-        <form action="sms_send_action.do" name="smsSend" id="smsSend" method="post" target="_self">
-        <table class="mainTbl searchSeries" summary="">
+        <!-- <form action="manage/sms_send" name="smsSend" id="smsSend" method="post" target="_self"> -->
+            <table class="table subTbl table-hover" summary="">
             <caption class="hidden">문자 발송</caption>
             <colgroup>
-                <col style="width:300px;">
+                <col style="width:200px;">
                 <col>
             </colgroup>
             <thead>
@@ -202,59 +265,65 @@
             </thead>
             <tbody>
                 <tr>
-                    <th rowspan="2">문자 수신 그룹<i class="fa fa-asterisk required_ico"></i></th>
+                    <th rowspan="2" class="subThead">문자 수신 그룹<i class="fa fa-asterisk required_ico"></i></th>
                     <td>
-                        <span style="margin-right:20px;"><input type="checkbox" id="check_groups_all" name="check_groups_all" value="all"><label for="check_groups_all"> 그룹 전체 선택</label></span>
-                        <span style="margin-right:10px;"><input type="checkbox" id="check_groups_member" name="check_groups_member" value="member"><label for="check_groups_member"> 그룹 멤버 선택</label></span>
+                        <span style="margin-right:20px;">
+                            <input type="checkbox" id="check_groups_all" name="check_groups_all" value="all" >
+                            <label for="check_groups_all"> 그룹 전체 선택</label>
+                        </span>
+                        <span style="margin-right:10px;">
+                            <input type="checkbox" id="check_groups_member" name="check_groups_member" value="member">
+                            <label for="check_groups_member"> 그룹 멤버 선택</label>
+                        </span>
                     </td>
                 </tr>
                 <tr>
-                    <td id="groupsCell">
+                    <td class="left" id="groupsCell">
                         <input type="hidden" name="check_groups" id="check_groups" value="" />
-                        <th:block th:each="groups, groupsStat : ${list.groups}" th:if="${groups.id > 1}">
+                        <th:block th:each="groups, groupsStat : ${groups}" th:if="${groups.id > 1}">
                         <span id="" style="margin-right:10px;white-space: nowrap;">
                             <input type="checkbox" th:id="${'groups_'+groups.id}" name="groups" th:value="${groups.id}" />
-                            <label th:for="${'groups_'+groups.id}" style="margin-right:10px" th:text="${groups.name}"></label>
+                            <label th:id="${'groups_'+groups.id}" style="margin-right:10px;vertical-align: middle;" th:text="${groups.name}"></label>
                         </span>
-                        <c:if test="${not groupsStat.last }"></c:if>
                         </th:block>
-                        </c:forEach>
                     </td>
                 </tr>
                 <tr id="targetMembers" style="display:none;">
-                    <th>문자 수신 멤버</th>
-                    <td>
+                    <th class="subThead">문자 수신 멤버</th>
+                    <td class="left">
                     </td>
                 </tr>
                 <tr>
-                    <th>문자 내용<i class="fa fa-asterisk required_ico"></i></th>
+                    <th class="subThead">문자 내용<i class="fa fa-asterisk required_ico"></i></th>
                     <td>
-                        <textarea id="smsMsg" name="smsMsg" rows="10" cols="50"></textarea>
+                        <textarea class="msgPtn" id="smsMsg" name="smsMsg"></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <th rowspan="2">문자 발송 시각</th>
-                    <td>
-                        <input type="radio" checked="checked" name="setReqDate" value="NOW" id="setReqDateNOW"><label for="setReqDateNOW">즉시 전송 </label>
+                    <th rowspan="2" class="subThead">문자 발송 시각</th>
+                    <td class="left">
+                        <input type="radio" checked="checked" name="setReqDate" value="NOW" id="setReqDateNOW">
+                        <label for="setReqDateNOW">즉시 전송 </label>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <input type="radio" name="setReqDate" value="RSV" id="setReqDateRSV"/><label for="setReqDateRSV">예약 전송</label>
-                        <input type="text" name="reqDate" id="reqDate" readonly th:value="${list.nowDate}" style="width: 90px;text-align: center;" disabled />
-                         <input type="text" name="reqTime" id="reqTime" readonly th:value="${list.nowTime}" style="width: 70px;text-align: center;" disabled />
+                    <td class="left">
+                        <input type="radio" name="setReqDate" value="RSV" id="setReqDateRSV"/>
+                        <label for="setReqDateRSV">예약 전송 </label>
+                        <!-- <input type="text" id="datepicker" th:value="${searchDate}" readonly /> -->
+                        <input type="text" name="reqDate" id="reqDate" readonly th:value="${nowDate}" style="width: 90px;text-align: center;" disabled />
+                        <input type="text" name="reqTime" id="reqTime" readonly th:value="${nowTime}" style="width: 70px;text-align: center;" disabled />
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align:center;">
-                        <input type="submit" class="login_btn submit" value="전 송" onclick="return fnSubmit();">
-                        <input type="reset" class="login_btn" value="다시 입력">
-                        <input type="button" class="login_btn" value="문자 발송 대기 내역" onclick="fnGoList();return false;"> 
+                        <input type="submit" class="btn login_btn" style="border-color: #8CC7F7;  background: #C4E4F1;" value="전 송" onclick="fnSubmit();">
+                        <input type="reset" class="btn login_btn" value="다시 입력" onclick="fnReset()">
+                        <input type="button" class="btn login_btn" value="문자 발송 대기 내역" onclick="fnGoList();return false;"> 
                     </td>
                 </tr>
             </tbody>
         </table>
-        </form>
-        <div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div>
+        <!-- </form> -->
     </th:block>
 </html>

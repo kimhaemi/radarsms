@@ -34,8 +34,8 @@
 		closeText: '닫기',
 //		timeFormat: 'tt h:mm',
 		timeFormat: 'HH:mm',	// change 
-		amNames: ['오전', 'AM', 'A'],
-		pmNames: ['오후', 'PM', 'P'],
+		// amNames: ['오전', 'AM', 'A'],
+		// pmNames: ['오후', 'PM', 'P'],
 		isRTL: false
 	};
 	$.timepicker.setDefaults($.timepicker.regional['ko']);

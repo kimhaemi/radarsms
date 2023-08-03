@@ -137,17 +137,8 @@ public class StationController {
             dateClose = now;
         }
 
-        //현재 날짜 return
         String searchDate = DateUtil.formatDate("yyyy'년 'MM'월 'dd'일'", dateClose);
         model.addAttribute("searchDate", searchDate);
-
-        // model.addAttribute("recvAlt",
-        // this.watchService.getPropertyMap(this.propertyService.getString("Web.RecvIconAlt")));
-        // model.addAttribute("searchDate", DateUtil.formatDate("yyyy'년 'MM'월 'dd'일'",
-        // dateClose));
-
-        // //과거자료 검색
-        // System.out.println("termStart ::: " + termStart);
 
         // 레이더
         // if (dataKind.equals("RDR")) {
@@ -169,9 +160,5 @@ public class StationController {
 
         return "views/station/stationHistory";
     }
-
-    // 저장
-
-    // 수정
 
 }
