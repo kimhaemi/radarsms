@@ -2,12 +2,14 @@ package kr.or.kimsn.radarsms.restApiController;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.kimsn.radarsms.common.ApiResult;
+import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
 import kr.or.kimsn.radarsms.dto.SmsSendDto;
@@ -20,15 +22,39 @@ import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberLinkDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
 import kr.or.kimsn.radarsms.service.ManagePostService;
+import kr.or.kimsn.radarsms.service.MembersService;
 import kr.or.kimsn.radarsms.service.SmsService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-public class ManagePostController {
+public class PostController {
 
+    private final MembersService membersService;
     private final ManagePostService managePostService;
     private final SmsService smsService;
+
+    private final PasswordEncoder passwordEncoder;
+
+    // 사용자 등록
+    @PostMapping("/users/admin_user_create")
+    public ApiResult<MembersDto> userSave(@RequestBody MembersDto membersDto){
+        membersDto.setPassword(passwordEncoder.encode(membersDto.getPassword()));
+        return ApiResult.success(membersService.userAdd(membersDto));
+    }
+
+    // 사용자 수정
+    @PostMapping("/users/admin_user_modify")
+    public ApiResult<MembersDto> userModify(@RequestBody MembersDto membersDto){
+        membersDto.setPassword(passwordEncoder.encode(membersDto.getPassword()));
+        return ApiResult.success(membersService.userModify(membersDto));
+    }
+
+    // 사용자 삭제
+    @PostMapping("/users/admin_user_del")
+    public ApiResult<Long> userDelete(@RequestParam Long id){
+        return ApiResult.success(membersService.userDelete(id));
+    }
 
     // 지점/자료별 문자 발송 설정 일괄 수정
     @PostMapping("/manage/station_set_rc_modify")

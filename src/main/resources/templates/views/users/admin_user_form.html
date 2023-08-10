@@ -89,7 +89,7 @@
                 
                 if(confirm(text)){
                     const params = {
-                        id: mode == "modify" && $("#uid").val(),
+                        id: mode == "modify" ? $("#uid").val() : 0,
                         memberId: $("#memberId").val(),
                         password: $("#password").val(),
                         passwordHint: $("#passwordHint").val(),
@@ -101,6 +101,7 @@
                         memberOrg: $("#org").val(),
                         memberDept: $("#dept").val(),
                         memberPos: $("#pos").val(),
+                        roles: "USER"
                     }
                     console.log(params);
                     let result = fnCall('post', '/users/admin_user_'+mode, JSON.stringify(params));

@@ -1,28 +1,16 @@
 package kr.or.kimsn.radarsms.config;
 
-import javax.servlet.DispatcherType;
-
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import kr.or.kimsn.radarsms.config.auth.AuthenticationFailure;
 import kr.or.kimsn.radarsms.config.auth.AuthenticationSuccess;
-import kr.or.kimsn.radarsms.config.auth.UserSecurityService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -31,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
 
     private final AuthenticationSuccess authenticationSuccess;
-    private final UserSecurityService userSecurityService;
     private final AuthenticationFailure authenticationFailure;
 
     @Bean
@@ -104,31 +91,7 @@ public class SecurityConfig {
         ;
         return http.build();
     }
-
-    // @Bean
-	// public UserDetailsService userDetailsService() {
-	// 	/* @formatter:off */
-	// 	UserDetails user =
-	// 		 User.withDefaultPasswordEncoder()
-	// 			.username("userId")
-	// 			.password("password")
-	// 			.roles("ADMIN")
-	// 			.build();
-	// 	/* @formatter:on */
- 
-	// 	return new InMemoryUserDetailsManager(user); // 메모리에 사용자 정보를 담는다.
-	// }
-
-    /**
-     * filter
-     */
-    // public HttpSecurity addFilter(Filter filter){
-    // Class<? extends Filter> filterClass = filter.getClass();
-    // if(!comparator.isRest){
-
-    // }
-    // }
-
+    
     // WebSecurityConfig 클래스에 BCryptPasswordEncoder 클래스를 Bean으로 등록해서 Controller에 의존성
     // 주입을 받아서 위와 같이 사용하면 됩니다.
     // 해당 암호화 기능을 이용하지 않는다면 아래 설명할 Spring Security의 로그인 기능을 이용할 수 없습니다.
