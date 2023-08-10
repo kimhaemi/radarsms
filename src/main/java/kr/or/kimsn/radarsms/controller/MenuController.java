@@ -38,9 +38,9 @@ public class MenuController {
 
         System.out.println("loginUser ::::: " + userId);
         
-        // if(userId == null){
-        //     return "views/login";
-        // }
+        if(userId == null){
+            return "views/login";
+        }
 
         // HttpSession session = req.getSession();
         // System.out.println("loginUser :::::: " + session.getAttribute("loginUser"));

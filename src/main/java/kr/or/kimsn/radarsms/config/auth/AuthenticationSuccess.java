@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -24,10 +25,10 @@ public class AuthenticationSuccess implements AuthenticationSuccessHandler {
 
         String userId = request.getParameter("userId");
 
-        // HttpSession session = request.getSession();
-        // session.setAttribute("loginUser", dto);
+        HttpSession session = request.getSession();
+        session.setAttribute("userId", userId);
         Cookie cookie = new Cookie("userId", userId);
-        cookie.setMaxAge(60 * 1); // 쿠키 유효 시간 : 1시간
+        cookie.setMaxAge(60 * 60); // 쿠키 유효 시간 : 1시간
         response.addCookie(cookie);
 
         response.sendRedirect("/");
