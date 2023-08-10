@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import kr.or.kimsn.radarsms.dto.MembersDto;
 
-
 //시큐리티가 /login 주소 요청이 오면 낚아채서 로그인을 진행시킨다.
 // 로그인 완료가 되면 시큐리티 session을 만들어 줌.
 //Security ContextHolder에 session 정보를 저장함.
@@ -31,11 +30,10 @@ public class PrincipalDetails implements UserDetails {
         collect.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return "";
-                // return user.getRoles();
+                return user.getRoles().toString();
             }
         });
-        // user.getRole();
+        // user.getRoles();
         return collect;
     }
 

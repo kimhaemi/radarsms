@@ -1,7 +1,6 @@
 package kr.or.kimsn.radarsms.controller;
 
-import java.util.Base64;
-
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.service.MembersService;
@@ -24,58 +25,49 @@ public class LoginController {
     private final PasswordEncoder passwordEncoder;
 
     // 로그인 화면
-    @GetMapping({ "/login" })
-    public String login() {
+    @RequestMapping(value="/login", method = {RequestMethod.GET, RequestMethod.POST})
+    // @GetMapping({ "/login" })
+    public String login(HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+        model.addAttribute("error", req.getAttribute("errorMessage"));
+    // public String login() {
         return "views/login";
     }
 
-    // 로그인 화면
-    @PostMapping({ "/loginProc" })
-    public String loginProc(HttpServletRequest req, HttpServletResponse res, ModelMap model) {
-        System.out.println("dfsdfsdfsdfsdfsdfsfsdf");
-        HttpSession session = req.getSession();
-        String userId = req.getParameter("userId");
-        String password = req.getParameter("pwd");
+    // 로그인 process
+    // @PostMapping({ "/loginProc" })
+    // public String loginProc(HttpServletRequest req, HttpServletResponse res, ModelMap model) {
 
-        MembersDto user = membersService.getUserId(userId);
-        System.out.println("user :::: " + user);
+    //     System.out.println("dfdsfsdfsfsfd");
+    //     HttpSession session = req.getSession();
+    //     String userId = req.getParameter("userId");
+    //     String password = req.getParameter("pwd");
 
-        if( user == null ){
-            System.out.println("durlsi");
-            model.addAttribute("error", "등록된 사용자가 없습니다.");
-            return "views/login";
-        }
-        
-        byte[] encodedBytes = Base64.getEncoder().encode(password.getBytes());
-        String encodedText = new String(encodedBytes);
-        System.out.println("Encoded Text: " + encodedText);
+    //     MembersDto user = membersService.getUserId(userId);
+    //     System.out.println("user :::: " + user);
 
-        // byte[] decodedBytes = Base64.getDecoder().decode(encodedBytes);
-        // String decodedText = new String(decodedBytes);
-        // System.out.println("Decoded Text: " + decodedText);
+    //     if( user == null ){
+    //         model.addAttribute("error", "등록된 사용자가 없습니다.");
+    //         return "views/login";
+    //         // return false;
+    //     }
 
-        byte[] decodedBytes = Base64.getDecoder().decode(user.getPassword());
-        String decodedText = new String(decodedBytes);
-        System.out.println("Decoded Text: " + decodedText);
+    //     System.out.println("userId :::: " + userId);
+    //     System.out.println("password :::: " + password);
 
-        // CryptUtil crypt = CryptUtil.getInstance();
-        // String enPassword = CryptUtil.hasingToB64(user.getPassword());
+    //     if(!password.equals("") && passwordEncoder.matches(password, user.getPassword())){
+    //         System.out.println("password success");
+    //         session.setAttribute("loginUser", user);
+    //         Cookie cookie = new Cookie("userId", String.valueOf(user.getMemberId()));
+    //         cookie.setMaxAge(60 * 1); // 쿠키 유효 시간 : 1시간
+    //         res.addCookie(cookie);
 
-        System.out.println("user.getPassword() ::::" + user.getPassword());
+    //         return "redirect:/";
+    //     } else {
+    //         model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+    //     }
 
-        // CryptUtil crypt = CryptUtil.getInstance();
-        
-        
-        // password = passwordEncoder.encode(password);
-        // if(password != null && passwordEncoder.matches(password, user.getPassword())){
-        //     System.out.println("passworderror");
-        //     model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
-        //     return "views/login";
-        // }
-
-        session.setAttribute("loginUser", user);
-        return "views/login";
-    }
+    //     return "views/login";
+    // }
 
     // 로그 아웃
     @PostMapping("/logout")
@@ -90,7 +82,7 @@ public class LoginController {
     }
 
     //error page
-    @GetMapping("/error")
+    @GetMapping("/common/error")
     public String error(){
         System.out.println("dfsfsdfsfsdfsdfsdfsdfsfsdf");
         return "views/common/error";

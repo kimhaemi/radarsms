@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.kimsn.radarsms.common.util.DateUtil;
-import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionJoinStationRdrDto;
 import kr.or.kimsn.radarsms.dto.StationDto;
@@ -32,8 +31,19 @@ public class MenuController {
 
     //메인 화면(전체 감시)
     @GetMapping({"", "/"})
-    public String main(@SessionAttribute(name = "loginUser", required = false)MembersDto MembersDto, ModelMap model, HttpServletRequest req, HttpServletResponse res) {
+    public String main(
+        // @SessionAttribute(name = "loginUser", required = false)MembersDto MembersDto, 
+        @CookieValue(name = "userId", required = false) String userId,
+        ModelMap model, HttpServletRequest req, HttpServletResponse res) {
+
+        System.out.println("loginUser ::::: " + userId);
+        
+        // if(userId == null){
+        //     return "views/login";
+        // }
+
         // HttpSession session = req.getSession();
+        // System.out.println("loginUser :::::: " + session.getAttribute("loginUser"));
 
         // if( session.getAttribute("loginUser") == null){
         //     return "views/login";

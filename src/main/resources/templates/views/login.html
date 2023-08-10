@@ -35,17 +35,6 @@
         $('#loginForm').submit();
       }
 
-      function fnBlur(){
-        let userId = $("#userId").val();
-        let password = $("#pwd").val();
-
-        if( userId != ""){
-          $("#idIsNull").css("display", "block");
-        }
-        if( password != ""){
-          $("#pwdIsNull").css("display", "block");
-        }
-      }
     </script>
 
   </head>
@@ -65,9 +54,19 @@
           <!-- <div id="pwdIsNull" style="display: none;">
             <p style="color: red;">비밀번호를 입력하세요.</p>
           </div> -->
+          <div th:if="${param.error}">
+            <p style="color: red;" th:text="${param.error}"></p>
+            <!-- <div class="alert alert-danger" th:text="${param.error}">
+                사용자ID 또는 비밀번호를 확인해 주세요.
+            </div> -->
+        </div>
           <div th:if="${error != ''}">
             <p style="color: red;" th:text="${error}"></p>
           </div>
+          <!-- <div th:if="${error}">
+            <p style="color: red;" th:text="${errorMessage}"></p>
+          </div> -->
+
           <div class="button-login-box" >
             <button type="button" id="btnLogin" class="btn btn-primary" style="width:100%" onclick="fnLogin()">로그인</button>
           </div>
