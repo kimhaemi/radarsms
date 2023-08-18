@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,7 +45,12 @@ public class SmsController {
     
     //문자 발송
     @GetMapping("/manage/sms_send")
-    public String sms_send(ModelMap model) {
+    public String sms_send(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -76,7 +82,12 @@ public class SmsController {
 
     //문자 발송 대기 내역
     @RequestMapping(value="/manage/sms_send_result", method = {RequestMethod.GET, RequestMethod.POST})
-    public String sms_send_result(ModelMap model, HttpServletRequest request, HttpServletResponse response, Pageable pageable) {
+    public String sms_send_result(@CookieValue(name = "userId", required = false) String userId, 
+                        ModelMap model, HttpServletRequest request, HttpServletResponse response, Pageable pageable) {
+        
+        if(userId == null){
+            return "views/login";
+        }
         
         Map<String, Object> map = new HashMap<>();
 
@@ -145,7 +156,12 @@ public class SmsController {
 
     //문자 발송 기능 ON/OFF 설정
     @GetMapping("/manage/sms_send_onoff")
-    public String sms_send_onoff(ModelMap model) {
+    public String sms_send_onoff(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+        
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();

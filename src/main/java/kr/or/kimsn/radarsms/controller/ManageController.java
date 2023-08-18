@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
@@ -27,7 +28,12 @@ public class ManageController {
 
     // 지점/자료별 문자 발송 설정
     @GetMapping("/manage/station_set_rc")
-    public String smsSetRc(ModelMap model) {
+    public String smsSetRc(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -51,7 +57,12 @@ public class ManageController {
 
     // 경고 기준 설정
     @GetMapping("/manage/station_set_rcc")
-    public String smsSetRcc(ModelMap model) {
+    public String smsSetRcc(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -74,7 +85,12 @@ public class ManageController {
 
     // 자료 수신 감시 설정
     @GetMapping("/manage/station_set_rs")
-    public String smsSetRs(ModelMap model) {
+    public String smsSetRs(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -96,7 +112,12 @@ public class ManageController {
 
     // 문자 메시지 패턴
     @GetMapping("/manage/sms_set_msg")
-    public String smsSetMsg(ModelMap model) {
+    public String smsSetMsg(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -119,7 +140,12 @@ public class ManageController {
 
     // 지점별 운영상태 설정
     @GetMapping("/manage/station_status")
-    public String stationStatus(ModelMap model) {
+    public String stationStatus(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+        
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();

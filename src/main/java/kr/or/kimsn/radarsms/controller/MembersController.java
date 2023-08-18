@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MembersDto;
@@ -26,13 +27,21 @@ public class MembersController {
 
     // 사용자 등록 화면
     @GetMapping("/users/joinForm")
-    public String join() {
+    public String join(@CookieValue(name = "userId", required = false) String userId) {
+        if(userId == null){
+            return "views/login";
+        }
         return "views/users/joinForm";
     }
 
     // 사용자 관리
     @GetMapping("/users/admin_user")
-    public String admin_user(ModelMap model){
+    public String admin_user(@CookieValue(name = "userId", required = false) String userId, ModelMap model){
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -53,8 +62,12 @@ public class MembersController {
 
     // 사용자 등록 화면
     @GetMapping("/users/admin_user_form")
-    public String admin_user_form(ModelMap model, Long id) {
+    public String admin_user_form(@CookieValue(name = "userId", required = false) String userId, ModelMap model, Long id) {
 
+        if(userId == null){
+            return "views/login";
+        }
+        
         System.out.println("id ::: " + id);
         Map<String, Object> map = new HashMap<>();
 

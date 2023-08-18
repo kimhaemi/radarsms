@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.or.kimsn.radarsms.dto.MenuDto;
@@ -31,7 +32,12 @@ public class SmsGroupController {
 
     // 문자 수신 그룹 관리
     @GetMapping("/manage/sms_target_group")
-    public String smsTargetGroup(ModelMap model) {
+    public String smsTargetGroup(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -52,7 +58,12 @@ public class SmsGroupController {
 
     // 문자 수신 그룹 관리 > [ *** ] 그룹 멤버 관리
     @GetMapping("/manage/sms_target_group_member")
-    public String smsTargetGroupMember(ModelMap model, Long gid) {
+    public String smsTargetGroupMember(@CookieValue(name = "userId", required = false) String userId, ModelMap model, Long gid) {
+        
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -89,7 +100,12 @@ public class SmsGroupController {
 
     // 그룹 관리 > [ *** ] 그룹 감시 자료 설정
     @GetMapping("/manage/sms_target_group_link")
-    public String smsTargetGroupLink(ModelMap model, Long gid) {
+    public String smsTargetGroupLink(@CookieValue(name = "userId", required = false) String userId, ModelMap model, Long gid) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -116,7 +132,12 @@ public class SmsGroupController {
 
     // 문자 수신자 관리
     @GetMapping("/manage/sms_target_member")
-    public String smsTargetMember(ModelMap model) {
+    public String smsTargetMember(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -137,7 +158,12 @@ public class SmsGroupController {
 
     // 상시 문자 수신 그룹 관리
     @GetMapping("/manage/sms_target_monitorgroup")
-    public String smsTargetMonitorgroup(ModelMap model) {
+    public String smsTargetMonitorgroup(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();

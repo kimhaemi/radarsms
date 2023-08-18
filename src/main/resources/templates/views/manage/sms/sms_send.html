@@ -53,9 +53,7 @@
                     minDate: "+0D", 
                     maxDate: "+2Y"/*(new Date(2014, 11, 31)) /*"+1Y +1M +10D"*/
                 });
-                console.log("dsfsdfsdfsdfsd");
-                console.log($( "#reqTime" ));
-            
+                
                 $("#check_groups_all").click(function(){
                     if($("#check_groups_all").prop("checked")){
                         $("input[name=groups]").prop("checked",true);
@@ -281,7 +279,7 @@
                     <td class="left" id="groupsCell">
                         <input type="hidden" name="check_groups" id="check_groups" value="" />
                         <th:block th:each="groups, groupsStat : ${groups}" th:if="${groups.id > 1}">
-                        <span id="" style="margin-right:10px;white-space: nowrap;">
+                        <span id="" style="margin-right:10px;white-space: nowrap;" th:if="${groups.status != '0'}">
                             <input type="checkbox" th:id="${'groups_'+groups.id}" name="groups" th:value="${groups.id}" />
                             <label th:id="${'groups_'+groups.id}" style="margin-right:10px;vertical-align: middle;" th:text="${groups.name}"></label>
                         </span>

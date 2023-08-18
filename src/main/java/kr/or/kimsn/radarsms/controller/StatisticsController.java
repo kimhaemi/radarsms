@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,9 +39,13 @@ public class StatisticsController {
 
     //조회
     @RequestMapping(value="/stat/{site}", method = {RequestMethod.GET, RequestMethod.POST})
-    public String getStation(@PathVariable("site") String site, 
+    public String getStation(@CookieValue(name = "userId", required = false) String userId, 
+        @PathVariable("site") String site, 
         HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model){
         
+        if(userId == null){
+            return "views/login";
+        }
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();

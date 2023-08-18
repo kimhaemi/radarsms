@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,12 @@ public class StationController {
 
     // 지점별 감시
     @GetMapping("/station/{site}")
-    public String getStation(@PathVariable("site") String site, ModelMap model) {
+    public String getStation(@CookieValue(name = "userId", required = false) String userId, 
+                        @PathVariable("site") String site, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
 
         // lgt :낙뢰
         // rdr : radar(대형)
@@ -95,7 +101,13 @@ public class StationController {
     // 과거자료 검색
     @RequestMapping(value="/station/hist/{site}", method = {RequestMethod.GET, RequestMethod.POST})
     // @GetMapping("/station/hist/{site}")
-    public String getStationHist(@PathVariable("site") String site, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+    public String getStationHist(@CookieValue(name = "userId", required = false) String userId, 
+                        @PathVariable("site") String site, HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
