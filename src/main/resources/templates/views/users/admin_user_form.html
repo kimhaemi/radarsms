@@ -101,9 +101,9 @@
                         memberOrg: $("#org").val(),
                         memberDept: $("#dept").val(),
                         memberPos: $("#pos").val(),
-                        roles: "USER"
+                        roles: $("#memberClass").val() == "A" ? "ADMIN" : "USER"
                     }
-                    console.log(params);
+                    
                     let result = fnCall('post', '/users/admin_user_'+mode, JSON.stringify(params));
                     
                     console.log("result :: "+ result.status);
@@ -154,10 +154,7 @@
                         </tr>
                         <tr>
                             <th class="subThead">비밀번호<i class="fa fa-asterisk required_ico"></i></th>
-                            <td>
-                                <input id="password" name="password" class="user_input" type="password" value="">
-                                <span></span>
-                            </td>
+                            <td><input id="password" name="password" class="user_input" type="password" value=""></td>
                         </tr>
                         <tr>
                             <th class="subThead">비밀번호 확인<i class="fa fa-asterisk required_ico"></i></th>

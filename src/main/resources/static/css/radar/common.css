@@ -82,7 +82,7 @@ fieldset{display:inline-block;}
 img,input,select{vertical-align:middle;}
 span,
 a{
-  /* vertical-align: middle; */
+  vertical-align: middle;
   display:inline-block;text-decoration:none;box-sizing:border-box;}
 a:hover{text-decoration:none;}
 caption{width:0;height:0;overflow:hidden;visibility:hidden;font-size:0;line-height:0;}
@@ -178,7 +178,9 @@ label{vertical-align:middle;margin-bottom: 0rem;}
 .required::after{content:" *";color:#f35857;font-size:11px;font-weight:600;}
 [required]::before{margin-right:5px;}
 input,
-select{padding:1px 5px 2px;box-sizing:border-box;height:24px;border:1px solid #a9a9a9;}
+select{padding:1px 5px 2px;box-sizing:border-box;
+  /* height:24px; */
+  border:1px solid #a9a9a9;}
 select[multiple]{height:auto;}
 input[type="text"],
 input[type="password"]{height:24px;}

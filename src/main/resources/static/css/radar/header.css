@@ -326,7 +326,8 @@ input, select {
 .alertMap .TOTA {background:url('../../images/watchcon/status_TOTA.png') no-repeat;}
 .alertMap .MRO {background:url('../../images/watchcon/status_MRO.png') no-repeat;}
 /* 대형 */
-.alertMap .radar.KWK {top:170px; left:260px; background-size: 70% 70%;}
+.alertMap .radar.KWK {top:170px; left:250px; background-size: 70% 70%;}
+.alertMap .radar.BRI {top:100px; left:25px; background-size: 70% 70%;}
 .alertMap .radar.GDK {top:90px; left:260px; background-size: 70% 70%;}
 .alertMap .radar.GNG {top:130px; left:370px; background-size: 70% 70%;}
 .alertMap .radar.MYN {top:320px; left:380px; background-size: 70% 70%;}
@@ -335,7 +336,7 @@ input, select {
 .alertMap .radar.JNI {top:470px; left:160px; background-size: 70% 70%;}
 .alertMap .radar.GSN {top:565px; left:120px; background-size: 70% 70%;}
 .alertMap .radar.SSP {top:565px; left:230px; background-size: 70% 70%;}
-.alertMap .radar.BRI {top:100px; left:25px; background-size: 70% 70%;}
+.alertMap .radar.YIN {top:210px; left:270px; background-size: 70% 70%;}
 
 /* .alertMap .small.ORDI {background:url('../images/watchcon/srdr2.jpg') no-repeat;} */
 /* 공항 */
@@ -346,6 +347,7 @@ input, select {
 .alertMap .radar.SRI {top:210px; left:230px; background-size: 35% 35%;}
 .alertMap .radar.DJK {top:210px; left:150px; background-size: 35% 35%;}
 
+.KWKYIN {position:absolute; top:13px; left:43px;width:100%; text-align: center; background: url("../../images/tbl_head_bar1.png") repeat-x;background-position: -1px; }
 .large {position:absolute; top:45px; left:-10px;width:100%; text-align: center; background: url("../../images/tbl_head_bar1.png") repeat-x;background-position: -1px; }
 .small {position:absolute; top:25px; left:-20px;width:100%; text-align: center; background: url("../../images/tbl_head_bar1.png") repeat-x;background-position: -1px; }
 
@@ -368,7 +370,7 @@ input, select {
 .alarmAudio {visibility: hidden;display: none;}
 
 .login_input {margin:0 auto; background:#f9f9f9;border:1px solid #d9d9d9;padding:3px 4px; text-align:center; vertical-align:middle; color:#333; width:250px;}
-.login_btn {margin:0 5px; background:#f9f9f9;border:1px outset #d9d9d9;padding:0px 4px; vertical-align:middle; color:#111; width:150px;cursor: pointer;}
+.login_btn {margin:10px 5px; background:#f9f9f9;border:1px outset #d9d9d9;padding:0px 4px; vertical-align:middle; color:#111; width:150px;cursor: pointer;}
 
 .login_btn.del {  border-color: #F78C8C;  background: #F1C4C4;}
 .btnSubmit { border-color: #8CC7F7;  background: #C4E4F1;}

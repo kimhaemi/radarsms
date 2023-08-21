@@ -64,7 +64,12 @@
 				<div class="map"><img src="/images/map.png" alt="지도"></div>
 				<th:block th:each="rcSite : ${rcState}">
 					<div th:if="${rcSite.gubun == 1}" th:classappend="${'radar '+rcSite.site+' '+ rcSite.recv_condition}" th:id="${rcSite.site}">
-						<div class="large"><a th:href="${'/station/'+rcSite.site}" th:text="${rcSite.name_kr}"></a></div>
+						<th:block th:if="${rcSite.site == 'KWK' || rcSite.site == 'YIN'}">
+							<div class="KWKYIN"><a th:href="${'/station/'+rcSite.site}" th:text="${rcSite.name_kr}"></a></div>
+						</th:block>
+						<th:block th:if="${rcSite.site != 'KWK' && rcSite.site != 'YIN'}">
+							<div class="large"><a th:href="${'/station/'+rcSite.site}" th:text="${rcSite.name_kr}"></a></div>
+						</th:block>
 					</div>
 					<!-- <div th:if="${rcSite.gubun == 2}" th:classappend="${'radar '+rcSite.site+' small '+ rcSite.recv_condition}" th:id="${rcSite.site}"> -->
 						<div th:if="${rcSite.gubun == 2}" th:classappend="${'radar '+rcSite.site+' '+ rcSite.recv_condition}" th:id="${rcSite.site}">
