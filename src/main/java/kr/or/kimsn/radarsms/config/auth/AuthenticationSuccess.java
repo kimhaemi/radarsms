@@ -22,7 +22,7 @@ public class AuthenticationSuccess implements AuthenticationSuccessHandler {
         // RequestCache requestCache = new HttpSessionRequestCache();
         // SavedRequest savedRequest = requestCache.getRequest(request, response);
         // String redirectUrl = savedRequest.getRedirectUrl();
-
+        
         String userId = request.getParameter("userId");
 
         HttpSession session = request.getSession();

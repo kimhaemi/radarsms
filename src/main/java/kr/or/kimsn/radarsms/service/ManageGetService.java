@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
+import kr.or.kimsn.radarsms.dto.AppTemplateCodeDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
@@ -18,6 +19,7 @@ import kr.or.kimsn.radarsms.dto.SmsTargetGroupLinkListDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetGroupMemberDto;
 import kr.or.kimsn.radarsms.dto.SmsTargetMemberDto;
 import kr.or.kimsn.radarsms.dto.StationStatusDto;
+import kr.or.kimsn.radarsms.repository.AppTemplateCodeRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionCriteriaRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveSettingRepository;
@@ -48,6 +50,7 @@ public class ManageGetService {
     private final SmsTargetGroupLinkListRepository smsTargetGroupLinkListRepository;
 
     private final ReceiveRepository receiveRepository;
+    private final AppTemplateCodeRepository appTemplateCodeRepository;    
     
     /*
      * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
@@ -150,4 +153,8 @@ public class ManageGetService {
         return smsTargetMemberRepository.findByOrderByName();
     }
 
+    //템플릿 코드정보
+    public List<AppTemplateCodeDto> getAppTemplateCodeDtoList(){
+        return appTemplateCodeRepository.findAll();
+    }
 }

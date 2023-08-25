@@ -412,7 +412,7 @@ input, select {
 .subTbl .toggle{
 	width:100px;margin: 0 auto;
 }
-.subTbl td.left {text-align:left; padding-left: 10px;}
+.subTbl td.left {text-align:left; padding-left: 9px;}
 .subTbl input.rccset {text-align:center; width:30px;}
 .subTbl .settingSeries .toggle {width:50px;}
 .subTbl input.namePattern {text-align:center; width:280px;}

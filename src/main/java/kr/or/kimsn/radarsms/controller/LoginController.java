@@ -28,6 +28,8 @@ public class LoginController {
     @RequestMapping(value="/login", method = {RequestMethod.GET, RequestMethod.POST})
     // @GetMapping({ "/login" })
     public String login(HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+        String referrer = req.getHeader("Referer");
+        req.getSession().setAttribute("prevPage", referrer);
         model.addAttribute("error", req.getAttribute("errorMessage"));
     // public String login() {
         return "views/login";

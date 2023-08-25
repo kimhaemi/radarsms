@@ -1,8 +1,10 @@
 package kr.or.kimsn.radarsms.restApiController;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +14,6 @@ import kr.or.kimsn.radarsms.common.ApiResult;
 import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
-import kr.or.kimsn.radarsms.dto.SmsSendDto;
 import kr.or.kimsn.radarsms.dto.SmsSendOnOffDto;
 import kr.or.kimsn.radarsms.dto.SmsSendPatternDto;
 import kr.or.kimsn.radarsms.dto.SmsSetRcDto;
@@ -148,16 +149,18 @@ public class PostController {
 
     //문자 발송
     @PostMapping("/manage/sms_send_save")
-    public ApiResult<String> smsSendSave(@RequestBody List<SmsSendDto> dto){
-        String result = smsService.smsSendsave(dto);
-        System.out.println("result ::::: " + result);
-        if( result.equals("")){
-            return ApiResult.success(result);
+    public ApiResult<String> smsSendSave(@CookieValue(name = "userId", required = false) String userId, 
+        @RequestBody List<Map<String, Object>> dto){
+
+        String SmsSendDto = smsService.smsSendsave(dto);
+        
+        if( SmsSendDto.equals("")){
+            return ApiResult.success(SmsSendDto);
         } else {
-            return ApiResult.error(result, null, null);
+            return ApiResult.error(SmsSendDto, null, null);
         }
         
-        // return ;
+        // return ApiResult.success("");
     }
 
 }

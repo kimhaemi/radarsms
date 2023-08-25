@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.kimsn.radarsms.common.util.DateUtil;
+import kr.or.kimsn.radarsms.dto.AppTemplateCodeDto;
 import kr.or.kimsn.radarsms.dto.MenuDto;
 import kr.or.kimsn.radarsms.dto.SmsSendDto;
 import kr.or.kimsn.radarsms.dto.SmsSendOnOffDto;
@@ -61,6 +62,8 @@ public class SmsController {
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
+        model.addAttribute("list", map);
+
         Date today = new Date();
         SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd");
         SimpleDateFormat time = new SimpleDateFormat("HH:mm");
@@ -75,8 +78,11 @@ public class SmsController {
         //문자 수신 그룹 멤버
         List<SmsTargetGroupMemberDto> memberList = manageGetService.getSmsTargetGroupMemberList();
         model.addAttribute("memberList", memberList);
-        
-        model.addAttribute("list", map);
+
+        //템플릿 코드정보
+        List<AppTemplateCodeDto> tempCodeList = manageGetService.getAppTemplateCodeDtoList();
+        model.addAttribute("tempCodeList", tempCodeList);
+
         return "views/manage/sms/sms_send";
     }
 
@@ -104,6 +110,7 @@ public class SmsController {
         int page = (pageable.getPageNumber() == 0) ? 0 : pageable.getPageNumber();
         System.out.println("pageable.getPageNumber() :::: " + pageable.getPageNumber());
         System.out.println("page :::: " + page);
+        // pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "MSG_SEQ"));
         pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "MSG_SEQ"));
         
         System.out.println("pageable ::::: "+ pageable);
@@ -148,7 +155,12 @@ public class SmsController {
 
         //list
         // List<SmsSendDto> smsRsultList = smsService.getSmsSendData(offset, 10, Integer.parseInt(yearMonth), termStart, termClose);
-        Page<SmsSendDto> smsRsultList = smsService.getSmsSendData(pageable, Integer.parseInt(yearMonth), termStart, termClose);
+        //문자발송 내역
+        // Page<SmsSendDto> smsRsultList = smsService.getSmsSendData(pageable, Integer.parseInt(yearMonth), termStart, termClose);
+        // model.addAttribute("smsRsultList", smsRsultList);
+
+        //app 발송 내역
+        Page<SmsSendDto> smsRsultList = smsService.getAppSendData(pageable, Integer.parseInt(yearMonth), termStart, termClose);
         model.addAttribute("smsRsultList", smsRsultList);
 
         return "views/manage/sms/sms_send_result";

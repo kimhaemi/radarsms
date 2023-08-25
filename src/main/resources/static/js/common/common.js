@@ -30,3 +30,19 @@ function fnCall(method, url, params){
 
     return result;
 }
+
+function getByteB(str) {
+
+    var byte = 0;
+    
+    for (var i=0; i<str.length; ++i) {
+    
+    // 기본 한글 2바이트 처리
+    
+    (str.charCodeAt(i) > 127) ? byte += 2 : byte++ ;
+    
+    }
+    
+    return byte;
+    
+}

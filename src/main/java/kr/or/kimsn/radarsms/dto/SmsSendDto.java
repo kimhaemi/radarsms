@@ -19,8 +19,9 @@ public class SmsSendDto {
     private String call_to;
     private String call_from;
     private String sms_txt;
-    private Integer msg_type; //4:SMS, 6:MMS
+    private String msg_type; //4:SMS, 6:MMS
     private String rslt_code2;
+    // private String TemplateCode;
     // private Long CONT_SEQ; //mms 발송시 필요
     
 }

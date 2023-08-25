@@ -1,6 +1,7 @@
 package kr.or.kimsn.radarsms.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -33,12 +34,20 @@ public class SmsService {
         // return smsSendRepository.getSmsSendData(limitStart, pageSize, yearMonth, startDate, endDate);
         return smsSendRepository.getSmsSendData(pageable, yearMonth, startDate, endDate);
     }
+
+    //App 발송 대기 내역 page list
+    public Page<SmsSendDto> getAppSendData (Pageable pageable, Integer yearMonth, String startDate, String endDate) {
+        // Pageable pageable = PageRequest.of(limitStart,10);
+        // return smsSendRepository.getSmsSendData(limitStart, pageSize, yearMonth, startDate, endDate);
+        return smsSendRepository.getAppSendData(pageable, yearMonth, startDate, endDate);
+    }
     
-    //문자 발송기능 on/off 설정
+    //문자 발송기능 on/off 설정 list
     public List<SmsSendOnOffDto> getSmsSendOnOffData () {
         return smsSendOnOffRepository.findAll();
     }
 
+    //문자 발송기능 on/off 설정
     @Transactional
     public SmsSendOnOffDto updateOnOff(SmsSendOnOffDto smsSendOnOffDto ) throws Exception {
         try{
@@ -50,14 +59,42 @@ public class SmsService {
     }
 
     //문자 발송
-    public String smsSendsave(List<SmsSendDto> smsSendDto){
-        // System.out.println("smsSendDto :::::: " + smsSendDto);
+    public String smsSendsave(List<Map<String, Object>> dto){
+        System.out.println("dto :::::: " + dto);
         String result = "";
+        
+        //app content sequence
+        String appContentNextval = smsSendRepository.getAppContentNextval();
+        System.out.println("appContentNextval ::::: " + appContentNextval);
+
+        String smsText = dto.get(0).get("sms_txt").toString();
+
+        //카카오톡 발송(내용)
+        smsSendRepository.gaonAppSendContentsSave(Long.parseLong(appContentNextval), smsText);
+
         try {
-            for(SmsSendDto dto : smsSendDto){
-                dto.setCall_from("027337365");
-                smsSendRepository.smsSendSave(dto.getReq_date(), dto.getCall_to(), dto.getCall_from(), dto.getSms_txt(), dto.getMsg_type());
+            for(Map<String, Object> smsDto : dto){
+                System.out.println("smsDto::::: " + smsDto);
+                String call_from = "027337365";
+                String call_to = smsDto.get("call_to").toString().replaceAll("-", "");
+                String req_date = smsDto.get("req_date").toString().replace(".", "").replace(":", "")+"00";
+                String templateCode = smsDto.get("templateCode").toString();
+
+                //카카오톡 발송(전화번호)
+                smsSendRepository.gaonAppSendDataSave(Long.parseLong(appContentNextval), req_date, call_to, call_from, templateCode);
             }
+
+            // for(SmsSendDto dto : smsSendDto){
+            //     dto.setCall_from("027337365");
+            //     dto.setCall_to(dto.getCall_to().replaceAll("-", ""));
+            //     dto.setReq_date(dto.getReq_date().replace(".", "").replace(":", "")+"00");
+
+            //     // 문자발송
+            //     // smsSendRepository.nuriSmsSendSave(dto.getReq_date(), dto.getCall_to(), dto.getCall_from(), dto.getSms_txt(), dto.getMsg_type());
+
+            //     //카카오톡 발송(전화번호)
+            //     smsSendRepository.gaonAppSendDataSave(Long.parseLong(appContentNextval), dto.getReq_date(), dto.getCall_to(), dto.getCall_from(), templateCode);
+            // }
         } catch (Exception e) {
             result = "sms insert error : " + e;
             System.out.println("insert error : " +e);
