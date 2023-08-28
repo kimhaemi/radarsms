@@ -246,7 +246,7 @@
 
             function fnGoList(){
                 location.href="/manage/sms_send_result";
-            }            
+            }
             
         </script>
     
@@ -311,6 +311,9 @@
                                 <option th:value="${tempCode.templateCode}" th:text="${tempCode.head}"></option>    
                             </th:block>
                         </select>
+                        <button type="button" class="btn" data-target="#temp" onclick="location.href='/manage/sms_template'">
+                            템플릿 등록
+                        </button>
                     </td>
                 </tr>
                 <tr>

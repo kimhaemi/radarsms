@@ -15,11 +15,11 @@
             function fnModify(mid){
                 const params = {
                     id: mid,
-                    name: $("#name").val(),
-                    organization: $("#organization").val(),
-                    department: $("#department").val(),
-                    position: $("#position").val(),
-                    phone_num: $("#phone_num").val(),
+                    name: $("#name_"+mid).val(),
+                    organization: $("#organization_"+mid).val(),
+                    department: $("#department_"+mid).val(),
+                    position: $("#position_"+mid).val(),
+                    phone_num: $("#phone_num_"+mid).val(),
                     activation: $("#activation_"+mid).is(":checked") ? 1 : 0
                 }
                 if(confirm("수정 하겠습니까?")){
@@ -109,16 +109,16 @@
             <tbody class="table-group-divider">
                 <tr th:each="tmList, tmListStat : ${targetmembers}">
                     <td>
-                        <input type="text" name="name" id="name" size="16" th:value="${tmList.name }"/>
+                        <input type="text" name="name" th:id="${'name_'+tmList.id}" size="16" th:value="${tmList.name }"/>
                     </td>
                     <td>
-                        <input type="text" name="position" id="position" size="16" th:value="${tmList.position }"/>
+                        <input type="text" name="position" th:id="${'position_'+tmList.id}" size="16" th:value="${tmList.position }"/>
                     </td>
                     <td>
-                        <input type="text" name="department" id="department" size="16" th:value="${tmList.department }"/>
+                        <input type="text" name="department" th:id="${'department_'+tmList.id}" size="16" th:value="${tmList.department }"/>
                     </td>
                     <td>
-                        <input type="text" name="organization" id="organization" size="16" th:value="${tmList.organization }"/>
+                        <input type="text" name="organization" th:id="${'organization_'+tmList.id}" size="16" th:value="${tmList.organization }"/>
                     </td>
                     <td>
                         <input type="text" name="phone_num" id="phone_num" size="16" th:value="${tmList.phone_num }"/>

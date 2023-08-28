@@ -19,11 +19,14 @@
                             let jObj = new Object();
                             jObj.code=e.code;
                             jObj.name=e.name;
-                            jObj.criterion=$("#"+e.code).val();
+                            jObj.criterion=$("#"+e.code+"_"+e.gubun).val();
                             jObj.comment=e.comment;
+                            jObj.gubun=e.gubun;
                             list.push(jObj);
                         }
                     });
+
+                    console.log(list);
 
                     if(confirm("저장 하겠습니까?")){
                     let result = fnCall('post', '/manage/station_set_rcc_modify', JSON.stringify(list));
@@ -67,13 +70,16 @@
             </thead>
             <tbody class="table-group-divider">
                 <th:block th:each="list, listState : ${list.criteriaList}">
-                <tr th:if="${list.code == 'NOTI'}">
-                    <th colspan="2" th:if="${list.gubun} == 1" style="height: 40px;">
+                <tr class="subThead">
+                    <td colspan="2" th:if="${list.code == 'NOTI' && list.gubun == 1}">
                         대형 레이더
-                    </th>
-                    <th colspan="2" th:if="${list.gubun} == 2" style="height: 40px;">
+                    </td>
+                    <td colspan="2" th:if="${list.code == 'NOTI' && list.gubun == 2}">
                         소형 레이더
-                    </th>
+                    </td>
+                    <td colspan="2" th:if="${list.code == 'NOTI' && list.gubun == 3}">
+                        공항 레이더
+                    </td>
                 </tr>
                 
                 <tr th:if="${list.code != 'ORDI'}">
@@ -82,19 +88,19 @@
                     </td>
                     <td class="left">
                         <span th:if="${list.code} == 'NOTI'">
-                            자료가 연속으로 <input type="text" name="NOTI" id="NOTI" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
+                            자료가 연속으로 <input type="text" name="NOTI" th:id="${'NOTI_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
                         </span>
                         <span th:if="${list.code} == 'WARN'">
-                            자료가 연속으로 <input type="text" name="WARN" id="WARN" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
+                            자료가 연속으로 <input type="text" name="WARN" th:id="${'WARN_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
                         </span>
                         <span th:if="${list.code} == 'RETR'">
-                            주의 또는 경고 상태에서 자료가 연속으로 <input type="text" name="RETR" id="RETR" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
+                            주의 또는 경고 상태에서 자료가 연속으로 <input type="text" name="RETR" th:id="${'RETR_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
                         </span>
                         <span th:if="${list.code} == 'TOTA'">
-                            전 사이트가 연속으로 <input type="text" name="TOTA" id="TOTA" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
+                            전 사이트가 연속으로 <input type="text" name="TOTA" th:id="${'TOTA_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
                         </span>
                         <span th:if="${list.code} == 'TORE'">
-                            어느 한 사이트가 연속으로 <input type="text" name="TORE" id="TORE" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
+                            어느 한 사이트가 연속으로 <input type="text" name="TORE" th:id="${'TORE_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
                         </span>
                     </td>
                 </tr>

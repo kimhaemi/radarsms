@@ -20,14 +20,16 @@ public interface ReceiveConditionCriteriaRepository extends JpaRepository<Receiv
         "update receive_condition_criteria set \n"+
         "    criterion = :criterion \n"+
         "where 1=1\n"+
-        "  and code = :code \n"
+        "  and code = :code \n" +
+        "  and gubun = :gubun \n"
     )
     @Transactional
     @Modifying
     // 경고 기준 설정 일괄 수정
     Integer setReceiveConditionCriteriaModify(
         @Param("criterion") String criterion,
-        @Param("code") String code
+        @Param("code") String code,
+        @Param("gubun") Integer gubun
     );
     
 }

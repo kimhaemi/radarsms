@@ -68,9 +68,10 @@ public class ManagePostService {
         Integer result = 0;
         try {
             for(ReceiveConditionCriteriaDto dto : receiveConditionCriteriaDto){
-                String code = dto.getCode();
                 String criterion = dto.getCriterion();
-                receiveConditionCriteriaRepository.setReceiveConditionCriteriaModify(criterion, code);
+                String code = dto.getCode();
+                Integer gubun = dto.getGubun();
+                receiveConditionCriteriaRepository.setReceiveConditionCriteriaModify(criterion, code, gubun);
                 result++;
             }
         } catch (Exception e) {

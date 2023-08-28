@@ -86,6 +86,35 @@ public class SmsController {
         return "views/manage/sms/sms_send";
     }
 
+    //템플릿 화면
+    @GetMapping("/manage/sms_template")
+    public String sms_template(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
+
+        if(userId == null){
+            return "views/login";
+        }
+
+        Map<String, Object> map = new HashMap<>();
+
+        List<MenuDto> menuList = menuService.getMenuList();
+        // table join 필요
+        // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
+		// 				FROM watchdog.receive_condition; 
+        List<StationDto> stationList = menuService.getStationList();
+
+        map.put("menuList", menuList);
+        map.put("stationList", stationList);
+
+        model.addAttribute("list", map);
+
+        //템플릿 코드정보
+        List<AppTemplateCodeDto> tempCodeList = manageGetService.getAppTemplateCodeDtoList();
+        model.addAttribute("tempCodeList", tempCodeList);
+        System.out.println("tempCodeList :: " + tempCodeList);
+
+        return "views/manage/sms/sms_template";
+    }
+
     //문자 발송 대기 내역
     @RequestMapping(value="/manage/sms_send_result", method = {RequestMethod.GET, RequestMethod.POST})
     public String sms_send_result(@CookieValue(name = "userId", required = false) String userId, 
@@ -192,4 +221,5 @@ public class SmsController {
         model.addAttribute("list", map);
         return "views/manage/sms/sms_send_onoff";
     }
+        
 }

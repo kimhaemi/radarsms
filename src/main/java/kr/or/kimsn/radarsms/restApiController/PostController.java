@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.kimsn.radarsms.common.ApiResult;
+import kr.or.kimsn.radarsms.dto.AppTemplateCodeDto;
 import kr.or.kimsn.radarsms.dto.MembersDto;
 import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 import kr.or.kimsn.radarsms.dto.ReceiveSettingDto;
@@ -135,6 +136,7 @@ public class PostController {
     public ApiResult<Integer> smsTargetMemberDelete(@RequestParam Long mid){
         return ApiResult.success(managePostService.setSmsTargetMemberDelete(mid));
     }
+
     //문자 수신자 관리 > 추가
     @PostMapping("/manage/sms_target_member_add")
     public ApiResult<SmsTargetMemberDto> smsTargetMemberAdd(@RequestBody SmsTargetMemberDto dto){
@@ -162,5 +164,28 @@ public class PostController {
         
         // return ApiResult.success("");
     }
+
+    //템플릿 등록
+    @PostMapping("/manage/sms_temp_add")
+    public ApiResult<Integer> setAppTemplateCodeAdd(@CookieValue(name = "userId", required = false) String userId, 
+        @RequestBody AppTemplateCodeDto dto){
+            System.out.println("sms_temp_add :::: " + dto);
+        return ApiResult.success(smsService.setAppTemplateCodeAdd(dto));
+    }
+
+    //템플릿 수정
+    @PostMapping("/manage/sms_temp_modify")
+    public ApiResult<Integer> setAppTemplateCodeModify(@CookieValue(name = "userId", required = false) String userId, 
+        @RequestBody Map<String, Object> dto){
+        return ApiResult.success(smsService.setAppTemplateCodeModify(dto));
+    }
+
+    //템플릿 수정
+    @PostMapping("/manage/sms_temp_delete")
+    public ApiResult<Integer> setAppTemplateCodeDelete(@CookieValue(name = "userId", required = false) String userId, 
+        @RequestParam String tempCode){
+        return ApiResult.success(smsService.setAppTemplateCodeDelete(tempCode));
+    }
+
 
 }

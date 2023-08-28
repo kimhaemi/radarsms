@@ -9,8 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import kr.or.kimsn.radarsms.dto.AppTemplateCodeDto;
 import kr.or.kimsn.radarsms.dto.SmsSendDto;
 import kr.or.kimsn.radarsms.dto.SmsSendOnOffDto;
+import kr.or.kimsn.radarsms.repository.AppTemplateCodeRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendOnOffRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class SmsService {
     
     private final SmsSendOnOffRepository smsSendOnOffRepository;
     private final SmsSendRepository smsSendRepository;
+    private final AppTemplateCodeRepository appTemplateCodeRepository;
 
     // 문자 발송 대기 내역 totalcount
     public Integer getSmsAgentTotalCount (Integer yearMonth, String startDate, String endDate) {
@@ -101,4 +104,53 @@ public class SmsService {
         }
         return result;
     }
+
+    //template 등록
+    @Transactional
+    public Integer setAppTemplateCodeAdd (AppTemplateCodeDto dto) {
+        Integer result = 0;
+        try {
+            System.out.println("사용자 등록 userAdd");
+            result = appTemplateCodeRepository.setAppTemplateCodeAdd(dto.getTemplateCode(), dto.getHead());
+        } catch (Exception e) {
+            System.out.println("insert error : " +e);
+            return -1;
+        }
+        return result;
+    }
+
+    //template 수정
+    @Transactional
+    public Integer setAppTemplateCodeModify (Map<String, Object> appTemplateCodeDto) {
+        Integer result = 0;
+
+        System.out.println("appTemplateCodeDto :::; " + appTemplateCodeDto);
+        String oldTemplateCode = appTemplateCodeDto.get("oldTemplateCode").toString();
+        String newTemplateCode = appTemplateCodeDto.get("newTemplateCode").toString();
+        String head = appTemplateCodeDto.get("head").toString();
+
+        try {
+            System.out.println("사용자 수정 usermodify");
+            result = appTemplateCodeRepository.setAppTemplateCodeModify(newTemplateCode, oldTemplateCode, head);
+        } catch (Exception e) {
+            System.out.println("update error : " +e);
+            return -1;
+        }
+        return result;
+    }
+
+    //template 삭제
+    @Transactional
+    public Integer setAppTemplateCodeDelete (String templateCode) {
+        Integer result = 0;
+        try {
+            System.out.println("사용자 삭제 userDelete");
+            result = appTemplateCodeRepository.setAppTemplateCodeDelete(templateCode);
+        } catch (Exception e) {
+            System.out.println("delete error : " +e);
+            return -1;
+        }
+        return result;
+    }
+
 }
