@@ -37,20 +37,17 @@ public class ManageController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+        
+        model.addAttribute("list", map);
 
-        // 자료 수신 상태
+        // 자료 수신 상태 조회
         List<SmsSetRcDto> receiveList = manageGetService.getReceiveConditionList();
         System.out.println("receiveList : " + receiveList);
         map.put("receiveList", receiveList);
 
-        model.addAttribute("list", map);
 
         return "views/manage/station_set_rc";
     }
@@ -66,20 +63,18 @@ public class ManageController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
-        // 경고 기준
+        model.addAttribute("list", map);
+
+        // 경고 기준 조회
         List<ReceiveConditionCriteriaDto> criteriaList = manageGetService.getReceiveConditionCriteriaList();
         System.out.println("criteriaList ::: " + criteriaList);
         map.put("criteriaList", criteriaList);
 
-        model.addAttribute("list", map);
+        
         return "views/manage/station_set_rcc";
     }
 
@@ -94,16 +89,13 @@ public class ManageController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
         model.addAttribute("list", map);
 
+        // 자료 수신 감시 설정 조회
         List<ReceiveSettingDto> receiveSettingList = manageGetService.getReceiveSettingList();
         model.addAttribute("receiveSettingList", receiveSettingList);
         
@@ -121,20 +113,18 @@ public class ManageController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
+        model.addAttribute("list", map);
+
+        // 문자 메시지 패턴 조회
         // List<SmsSendPatternDto> smsSendPatternList = manageGetService.getSmsSendPatternList();
         Map<String, String> smsSendPatternList = manageGetService.getSmsSendPatternList();
         model.addAttribute("smsSendPatternList", smsSendPatternList);
         System.out.println("smsSendPatternList : \n" + smsSendPatternList);
 
-        model.addAttribute("list", map);
         return "views/manage/smsConfig/sms_set_msg";
     }
 
@@ -149,18 +139,16 @@ public class ManageController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+        
+        model.addAttribute("list", map);
 
+        // 지점별 운영상태 설정 조회
         List<StationStatusDto> stationStatusList = manageGetService.getStationStatusList();
         model.addAttribute("stationStatusList", stationStatusList);
 
-        model.addAttribute("list", map);
         return "views/manage/station_status";
     }
 }

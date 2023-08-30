@@ -68,10 +68,12 @@ public class ManagePostService {
         Integer result = 0;
         try {
             for(ReceiveConditionCriteriaDto dto : receiveConditionCriteriaDto){
+                System.out.println("dto :::: " + dto);
                 String criterion = dto.getCriterion();
                 String code = dto.getCode();
                 Integer gubun = dto.getGubun();
-                receiveConditionCriteriaRepository.setReceiveConditionCriteriaModify(criterion, code, gubun);
+                String codedtl = dto.getCodedtl();
+                receiveConditionCriteriaRepository.setReceiveConditionCriteriaModify(criterion, code, gubun, codedtl);
                 result++;
             }
         } catch (Exception e) {
@@ -110,7 +112,8 @@ public class ManagePostService {
                 String activation = dto.getActivation();
                 String code = dto.getCode();
                 String mode = dto.getMode();
-                smsSendPatternRepository.setSmsSetMsgModify(pattern, activation, code, mode);
+                String codedtl = dto.getCodedtl();
+                smsSendPatternRepository.setSmsSetMsgModify(pattern, activation, code, mode, codedtl);
                 result++;
             }
         } catch (Exception e) {

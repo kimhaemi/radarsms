@@ -15,4 +15,5 @@ import lombok.NoArgsConstructor;
 public class SmsSendPatternPk implements Serializable {
     private String code;
     private String mode;
+    private String codedtl;
 }

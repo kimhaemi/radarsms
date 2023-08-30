@@ -25,6 +25,7 @@ public interface SmsSendPatternRepository extends JpaRepository<SmsSendPatternDt
 		"  activation = :activation \n" +
         "where 1=1  \n" +
         "  and code = :code \n" +
+        "  and codedtl = :codedtl \n" +
         "  and mode = :mode \n"
     )
     @Transactional
@@ -34,6 +35,7 @@ public interface SmsSendPatternRepository extends JpaRepository<SmsSendPatternDt
         @Param("pattern") String pattern,
         @Param("activation") String activation,
         @Param("code") String code,
-        @Param("mode") String mode
+        @Param("mode") String mode,
+        @Param("codedtl") String codedtl
     );
 }

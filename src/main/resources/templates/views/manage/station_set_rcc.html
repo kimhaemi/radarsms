@@ -19,9 +19,11 @@
                             let jObj = new Object();
                             jObj.code=e.code;
                             jObj.name=e.name;
-                            jObj.criterion=$("#"+e.code+"_"+e.gubun).val();
+                            jObj.criterion=$("#"+e.code+"_"+e.gubun+"_"+e.codedtl).val();
                             jObj.comment=e.comment;
                             jObj.gubun=e.gubun;
+                            jObj.codedtl=e.codedtl;
+                            jObj.sort=e.sort;
                             list.push(jObj);
                         }
                     });
@@ -71,36 +73,58 @@
             <tbody class="table-group-divider">
                 <th:block th:each="list, listState : ${list.criteriaList}">
                 <tr class="subThead">
-                    <td colspan="2" th:if="${list.code == 'NOTI' && list.gubun == 1}">
+                    <td colspan="2" th:if="${list.code == 'ORDI' && list.gubun == 1}">
                         대형 레이더
                     </td>
-                    <td colspan="2" th:if="${list.code == 'NOTI' && list.gubun == 2}">
+                    <td colspan="2" th:if="${list.code == 'ORDI' && list.gubun == 2}">
                         소형 레이더
                     </td>
-                    <td colspan="2" th:if="${list.code == 'NOTI' && list.gubun == 3}">
+                    <td colspan="2" th:if="${list.code == 'ORDI' && list.gubun == 3}">
                         공항 레이더
                     </td>
                 </tr>
                 
                 <tr th:if="${list.code != 'ORDI'}">
                     <td>
-                        <span th:text="${list.name + ' 기준'}"></span>
+                        <span th:if="${list.code == 'WARN' &&  list.codedtl == 'file_no'}" th:text="${list.name + ' 기준(자료 미수신)'}"></span>
+                        <span th:if="${list.code == 'WARN' &&  list.codedtl == 'filesize_no'}" th:text="${list.name + ' 기준(자료 품질 이상)'}"></span>
+                        <span th:if="${list.code == 'RETR' &&  list.codedtl == 'file_ok'}" th:text="${list.name + ' 기준(자료 수신)'}"></span>
+                        <span th:if="${list.code == 'RETR' &&  list.codedtl == 'filesize_ok'}" th:text="${list.name + ' 기준(자료 품질 정상)'}"></span>
+                        <span th:if="${list.code != 'WARN' && list.code != 'RETR'}" th:text="${list.name + ' 기준'}"></span>
                     </td>
                     <td class="left">
-                        <span th:if="${list.code} == 'NOTI'">
+                        <!-- <span th:if="${list.code} == 'NOTI'">
                             자료가 연속으로 <input type="text" name="NOTI" th:id="${'NOTI_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
+                        </span> -->
+                        <span th:if="${list.code == 'WARN' && list.codedtl == 'file_no'} ">
+                            자료가 연속으로 
+                            <input type="text" name="WARN" th:id="${'WARN_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            회 이상 자료가 미수신일 때
                         </span>
-                        <span th:if="${list.code} == 'WARN'">
-                            자료가 연속으로 <input type="text" name="WARN" th:id="${'WARN_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
+                        <span th:if="${list.code == 'WARN' && list.codedtl == 'filesize_no'} ">
+                            자료 크기가 기준파일크기보다 연속으로 
+                            <input type="text" name="WARN" th:id="${'WARN_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            회 이상 작을때
                         </span>
-                        <span th:if="${list.code} == 'RETR'">
-                            주의 또는 경고 상태에서 자료가 연속으로 <input type="text" name="RETR" th:id="${'RETR_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
+                        <span th:if="${list.code == 'RETR' && list.codedtl == 'file_ok'} ">
+                            주의 또는 경고 상태에서 자료가 연속으로 
+                            <input type="text" name="RETR" th:id="${'RETR_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            회 이상 자료가 수신되었을 때
+                        </span>
+                        <span th:if="${list.code == 'RETR' && list.codedtl == 'filesize_ok'} ">
+                            자료 크기가 연속으로 
+                            <input type="text" name="RETR" th:id="${'RETR_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            회 이상 정상일때
                         </span>
                         <span th:if="${list.code} == 'TOTA'">
-                            전 사이트가 연속으로 <input type="text" name="TOTA" th:id="${'TOTA_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 미수신일 때
+                            전 사이트가 연속으로 
+                            <input type="text" name="TOTA" th:id="${'TOTA_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            회 이상 자료가 미수신일 때
                         </span>
                         <span th:if="${list.code} == 'TORE'">
-                            어느 한 사이트가 연속으로 <input type="text" name="TORE" th:id="${'TORE_'+list.gubun}" class="rccset" th:value="${list.criterion}"/>회 이상 자료가 수신되었을 때
+                            어느 한 사이트가 연속으로 
+                            <input type="text" name="TORE" th:id="${'TORE_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            회 이상 자료가 수신되었을 때
                         </span>
                     </td>
                 </tr>

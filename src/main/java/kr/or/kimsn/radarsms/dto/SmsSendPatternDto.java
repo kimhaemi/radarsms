@@ -24,5 +24,7 @@ public class SmsSendPatternDto {
     private String mode;
     private String activation;
     private String pattern;
+    @Id
+    private String codedtl;
 }
 

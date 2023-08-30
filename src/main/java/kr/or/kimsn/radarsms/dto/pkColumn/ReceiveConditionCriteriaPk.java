@@ -15,5 +15,6 @@ import lombok.NoArgsConstructor;
 public class ReceiveConditionCriteriaPk implements Serializable{
     private String code;
     private Integer gubun;
+    private String codedtl;
 }
 

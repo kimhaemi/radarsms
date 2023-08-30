@@ -18,7 +18,8 @@ public interface SmsSetRcRepository extends JpaRepository<SmsSetRcDto, String> {
             "T1.data_type as data_type, \n"+
             "T3.data_name as data_name,\n" +
             "T1.sms_send_activation as sms_send_activation,\n" +
-            "T1.status as status\n" +
+            "T1.status as status,\n" +
+            "T2.gubun as gubun\n" +
             "from watchdog.receive_condition T1\n" +
             "left outer join watchdog.station_rdr T2 \n" +
             "on T1.site = T2.site_cd \n" +

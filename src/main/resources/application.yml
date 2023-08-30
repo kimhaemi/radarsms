@@ -11,14 +11,14 @@ spring:
 # DB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    # url: jdbc:mysql://175.197.48.213:3306/watchdog
+    url: jdbc:mysql://175.197.48.213:3306/watchdog
     # url: jdbc:mysql://175.197.48.213:23307/watchdog
-    url: jdbc:mysql://localhost:3306/watchdog
+    # url: jdbc:mysql://localhost:3306/watchdog
     username: root
     #local
     # password: test123
-    # password: Test123~!@
-    password: Watch1234!
+    password: Test123~!@
+    # password: Watch1234!
 
 # query
   jpa:

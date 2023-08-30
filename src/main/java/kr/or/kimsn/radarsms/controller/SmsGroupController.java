@@ -41,18 +41,16 @@ public class SmsGroupController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
+        model.addAttribute("list", map);
+
+        // 문자 수신 그룹 관리 조회
         List<SmsTargetGroupDto> smsTargetGroupList = manageGetService.getSmsTargetGroupList();
         model.addAttribute("smsTargetGroupList", smsTargetGroupList);
 
-        model.addAttribute("list", map);
         return "views/manage/smsGroup/sms_target_group";
     }
 
@@ -67,13 +65,11 @@ public class SmsGroupController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        model.addAttribute("list", map);
 
         if( gid != null ){
             //수신 그룹
@@ -93,7 +89,6 @@ public class SmsGroupController {
             return "views/manage/smsGroup/sms_target_group_member";
         }
 
-        model.addAttribute("list", map);
         return "redirect:/manage/sms_target_group";
         
     }
@@ -109,13 +104,11 @@ public class SmsGroupController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+
+        model.addAttribute("list", map);
 
         SmsTargetGroupDto smsTargetGroup = manageGetService.getSmsTargetGroupId(gid);
         model.addAttribute("smsTargetGroup", smsTargetGroup);
@@ -126,7 +119,6 @@ public class SmsGroupController {
         List<ReceiveDto> notlinks = manageGetService.getSmsTargetGroupNotLink(links);
         model.addAttribute("notlinks", notlinks);
         
-        model.addAttribute("list", map);
         return "views/manage/smsGroup/sms_target_group_link";
     }
 
@@ -141,18 +133,16 @@ public class SmsGroupController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
 
+        model.addAttribute("list", map);
+
+        // 문자 수신자 관리 조회
         List<SmsTargetMemberDto> targetmembers = manageGetService.getSmsTargetMemberList();
         model.addAttribute("targetmembers", targetmembers);
 
-        model.addAttribute("list", map);
         return "views/manage/smsGroup/sms_target_member";
     }
 
@@ -167,10 +157,6 @@ public class SmsGroupController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
 
         map.put("menuList", menuList);

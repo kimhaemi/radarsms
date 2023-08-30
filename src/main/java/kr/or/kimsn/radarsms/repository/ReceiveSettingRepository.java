@@ -16,7 +16,7 @@ public interface ReceiveSettingRepository extends JpaRepository<ReceiveSettingDt
 
     ReceiveSettingDto findByDataKindAndPermittedWatch(String dataKind, Integer permittedWatch);
 
-    List<ReceiveSettingDto> findByOrderByDataKindDescPermittedWatchDesc();
+    List<ReceiveSettingDto> findByOrderByDataKindAscPermittedWatchDesc();
 
     @Query(
         nativeQuery = true,

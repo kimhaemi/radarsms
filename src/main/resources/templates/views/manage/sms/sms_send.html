@@ -291,7 +291,7 @@
                     <td class="left" id="groupsCell">
                         <input type="hidden" name="check_groups" id="check_groups" value="" />
                         <th:block th:each="groups, groupsStat : ${groups}" th:if="${groups.id > 1}">
-                        <span id="" style="margin-right:10px;white-space: nowrap;" th:if="${groups.status != '0'}">
+                        <span id="" style="margin-right:10px;white-space: nowrap;" th:if="${groups.status != '0' && groups.activation == '1'}">
                             <input type="checkbox" th:id="${'groups_'+groups.id}" name="groups" th:value="${groups.id}" />
                             <label th:id="${'groups_'+groups.id}" style="margin-right:10px;vertical-align: middle;" th:text="${groups.name}"></label>
                         </span>

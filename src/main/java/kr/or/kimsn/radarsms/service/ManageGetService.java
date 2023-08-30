@@ -72,12 +72,12 @@ public class ManageGetService {
     // 경고 기준 설정
     public List<ReceiveConditionCriteriaDto> getReceiveConditionCriteriaList() {
         // return receiveConditionCriteriaRepository.findAll();
-        return receiveConditionCriteriaRepository.findByOrderByGubunAsc();
+        return receiveConditionCriteriaRepository.findByOrderByGubunAscSortAsc();
     }
 
     // 자료 수신 감시 설정(자료 수신 처리 설정 테이블) - 상태가 사용인 것만
     public List<ReceiveSettingDto> getReceiveSettingList() {
-        return receiveSettingRepository.findByOrderByDataKindDescPermittedWatchDesc();
+        return receiveSettingRepository.findByOrderByDataKindAscPermittedWatchDesc();
     }
 
     // 문자 메시지 패턴
@@ -87,10 +87,11 @@ public class ManageGetService {
         List<SmsSendPatternDto> list = smsSendPatternRepository.findByOrderByCodeAscModeDesc();
 
         for (SmsSendPatternDto vo : list) {
-          String key = String.valueOf(vo.getCode()) + "_" + vo.getMode();
+          String key = String.valueOf(vo.getCode()) + "_" + vo.getMode() + "_" + vo.getCodedtl();
           map.put(String.valueOf(key) + "_activation", vo.getActivation());
           map.put(String.valueOf(key) + "_pattern", vo.getPattern());
         }
+
         return map;
         // return smsSendPatternRepository.findByOrderByCodeAscModeDesc();
     }

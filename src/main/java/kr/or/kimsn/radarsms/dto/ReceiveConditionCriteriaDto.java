@@ -21,4 +21,7 @@ public class ReceiveConditionCriteriaDto {
     private String comment;
     @Id
     private Integer gubun;
+    @Id
+    private String codedtl;
+    private String sort;
 }

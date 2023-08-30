@@ -12,7 +12,8 @@ import kr.or.kimsn.radarsms.dto.ReceiveConditionCriteriaDto;
 
 public interface ReceiveConditionCriteriaRepository extends JpaRepository<ReceiveConditionCriteriaDto, String> {
 
-    List<ReceiveConditionCriteriaDto> findByOrderByGubunAsc();
+    //경고기준설정 조회
+    List<ReceiveConditionCriteriaDto> findByOrderByGubunAscSortAsc();
 
     @Query(
         nativeQuery = true,
@@ -21,6 +22,7 @@ public interface ReceiveConditionCriteriaRepository extends JpaRepository<Receiv
         "    criterion = :criterion \n"+
         "where 1=1\n"+
         "  and code = :code \n" +
+        "  and codedtl = :codedtl \n" +
         "  and gubun = :gubun \n"
     )
     @Transactional
@@ -29,7 +31,8 @@ public interface ReceiveConditionCriteriaRepository extends JpaRepository<Receiv
     Integer setReceiveConditionCriteriaModify(
         @Param("criterion") String criterion,
         @Param("code") String code,
-        @Param("gubun") Integer gubun
+        @Param("gubun") Integer gubun,
+        @Param("codedtl") String codedtl
     );
     
 }

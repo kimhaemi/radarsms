@@ -22,7 +22,7 @@
                     // e.data_name=e.data_name;
                     // e.recv_interval=e.recv_interval;
                     // e.status=e.status;
-                    console.log("idx :: ", idx);
+                    // console.log("idx :: ", idx);
                     let dataKind = $("#data_kind-"+idx).val();
                     let dataType = $("#data_type-"+idx).val();
                     // console.log("dataKind :: ", dataKind);
@@ -91,16 +91,19 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider" th:each="rsList, rsListStat : ${receiveSettingList}" th:if="${rsList.status == 1}">
-                <tr th:if="${rsList.permittedWatch} == 1">
+                <tr class="subThead" th:if="${rsList.permittedWatch} == 1">
                     <th colspan="7" th:if="${rsList.dataKind} == 'RDR'">
                         대형 레이더
                     </th>
                     <th colspan="7" th:if="${rsList.dataKind} == 'SDR'">
                         소형 레이더
                     </th>
-                    <th colspan="7" th:if="${rsList.dataKind} == 'LGT'">
+                    <th colspan="7" th:if="${rsList.dataKind} == 'TDWR'">
+                        공항 레이더
+                    </td>
+                    <!-- <th colspan="7" th:if="${rsList.dataKind} == 'LGT'">
                         낙뢰
-                    </th>
+                    </th> -->
                 </tr>
                 <tr th:if="${rsList.dataKind} != 'all'">
                     <td>

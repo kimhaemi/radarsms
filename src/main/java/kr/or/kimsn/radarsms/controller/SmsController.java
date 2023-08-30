@@ -55,9 +55,6 @@ public class SmsController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
-		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
@@ -97,9 +94,6 @@ public class SmsController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
-		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
 
         map.put("menuList", menuList);
@@ -127,9 +121,6 @@ public class SmsController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
-		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
@@ -172,22 +163,6 @@ public class SmsController {
 
         String yearMonth = DateUtil.formatDate("yyyyMM", dateClose);
 
-        //total
-        // Integer totalCnt = smsService.getSmsAgentTotalCount(Integer.parseInt(yearMonth), termStart, termClose);
-        // model.addAttribute("totalCnt", totalCnt);
-
-        // int pageNumber = Integer.parseInt(page); // 표시하려는 페이지 번호
-        // int pageSize = 10; // 페이지 당 표시할 데이터 개수
-
-        // // 페이지 번호와 페이지 사이즈를 이용하여 OFFSET과 LIMIT 값을 계산
-        // int offset = (pageNumber - 1) * pageSize;
-
-        //list
-        // List<SmsSendDto> smsRsultList = smsService.getSmsSendData(offset, 10, Integer.parseInt(yearMonth), termStart, termClose);
-        //문자발송 내역
-        // Page<SmsSendDto> smsRsultList = smsService.getSmsSendData(pageable, Integer.parseInt(yearMonth), termStart, termClose);
-        // model.addAttribute("smsRsultList", smsRsultList);
-
         //app 발송 내역
         Page<SmsSendDto> smsRsultList = smsService.getAppSendData(pageable, Integer.parseInt(yearMonth), termStart, termClose);
         model.addAttribute("smsRsultList", smsRsultList);
@@ -206,9 +181,6 @@ public class SmsController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time, last_check_time, sms_send, sms_send_activation
-		// 				FROM watchdog.receive_condition; 
         List<StationDto> stationList = menuService.getStationList();
 
         map.put("menuList", menuList);
