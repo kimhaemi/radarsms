@@ -59,16 +59,16 @@
         <th class="left">
           지점별 감시 &gt; <span class="radar" th:text="${siteName+' 레이더'}"></span>
         </th>
-        <th class="left">알람설정:</th>
+        <th class="left"><!-- 알람설정: --></th>
         <th class="center">
           <div class="toggle toggle-light" id="s" data-toggle-on="1" style="height: 20px;">
-            <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+            <!-- <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
               <input type="checkbox" th:name="notiConfig" 
               />
               <span class="toggle">
                   <span class="switch"></span>
               </span>
-            </label>
+            </label> -->
           </div>
           <input type="hidden" name="alert_activity" id="alert_activity" value="1">
           <input type="hidden" name="alert_lasttime" id="alert_lasttime" value="${now}">

@@ -28,7 +28,7 @@
                     // console.log("dataKind :: ", dataKind);
                     // console.log("dataType :: ", dataType);
                     if(e.dataKind == dataKind && e.dataType == dataType){
-                        e.time_zone=$("#time-"+idx).is(":checked") ? 1 : 0;
+                        e.time_zone=$("#time-"+idx).is(":checked") ? "K" : "U";
                         e.filename_pattern=$("#filename_pattern-"+idx).val();
                         e.filename_regex=$("#filename_regex-"+idx).val();
                         e.permittedWatch=$("#pmt-"+idx).is(":checked") ? 1 : 0;
@@ -82,7 +82,7 @@
             </colgroup>
             <thead class="subThead">
                 <tr>
-                    <th colspan="2">데이터 종류</th>
+                    <th>데이터 종류</th>
                     <th>시간대<br/> 설정</th>
                     <th>파일이름 패턴</th>
                     <th>파일이름 정규식 </th>
@@ -91,7 +91,7 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider" th:each="rsList, rsListStat : ${receiveSettingList}" th:if="${rsList.status == 1}">
-                <tr class="subThead" th:if="${rsList.permittedWatch} == 1">
+                <tr class="subThead">
                     <th colspan="7" th:if="${rsList.dataKind} == 'RDR'">
                         대형 레이더
                     </th>
@@ -106,20 +106,18 @@
                     </th> -->
                 </tr>
                 <tr th:if="${rsList.dataKind} != 'all'">
-                    <td>
+                    <td><!-- <th>데이터 종류</th> -->
                         <input type="hidden" th:id="${'data_type-'+rsListStat.index}" th:value="${rsList.dataType }" />
                         <input type="hidden" th:id="${'data_kind-'+rsListStat.index}" th:value="${rsList.dataKind }" />
                         <div th:text="${rsList.dataType}"></div>
-                    </td>
-                    <td>
                         <input type="hidden" th:id="${'data_name-'+rsListStat.index}" th:value="${rsList.data_name }" />
-                        <div th:text="${rsList.data_name}"></div>
+                        <div th:text="${'('+rsList.data_name+')'}"></div>
                     </td>
-                    <td>
-                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-input-checked-content:'UTC'; --a8z-ts-input-unchecked-content: 'KST'; --a8z-ts-width: 60px;">
+                    <td><!-- <th>시간대<br/> 설정</th> -->
+                        <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-input-checked-content:'KST'; --a8z-ts-input-unchecked-content: 'UTC'; --a8z-ts-width: 60px;">
                             <input type="checkbox" name="timeConfig" 
                                 th:id="${'time-'+rsListStat.index}"
-                                th:checked="${rsList.time_zone == 'U'}"
+                                th:checked="${rsList.time_zone == 'K'}"
                             />
                             <span class="toggle">
                                 <span class="switch"></span>

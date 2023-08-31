@@ -336,7 +336,7 @@ input, select {
 .alertMap .radar.JNI {top:470px; left:160px; background-size: 70% 70%;}
 .alertMap .radar.GSN {top:565px; left:120px; background-size: 70% 70%;}
 .alertMap .radar.SSP {top:565px; left:230px; background-size: 70% 70%;}
-.alertMap .radar.YIN {top:210px; left:270px; background-size: 70% 70%;}
+.alertMap .radar.YIT {top:210px; left:270px; background-size: 70% 70%;}
 
 /* .alertMap .small.ORDI {background:url('../images/watchcon/srdr2.jpg') no-repeat;} */
 /* 공항 */
@@ -347,7 +347,7 @@ input, select {
 .alertMap .radar.SRI {top:210px; left:230px; background-size: 35% 35%;}
 .alertMap .radar.DJK {top:210px; left:150px; background-size: 35% 35%;}
 
-.KWKYIN {position:absolute; top:13px; left:43px;width:100%; text-align: center; background: url("../../images/tbl_head_bar1.png") repeat-x;background-position: -1px; }
+.KWKYIT {position:absolute; top:13px; left:43px;width:100%; text-align: center; background: url("../../images/tbl_head_bar1.png") repeat-x;background-position: -1px; }
 .large {position:absolute; top:45px; left:-10px;width:100%; text-align: center; background: url("../../images/tbl_head_bar1.png") repeat-x;background-position: -1px; }
 .small {position:absolute; top:25px; left:-20px;width:100%; text-align: center; background: url("../../images/tbl_head_bar1.png") repeat-x;background-position: -1px; }
 

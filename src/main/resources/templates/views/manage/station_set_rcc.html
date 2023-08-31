@@ -117,11 +117,17 @@
                             회 이상 정상일때
                         </span>
                         <span th:if="${list.code} == 'TOTA'">
+                            <div style="display: inline-block;" th:if="${list.gubun == 1}" >대형 레이더</div>
+                            <div style="display: inline-block;" th:if="${list.gubun == 2}" >소형 레이더</div>
+                            <div style="display: inline-block;" th:if="${list.gubun == 3}" >공항 레이더</div>
                             전 사이트가 연속으로 
                             <input type="text" name="TOTA" th:id="${'TOTA_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
                             회 이상 자료가 미수신일 때
                         </span>
                         <span th:if="${list.code} == 'TORE'">
+                            <div style="display: inline-block;" th:if="${list.gubun == 1}" >대형 레이더</div>
+                            <div style="display: inline-block;" th:if="${list.gubun == 2}" >소형 레이더</div>
+                            <div style="display: inline-block;" th:if="${list.gubun == 3}" >공항 레이더</div>
                             어느 한 사이트가 연속으로 
                             <input type="text" name="TORE" th:id="${'TORE_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
                             회 이상 자료가 수신되었을 때

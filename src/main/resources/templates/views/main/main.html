@@ -6,8 +6,6 @@
 	<th:block layout:fragment="content">
 		<script th:inline="javascript">
 			/* <![CDATA[ */
-			var site = /*[[${list.stationList}]]*/
-			console.log(site);
 			var rcState = /*[[${rcState}]]*/
 			console.log(rcState);
             /* ]]> */
@@ -38,16 +36,15 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th class="left">
-					</th>
-					<th class="left">알람설정:</th>
+					<th class="left"></th>
+					<th class="left"><!-- 알람설정: --></th>
 					<th class="center toggle-light">
-						<label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
+						<!-- <label class="a8z-toggle-switch" data-size="sm" style="--a8z-ts-width: 60px;">
                             <input type="checkbox" th:name="notiConfig" />
                             <span class="toggle">
                                 <span class="switch"></span>
                             </span>
-                        </label>
+                        </label> -->
 						<input type="hidden" name="alert_activity" id="alert_activity" value="1">
 						<input type="hidden" name="alert_lasttime" id="alert_lasttime" value="">
 						<input type="hidden" name="alert_checksite" id="alert_checksite" value="ALL">
@@ -63,10 +60,10 @@
 				<div class="map"><img src="/images/map.png" alt="지도"></div>
 				<th:block th:each="rcSite : ${rcState}">
 					<div th:if="${rcSite.gubun == 1}" th:classappend="${'radar '+rcSite.site+' '+ rcSite.recv_condition}" th:id="${rcSite.site}">
-						<th:block th:if="${rcSite.site == 'KWK' || rcSite.site == 'YIN'}">
-							<div class="KWKYIN"><a th:href="${'/station/'+rcSite.site}" th:text="${rcSite.name_kr}"></a></div>
+						<th:block th:if="${rcSite.site == 'KWK' || rcSite.site == 'YIT'}">
+							<div class="KWKYIT"><a th:href="${'/station/'+rcSite.site}" th:text="${rcSite.name_kr}"></a></div>
 						</th:block>
-						<th:block th:if="${rcSite.site != 'KWK' && rcSite.site != 'YIN'}">
+						<th:block th:if="${rcSite.site != 'KWK' && rcSite.site != 'YIT'}">
 							<div class="large"><a th:href="${'/station/'+rcSite.site}" th:text="${rcSite.name_kr}"></a></div>
 						</th:block>
 					</div>

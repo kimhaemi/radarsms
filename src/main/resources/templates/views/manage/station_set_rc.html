@@ -84,10 +84,9 @@
             <tbody class="table-group-divider">
                 <tr th:each="rclist : ${list.receiveList}" th:if="${rclist.status == 1}">
                     <td th:if="${rclist.dataKind == 'RDR'}">
-                        <span th:if="${rclist.gubun == 1}">대형</span>
-                        <span th:if="${rclist.gubun == 2}">소형</span>
-                        <span th:if="${rclist.gubun == 3}">공항</span>
-                         레이더
+                        <span th:if="${rclist.gubun == 1}">대형 레이더</span>
+                        <span th:if="${rclist.gubun == 2}">소형 레이더</span>
+                        <span th:if="${rclist.gubun == 3}">공항 레이더</span>
                     </td>
                     <!-- <td th:if="${rclist.dataKind == 'LGT'}">
                         낙뢰

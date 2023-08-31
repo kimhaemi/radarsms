@@ -2,9 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="headerFragment">
         <script th:inline="javascript">
-			/* <![CDATA[ */
-                var menuList = /*[[${menuList}]]*/
-                console.log("menuList", menuList);
+			/* <![C DATA[ */
+            var menuList = /*[[${list.menuList}]]*/
+            console.log("menuList", menuList);
+            var site = /*[[${list.stationList}]]*/
+            console.log(site);
             /* ]]> */
             </script>
         <script type="text/javascript">
@@ -99,7 +101,7 @@
                             <li>
                                 <a th:href="${mList.path}" th:text="${mList.menuName}"></a><!-- 대메뉴 -->
                                 <ul th:if="${mList.id != 1000 && mList.id != 6000}"
-                                    class="sub" style="display: none; height: 420px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                                    class="sub" style="display: none; height: 450px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
                                     <li class="subTitle" th:if="${mList.id} != '5000'">대형</li>
                                     <li th:each="sList : ${list.stationList}" th:if="${sList.gubun == 1}">
                                         <a th:if="${mList.id} == '2000'" th:href="${'/station/'+sList.siteCd}" th:text="${sList.name_kr}"></a>
