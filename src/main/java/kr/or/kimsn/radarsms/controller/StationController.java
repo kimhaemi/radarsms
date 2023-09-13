@@ -57,10 +57,6 @@ public class StationController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
 
         map.put("menuList", menuList);
@@ -111,10 +107,6 @@ public class StationController {
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
-        // table join 필요
-        // SELECT site, data_kind, data_type, recv_condition, apply_time,
-        // last_check_time, sms_send, sms_send_activation
-        // FROM watchdog.receive_condition;
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);

@@ -17,11 +17,12 @@ public class ReceiveConditionCriteriaDto {
     @Id
     private String code;
     private String name;
-    private String criterion;
+    private int criterion;
     private String comment;
     @Id
     private Integer gubun;
     @Id
     private String codedtl;
     private String sort;
+    private int status;
 }

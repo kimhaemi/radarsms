@@ -35,6 +35,15 @@
         $('#loginForm').submit();
       }
 
+      $(document).ready(function() {
+          // ID가 message에서 엔터키를 누를 경우
+          $("#pwd").keydown(function (key) {
+              if (key.keyCode == 13) {
+                  fnLogin();
+              }
+          });
+      });
+
     </script>
 
   </head>

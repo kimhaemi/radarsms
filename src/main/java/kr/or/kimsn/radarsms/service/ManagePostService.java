@@ -69,7 +69,7 @@ public class ManagePostService {
         try {
             for(ReceiveConditionCriteriaDto dto : receiveConditionCriteriaDto){
                 System.out.println("dto :::: " + dto);
-                String criterion = dto.getCriterion();
+                int criterion = dto.getCriterion();
                 String code = dto.getCode();
                 Integer gubun = dto.getGubun();
                 String codedtl = dto.getCodedtl();

@@ -20,6 +20,9 @@
                             jObj.code=e.code;
                             jObj.name=e.name;
                             jObj.criterion=$("#"+e.code+"_"+e.gubun+"_"+e.codedtl).val();
+                            if(e.codedtl == 'siteconnect_no'){
+                                jObj.criterion = $("#"+e.code+"_"+e.gubun+"_file_no").val();
+                            }
                             jObj.comment=e.comment;
                             jObj.gubun=e.gubun;
                             jObj.codedtl=e.codedtl;
@@ -84,7 +87,7 @@
                     </td>
                 </tr>
                 
-                <tr th:if="${list.code != 'ORDI'}">
+                <tr th:if="${list.code != 'ORDI' && list.status == 1}">
                     <td>
                         <span th:if="${list.code == 'WARN' &&  list.codedtl == 'file_no'}" th:text="${list.name + ' 기준(자료 미수신)'}"></span>
                         <span th:if="${list.code == 'WARN' &&  list.codedtl == 'filesize_no'}" th:text="${list.name + ' 기준(자료 품질 이상)'}"></span>

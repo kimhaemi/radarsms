@@ -1,5 +1,6 @@
 package kr.or.kimsn.radarsms.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -17,9 +18,11 @@ public class SmsTargetGroupLinkDto {
     @Id
     private String site;
     @Id
-    private String data_kind;
+    @Column(name = "data_kind")
+    private String dataKind;
     @Id
-    private String data_type;
+    @Column(name = "data_type")
+    private String dataType;
     @Id
     private String group_id;
 }

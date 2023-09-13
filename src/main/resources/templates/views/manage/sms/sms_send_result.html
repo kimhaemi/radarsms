@@ -110,15 +110,16 @@
                     </td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" th:text="${smsList.req_date }" /></td>
                     
-                    <td th:if="${smsList.call_to.length} ge 11">
+                    <td th:if="${smsList.call_to.length} ge 11"><!-- >= -->
                         <span th:text="${smsList.call_to.substring(0,3)}"></span> - 
                         <span th:text="${smsList.call_to.substring(3,7)}"></span> - 
                         <span th:text="${smsList.call_to.substring(7,11)}"></span>
                     </td>
-                    <td th:if="${smsList.call_to.length} lt 11">
-                        <span th:text="${smsList.call_to.substring(0,3) == '010' ? smsList.call_to.substring(0,3) : smsList.call_to.substring(0,2)}"></span> - 
+                    <td th:if="${smsList.call_to.length lt 11} "><!-- lt:< / gt:> -->
+                        <!-- <span th:text="${smsList.call_to.substring(0,3) == '010' ? smsList.call_to.substring(0,3) : smsList.call_to.substring(0,2)}"></span> - 
                         <span th:text="${smsList.call_to.substring(0,3) == '010' ? smsList.call_to.substring(3,6) : smsList.call_to.substring(2,6)}"></span> -
-                        <span th:text="${smsList.call_to.substring(6,10)}"></span>
+                        <span th:text="${smsList.call_to.substring(6,10)}"></span> -->
+                        <span th:text="${smsList.call_to}"></span>
                     </td>
                     <td th:utext="${smsList.sms_txt}"></td>
                 </tr>
