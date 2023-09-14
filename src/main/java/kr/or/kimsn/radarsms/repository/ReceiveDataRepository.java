@@ -59,8 +59,8 @@ public interface ReceiveDataRepository extends JpaRepository<ReceiveDataDto, Rec
         "    file_size  \n" +
         "from receive_data \n" +
         "where 1=1 \n" +
-        "  and data_time <= :now \n" +
-        "  and data_time >= subdate( :now , interval 3 hour ) \n" +
+        "  and data_kst <= :now \n" +
+        "  and data_kst >= subdate( :now , interval 3 hour ) \n" +
         "  and data_kind  = :data_kind \n" +
         "  and site       = :site \n" +
         "  and data_type  = :data_type \n" +

@@ -62,6 +62,10 @@ public class StationService {
             rdDto.setData_time(DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", now));
         }
 
+        System.out.println("rsDto.getDataKind() : "+rsDto.getDataKind());
+        System.out.println("rsDto.getDataType() : "+rsDto.getDataType());
+        System.out.println("site : "+ site);
+
         rdDto.setData_kind(rsDto.getDataKind());
         rdDto.setData_type(rsDto.getDataType());
         rdDto.setSite(site);

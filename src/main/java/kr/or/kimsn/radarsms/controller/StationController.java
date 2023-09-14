@@ -54,6 +54,9 @@ public class StationController {
         // sml : 스몰
         String dataKind = !site.equals("LGT") ? "RDR" : "LGT";
 
+        if(site.equals("IIA")) dataKind = "TDWR";
+        if(site.equals("DJK") || site.equals("SRI") || site.equals("MIL")) dataKind = "SDR";
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -116,6 +119,9 @@ public class StationController {
         // rdr : radar(대형)
         // sml : 스몰
         String dataKind = !site.equals("LGT") ? "RDR" : "LGT";
+        if(site.equals("IIA")) dataKind = "TDWR";
+        if(site.equals("DJK") || site.equals("SRI") || site.equals("MIL")) dataKind = "SDR";
+        
         model.addAttribute("site", site);
 
         // parameter

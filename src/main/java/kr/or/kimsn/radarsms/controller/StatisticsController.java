@@ -60,6 +60,8 @@ public class StatisticsController {
         // rdr : radar(대형)
         // sml : 스몰
         String dataKind = !site.equals("LGT") ? "RDR" : "LGT";
+        if(site.equals("IIA")) dataKind = "TDWR";
+        if(site.equals("DJK") || site.equals("SRI") || site.equals("MIL")) dataKind = "SDR";
 
         String statYear = request.getParameter("statYear");
         System.out.println("statYear :::: " + statYear );
