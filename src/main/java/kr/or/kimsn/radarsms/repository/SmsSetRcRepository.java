@@ -28,7 +28,7 @@ public interface SmsSetRcRepository extends JpaRepository<SmsSetRcDto, String> {
             "and T1.data_kind=T3.data_kind \n" +
             "and T1.data_type=T3.data_type \n" +
             "order by \n" +
-            "data_kind desc, T2.sort_order asc, data_type asc",
+            "gubun, data_kind desc, T2.sort_order asc, data_type asc",
             nativeQuery = true)
     List<SmsSetRcDto> findReceiveConditionStationRdrReceiveSetting();
 }

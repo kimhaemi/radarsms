@@ -75,22 +75,21 @@ public class SmsService {
 
         String smsText = dto.get(0).get("sms_txt").toString();
 
-        System.out.println("smsText ::::::: " + smsText);
-
         // 카카오톡 발송(내용)
-        smsSendRepository.gaonAppSendContentsSave(appContentNextval, smsText);
+        Integer sms = smsSendRepository.gaonAppSendContentsSave(appContentNextval, smsText);
+        System.out.println("카카오톡 발송(내용) insert : " + sms);
 
         try {
             for (Map<String, Object> smsDto : dto) {
                 System.out.println("smsDto::::: " + smsDto);
                 String call_from = "027337365";
                 String call_to = smsDto.get("call_to").toString().replaceAll("-", "");
-                String req_date = smsDto.get("req_date").toString().replace(".", "").replace(":", "") + "00";
+                String req_date = smsDto.get("req_date").toString().replace(".", "").replace(":", "");
                 String templateCode = smsDto.get("templateCode").toString();
-
+               
                 // 카카오톡 발송(전화번호)
-                smsSendRepository.gaonAppSendDataSave(appContentNextval, req_date, call_to, call_from,
-                        templateCode);
+                Integer smstel = smsSendRepository.gaonAppSendDataSave(appContentNextval, req_date, call_to, call_from, templateCode);
+                System.out.println("카카오톡 발송(전화번호) insert : " + smstel);
             }
 
             // for(SmsSendDto dto : smsSendDto){
