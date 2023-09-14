@@ -70,6 +70,10 @@
                 });
                 
                 $("#groupsCell input[name='groups']").click(function(e){
+                    
+                    console.log("dfsdfsdfsfsfsfs");
+                    console.log(e.target.checked);
+                    console.log($("#check_groups_member").prop("checked"));
                     if($("#check_groups_member").prop("checked")){
                         if( e.target.checked ){
                             setGroupsMembers();
@@ -89,6 +93,7 @@
                 });
                 
                 $("#check_groups_member").click(function(){
+                    console.log($("#check_groups_member").prop("checked"));
                     if($("#check_groups_member").prop("checked")){
                         if($("input[name=groups]:checked").length>0){
                             $("tr#targetMembers").show();
@@ -116,9 +121,15 @@
             });
             
             function setGroupsMembers(){
-                var groups = $("td#groupsCell input[name='groups']:checked");
+                console.log("dfsdfsfsfd");
+                console.log($("input[name='groups']:checked"));
+                // var groups = $("td#groupsCell input[name='groups']:checked");
+                console.log(mems);
+                var groups = $("input[name='groups']:checked");
+                console.log(groups.length);
                 for(var i=0; i<groups.length; i++){
                     for(var j=0; j<mems.length; j++){
+                        console.log(groups.eq(i).val() + "////////" + mems[j][0] +"///////"+ (groups.eq(i).val() == mems[j][0] ));
                         if( groups.eq(i).val() == mems[j][0] ){
                             makeGroupsMember(mems[j]);
                         }
@@ -291,10 +302,10 @@
                     <td class="left" id="groupsCell">
                         <input type="hidden" name="check_groups" id="check_groups" value="" />
                         <th:block th:each="groups, groupsStat : ${groups}" th:if="${groups.id > 1}">
-                        <span id="" style="margin-right:10px;white-space: nowrap;" th:if="${groups.status != '0' && groups.activation == '1'}">
-                            <input type="checkbox" th:id="${'groups_'+groups.id}" name="groups" th:value="${groups.id}" />
-                            <label th:id="${'groups_'+groups.id}" style="margin-right:10px;vertical-align: middle;" th:text="${groups.name}"></label>
-                        </span>
+                            <span id="" style="margin-right:10px;white-space: nowrap;" th:if="${groups.status != '0' && groups.activation == '1'}">
+                                <input type="checkbox" th:id="${'groups_'+groups.id}" name="groups" th:value="${groups.id}" />
+                                <label th:id="${'groups_'+groups.id}" style="margin-right:10px;vertical-align: middle;" th:text="${groups.name}"></label>
+                            </span>
                         </th:block>
                     </td>
                 </tr>
