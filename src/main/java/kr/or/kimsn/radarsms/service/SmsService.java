@@ -40,7 +40,7 @@ public class SmsService {
         return smsSendRepository.getSmsSendData(pageable, yearMonth, startDate, endDate);
     }
 
-    // App 발송 대기 내역 page list
+    // App 발송 내역 page list
     public Page<SmsSendDto> getAppSendData(Pageable pageable, Integer yearMonth, String startDate, String endDate) {
         // Pageable pageable = PageRequest.of(limitStart,10);
         // return smsSendRepository.getSmsSendData(limitStart, pageSize, yearMonth,

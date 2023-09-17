@@ -484,6 +484,7 @@ public interface SmsSendRepository extends JpaRepository<SmsSendDto, Long> {
 					") chat\n"
 	// "-- ORDER BY REQ_DATE desc, REQ_DATE -- limit 0, 10\n"
 	)
+	//문자 전송 내역
 	Page<SmsSendDto> getAppSendData(
 			Pageable pageable,
 			// @Param("limitStart") Integer limitStart,

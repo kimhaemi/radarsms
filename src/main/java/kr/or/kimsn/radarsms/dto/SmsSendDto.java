@@ -14,6 +14,7 @@ public class SmsSendDto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long msg_seq;
+    private String msg;
     private String req_date;
     private Integer cur_state;
     private String call_to;

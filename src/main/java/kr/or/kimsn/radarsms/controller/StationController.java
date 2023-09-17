@@ -86,7 +86,7 @@ public class StationController {
         model.addAttribute("rdrMap", rdrMap);
         System.out.println("rdrMap :::: " + rdrMap);
 
-        Map<String, List<String>> keySet = stationService.getReceiveTimeList(now, 3, rdrSet);
+        Map<String, List<String>> keySet = stationService.getReceiveTimeList(now, rdrSet, dataKind);
         System.out.println("keySet ::::::: " + keySet);
         model.addAttribute("keySet", keySet);
         

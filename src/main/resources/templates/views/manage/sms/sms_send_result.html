@@ -87,6 +87,7 @@
             <thead class="subThead">
                 <tr>
                     <th width="50">순번</th>
+                    <th width="80">발송 타입</th>
                     <th width="80">문자 종류</th>
                     <th width="80">발송 번호</th>
                     <th width="80">발송 상태</th>
@@ -98,6 +99,7 @@
             <tbody class="table-group-divider">
                   <tr th:each="smsList, smsListStat : ${smsRsultList.content}">
                     <td><span th:text="${smsListStat.index+1}"></span></td>
+                    <td><span th:text="${smsList.msg == 'AP' ? 'APP' : '문자'}"></span></td>
                     <!-- <td><span th:text="${smsList.msg_type == 6 ? '장문' : '단문'}"></span></td> -->
                     <td><span th:text="${smsList.msg_type}"></span></td>
                     <td><span th:text="${smsList.call_from}"></span></td>

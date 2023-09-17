@@ -54,13 +54,13 @@ public class StationService {
     public List<ReceiveDataDto> getReceiveDataThreeHour(String dataKind, String site, ReceiveSettingDto rsDto, Date now){
         
         ReceiveDataDto rdDto = new ReceiveDataDto();
-
-        if(rsDto.getTime_zone().equals("U")){
-            String dateStr = DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", DateUtils.addHours(now, -9));
-            rdDto.setData_time(dateStr);
-        } else {
+        
+        // if(rsDto.getTime_zone().equals("U")){
+        //     String dateStr = DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", DateUtils.addHours(now, -9));
+        //     rdDto.setData_time(dateStr);
+        // } else {
             rdDto.setData_time(DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", now));
-        }
+        // }
 
         System.out.println("rsDto.getDataKind() : "+rsDto.getDataKind());
         System.out.println("rsDto.getDataType() : "+rsDto.getDataType());
@@ -74,10 +74,9 @@ public class StationService {
     }
 
     //time setting
-    public Map<String, List<String>> getReceiveTimeList(Date now, int hour, ReceiveSettingDto rsDto) {
+    public Map<String, List<String>> getReceiveTimeList(Date now, ReceiveSettingDto rsDto, String dataKind) {
         Map<String, List<String>> map = new HashMap<String, List<String>>();
 
-        hour *= 6;
         Date date = null;
         if (rsDto.getTime_zone().equals("U")) {
             date = DateUtils.addHours(now, -9);
@@ -87,15 +86,42 @@ public class StationService {
         
         List<String> list = new ArrayList<String>();
 
-        //이게 중요한것 같네~~
-        for (int i = 0; i < hour; i++) {
-            //10분단위
-            // String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 10))).substring(0, 15) + "0";
-            //5분단위
-            String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5)));
-            // System.out.println("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5))));
-            // System.out.println("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5))).substring(0, 15) + "0");
-            list.add(key);
+        //소형(1분)
+        if(dataKind.equals("SDR")){
+            int hour = 3*30; //3시간을 1분 단위로
+            System.out.println("hour ::::: " + hour);
+            for (int i = 0; i < hour; i++) {
+                String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 1)));
+
+                // key = key.substring(0, key.length()-1) + "0";
+                
+                list.add(key);
+            }
+
+        }
+
+        //대형, 공항(5분)
+        if(dataKind.equals("RDR") || dataKind.equals("TDWR")){
+            int hour = 3*12; //3시간을 5분 단위로
+            //이게 중요한것 같네~~
+            for (int i = 0; i < hour; i++) {
+                //10분단위
+                // String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 10))).substring(0, 15) + "0";
+                //5분단위
+                String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5)));
+                
+                if(Integer.parseInt(key.substring(key.length()-1, key.length())) < 5) {
+                    key = key.substring(0, key.length()-1) + "0";
+                }
+                if(Integer.parseInt(key.substring(key.length()-1, key.length())) > 5) {
+                    key = key.substring(0, key.length()-1) + "5";
+                }
+                
+                // System.out.println("key :::: " + key);
+                // System.out.println("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5))));
+                // System.out.println("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5))).substring(0, 15) + "0");
+                list.add(key);
+            }
         }
 
         map.put(rsDto.getDataType(), list);

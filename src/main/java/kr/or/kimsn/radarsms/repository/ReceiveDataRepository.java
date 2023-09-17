@@ -64,7 +64,7 @@ public interface ReceiveDataRepository extends JpaRepository<ReceiveDataDto, Rec
         "  and data_kind  = :data_kind \n" +
         "  and site       = :site \n" +
         "  and data_type  = :data_type \n" +
-        "order by data_kind, site, data_type, data_time desc \n"        
+        "order by data_kind, site, data_type, data_kst desc \n"        
 
     )
     //3시간 전까지 data

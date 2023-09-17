@@ -109,7 +109,7 @@ public class SmsController {
         return "views/manage/sms/sms_template";
     }
 
-    //문자 발송 대기 내역
+    //문자 발송 내역
     @RequestMapping(value="/manage/sms_send_result", method = {RequestMethod.GET, RequestMethod.POST})
     public String sms_send_result(@CookieValue(name = "userId", required = false) String userId, 
                         ModelMap model, HttpServletRequest request, HttpServletResponse response, Pageable pageable) {

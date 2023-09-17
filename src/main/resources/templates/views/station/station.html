@@ -117,7 +117,7 @@
           </tr>
           <tr>
             <th:block th:each="rdrs : ${rdrSet}">
-              <th style="width: 40px;">상태</th>
+              <th style="width: 100px;">상태</th>
               <th>수신시간</th>
             </th:block>
           </tr>
@@ -128,17 +128,25 @@
 						<td>
               <span th:text="${datatime.replace('_', ' ')}"></span>
 						</td>
-						
-            <th:block th:each="rdrs : ${rdrSet}">
-              <td th:if="${rdrMap.size() > 0 }">
-                <span th:classappend="${'recv ' + rdrMap[datatimeStat.index].recv_condition}" ></span>
-              </td>
-              <td th:if="${rdrMap.size() == 0 }">
-                -
-              </td>
-              <td>
-                <span th:text="${rdrMap.size() > 0 ? rdrMap[datatimeStat.index].recv_time : '-'}"></span>
-              </td>
+            <td>
+              <th:block th:if="${rdrMap.size() > datatimeStat.index}">
+                <!-- <th:block th:if="${datatime.replace('.', '').replace('_', '').replace(':', '')
+                == rdrMap[datatimeStat.index].recv_time.replace('-', '').replace(':', '').replace(' ', '').substring(0, rdrMap[datatimeStat.index].recv_time.replace('-', '').replace(':', '').replace(' ', '').length -2)}"> -->
+                  <span th:classappend="${'recv ' + rdrMap[datatimeStat.index].recv_condition}" ></span>
+                <!-- </th:block> -->
+              </th:block>
+              <th:block th:if="${rdrMap.size() <= datatimeStat.index}">
+                <span> - </span>
+              </th:block>
+            </td>
+            <td>
+              <th:block th:if="${rdrMap.size() > datatimeStat.index}">
+                <span th:text="${rdrMap[datatimeStat.index].recv_time}"></span>
+              </th:block>
+              <th:block th:if="${rdrMap.size() <= datatimeStat.index}">
+                <span> - </span>
+              </th:block>
+            </td>
 					</tr>
         </tbody>
       </table>
