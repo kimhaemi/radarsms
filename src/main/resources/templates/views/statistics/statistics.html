@@ -138,7 +138,7 @@
                 </th>
                 <th class="ptail">
                     <select name="statYear" id="statYear" class="">
-                        <th:block th:each="year : ${#numbers.sequence(2013, nowYear)}">
+                        <th:block th:each="year : ${#numbers.sequence(2023, nowYear)}">
                             <option th:value="${year}" th:text="${year + '년도'}" th:selected="${#strings.toString(year) == statYear}"></option>    
                         </th:block>
                     </select>
