@@ -91,13 +91,14 @@
             <tbody class="table-group-divider">
                 <tr th:each="link : ${links}">
                     <td th:switch="${link.data_kind}">
-                        <span th:case="RDR">레이더</span>
+                        <span th:case="RDR">대형레이더</span>
+                        <span th:case="SDR">소형레이더</span>
+                        <span th:case="TDWR">공항레이더</span>
                         <span th:case="all">네트워크</span>
                         <span th:case="LGT">낙뢰</span>
                     </td>
                     <td>
-                        <span th:if="${link.data_kind == 'RDR'}" th:text="${link.name_kr}"></span>
-                        <span th:unless="${link.data_kind == 'RDR'}" >-</span>
+                        <span th:text="${link.name_kr}"></span>
                     </td>
                     <td>
                         <span th:text="${link.data_type}"></span>
@@ -137,13 +138,14 @@
             <tbody class="table-group-divider">
                 <tr th:each="notLink : ${notlinks}" th:if="${notLink.status == 1}">
                     <td th:switch="${notLink.dataKind}">
-                        <span th:case="RDR">레이더</span>
+                        <span th:case="RDR">대형레이더</span>
+                        <span th:case="SDR">소형레이더</span>
+                        <span th:case="TDWR">공항레이더</span>
                         <span th:case="all">네트워크</span>
                         <span th:case="LGT">낙뢰</span>
                     </td>
                     <td>
-                        <span th:if="${notLink.dataKind == 'RDR'}" th:text="${notLink.name_kr}"></span>
-                        <span th:unless="${notLink.dataKind == 'RDR'}">-</span>
+                        <span th:text="${notLink.name_kr}"></span>
                     </td>
                     <td>
                         <span th:text="${notLink.dataType}"></span>

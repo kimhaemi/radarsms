@@ -97,7 +97,7 @@
                     <th width="50">순번</th>
                     <th width="100">APP 구분</th>
                     <th width="100">템플릿 코드</th>
-                    <th width="300">템플릿 머릿말</th>
+                    <th width="250">템플릿 머릿말</th>
                     <th width="100">관리</th>
                 </tr>
             </thead>
@@ -105,10 +105,10 @@
                 <tr th:each="tempCode, tempCodetStat : ${tempCodeList}">
                     <td><span th:text="${tempCodetStat.index+1}"></span></td>
                     <td><span th:text="${tempCode.appGubun}"></span></td>
-                    <td><input type="text" name="templateCode" th:id="${'templateCode_'+tempCode.templateCode}" size="45" maxlength="40" th:value="${tempCode.templateCode }"/>
+                    <td><input type="text" name="templateCode" th:id="${'templateCode_'+tempCode.templateCode}" size="40" maxlength="40" th:value="${tempCode.templateCode }"/>
                     </span></td>
                     <td>
-                        <input type="text" name="head" th:id="${'head_'+tempCode.templateCode}" size="56" maxlength="300" th:value="${tempCode.head }"/></td>
+                        <input type="text" name="head" th:id="${'head_'+tempCode.templateCode}" size="50" maxlength="300" th:value="${tempCode.head }"/></td>
                     <td>
                         <input type="submit" class="btn" name="" id="modify" value="수정" th:onclick="fnModify([[${tempCode.templateCode}]])"/>
                         <input type="submit" class="btn" name="" id="delete" value="삭제" th:onclick="fnDelete([[${tempCode.templateCode}]])"/>
@@ -138,17 +138,17 @@
             <thead class="subThead">
                 <tr>
                     <th width="300">템플릿 코드</th>
-                    <th width="500">템플릿 머릿말</th>
-                    <th width="50"></th>
+                    <th width="300">템플릿 머릿말</th>
+                    <th width="60"></th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
                 <tr>
                     <td>
-                        <input type="text" name="addTemplateCode" id="addTemplateCode" size="50" value=""/>
+                        <input type="text" name="addTemplateCode" id="addTemplateCode" size="62" value=""/>
                     </td>
                     <td>
-                        <input type="text" name="addHead" id="addHead" size="80" value=""/>
+                        <input type="text" name="addHead" id="addHead" size="62" value=""/>
                     </td>
                     <td>
                         <input type="submit" class="btn" name="" value="추가" th:onclick="fnAdd()"/>

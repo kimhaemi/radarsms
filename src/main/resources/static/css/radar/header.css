@@ -298,7 +298,7 @@ input, select {
 .mainTbl td.left {text-align:left; padding-left: 10px;}
 .mainTbl input.rccset {text-align:center; width:30px;}
 .mainTbl input.namePattern {text-align:center; width:280px;}
-.mainTbl input.nameRegex {text-align:center; width:200px;}
+.mainTbl input.nameRegex {text-align:left; width:200px;}
 .mainTbl textarea.msgPtn {width:98%;height:60px;padding:4px;}
 .mainTbl input.groupName {text-align:center; width:95%; height: 95%; }
 
@@ -415,8 +415,8 @@ input, select {
 .subTbl td.left {text-align:left; padding-left: 9px;}
 .subTbl input.rccset {text-align:center; width:30px;}
 .subTbl .settingSeries .toggle {width:50px;}
-.subTbl input.namePattern {text-align:center; width:280px;}
-.subTbl input.nameRegex {text-align:center; width:200px;}
+.subTbl input.namePattern {text-align:left; width:280px;}
+.subTbl input.nameRegex {text-align:left; width:200px;}
 .subTbl textarea.msgPtn {width:98%;height:60px;padding:4px;}
 .subTbl input.groupName {text-align:center; width:95%; height: 95%; }
 .subTbl .toggle.wide {width:200px;}

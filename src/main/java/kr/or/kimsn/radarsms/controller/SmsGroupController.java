@@ -34,7 +34,7 @@ public class SmsGroupController {
     @GetMapping("/manage/sms_target_group")
     public String smsTargetGroup(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
 
@@ -56,9 +56,10 @@ public class SmsGroupController {
 
     // 문자 수신 그룹 관리 > [ *** ] 그룹 멤버 관리
     @GetMapping("/manage/sms_target_group_member")
-    public String smsTargetGroupMember(@CookieValue(name = "userId", required = false) String userId, ModelMap model, Long gid) {
-        
-        if(userId == null){
+    public String smsTargetGroupMember(@CookieValue(name = "userId", required = false) String userId, ModelMap model,
+            Long gid) {
+
+        if (userId == null) {
             return "views/login";
         }
 
@@ -71,16 +72,16 @@ public class SmsGroupController {
 
         model.addAttribute("list", map);
 
-        if( gid != null ){
-            //수신 그룹
+        if (gid != null) {
+            // 수신 그룹
             SmsTargetGroupDto group = manageGetService.getSmsTargetGroupId(gid);
             model.addAttribute("group", group);
 
-            //그룹에 속한 사용자
+            // 그룹에 속한 사용자
             List<SmsTargetGroupMemberDto> links = manageGetService.getSmsTargetGroupsMemberId(gid);
             model.addAttribute("links", links);
 
-            //그룹에 속하지 않은 멤버
+            // 그룹에 속하지 않은 멤버
             List<SmsTargetMemberDto> notlinks = manageGetService.getSmsTargetGroupsMemberIdNot(gid);
             model.addAttribute("notlinks", notlinks);
             // System.out.println("notlinks ::: " + notlinks);
@@ -90,14 +91,15 @@ public class SmsGroupController {
         }
 
         return "redirect:/manage/sms_target_group";
-        
+
     }
 
     // 그룹 관리 > [ *** ] 그룹 감시 자료 설정
     @GetMapping("/manage/sms_target_group_link")
-    public String smsTargetGroupLink(@CookieValue(name = "userId", required = false) String userId, ModelMap model, Long gid) {
+    public String smsTargetGroupLink(@CookieValue(name = "userId", required = false) String userId, ModelMap model,
+            Long gid) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
 
@@ -112,13 +114,14 @@ public class SmsGroupController {
 
         SmsTargetGroupDto smsTargetGroup = manageGetService.getSmsTargetGroupId(gid);
         model.addAttribute("smsTargetGroup", smsTargetGroup);
-        
+
         List<SmsTargetGroupLinkListDto> links = manageGetService.getTableJoinAll(gid);
         model.addAttribute("links", links);
         // System.out.println("links ::: " + links);
         List<ReceiveDto> notlinks = manageGetService.getSmsTargetGroupNotLink(links);
         model.addAttribute("notlinks", notlinks);
-        
+        // System.out.println("notlinks ::: " + notlinks);
+
         return "views/manage/smsGroup/sms_target_group_link";
     }
 
@@ -126,7 +129,7 @@ public class SmsGroupController {
     @GetMapping("/manage/sms_target_member")
     public String smsTargetMember(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
 
@@ -150,7 +153,7 @@ public class SmsGroupController {
     @GetMapping("/manage/sms_target_monitorgroup")
     public String smsTargetMonitorgroup(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
 
@@ -164,11 +167,11 @@ public class SmsGroupController {
 
         model.addAttribute("list", map);
 
-        //그룹에 속한 사용자
+        // 그룹에 속한 사용자
         List<SmsTargetGroupMemberDto> links = manageGetService.getSmsTargetGroupsMemberId(1L);
         model.addAttribute("links", links);
 
-        //그룹에 속하지 않은 멤버
+        // 그룹에 속하지 않은 멤버
         List<SmsTargetMemberDto> notlinks = manageGetService.getSmsTargetGroupsMemberIdNot(1L);
         model.addAttribute("notlinks", notlinks);
 

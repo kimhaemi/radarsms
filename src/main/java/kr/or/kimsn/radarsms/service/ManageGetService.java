@@ -50,16 +50,14 @@ public class ManageGetService {
     private final SmsTargetGroupLinkListRepository smsTargetGroupLinkListRepository;
 
     private final ReceiveRepository receiveRepository;
-    private final AppTemplateCodeRepository appTemplateCodeRepository;    
-    
+    private final AppTemplateCodeRepository appTemplateCodeRepository;
+
     /*
      * 각 지점의 현재 상태(정상운영 중인지 유지보수 상태인지...)
      */
     public List<StationStatusDto> getStationStatusList() {
         return stationStatusRepository.findByOrderBySortOrder();
     }
-
-    
 
     // 지점/자료별 문자 발송 설정 조회(자료 수신 상태)
     public List<SmsSetRcDto> getReceiveConditionList() {
@@ -87,9 +85,9 @@ public class ManageGetService {
         List<SmsSendPatternDto> list = smsSendPatternRepository.findByOrderByCodeAscModeDesc();
 
         for (SmsSendPatternDto vo : list) {
-          String key = String.valueOf(vo.getCode()) + "_" + vo.getMode() + "_" + vo.getCodedtl();
-          map.put(String.valueOf(key) + "_activation", vo.getActivation());
-          map.put(String.valueOf(key) + "_pattern", vo.getPattern());
+            String key = String.valueOf(vo.getCode()) + "_" + vo.getMode() + "_" + vo.getCodedtl();
+            map.put(String.valueOf(key) + "_activation", vo.getActivation());
+            map.put(String.valueOf(key) + "_pattern", vo.getPattern());
         }
 
         return map;
@@ -108,7 +106,8 @@ public class ManageGetService {
 
         for (SmsTargetGroupLinkListDto link : links) {
             for (ReceiveDto rc : rclist) {
-                if (link.getData_kind().equals(rc.getDataKind()) && link.getSite().equals(rc.getSite()) && link.getData_type().equals(rc.getDataType())) {
+                if (link.getData_kind().equals(rc.getDataKind()) && link.getSite().equals(rc.getSite())
+                        && link.getData_type().equals(rc.getDataType())) {
                     rmlist.add(rc);
                     break;
                 }
@@ -154,8 +153,8 @@ public class ManageGetService {
         return smsTargetMemberRepository.findByOrderByName();
     }
 
-    //템플릿 코드정보
-    public List<AppTemplateCodeDto> getAppTemplateCodeDtoList(){
+    // 템플릿 코드정보
+    public List<AppTemplateCodeDto> getAppTemplateCodeDtoList() {
         return appTemplateCodeRepository.findAll();
     }
 }

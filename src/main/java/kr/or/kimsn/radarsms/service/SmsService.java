@@ -25,12 +25,12 @@ public class SmsService {
     private final SmsSendRepository smsSendRepository;
     private final AppTemplateCodeRepository appTemplateCodeRepository;
 
-    // 문자 발송 대기 내역 totalcount
+    // 문자 발송 내역 totalcount
     public Integer getSmsAgentTotalCount(Integer yearMonth, String startDate, String endDate) {
         return smsSendRepository.getsmsSendTotalCount(yearMonth, startDate, endDate);
     }
 
-    // 문자 발송 대기 내역 page list
+    // 문자 발송 내역 page list
     // public List<SmsSendDto> getSmsSendData (Integer limitStart, Integer pageSize,
     // Integer yearMonth, String startDate, String endDate) {
     public Page<SmsSendDto> getSmsSendData(Pageable pageable, Integer yearMonth, String startDate, String endDate) {
@@ -86,9 +86,10 @@ public class SmsService {
                 String call_to = smsDto.get("call_to").toString().replaceAll("-", "");
                 String req_date = smsDto.get("req_date").toString().replace(".", "").replace(":", "");
                 String templateCode = smsDto.get("templateCode").toString();
-               
+
                 // 카카오톡 발송(전화번호)
-                Integer smstel = smsSendRepository.gaonAppSendDataSave(appContentNextval, req_date, call_to, call_from, templateCode);
+                Integer smstel = smsSendRepository.gaonAppSendDataSave(appContentNextval, req_date, call_to, call_from,
+                        templateCode);
                 System.out.println("카카오톡 발송(전화번호) insert : " + smstel);
             }
 
