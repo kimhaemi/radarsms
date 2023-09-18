@@ -93,8 +93,9 @@
 							</td>
 							<td>
 								<span th:classappend="${'status '+ rcSite.recv_condition}"></span>
-								<span th:text="${'최종 수신 '+ rcSite.apply_time}"></span>
+								<!-- <span th:text="${'최종 수신 '+ rcSite.apply_time}"></span> -->
 								<!-- <span th:text="${'최종 수신 '+ rcSite.last_check_time}"></span> -->
+								<span th:text="${'최종 수신 '+ rcSite.last_check_time.substring(0, rcSite.last_check_time.length-3)}"></span>
 							</td>
 						</tr>
 					</tbody>
@@ -114,7 +115,8 @@
 							</td>
 							<td>
 								<span th:classappend="${'status '+ rcSite.recv_condition}" ></span>
-								<span th:text="${'최종 수신 '+ rcSite.apply_time}"></span>
+								<!-- <span th:text="${'최종 수신 '+ rcSite.apply_time}"></span> -->
+								<span th:text="${'최종 수신 '+ rcSite.last_check_time.substring(0, rcSite.last_check_time.length-3)}"></span>
 							</td>
 						</tr>
 					</tbody>
@@ -134,7 +136,8 @@
 							</td>
 							<td>
 								<span th:classappend="${'status '+ rcSite.recv_condition}" ></span>
-								<span th:text="${'최종 수신 '+ rcSite.apply_time}"></span>
+								<!-- <span th:text="${'최종 수신 '+ rcSite.apply_time}"></span> -->
+								<span th:text="${'최종 수신 '+ rcSite.last_check_time.substring(0, rcSite.last_check_time.length-3)}"></span>
 							</td>
 						</tr>
 					</tbody>
