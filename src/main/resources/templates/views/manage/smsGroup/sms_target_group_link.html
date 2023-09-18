@@ -90,7 +90,7 @@
             </thead>
             <tbody class="table-group-divider">
                 <tr th:each="link : ${links}">
-                    <td th:switch="${link.data_kind}">
+                    <td th:switch="${link.dataKind}">
                         <span th:case="RDR">대형레이더</span>
                         <span th:case="SDR">소형레이더</span>
                         <span th:case="TDWR">공항레이더</span>
@@ -101,7 +101,7 @@
                         <span th:text="${link.name_kr}"></span>
                     </td>
                     <td>
-                        <span th:text="${link.data_type}"></span>
+                        <span th:text="${link.dataType}"></span>
                     </td>
                     <td>
                         <spen th:text="${link.data_name}"></spen>

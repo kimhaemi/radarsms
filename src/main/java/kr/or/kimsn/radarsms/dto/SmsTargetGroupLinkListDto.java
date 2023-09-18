@@ -10,8 +10,8 @@ import lombok.Data;
 public class SmsTargetGroupLinkListDto {
     @Id
     private String site;
-    private String data_kind;
-    private String data_type;
+    private String dataKind;
+    private String dataType;
     private String group_id;
 
     private String name_kr;

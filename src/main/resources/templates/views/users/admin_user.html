@@ -4,6 +4,20 @@
       th:with="metaTitle='사용자 관리'">
 
     <th:block layout:fragment="content">
+        <script th:inline="javascript">
+            /* <![CDATA[ */
+                var membersList = /*[[${membersList}]]*/
+                console.log(membersList);
+                var loginUser = /*[[${loginUser}]]*/
+                console.log(loginUser);
+                $(document).ready(function (){
+                    if(loginUser.memberClass != 'A'){
+                        $("#newuserbtn").hide();
+                    }
+                });
+                
+            /* ]]> */
+        </script>
         <div id="contentMain">
             <table class="noticeTbl settingSeries">
                 <thead>
@@ -13,7 +27,8 @@
                     </th>
                     <th class="right">
                         <input type="hidden" name="mode" value="I">
-                        <button type="button" 
+                        <!-- <div id="newuserbtn">dfsfsdfsfsfsd</div> -->
+                        <button id="newuserbtn" type="button" 
                             class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" 
                             th:onclick="| location.href='@{/users/admin_user_form}' |">새로운 사용자</button>
                     </th>
@@ -38,7 +53,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr th:each="mlist : ${list.membersList}">
+                    <tr th:each="mlist : ${membersList}">
                         <td th:text="${mlist.memberId}"></td><!-- id -->
                         <td th:text="${mlist.memberName}"></td><!-- 성명 -->
                         <td th:text="${mlist.memberClass == 'A' ? '관리자' : '사용자'}"></td><!-- 등급 -->
@@ -48,9 +63,12 @@
                         <td ></td><!-- 연락처 -->
                         <td ></td><!-- e-mail -->
                         <td>
-                            <button type="button" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" th:onclick="| location.href='@{/users/admin_user_form(id=${mlist.id})}' |" id="">관리</button>
-                            <!-- <a class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" th:href="'/users/admin_user_form?id='+${mlist.id}" role="button">
-                                <span class="ui-button-text">관리</span> -->
+                            <th:block th:if="${loginUser.memberClass == 'A'}">
+                                <button type="button" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" th:onclick="| location.href='@{/users/admin_user_form(id=${mlist.id})}' |" id="">관리</button>
+                            </th:block>
+                            <th:block th:if="${loginUser.memberClass == 'U' && mlist.memberId == loginUser.memberId}">
+                                <button type="button" class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" th:onclick="| location.href='@{/users/admin_user_form(id=${mlist.id})}' |" id="">관리</button>
+                            </th:block>
                             </a>
                         </td>
                     </tr>

@@ -24,7 +24,7 @@ public class AuthenticationSuccess implements AuthenticationSuccessHandler {
         // String redirectUrl = savedRequest.getRedirectUrl();
         
         String userId = request.getParameter("userId");
-
+        
         HttpSession session = request.getSession();
         session.setAttribute("userId", userId);
         Cookie cookie = new Cookie("userId", userId);

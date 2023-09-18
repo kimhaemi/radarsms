@@ -48,11 +48,17 @@ public class MembersController {
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
+        model.addAttribute("list", map);
 
         List<MembersDto> membersList = membersService.getUsersList();
-        map.put("membersList", membersList);
-        
-        model.addAttribute("list", map);
+        MembersDto loginUser = new MembersDto();
+        for(MembersDto mDto : membersList){
+            if(mDto.getMemberId().equals(userId)){
+                loginUser = mDto;
+            }
+        }
+        model.addAttribute("membersList", membersList);
+        model.addAttribute("loginUser", loginUser);
         
         return "views/users/admin_user";
     }
