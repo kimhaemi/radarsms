@@ -106,23 +106,6 @@
                     <td>
                         <label th:text="${smsList.rslt_code2}"></label>
                     </td>
-
-
-
-
-
-                    <!-- <td th:switch="${smsList.rslt_code2}">
-                        <label th:case="0000">전송 완료</label>
-                        <label th:case="0">전송 실패</label> cur_state = 2
-                        <label th:case="d">전송 실패</label> cur_state = 3
-                    </td> -->
-                    <!-- <td th:switch="${smsList.cur_state}">
-                        <label th:case="0">전송대기</label>
-                        <label th:case="1">전송대기</label>
-                        <label th:case="2">결과대기</label>
-                        <label th:case="3" th:if="${smsList.rslt_code2 != '0' }">전송 실패</label>
-                        <label th:case="3" th:unless="${smsList.rslt_code2 == '0' }">전송 완료</label>
-                    </td> -->
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" th:text="${smsList.req_date }" /></td>
                     
                     <td th:if="${smsList.call_from.length} ge 11"><!-- >= -->
