@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'kr.or.kimsn'
-version = '0.0.1-SNAPSHOT'
+version = 'test'
 sourceCompatibility = '11'
 apply plugin: 'war'
 
@@ -13,6 +13,10 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	/*logback 의존성 제거*/
+	all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 
 repositories {
@@ -31,7 +35,11 @@ dependencies {
 	// implementation 'org.springframework.boot:spring-boot-starter-mustache'
 
  	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-	
+
+	/*logback 의존성 추가*/
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml'
+
 	implementation 'org.apache.commons:commons-lang3:3.12.0'
 	// implementation 'com.fasterxml.jackson.core:jackson-databind'
     // implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'

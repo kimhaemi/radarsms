@@ -84,7 +84,7 @@ public class SmsGroupController {
             // 그룹에 속하지 않은 멤버
             List<SmsTargetMemberDto> notlinks = manageGetService.getSmsTargetGroupsMemberIdNot(gid);
             model.addAttribute("notlinks", notlinks);
-            // System.out.println("notlinks ::: " + notlinks);
+            // log.info("notlinks ::: " + notlinks);
 
             model.addAttribute("list", map);
             return "views/manage/smsGroup/sms_target_group_member";
@@ -117,10 +117,10 @@ public class SmsGroupController {
 
         List<SmsTargetGroupLinkListDto> links = manageGetService.getTableJoinAll(gid);
         model.addAttribute("links", links);
-        // System.out.println("links ::: " + links);
+        // log.info("links ::: " + links);
         List<ReceiveDto> notlinks = manageGetService.getSmsTargetGroupNotLink(links);
         model.addAttribute("notlinks", notlinks);
-        // System.out.println("notlinks ::: " + notlinks);
+        // log.info("notlinks ::: " + notlinks);
 
         return "views/manage/smsGroup/sms_target_group_link";
     }

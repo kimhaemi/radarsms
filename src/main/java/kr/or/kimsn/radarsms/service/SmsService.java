@@ -9,14 +9,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import kr.or.kimsn.radarsms.dto.AppErrorCodeDto;
 import kr.or.kimsn.radarsms.dto.AppTemplateCodeDto;
 import kr.or.kimsn.radarsms.dto.SmsSendDto;
 import kr.or.kimsn.radarsms.dto.SmsSendOnOffDto;
+import kr.or.kimsn.radarsms.repository.AppErrorCodeRepository;
 import kr.or.kimsn.radarsms.repository.AppTemplateCodeRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendOnOffRepository;
 import kr.or.kimsn.radarsms.repository.SmsSendRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class SmsService {
@@ -24,6 +28,8 @@ public class SmsService {
     private final SmsSendOnOffRepository smsSendOnOffRepository;
     private final SmsSendRepository smsSendRepository;
     private final AppTemplateCodeRepository appTemplateCodeRepository;
+
+    private final AppErrorCodeRepository appErrorCodeRepository;
 
     // 문자 발송 내역 totalcount
     public Integer getSmsAgentTotalCount(Integer yearMonth, String startDate, String endDate) {
@@ -48,6 +54,11 @@ public class SmsService {
         return smsSendRepository.getAppSendData(pageable, yearMonth, startDate, endDate);
     }
 
+    // app error code
+    public List<AppErrorCodeDto> getAppErrorCode() {
+        return appErrorCodeRepository.findAll();
+    }
+
     // 문자 발송기능 on/off 설정 list
     public List<SmsSendOnOffDto> getSmsSendOnOffData() {
         return smsSendOnOffRepository.findAll();
@@ -59,29 +70,29 @@ public class SmsService {
         try {
             smsSendOnOffDto = smsSendOnOffRepository.save(smsSendOnOffDto);
         } catch (Exception e) {
-            System.out.println("update error : " + e);
+            log.info("update error : " + e);
         }
         return smsSendOnOffDto;
     }
 
     // 문자 발송
     public String smsSendsave(List<Map<String, Object>> dto) {
-        System.out.println("dto :::::: " + dto);
+        log.info("dto :::::: " + dto);
         String result = "";
 
         // app content sequence
         Long appContentNextval = smsSendRepository.getAppContentNextval();
-        System.out.println("appContentNextval ::::: " + appContentNextval);
+        log.info("appContentNextval ::::: " + appContentNextval);
 
         String smsText = dto.get(0).get("sms_txt").toString();
 
         // 카카오톡 발송(내용)
         Integer sms = smsSendRepository.gaonAppSendContentsSave(appContentNextval, smsText);
-        System.out.println("카카오톡 발송(내용) insert : " + sms);
+        log.info("카카오톡 발송(내용) insert : " + sms);
 
         try {
             for (Map<String, Object> smsDto : dto) {
-                System.out.println("smsDto::::: " + smsDto);
+                log.info("smsDto::::: " + smsDto);
                 String call_from = "027337365";
                 String call_to = smsDto.get("call_to").toString().replaceAll("-", "");
                 String req_date = smsDto.get("req_date").toString().replace(".", "").replace(":", "");
@@ -90,7 +101,7 @@ public class SmsService {
                 // 카카오톡 발송(전화번호)
                 Integer smstel = smsSendRepository.gaonAppSendDataSave(appContentNextval, req_date, call_to, call_from,
                         templateCode);
-                System.out.println("카카오톡 발송(전화번호) insert : " + smstel);
+                log.info("카카오톡 발송(전화번호) insert : " + smstel);
             }
 
             // for(SmsSendDto dto : smsSendDto){
@@ -108,7 +119,7 @@ public class SmsService {
             // }
         } catch (Exception e) {
             result = "sms insert error : " + e;
-            System.out.println("insert error : " + e);
+            log.info("insert error : " + e);
         }
         return result;
     }
@@ -118,10 +129,10 @@ public class SmsService {
     public Integer setAppTemplateCodeAdd(AppTemplateCodeDto dto) {
         Integer result = 0;
         try {
-            System.out.println("사용자 등록 userAdd");
+            log.info("사용자 등록 userAdd");
             result = appTemplateCodeRepository.setAppTemplateCodeAdd(dto.getTemplateCode(), dto.getHead());
         } catch (Exception e) {
-            System.out.println("insert error : " + e);
+            log.info("insert error : " + e);
             return -1;
         }
         return result;
@@ -132,16 +143,16 @@ public class SmsService {
     public Integer setAppTemplateCodeModify(Map<String, Object> appTemplateCodeDto) {
         Integer result = 0;
 
-        System.out.println("appTemplateCodeDto :::; " + appTemplateCodeDto);
+        log.info("appTemplateCodeDto :::; " + appTemplateCodeDto);
         String oldTemplateCode = appTemplateCodeDto.get("oldTemplateCode").toString();
         String newTemplateCode = appTemplateCodeDto.get("newTemplateCode").toString();
         String head = appTemplateCodeDto.get("head").toString();
 
         try {
-            System.out.println("사용자 수정 usermodify");
+            log.info("사용자 수정 usermodify");
             result = appTemplateCodeRepository.setAppTemplateCodeModify(newTemplateCode, oldTemplateCode, head);
         } catch (Exception e) {
-            System.out.println("update error : " + e);
+            log.info("update error : " + e);
             return -1;
         }
         return result;
@@ -152,10 +163,10 @@ public class SmsService {
     public Integer setAppTemplateCodeDelete(String templateCode) {
         Integer result = 0;
         try {
-            System.out.println("사용자 삭제 userDelete");
+            log.info("사용자 삭제 userDelete");
             result = appTemplateCodeRepository.setAppTemplateCodeDelete(templateCode);
         } catch (Exception e) {
-            System.out.println("delete error : " + e);
+            log.info("delete error : " + e);
             return -1;
         }
         return result;

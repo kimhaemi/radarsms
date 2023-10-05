@@ -1,0 +1,28 @@
+2023-10-05 20:56:03.897 [INFO ] Starting RadarsmsApplication using Java 11.0.18 on DESKTOP-BJ29IOC with PID 10220 (C:\0001_projectSource\radarsms\build\classes\java\main started by haem in C:\0001_projectSource\radarsms)
+2023-10-05 20:56:03.910 [DEBUG] Running with Spring Boot v2.7.12, Spring v5.3.27
+2023-10-05 20:56:03.912 [INFO ] No active profile set, falling back to 1 default profile: "default"
+2023-10-05 20:56:04.228 [INFO ] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-10-05 20:56:04.228 [INFO ] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-10-05 20:56:05.279 [INFO ] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-05 20:56:05.449 [INFO ] Finished Spring Data repository scanning in 156 ms. Found 22 JPA repository interfaces.
+2023-10-05 20:56:06.935 [INFO ] Tomcat initialized with port(s): 8080 (http)
+2023-10-05 20:56:06.961 [INFO ] Initializing ProtocolHandler ["http-nio-8080"]
+2023-10-05 20:56:06.962 [INFO ] Starting service [Tomcat]
+2023-10-05 20:56:06.962 [INFO ] Starting Servlet engine: [Apache Tomcat/9.0.75]
+2023-10-05 20:56:07.097 [INFO ] Initializing Spring embedded WebApplicationContext
+2023-10-05 20:56:07.097 [INFO ] Root WebApplicationContext: initialization completed in 2868 ms
+2023-10-05 20:56:07.146 [INFO ] HikariPool-1 - Starting...
+2023-10-05 20:56:07.693 [INFO ] HikariPool-1 - Start completed.
+2023-10-05 20:56:07.705 [INFO ] H2 console available at '/h2-console'. Database available at 'jdbc:mysql://175.197.48.213:3306/watchdog'
+2023-10-05 20:56:07.935 [INFO ] HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-05 20:56:08.025 [INFO ] HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-10-05 20:56:08.277 [INFO ] HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-10-05 20:56:08.575 [INFO ] HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-10-05 20:56:09.475 [INFO ] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-10-05 20:56:09.486 [INFO ] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-05 20:56:11.435 [INFO ] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@236832b3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@64a117e0, org.springframework.security.web.context.SecurityContextPersistenceFilter@36732b24, org.springframework.security.web.header.HeaderWriterFilter@1f4f56eb, org.springframework.security.web.authentication.logout.LogoutFilter@5c93266d, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4c61ee62, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@416f7c0b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1817795f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@68d8df93, org.springframework.security.web.session.SessionManagementFilter@28718638, org.springframework.security.web.access.ExceptionTranslationFilter@36fdb6ef, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@8be4729]
+2023-10-05 20:56:11.451 [INFO ] Will secure Or [Ant [pattern='/static/**']] with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3f52c19d, org.springframework.security.web.header.HeaderWriterFilter@21e3e130, org.springframework.security.web.csrf.CsrfFilter@2e2a6f15, org.springframework.security.web.authentication.logout.LogoutFilter@12304278, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@139a094b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@45d160f5, org.springframework.security.web.access.ExceptionTranslationFilter@57ca913f, org.springframework.security.web.access.intercept.AuthorizationFilter@674d5495]
+2023-10-05 20:56:12.595 [INFO ] LiveReload server is running on port 35729
+2023-10-05 20:56:12.625 [INFO ] Starting ProtocolHandler ["http-nio-8080"]
+2023-10-05 20:56:12.673 [INFO ] Tomcat started on port(s): 8080 (http) with context path ''
+2023-10-05 20:56:12.693 [INFO ] Started RadarsmsApplication in 9.274 seconds (JVM running for 10.704)

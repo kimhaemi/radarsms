@@ -23,13 +23,13 @@ public class UserSecurityService implements UserDetailsService {
         // user가 있는지 확인
         MembersDto userDto = userRepository.findByMemberId(username);
 
-        if(userDto == null){
+        if (userDto == null) {
             throw new UsernameNotFoundException("[" + username + "] 사용자를 찾을수 없습니다.");
         }
 
         // if (userEntity != null) {
-        //     System.out.println("userEntity != null");
-        //     return new PrincipalDetails(userEntity);
+        // log.info("userEntity != null");
+        // return new PrincipalDetails(userEntity);
         // }
 
         return new PrincipalDetails(userDto);

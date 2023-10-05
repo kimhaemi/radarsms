@@ -34,7 +34,7 @@ public class StationService {
     private final ReceiveConditionRepository receiveConditionRepository;
     private final ReceiveSettingRepository receiveSettingRepository;
     private final ReceiveDataRepository receiveDataRepository;
-    private final ReceiveDataForSiteStatMonthRepository receiveDataForSiteStatMonthRepository;    
+    private final ReceiveDataForSiteStatMonthRepository receiveDataForSiteStatMonthRepository;
 
     // 지점 데이터
     public StationDto getStationDetail(String siteCd) {
@@ -50,30 +50,33 @@ public class StationService {
         return receiveSettingRepository.findByDataKindAndPermittedWatch(dataKind, permitted_watch);
     }
 
-    //3시간 전까지의 data
-    public List<ReceiveDataDto> getReceiveDataThreeHour(String dataKind, String site, ReceiveSettingDto rsDto, Date now){
-        
+    // 3시간 전까지의 data
+    public List<ReceiveDataDto> getReceiveDataThreeHour(String dataKind, String site, ReceiveSettingDto rsDto,
+            Date now) {
+
         ReceiveDataDto rdDto = new ReceiveDataDto();
-        
+
         // if(rsDto.getTime_zone().equals("U")){
-        //     String dateStr = DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", DateUtils.addHours(now, -9));
-        //     rdDto.setData_time(dateStr);
+        // String dateStr = DateUtil.formatDate("yyyy-MM-dd HH:mm:ss",
+        // DateUtils.addHours(now, -9));
+        // rdDto.setData_time(dateStr);
         // } else {
-            rdDto.setData_time(DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", now));
+        rdDto.setData_time(DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", now));
         // }
 
-        System.out.println("rsDto.getDataKind() : "+rsDto.getDataKind());
-        System.out.println("rsDto.getDataType() : "+rsDto.getDataType());
-        System.out.println("site : "+ site);
+        log.info("rsDto.getDataKind() : " + rsDto.getDataKind());
+        log.info("rsDto.getDataType() : " + rsDto.getDataType());
+        log.info("site : " + site);
 
         rdDto.setData_kind(rsDto.getDataKind());
         rdDto.setData_type(rsDto.getDataType());
         rdDto.setSite(site);
-        
-        return receiveDataRepository.getReceiveDataThreeHour(rdDto.getData_time(), rdDto.getData_kind(), rdDto.getSite(), rdDto.getData_type());
+
+        return receiveDataRepository.getReceiveDataThreeHour(rdDto.getData_time(), rdDto.getData_kind(),
+                rdDto.getSite(), rdDto.getData_type());
     }
 
-    //time setting
+    // time setting
     public Map<String, List<String>> getReceiveTimeList(Date now, ReceiveSettingDto rsDto, String dataKind) {
         Map<String, List<String>> map = new HashMap<String, List<String>>();
 
@@ -83,50 +86,53 @@ public class StationService {
         } else {
             date = now;
         }
-        
+
         List<String> list = new ArrayList<String>();
 
-        //소형(1분)
-        if(dataKind.equals("SDR")){
-            int hour = 3*30; //3시간을 1분 단위로
-            System.out.println("hour ::::: " + hour);
+        // 소형(1분)
+        if (dataKind.equals("SDR")) {
+            int hour = 3 * 30; // 3시간을 1분 단위로
+            log.info("hour ::::: " + hour);
             for (int i = 0; i < hour; i++) {
                 String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 1)));
 
                 // key = key.substring(0, key.length()-1) + "0";
-                
+
                 list.add(key);
             }
 
         }
 
-        //대형, 공항(5분)
-        if(dataKind.equals("RDR") || dataKind.equals("TDWR")){
-            int hour = 3*12; //3시간을 5분 단위로
-            //이게 중요한것 같네~~
+        // 대형, 공항(5분)
+        if (dataKind.equals("RDR") || dataKind.equals("TDWR")) {
+            int hour = 3 * 12; // 3시간을 5분 단위로
+            // 이게 중요한것 같네~~
             for (int i = 0; i < hour; i++) {
-                //10분단위
-                // String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 10))).substring(0, 15) + "0";
-                //5분단위
+                // 10분단위
+                // String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm",
+                // DateUtils.addMinutes(date, -(i * 10))).substring(0, 15) + "0";
+                // 5분단위
                 String key = DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5)));
-                
-                if(Integer.parseInt(key.substring(key.length()-1, key.length())) < 5) {
-                    key = key.substring(0, key.length()-1) + "0";
+
+                if (Integer.parseInt(key.substring(key.length() - 1, key.length())) < 5) {
+                    key = key.substring(0, key.length() - 1) + "0";
                 }
-                if(Integer.parseInt(key.substring(key.length()-1, key.length())) > 5) {
-                    key = key.substring(0, key.length()-1) + "5";
+                if (Integer.parseInt(key.substring(key.length() - 1, key.length())) > 5) {
+                    key = key.substring(0, key.length() - 1) + "5";
                 }
-                
-                // System.out.println("key :::: " + key);
-                // System.out.println("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5))));
-                // System.out.println("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm", DateUtils.addMinutes(date, -(i * 5))).substring(0, 15) + "0");
+
+                // log.info("key :::: " + key);
+                // log.info("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm",
+                // DateUtils.addMinutes(date, -(i * 5))));
+                // log.info("key ::::: " + DateUtil.formatDate("yyyy.MM.dd_HH:mm",
+                // DateUtils.addMinutes(date, -(i * 5))).substring(0, 15) + "0");
                 list.add(key);
             }
         }
 
         map.put(rsDto.getDataType(), list);
-        
-        return map;        
+
+        return map;
     }
 
     // 지점별 최종 수신 확인 시각(NQC)
@@ -140,28 +146,33 @@ public class StationService {
     }
 
     // 지점별 과거자료 검색
-    public List<ReceiveDataDto> getReceiveDataList(String data_kind, String data_type, String site, String dateStart, String dateClose) {
+    public List<ReceiveDataDto> getReceiveDataList(String data_kind, String data_type, String site, String dateStart,
+            String dateClose) {
         return receiveDataRepository.getReceiveDataList(data_kind, data_type, site, dateStart, dateClose);
     }
 
-    //통계
-    public ModelMap getReceiveDataSiteStatMonth(ReceiveSettingDto rsDto, String site, Date dateStart, Date dateClose, ModelMap model) {
+    // 통계
+    public ModelMap getReceiveDataSiteStatMonth(ReceiveSettingDto rsDto, String site, Date dateStart, Date dateClose,
+            ModelMap model) {
 
         String data_time = DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", dateStart);
         String recv_time = DateUtil.formatDate("yyyy-MM-dd HH:mm:ss", dateClose);
 
-        System.out.println("data_time :::: " + data_time);
-        System.out.println("recv_time :::: " + recv_time);
+        log.info("data_time :::: " + data_time);
+        log.info("recv_time :::: " + recv_time);
 
-        List<ReceiveDataForSiteStatMonthDto> recvData = receiveDataForSiteStatMonthRepository.getReceiveDataForSiteStatMonth(site, data_time, recv_time, "RECV", rsDto.getDataType());
-        List<ReceiveDataForSiteStatMonthDto> retrData = receiveDataForSiteStatMonthRepository.getReceiveDataForSiteStatMonth(site, data_time, recv_time, "RETR", rsDto.getDataType());
-        List<ReceiveDataForSiteStatMonthDto> missData = receiveDataForSiteStatMonthRepository.getReceiveDataForSiteStatMonth(site, data_time, recv_time, "MISS", rsDto.getDataType());
-        
+        List<ReceiveDataForSiteStatMonthDto> recvData = receiveDataForSiteStatMonthRepository
+                .getReceiveDataForSiteStatMonth(site, data_time, recv_time, "RECV", rsDto.getDataType());
+        List<ReceiveDataForSiteStatMonthDto> retrData = receiveDataForSiteStatMonthRepository
+                .getReceiveDataForSiteStatMonth(site, data_time, recv_time, "RETR", rsDto.getDataType());
+        List<ReceiveDataForSiteStatMonthDto> missData = receiveDataForSiteStatMonthRepository
+                .getReceiveDataForSiteStatMonth(site, data_time, recv_time, "MISS", rsDto.getDataType());
+
         model.addAttribute("recvMap", recvData);
         model.addAttribute("retrMap", retrData);
         model.addAttribute("missMap", missData);
 
         return model;
-  }
+    }
 
 }

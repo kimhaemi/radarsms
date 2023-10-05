@@ -22,9 +22,9 @@ public class AuthenticationSuccess implements AuthenticationSuccessHandler {
         // RequestCache requestCache = new HttpSessionRequestCache();
         // SavedRequest savedRequest = requestCache.getRequest(request, response);
         // String redirectUrl = savedRequest.getRedirectUrl();
-        
+
         String userId = request.getParameter("userId");
-        
+
         HttpSession session = request.getSession();
         session.setAttribute("userId", userId);
         Cookie cookie = new Cookie("userId", userId);
@@ -32,9 +32,9 @@ public class AuthenticationSuccess implements AuthenticationSuccessHandler {
         response.addCookie(cookie);
 
         response.sendRedirect("/");
-                
-        // System.out.println("loginsuccess");
+
+        // log.info("loginsuccess");
         // response.sendRedirect("/");
     }
-    
+
 }

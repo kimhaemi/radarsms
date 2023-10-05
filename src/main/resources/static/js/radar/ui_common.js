@@ -69,17 +69,17 @@
     // });
 
     // $("[dataformat='datepic']").datepicker({
-    //     buttonText: "날짜를 선택해주세요."
+    //     buttonText: "날짜를 선택하세요."
     // });
     // $("[dataformat='from']").datepicker({
-    //     buttonText: "시작날짜를 선택해주세요.",
+    //     buttonText: "시작날짜를 선택하세요.",
     //     onClose: function (selectedDate) {
     //         var getName = $(this).attr('name');
     //         $("input[name='" + getName + "'].to").datepicker("option", "minDate", selectedDate);
     //     }
     // });
     // $("[dataformat='to']").datepicker({
-    //     buttonText: "종료날짜를 선택해주세요.",
+    //     buttonText: "종료날짜를 선택하세요.",
     //     onClose: function (selectedDate) {
     //         var getName = $(this).attr('name');
     //         $("input[name='" + getName + "'].from").datepicker("option", "maxDate", selectedDate);

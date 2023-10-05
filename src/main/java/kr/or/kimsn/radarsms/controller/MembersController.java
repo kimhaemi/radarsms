@@ -15,10 +15,12 @@ import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MembersService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 사용자
  */
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class MembersController {
@@ -28,7 +30,7 @@ public class MembersController {
     // 사용자 등록 화면
     @GetMapping("/users/joinForm")
     public String join(@CookieValue(name = "userId", required = false) String userId) {
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
         return "views/users/joinForm";
@@ -36,9 +38,9 @@ public class MembersController {
 
     // 사용자 관리
     @GetMapping("/users/admin_user")
-    public String admin_user(@CookieValue(name = "userId", required = false) String userId, ModelMap model){
+    public String admin_user(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
 
@@ -52,26 +54,27 @@ public class MembersController {
 
         List<MembersDto> membersList = membersService.getUsersList();
         MembersDto loginUser = new MembersDto();
-        for(MembersDto mDto : membersList){
-            if(mDto.getMemberId().equals(userId)){
+        for (MembersDto mDto : membersList) {
+            if (mDto.getMemberId().equals(userId)) {
                 loginUser = mDto;
             }
         }
         model.addAttribute("membersList", membersList);
         model.addAttribute("loginUser", loginUser);
-        
+
         return "views/users/admin_user";
     }
 
     // 사용자 등록 화면
     @GetMapping("/users/admin_user_form")
-    public String admin_user_form(@CookieValue(name = "userId", required = false) String userId, ModelMap model, Long id) {
+    public String admin_user_form(@CookieValue(name = "userId", required = false) String userId, ModelMap model,
+            Long id) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
-        
-        System.out.println("id ::: " + id);
+
+        log.info("id ::: " + id);
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
@@ -81,15 +84,15 @@ public class MembersController {
 
         MembersDto memberData = null;
 
-        if( id != null ){
+        if (id != null) {
             memberData = membersService.getUsersData(id);
-            System.out.println("memberData :::; " + memberData);
+            log.info("memberData :::; " + memberData);
         }
 
         map.put("memberData", memberData);
-        
+
         model.addAttribute("list", map);
-        
+
         return "views/users/admin_user_form";
     }
 }

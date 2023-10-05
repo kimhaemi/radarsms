@@ -70,16 +70,13 @@
                 });
                 
                 $("#groupsCell input[name='groups']").click(function(e){
-                    
-                    console.log("dfsdfsdfsfsfsfs");
-                    console.log(e.target.checked);
-                    console.log($("#check_groups_member").prop("checked"));
                     if($("#check_groups_member").prop("checked")){
                         if( e.target.checked ){
                             setGroupsMembers();
                         }
                         else{
                             if($("#groupsCell input[name='groups']:checked").length>0){
+                                console.log("e.target.value ::::: " + e.target.value);
                                 delGroupsMembers(e.target.value);
                             }
                             else{
@@ -93,10 +90,17 @@
                 });
                 
                 $("#check_groups_member").click(function(){
-                    console.log($("#check_groups_member").prop("checked"));
+                    
                     if($("#check_groups_member").prop("checked")){
                         if($("input[name=groups]:checked").length>0){
                             $("tr#targetMembers").show();
+                            //전체선택 check box
+                            var html = '<span style="margin-right:10px;white-space: nowrap;">'
+                                + '<input type="checkbox" id="membersAll" name="membersAll" onchange="fnMembersAll()"" checked/>'
+                                + '<label for="membersAll" style="margin-right:10px" > '
+                                + '전체 선택'
+                                + '</label></span><br />';
+                            $("tr#targetMembers>td").append(html);
                             setGroupsMembers();
                         }
                         else{
@@ -118,19 +122,37 @@
                     $("input[name=reqDate]").prop("disabled",true);
                     $("input[name=reqTime]").prop("disabled",true);
                 });
+
             });
+
+            //부분선택시 전체선택 해제
+            function fnMembersChk(){
+                var members = $("input[name='members']");
+                var membersChk = $("input[name='members']:checked");
+                if(members.length == membersChk.length){
+                    $("input[name=membersAll]").prop("checked",true);
+                } else {
+                    $("input[name=membersAll]").prop("checked",false);
+                }
+            }
+
+            //전체선택/해제
+            function fnMembersAll(){
+                let memberAllchk = $("#membersAll").prop("checked");
+                if(memberAllchk){
+                    $("input[name=members]").prop("checked",true);
+                } else {
+                    $("input[name=members]").prop("checked",false);
+                }
+            }
             
             function setGroupsMembers(){
-                // console.log("dfsdfsfsfd");
-                // console.log($("input[name='groups']:checked"));
-                // var groups = $("td#groupsCell input[name='groups']:checked");
-                // console.log(mems);
                 var groups = $("input[name='groups']:checked");
-                // console.log(groups.length);
+                // console.log("groups ::", groups);
                 for(var i=0; i<groups.length; i++){
                     for(var j=0; j<mems.length; j++){
-                        // console.log(groups.eq(i).val() + "////////" + mems[j][0] +"///////"+ (groups.eq(i).val() == mems[j][0] ));
                         if( groups.eq(i).val() == mems[j][0] ){
+                            // console.log("mems :: ", mems[j]);
                             makeGroupsMember(mems[j]);
                         }
                     }
@@ -139,7 +161,7 @@
             function makeGroupsMember(member){
                 if(checkGroupsMember(member[1])){
                     var html = '<span id="member_'+ member[1] +'" style="margin-right:10px;white-space: nowrap;">'
-                    + '<input type="checkbox" id="members_'+ member[1] +'" name="members" value="'+ member[5] +'" checked/>'
+                    + '<input type="checkbox" id="members_'+ member[1] +'" name="members" value="'+ member[5] +'" onchange="fnMembersChk()" checked/>'
                     + '<label for="members_'+ member[1] + '" style="margin-right:10px" > '
                     + member[2] + ' ' + member[5] + ' (' + member[3] + ' ' + member[4] +')'
                     + '</label></span><br />';
@@ -147,7 +169,7 @@
                 }
             }
             function checkGroupsMember(memid){
-                var members = $("tr#targetMembers input[name='members']");
+                var members = $("td#targetMembers input[name='members']");
                 for(var i=0; i<members.length; i++){
                     if(memid == members.eq(i).val()){
                         return false;
@@ -156,14 +178,23 @@
                 return true;
             }
             function delGroupsMembers(){
-                $("tr#targetMembers input[name='members']").addClass("DO_DEL")
-                $("td#groupsCell input[name='groups']:checked").each(function(){
+                $("tr#targetMembers input[name='members']").addClass("DO_DEL");
+                console.log("mems ::: " + mems);
+                $("td#groupsCell input[name='groups']:checked").each(function(e){
+                    console.log("e ::::: " + e);
+                    console.log($(this).val());
                     for(var i=0; i<mems.length; i++){
+                        // console.log("mems[i][0] ::: " + mems[i][0]);
+                        // console.log("this(val) ::: " + $(this).val());
+                        
                         if(mems[i][0] == $(this).val()){
+                            console.log("mems[i][1] ::: " + mems[i][1]);
+                            console.log("#member_ :::::: " + $("#member_"+mems[i][1]));
                             $("tr#targetMembers input#members_"+mems[i][1]).removeClass("DO_DEL");
                         }
                     }
                 });
+                console.log($("tr#targetMembers input.DO_DEL"));
                 $("tr#targetMembers input.DO_DEL").each(function(){
                     $(this).parent().next("br").remove();
                     $(this).parent().remove();
@@ -174,12 +205,12 @@
             function fnSubmit(){
 
                 if($("input[name='groups']:checked").length==0){
-                    alert("문자를 수신받을 그룹을 선택해주세요.");
+                    alert("문자를 수신받을 그룹을 선택하세요.");
                     $("#check_groups_all").focus();
                     return false;
                 }
                 if($.trim($("#smsMsg").val()).length==0){
-                    alert("문자 내용을 입력해주세요.");
+                    alert("문자 내용을 입력하세요.");
                     $("#smsMsg").focus();
                     return false;
                 }
@@ -236,18 +267,22 @@
                     }
                 } 
                 console.log(arr);
-
-                if(confirm("전송 하겠습니까?")){
-                    let result = fnCall('post', '/manage/sms_send_save', JSON.stringify(arr));
-                    
-                    console.log("result :: "+ result.status);
-                    if(result.status == "success"){
-                        alert("전송 되었습니다.");
-                        // location.href="/manage/sms_send"; //다시 로딩
-                    } else {
-                        alert("전송에 실패하였습니다. \n" + result.data);
+                if(arr.length > 0){
+                    if(confirm("전송 하겠습니까?")){
+                        let result = fnCall('post', '/manage/sms_send_save', JSON.stringify(arr));
+                        
+                        console.log("result :: "+ result.status);
+                        if(result.status == "success"){
+                            alert("전송 되었습니다.");
+                            // location.href="/manage/sms_send"; //다시 로딩
+                        } else {
+                            alert("전송에 실패하였습니다. \n" + result.data);
+                        }
                     }
+                } else {
+                    alert("전송 대상이 없습니다. \n전송 대상을 선택하세요.");    
                 }
+                
                 //return true;
             }
 

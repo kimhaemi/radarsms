@@ -15,7 +15,7 @@ public class InterceptorConfig implements HandlerInterceptor {
             throws Exception {
         Cookie[] cookies = request.getCookies();
         HttpSession session = request.getSession(false);
-        System.out.println(session);
+
         if (session == null) {
             response.sendRedirect("/login");
         }

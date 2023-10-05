@@ -32,66 +32,64 @@ public class SecurityConfig {
         // csrf는 비활성화하고 /css, /index는 접속허용, /user/** url은 USER 권한만 가능으로 설정을 구성한다. 그리고
         // user를 생성해주고, password encoder를 bean으로 선언해준다.
 
-        System.out.println("filterChain");
-
         http.csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/").authenticated()
-            .antMatchers("/manage/**").authenticated()
-            .antMatchers("/station/**").authenticated()
-            .antMatchers("/stat/**").authenticated()
-            .anyRequest().permitAll()
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/loginProc")
-            .usernameParameter("userId")
-            .passwordParameter("pwd")
-            .successHandler(authenticationSuccess)
-            // .defaultSuccessUrl("/", true)
-            .failureHandler(authenticationFailure)
-            // .failureUrl("/error")
-            .permitAll()
-            // .successForwardUrl("/")
-            .and()
-            .logout()
-            .permitAll()
-            // .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            // .logoutSuccessUrl("/login")
-
+                .authorizeRequests()
+                .antMatchers("/").authenticated()
+                .antMatchers("/manage/**").authenticated()
+                .antMatchers("/station/**").authenticated()
+                .antMatchers("/stat/**").authenticated()
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/loginProc")
+                .usernameParameter("userId")
+                .passwordParameter("pwd")
+                .successHandler(authenticationSuccess)
+                // .defaultSuccessUrl("/", true)
+                .failureHandler(authenticationFailure)
+                // .failureUrl("/error")
+                .permitAll()
+                // .successForwardUrl("/")
+                .and()
+                .logout()
+                .permitAll()
+        // .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        // .logoutSuccessUrl("/login")
 
         // http
-        //     .csrf(AbstractHttpConfigurer::disable) // CSRF 공격에 대한 방어를 해제 합니다.
-        //     // .cors((cors)-> cors.disable())
-        //     //resources(css, js 등) 의 경우 securityContext 등에 대한 조회가 불필요 하므로 disable 
-        //     // .requestMatchers(matchers -> matchers.antMatchers( "/**"))
-        //     //인증/인가 제외
-        //     .authorizeHttpRequests((authz)-> authz
-        //         // .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() //JSP 등 컨트롤러에서 화면 파일명을 리턴해 화면을 바꾸는 경우
-        //         // .antMatchers("/manager/**").permitAll()
-        //         // .antMatchers("/users/**").permitAll()
-        //         // .antMatchers("/station/**").permitAll()
-        //         // .antMatchers("/stat/**").permitAll()
-        //         .anyRequest().authenticated()	// 어떠한 요청이라도 인증필요
-        //     )
-        //     .formLogin(login-> login
-        //         .loginPage("/login")
-        //         // .loginProcessingUrl("/loginProc")	// [B] submit 받을 url
-        //         // .usernameParameter("userId")	// [C] submit할 아이디
-        //         // .passwordParameter("password")	// [D] submit할 비밀번호
-        //         .defaultSuccessUrl("/")
-        //         // .successHandler(authenticationSuccess)
-        //         // .failureUrl("/common/error")
-        //         // .permitAll()
-        //     )
-        //     .logout((logout) -> logout
-        //         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-        //         .logoutSuccessUrl("/login")
-        //         .invalidateHttpSession(true))
+        // .csrf(AbstractHttpConfigurer::disable) // CSRF 공격에 대한 방어를 해제 합니다.
+        // // .cors((cors)-> cors.disable())
+        // //resources(css, js 등) 의 경우 securityContext 등에 대한 조회가 불필요 하므로 disable
+        // // .requestMatchers(matchers -> matchers.antMatchers( "/**"))
+        // //인증/인가 제외
+        // .authorizeHttpRequests((authz)-> authz
+        // // .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() //JSP 등 컨트롤러에서
+        // 화면 파일명을 리턴해 화면을 바꾸는 경우
+        // // .antMatchers("/manager/**").permitAll()
+        // // .antMatchers("/users/**").permitAll()
+        // // .antMatchers("/station/**").permitAll()
+        // // .antMatchers("/stat/**").permitAll()
+        // .anyRequest().authenticated() // 어떠한 요청이라도 인증필요
+        // )
+        // .formLogin(login-> login
+        // .loginPage("/login")
+        // // .loginProcessingUrl("/loginProc") // [B] submit 받을 url
+        // // .usernameParameter("userId") // [C] submit할 아이디
+        // // .passwordParameter("password") // [D] submit할 비밀번호
+        // .defaultSuccessUrl("/")
+        // // .successHandler(authenticationSuccess)
+        // // .failureUrl("/common/error")
+        // // .permitAll()
+        // )
+        // .logout((logout) -> logout
+        // .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+        // .logoutSuccessUrl("/login")
+        // .invalidateHttpSession(true))
         ;
         return http.build();
     }
-    
+
     // WebSecurityConfig 클래스에 BCryptPasswordEncoder 클래스를 Bean으로 등록해서 Controller에 의존성
     // 주입을 받아서 위와 같이 사용하면 됩니다.
     // 해당 암호화 기능을 이용하지 않는다면 아래 설명할 Spring Security의 로그인 기능을 이용할 수 없습니다.
@@ -116,16 +114,17 @@ public class SecurityConfig {
 
     // @Bean
     // public CorsConfigurationSource corsConfigurationSource() {
-    //     CorsConfiguration configuration = new CorsConfiguration();
-    //     configuration.setAllowCredentials(false); // 쿠키를 받을건지
-    //     configuration.setAllowedOrigins(Arrays.asList("http://localhost:2023"));
-    //     configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
+    // CorsConfiguration configuration = new CorsConfiguration();
+    // configuration.setAllowCredentials(false); // 쿠키를 받을건지
+    // configuration.setAllowedOrigins(Arrays.asList("http://localhost:2023"));
+    // configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
 
-    //     configuration.addAllowedHeader("*");
+    // configuration.addAllowedHeader("*");
 
-    //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    //     source.registerCorsConfiguration("/**", configuration);
-    //     return source;
+    // UrlBasedCorsConfigurationSource source = new
+    // UrlBasedCorsConfigurationSource();
+    // source.registerCorsConfiguration("/**", configuration);
+    // return source;
 
     // }
 }

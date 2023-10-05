@@ -199,6 +199,7 @@ input, select {
 .status.NOTI{background:url("../../images/watchcon/status_NOTI.png");background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
 .status.WARN{background:url("../../images/watchcon/status_WARN.png");background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
 .status.RETR{background:url("../../images/watchcon/status_ORDI.png");background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
+.status.TORE{background:url("../../images/watchcon/status_ORDI.png");background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
 .status.MRO {background:url("../../images/watchcon/status_MRO.png");background-size:70% 70%;background-repeat:no-repeat;background-position:center;}
 
 .recv{
@@ -209,6 +210,7 @@ input, select {
 .recv.MISS{background:url("../../images/watchcon/recv_MISS.png");background-size:80% 80%;background-repeat:no-repeat;background-position:center;}
 .recv.RECV{background:url("../../images/watchcon/recv_RECV.png");background-size:80% 80%;background-repeat:no-repeat;background-position:center;}
 .recv.RETR{background:url("../../images/watchcon/recv_RETR.png");background-size:80% 80%;background-repeat:no-repeat;background-position:center;}
+.recv.TORE{background:url("../../images/watchcon/recv_RETR.png");background-size:80% 80%;background-repeat:no-repeat;background-position:center;}
  
 .mainTbl {border:1px solid #0461c0; width:246px; float:left; margin:2px; border-radius: 8px;} 
 .mainTbl.on {background: #EBF6FC;font-weight:bold;}
@@ -320,6 +322,7 @@ input, select {
   position: absolute;
 }
 .alertMap .RETR {background:url('../../images/watchcon/radar_ordi.png') no-repeat;}
+.alertMap .TORE {background:url('../../images/watchcon/radar_ordi.png') no-repeat;}
 .alertMap .ORDI {background:url('../../images/watchcon/radar_ordi.png') no-repeat;}
 .alertMap .NOTI {background:url('../../images/watchcon/radar_noti.png') no-repeat;}
 .alertMap .WARN {background:url('../../images/watchcon/radar_warn.png') no-repeat;}

@@ -115,7 +115,6 @@ public class PostController {
     // 그룹 감시 자료 설정 > 연결 해제
     @PostMapping("/manage/sms_target_group_unlink")
     public ApiResult<SmsTargetGroupLinkDto> smsTargetgroupUnlink(@RequestBody SmsTargetGroupLinkDto dto) {
-        System.out.println("smsTargetGroupLinkDto :::: " + dto);
         return ApiResult.success(managePostService.setSmsTargetgroupUnlink(dto));
     }
 
@@ -169,7 +168,6 @@ public class PostController {
     @PostMapping("/manage/sms_temp_add")
     public ApiResult<Integer> setAppTemplateCodeAdd(@CookieValue(name = "userId", required = false) String userId,
             @RequestBody AppTemplateCodeDto dto) {
-        System.out.println("sms_temp_add :::: " + dto);
         return ApiResult.success(smsService.setAppTemplateCodeAdd(dto));
     }
 

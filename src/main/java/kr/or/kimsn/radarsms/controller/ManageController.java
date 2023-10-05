@@ -18,7 +18,9 @@ import kr.or.kimsn.radarsms.dto.StationStatusDto;
 import kr.or.kimsn.radarsms.service.ManageGetService;
 import kr.or.kimsn.radarsms.service.MenuService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class ManageController {
@@ -30,7 +32,7 @@ public class ManageController {
     @GetMapping("/manage/station_set_rc")
     public String smsSetRc(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
 
@@ -40,14 +42,13 @@ public class ManageController {
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
-        
+
         model.addAttribute("list", map);
 
         // 자료 수신 상태 조회
         List<SmsSetRcDto> receiveList = manageGetService.getReceiveConditionList();
-        System.out.println("receiveList : " + receiveList);
+        log.info("receiveList : " + receiveList);
         map.put("receiveList", receiveList);
-
 
         return "views/manage/station_set_rc";
     }
@@ -56,7 +57,7 @@ public class ManageController {
     @GetMapping("/manage/station_set_rcc")
     public String smsSetRcc(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
 
@@ -71,10 +72,9 @@ public class ManageController {
 
         // 경고 기준 조회
         List<ReceiveConditionCriteriaDto> criteriaList = manageGetService.getReceiveConditionCriteriaList();
-        System.out.println("criteriaList ::: " + criteriaList);
+        log.info("criteriaList ::: " + criteriaList);
         map.put("criteriaList", criteriaList);
 
-        
         return "views/manage/station_set_rcc";
     }
 
@@ -82,7 +82,7 @@ public class ManageController {
     @GetMapping("/manage/station_set_rs")
     public String smsSetRs(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
 
@@ -98,7 +98,7 @@ public class ManageController {
         // 자료 수신 감시 설정 조회
         List<ReceiveSettingDto> receiveSettingList = manageGetService.getReceiveSettingList();
         model.addAttribute("receiveSettingList", receiveSettingList);
-        
+
         return "views/manage/station_set_rs";
     }
 
@@ -106,7 +106,7 @@ public class ManageController {
     @GetMapping("/manage/sms_set_msg")
     public String smsSetMsg(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
 
@@ -120,10 +120,11 @@ public class ManageController {
         model.addAttribute("list", map);
 
         // 문자 메시지 패턴 조회
-        // List<SmsSendPatternDto> smsSendPatternList = manageGetService.getSmsSendPatternList();
+        // List<SmsSendPatternDto> smsSendPatternList =
+        // manageGetService.getSmsSendPatternList();
         Map<String, String> smsSendPatternList = manageGetService.getSmsSendPatternList();
         model.addAttribute("smsSendPatternList", smsSendPatternList);
-        System.out.println("smsSendPatternList : \n" + smsSendPatternList);
+        log.info("smsSendPatternList : \n" + smsSendPatternList);
 
         return "views/manage/smsConfig/sms_set_msg";
     }
@@ -132,17 +133,17 @@ public class ManageController {
     @GetMapping("/manage/station_status")
     public String stationStatus(@CookieValue(name = "userId", required = false) String userId, ModelMap model) {
 
-        if(userId == null){
+        if (userId == null) {
             return "views/login";
         }
-        
+
         Map<String, Object> map = new HashMap<>();
 
         List<MenuDto> menuList = menuService.getMenuList();
         List<StationDto> stationList = menuService.getStationList();
         map.put("menuList", menuList);
         map.put("stationList", stationList);
-        
+
         model.addAttribute("list", map);
 
         // 지점별 운영상태 설정 조회

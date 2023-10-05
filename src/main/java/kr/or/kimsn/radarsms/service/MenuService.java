@@ -15,7 +15,9 @@ import kr.or.kimsn.radarsms.repository.MenuRepository;
 import kr.or.kimsn.radarsms.repository.ReceiveConditionRepository;
 import kr.or.kimsn.radarsms.repository.StationRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class MenuService {
@@ -25,24 +27,24 @@ public class MenuService {
     private final ReceiveConditionRepository receiveConditionRepository;
 
     // 메뉴조회
-    public List<MenuDto> getMenuList(){
+    public List<MenuDto> getMenuList() {
         return menuRepository.findAll();
     }
 
     // 지점조회
-    public List<StationDto> getStationList(){
+    public List<StationDto> getStationList() {
         return stationRepository.findByOrderBySortOrder();
     }
 
-    //main 최종 수신 확인 시각(NQC)
-    public List<ReceiveConditionJoinStationRdrDto> getReceiveConditionJoinStationRdrList(List<StationDto> stationList){
+    // main 최종 수신 확인 시각(NQC)
+    public List<ReceiveConditionJoinStationRdrDto> getReceiveConditionJoinStationRdrList(List<StationDto> stationList) {
         List<ReceiveConditionJoinStationRdrDto> rcToRdr = new ArrayList<ReceiveConditionJoinStationRdrDto>();
-        //최총 수신 확인
+        // 최총 수신 확인
         List<ReceiveConditionDto> rcList = receiveConditionRepository.findByDataTypeOrderBySite("NQC");
-        
-        for(StationDto sr : stationList){
-            for(ReceiveConditionDto rc : rcList){
-                if(sr.getSiteCd().equals(rc.getSite())){
+
+        for (StationDto sr : stationList) {
+            for (ReceiveConditionDto rc : rcList) {
+                if (sr.getSiteCd().equals(rc.getSite())) {
                     ReceiveConditionJoinStationRdrDto rcDto = new ReceiveConditionJoinStationRdrDto();
                     rcDto.setSite(rc.getSite());
                     rcDto.setDataKind(rc.getData_kind());
@@ -58,22 +60,22 @@ public class MenuService {
                     rcDto.setGubun(sr.getGubun());
                     rcDto.setPermitted_watch(sr.getPermitted_watch());
 
-                    rcToRdr.add(rcDto);    
+                    rcToRdr.add(rcDto);
                 }
             }
         }
         return rcToRdr;
     }
-    
-    //메뉴저장
+
+    // 메뉴저장
     @Transactional
     public MenuDto addMenuDto(MenuDto menuDto) throws Exception {
         try {
-            // menuDto = menuRepository.save(menuDto);    
+            // menuDto = menuRepository.save(menuDto);
         } catch (Exception e) {
-            System.out.println("insert error : " +e);
+            log.info("insert error : " + e);
         }
-        
+
         return menuDto;
     }
 }

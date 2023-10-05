@@ -23,7 +23,7 @@
         </script>
         <script type="text/javascript">
             $(document).ready(function(){
-                $('#datepicker').datepicker({
+				$('#datepicker').datepicker({
 					buttonImageOnly: true,
                     sbuttonText: "Select date",
                     changeMonth: true,
@@ -101,7 +101,7 @@
 				<tbody>
 					<tr th:each="recvDt : ${recvData}">
 						<td>
-							<span th:text="${recvDt.data_time}"></span>
+							<span th:text="${recvDt.data_kst}"></span>
 						</td>
 						<td>
 							<span th:classappend="${'recv ' + recvDt.recv_condition}" th:title="${recvDt.recv_condition}"></span>

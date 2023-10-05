@@ -24,9 +24,12 @@ import kr.or.kimsn.radarsms.dto.StationDto;
 import kr.or.kimsn.radarsms.service.MenuService;
 import kr.or.kimsn.radarsms.service.StationService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 통계
  */
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class StatisticsController {
@@ -37,13 +40,13 @@ public class StatisticsController {
     // @Autowired
     // private HistoricalDataService historicalDataService;
 
-    //조회
-    @RequestMapping(value="/stat/{site}", method = {RequestMethod.GET, RequestMethod.POST})
-    public String getStation(@CookieValue(name = "userId", required = false) String userId, 
-        @PathVariable("site") String site, 
-        HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model){
-        
-        if(userId == null){
+    // 조회
+    @RequestMapping(value = "/stat/{site}", method = { RequestMethod.GET, RequestMethod.POST })
+    public String getStation(@CookieValue(name = "userId", required = false) String userId,
+            @PathVariable("site") String site,
+            HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) {
+
+        if (userId == null) {
             return "views/login";
         }
         Map<String, Object> map = new HashMap<>();
@@ -53,18 +56,20 @@ public class StatisticsController {
 
         map.put("menuList", menuList);
         map.put("stationList", stationList);
-        
+
         model.addAttribute("list", map);
 
         // lgt :낙뢰
         // rdr : radar(대형)
         // sml : 스몰
         String dataKind = !site.equals("LGT") ? "RDR" : "LGT";
-        if(site.equals("IIA")) dataKind = "TDWR";
-        if(site.equals("DJK") || site.equals("SRI") || site.equals("MIL")) dataKind = "SDR";
+        if (site.equals("IIA"))
+            dataKind = "TDWR";
+        if (site.equals("DJK") || site.equals("SRI") || site.equals("MIL"))
+            dataKind = "SDR";
 
         String statYear = request.getParameter("statYear");
-        System.out.println("statYear :::: " + statYear );
+        log.info("statYear :::: " + statYear);
 
         Date now = new Date();
         Date dateStart = null;
@@ -83,16 +88,16 @@ public class StatisticsController {
                 model.addAttribute("siteName", sdto.getName_kr());
                 model.addAttribute("siteCd", sdto.getSiteCd());
             }
-          } 
+        }
 
         // 자료 수신 처리 설정
         ReceiveSettingDto rdrSet = stationService.getReceiveSetting(dataKind, 1);
         model.addAttribute("rdrSet", rdrSet);
 
-        //통계
+        // 통계
         model = stationService.getReceiveDataSiteStatMonth(rdrSet, site, dateStart, dateClose, model);
         // model.addAttribute("recvData", recvData);
-        // System.out.println("model :::: " + model.get("recvData"));
+        // log.info("model :::: " + model.get("recvData"));
 
         model.addAttribute("statYear", DateUtil.formatDate("yyyy", dateStart));
         model.addAttribute("nowYear", DateUtil.formatDate("yyyy", now));
@@ -102,7 +107,6 @@ public class StatisticsController {
         model.addAttribute("retr", null);
         model.addAttribute("miss", null);
         model.addAttribute("tota", null);
-
 
         return "views/statistics/statistics";
     }

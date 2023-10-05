@@ -355,8 +355,9 @@ public interface SmsSendRepository extends JpaRepository<SmsSendDto, Long> {
 					"    ,srow.RECIVER as call_from                  -- 발신번호 (MO는 회신번호)\n" +
 					"    ,srow.TELCO                     -- 이통사\n" +
 					"    ,srow.CUR_STATE as cur_state                -- 메시지상태(MT용)\n" +
-					// "    ,srow.RSLT_CODE2 as rslt_code2                -- 결과코드(MT용)\n" +
-					"    ,(select DESCRIPTION from nuri.app_error_code where CAST(app_code AS BINARY)  = srow.RSLT_CODE2) as rslt_code2 -- 결과코드(MT용) \n" + 
+					"    ,srow.RSLT_CODE2 as rslt_code2                -- 결과코드(MT용)\n" +
+					// " ,(select DESCRIPTION from nuri.app_error_code where CAST(app_code AS
+					// BINARY) = srow.RSLT_CODE2) as rslt_code2 -- 결과코드(MT용) \n" +
 					"    ,srow.MSG_TXT as sms_txt                  -- 메시지내용\n" +
 					"    ,srow.MSG_BYTE                  -- 메시지내용\n" +
 					"    --  ,srow.MSG_IDATE                 -- MT 입력시간\n" +

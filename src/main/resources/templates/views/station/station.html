@@ -98,7 +98,8 @@
           <tr th:each="rcSite : ${rcState}">
             <td><div th:text="${now}"></div></td>
             <td><div th:classappend="${'status ' + rcSite.recv_condition}" ></div></td>
-            <td><span th:text="${rcSite.apply_time}"></span></td>
+            <!-- <td><span th:text="${rcSite.apply_time}"></span></td> -->
+            <td><span th:text="${rcSite.last_check_time}"></span></td>
           </tr>
         </tbody>
       </table>
