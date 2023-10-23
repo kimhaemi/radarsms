@@ -7,22 +7,27 @@
         <script th:inline="javascript">
         /* <![CDATA[ */
             var mData = /*[[${list.criteriaList}]]*/
-            console.log(mData);
+            // console.log(mData);
         /* ]]> */
         </script>
         <script type="text/javascript">
             $(function() {
                 $("#configSave").on("click", function(){
                     let list = new Array();
+                    let cnt = 0;
                     mData.forEach(e => {
                         if(e.code != 'ORDI'){
                             let jObj = new Object();
                             jObj.code=e.code;
                             jObj.name=e.name;
                             jObj.criterion=$("#"+e.code+"_"+e.gubun+"_"+e.codedtl).val();
-                            if(e.codedtl == 'siteconnect_no'){
-                                jObj.criterion = $("#"+e.code+"_"+e.gubun+"_file_no").val();
+                            // if(e.codedtl == 'siteconnect_no'){
+                            //     jObj.criterion = $("#"+e.code+"_"+e.gubun+"_file_no").val();
+                            // }
+                            if($("#"+e.code+"_"+e.gubun+"_"+e.codedtl).val() == 0){
+                                cnt++;
                             }
+
                             jObj.comment=e.comment;
                             jObj.gubun=e.gubun;
                             jObj.codedtl=e.codedtl;
@@ -31,7 +36,13 @@
                         }
                     });
 
-                    console.log(list);
+                    // console.log("cnt :::: ", cnt);
+                    // console.log(list);
+
+                    if(cnt > 0){
+                        alert("0보다 큰 수를 입력하세요.");
+                        return false;
+                    }
 
                     if(confirm("저장 하겠습니까?")){
                     let result = fnCall('post', '/manage/station_set_rcc_modify', JSON.stringify(list));
@@ -101,22 +112,22 @@
                         </span> -->
                         <span th:if="${list.code == 'WARN' && list.codedtl == 'file_no'} ">
                             자료가 연속으로 
-                            <input type="text" name="WARN" th:id="${'WARN_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            <input type="text" name="WARN" th:id="${'WARN_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2"/>
                             회 이상 자료가 미수신일 때
                         </span>
                         <span th:if="${list.code == 'WARN' && list.codedtl == 'filesize_no'} ">
                             자료 크기가 기준파일크기보다 연속으로 
-                            <input type="text" name="WARN" th:id="${'WARN_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            <input type="text" name="WARN" th:id="${'WARN_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2"/>
                             회 이상 작을때
                         </span>
                         <span th:if="${list.code == 'RETR' && list.codedtl == 'file_ok'} ">
                             주의 또는 경고 상태에서 자료가 연속으로 
-                            <input type="text" name="RETR" th:id="${'RETR_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            <input type="text" name="RETR" th:id="${'RETR_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2"/>
                             회 이상 자료가 수신되었을 때
                         </span>
                         <span th:if="${list.code == 'RETR' && list.codedtl == 'filesize_ok'} ">
                             자료 크기가 연속으로 
-                            <input type="text" name="RETR" th:id="${'RETR_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            <input type="text" name="RETR" th:id="${'RETR_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2"/>
                             회 이상 정상일때
                         </span>
                         <span th:if="${list.code} == 'TOTA'">
@@ -124,7 +135,7 @@
                             <div style="display: inline-block;" th:if="${list.gubun == 2}" >소형 레이더</div>
                             <div style="display: inline-block;" th:if="${list.gubun == 3}" >공항 레이더</div>
                             전 사이트가 연속으로 
-                            <input type="text" name="TOTA" th:id="${'TOTA_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            <input type="text" name="TOTA" th:id="${'TOTA_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2"/>
                             회 이상 자료가 미수신일 때
                         </span>
                         <span th:if="${list.code} == 'TORE'">
@@ -132,7 +143,7 @@
                             <div style="display: inline-block;" th:if="${list.gubun == 2}" >소형 레이더</div>
                             <div style="display: inline-block;" th:if="${list.gubun == 3}" >공항 레이더</div>
                             어느 한 사이트가 연속으로 
-                            <input type="text" name="TORE" th:id="${'TORE_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"/>
+                            <input type="text" name="TORE" th:id="${'TORE_'+list.gubun+'_'+list.codedtl}" class="rccset" th:value="${list.criterion}"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="2"/>
                             회 이상 자료가 수신되었을 때
                         </span>
                     </td>

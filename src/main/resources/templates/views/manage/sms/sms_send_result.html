@@ -96,16 +96,22 @@
 			<input type="hidden" name="sDt" id="sDt"/>
             <table class="noticeTbl searchSeries">
                 <colgroup>
-                    <col style="width:auto;"/>
-                    <col style="width:130px;"/>
+                    <col style="width:400px;"/>
+                    <col style="width:350px;"/>
                     <col style="width:50px;"/>
                 </colgroup>
                 <thead>
                 <tr>
                     <th></th>
-                    <th class="center">
+                    <th class="right">
+                        발송 상태
+                        <select name="smsResult" id="smsResult" style="size: 200px;">
+                            <option value="" th:selected="${smsResult == null || smsResult == '' ? true : false}">전체</option>
+                            <option value="0000" th:selected="${smsResult == '0000' ? true : false}">성공</option>
+                            <option value="9999" th:selected="${smsResult == '9999' ? true : false}">실패</option>
+                        </select>
                         <input type="text" id="month" th:value="${monthpick}" readonly />
-                    </td>
+                    </th>
                     <th class="right">
                         <button class="btn ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="btnSearch">검색</button>
                     </th>
@@ -131,7 +137,12 @@
             </thead>
             <tbody class="table-group-divider">
                   <tr th:each="smsList, smsListStat : ${smsRsultList.content}">
-                    <td><span th:text="${smsListStat.index+1}"></span></td>
+                    <td>
+                        <!-- <span th:text="${smsListStat.index+1}">
+                            ${전체 게시글 수 - (현재 페이지-1) * 페이지 당 보여지는 게시물 수 - smsListStat.index}
+                        </span> -->
+                        <span th:text="${smsRsultList.totalElements - (smsRsultList.number) * 15 - smsListStat.index}"></span>
+                    </td>
                     <td><span th:text="${smsList.msg == 'AP' ? 'APP' : '문자'}"></span></td>
                     <!-- <td><span th:text="${smsList.msg_type == 6 ? '장문' : '단문'}"></span></td> -->
                     <!-- <td><span th:text="${smsList.msg_type}"></span></td> -->
@@ -159,7 +170,7 @@
                         <span th:text="${smsList.call_from.substring(6,10)}"></span> -->
                         <span th:text="${smsList.call_from}"></span>
                     </td>
-                    <td th:utext="${smsList.sms_txt}"></td>
+                    <td th:text="${smsList.sms_txt}" class="left"></td>
                 </tr>
                 <tr th:if="${smsRsultList.content.size == 0 }">
                     <td colspan="7">데이터가 없습니다.</td>
@@ -184,6 +195,12 @@
                         last=(${start + 9 < smsRsultList.totalPages ? start + 9 : smsRsultList.totalPages})"> -->
 
                 <li th:classappend="${smsRsultList.first} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="${smsRsultList.first} ? '#' : @{/manage/sms_send_result(page=${0}, sDt=${sDt})}">
+                        <span aria-hidden="true">&lt;&lt;</span>
+                    </a>
+                </li>
+
+                <li th:classappend="${smsRsultList.first} ? 'disabled'" class="page-item">
                     <a class="page-link" th:href="${smsRsultList.first} ? '#' : @{/manage/sms_send_result(page=${pageNumber - 1}, sDt=${sDt})}">
                         <span aria-hidden="true">&lt;</span>
                     </a>
@@ -200,6 +217,13 @@
                         <span aria-hidden="true">&gt;</span>
                     </a>
                 </li>
+
+                <li th:classappend="${smsRsultList.last} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="${smsRsultList.last} ? '#' : @{/manage/sms_send_result(page=${totalPages-1}, sDt=${sDt})}" aria-label="Next">
+                        <span aria-hidden="true">&gt;&gt;</span>
+                    </a>
+                </li>
+                
                 <!-- <th:block th:with="
                     firstAddr=@{/manage/sms_send_result(page=1)},
                     prevAddr=@{/manage/sms_send_result(page=${smsRsultList.number})},

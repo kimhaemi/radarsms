@@ -346,7 +346,10 @@ public interface SmsSendRepository extends JpaRepository<SmsSendDto, Long> {
 			"-- APP G/W  공통쿼리\n" +
 			"-- -- -- APP 알림톡,네이버 토스 -- *********************** --\n" +
 			"  ) srow\n" +
-			") chat\n", value = "SELECT * FROM (\n" +
+			") chat\n" +
+			"where 1=1 \n" +
+			"and (:smsSUC is null or chat.rslt_code2 in ('0', '0000')) \n" +
+			"and (:smsFail is null or chat.rslt_code2 not in ('0', '0000')) \n", value = "SELECT * FROM (\n" +
 					"  SELECT\n" +
 					"     srow.MSG                      -- MT,MO 구분\n" +
 					"    --  ,srow.MSG_TYPE1                 -- 구분 텍스트\n" +
@@ -483,7 +486,10 @@ public interface SmsSendRepository extends JpaRepository<SmsSendDto, Long> {
 					"-- APP G/W  공통쿼리\n" +
 					"-- -- -- APP 알림톡,네이버 토스 -- *********************** --\n" +
 					"  ) srow\n" +
-					") chat\n"
+					") chat\n" +
+					"where 1=1 \n" +
+					"and (:smsSUC is null or chat.rslt_code2 in ('0', '0000')) \n" +
+					"and (:smsFail is null or chat.rslt_code2 not in ('0', '0000')) \n"
 	// "-- ORDER BY REQ_DATE desc, REQ_DATE -- limit 0, 10\n"
 	)
 	// 문자 전송 내역
@@ -493,7 +499,9 @@ public interface SmsSendRepository extends JpaRepository<SmsSendDto, Long> {
 			// @Param("pageSize") Integer pageSize,
 			@Param("yearMonth") Integer yearMonth,
 			@Param("startDate") String startDate,
-			@Param("endDate") String endDate);
+			@Param("endDate") String endDate,
+			@Param("smsSUC") String smsSUC,
+			@Param("smsFail") String smsFail);
 
 	@Query(nativeQuery = true, value = "INSERT INTO nuri.NURI_MSG_DATA ( \n" +
 			"  MSG_SEQ, \n" +

@@ -47,11 +47,12 @@ public class SmsService {
     }
 
     // App 발송 내역 page list
-    public Page<SmsSendDto> getAppSendData(Pageable pageable, Integer yearMonth, String startDate, String endDate) {
+    public Page<SmsSendDto> getAppSendData(Pageable pageable, Integer yearMonth, String startDate, String endDate,
+            String smsSUC, String smsFail) {
         // Pageable pageable = PageRequest.of(limitStart,10);
         // return smsSendRepository.getSmsSendData(limitStart, pageSize, yearMonth,
         // startDate, endDate);
-        return smsSendRepository.getAppSendData(pageable, yearMonth, startDate, endDate);
+        return smsSendRepository.getAppSendData(pageable, yearMonth, startDate, endDate, smsSUC, smsFail);
     }
 
     // app error code

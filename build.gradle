@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'kr.or.kimsn'
-version = 'test'
+version = 'REAL'
 sourceCompatibility = '11'
 apply plugin: 'war'
 

@@ -47,8 +47,7 @@ public class ManageController {
 
         // 자료 수신 상태 조회
         List<SmsSetRcDto> receiveList = manageGetService.getReceiveConditionList();
-        log.info("receiveList : " + receiveList);
-        map.put("receiveList", receiveList);
+        model.addAttribute("receiveList", receiveList);
 
         return "views/manage/station_set_rc";
     }

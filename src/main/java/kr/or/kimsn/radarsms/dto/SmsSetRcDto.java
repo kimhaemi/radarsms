@@ -23,5 +23,6 @@ public class SmsSetRcDto {
     private Integer sms_send_activation;
     private Integer status;
     private Integer gubun;
+    private Integer sort_order;
 
 }

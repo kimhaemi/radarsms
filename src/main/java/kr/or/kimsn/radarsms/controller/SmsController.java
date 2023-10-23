@@ -138,19 +138,30 @@ public class SmsController {
 
         log.info("pageable ::::: " + pageable);
 
-        // parameter
-        String sDt = request.getParameter("sDt");
-        model.addAttribute("sDt", sDt);
-
-        log.info("sDt :::: " + sDt);
-
         // 오늘 날짜
         Date now = new Date();
         Date dateStart = null;
         Date dateClose = null;
 
-        String termStart = sDt != null ? sDt + "01000000" : DateUtil.formatDate("yyyyMMdd", now) + "1000000";
-        String termClose = sDt != null ? sDt + "31235959" : DateUtil.formatDate("yyyyMMdd", now) + "31235959";
+        // parameter
+        String sDt = request.getParameter("sDt");
+        sDt = sDt == null ? DateUtil.formatDate("yyyyMM", now) : sDt;
+        model.addAttribute("sDt", sDt);
+        log.info("sDt :::: " + sDt);
+        String smsSUC = null;
+        String smsFail = null;
+
+        String smsResult = request.getParameter("smsResult");
+        if (smsResult != null && smsResult.equals("0000")) {
+            smsSUC = "0000";
+        } else if (smsResult != null && smsResult.equals("9999")) {
+            smsFail = "9999";
+        }
+        model.addAttribute("smsResult", smsResult);
+        System.out.println("smsResult ::: " + smsResult);
+
+        String termStart = sDt != null ? sDt + "01000000" : DateUtil.formatDate("yyyyMM", now) + "01000000";
+        String termClose = sDt != null ? sDt + "31235959" : DateUtil.formatDate("yyyyMM", now) + "31235959";
 
         log.info("termStart :::: " + termStart);
         log.info("termClose :::: " + termClose);
@@ -160,10 +171,12 @@ public class SmsController {
 
         if (dateStart == null) {
             // dateStart = DateUtils.addDays(now, -1);
-            dateStart = now;
+            // dateStart = now;
+            dateStart = DateUtil.stringToDate(DateUtil.formatDate("yyyyMM", now) + "01000000");
         }
         if (dateClose == null) {
-            dateClose = now;
+            // dateClose = now;
+            dateClose = DateUtil.stringToDate(DateUtil.formatDate("yyyyMM", now) + "31235959");
         }
 
         log.info("dateClose ::; " + dateClose);
@@ -176,7 +189,7 @@ public class SmsController {
 
         // app 발송 내역
         Page<SmsSendDto> smsRsultList = smsService.getAppSendData(pageable, Integer.parseInt(yearMonth), termStart,
-                termClose);
+                termClose, smsSUC, smsFail);
         model.addAttribute("smsRsultList", smsRsultList);
 
         List<AppErrorCodeDto> appErrorCodeList = smsService.getAppErrorCode();
