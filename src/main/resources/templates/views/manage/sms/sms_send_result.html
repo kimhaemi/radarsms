@@ -188,38 +188,39 @@
                     startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
                     tempEndPage = ${startPage + pageSize - 1},
                     endPage = (${tempEndPage < totalPages ? tempEndPage : totalPages}),
-                    sDt=${sDt}
+                    sDt=${sDt},
+                    smsResult=${smsResult}
                     "
                     >
                     <!-- th:with="start=${T(java.lang.Math).floor(smsRsultList.number/10)*10 + 1},
                         last=(${start + 9 < smsRsultList.totalPages ? start + 9 : smsRsultList.totalPages})"> -->
 
                 <li th:classappend="${smsRsultList.first} ? 'disabled'" class="page-item">
-                    <a class="page-link" th:href="${smsRsultList.first} ? '#' : @{/manage/sms_send_result(page=${0}, sDt=${sDt})}">
+                    <a class="page-link" th:href="${smsRsultList.first} ? '#' : @{/manage/sms_send_result(page=${0}, sDt=${sDt}, smsResult=${smsResult})}">
                         <span aria-hidden="true">&lt;&lt;</span>
                     </a>
                 </li>
 
                 <li th:classappend="${smsRsultList.first} ? 'disabled'" class="page-item">
-                    <a class="page-link" th:href="${smsRsultList.first} ? '#' : @{/manage/sms_send_result(page=${pageNumber - 1}, sDt=${sDt})}">
+                    <a class="page-link" th:href="${smsRsultList.first} ? '#' : @{/manage/sms_send_result(page=${pageNumber - 1}, sDt=${sDt}, smsResult=${smsResult})}">
                         <span aria-hidden="true">&lt;</span>
                     </a>
                 </li>
 
                 <li th:each="page: ${#numbers.sequence(startPage, endPage)}" th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
                     <th:block th:if="${page != 0}">
-                        <a th:text="${page}" class="page-link" th:href="@{/manage/sms_send_result(page=${page - 1}, sDt=${sDt})}"></a>
+                        <a th:text="${page}" class="page-link" th:href="@{/manage/sms_send_result(page=${page - 1}, sDt=${sDt}, smsResult=${smsResult})}"></a>
                     </th:block>
                 </li>
         
                 <li th:classappend="${smsRsultList.last} ? 'disabled'" class="page-item">
-                    <a class="page-link" th:href="${smsRsultList.last} ? '#' : @{/manage/sms_send_result(page=${pageNumber + 1}, sDt=${sDt})}" aria-label="Next">
+                    <a class="page-link" th:href="${smsRsultList.last} ? '#' : @{/manage/sms_send_result(page=${pageNumber + 1}, sDt=${sDt}, smsResult=${smsResult})}" aria-label="Next">
                         <span aria-hidden="true">&gt;</span>
                     </a>
                 </li>
 
                 <li th:classappend="${smsRsultList.last} ? 'disabled'" class="page-item">
-                    <a class="page-link" th:href="${smsRsultList.last} ? '#' : @{/manage/sms_send_result(page=${totalPages-1}, sDt=${sDt})}" aria-label="Next">
+                    <a class="page-link" th:href="${smsRsultList.last} ? '#' : @{/manage/sms_send_result(page=${totalPages-1}, sDt=${sDt}, smsResult=${smsResult})}" aria-label="Next">
                         <span aria-hidden="true">&gt;&gt;</span>
                     </a>
                 </li>

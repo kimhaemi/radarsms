@@ -185,10 +185,11 @@ public class SmsController {
         System.out.println("searchDate ::::: " + searchDate);
         model.addAttribute("monthpick", searchDate);
 
-        String yearMonth = DateUtil.formatDate("yyyyMM", dateClose);
+        // String yearMonth = DateUtil.formatDate("yyyyMM", sDt);
+        // System.out.println("yearMonth ::::: " + yearMonth);
 
         // app 발송 내역
-        Page<SmsSendDto> smsRsultList = smsService.getAppSendData(pageable, Integer.parseInt(yearMonth), termStart,
+        Page<SmsSendDto> smsRsultList = smsService.getAppSendData(pageable, Integer.parseInt(sDt), termStart,
                 termClose, smsSUC, smsFail);
         model.addAttribute("smsRsultList", smsRsultList);
 

@@ -174,7 +174,7 @@ public class PostController {
     // 템플릿 수정
     @PostMapping("/manage/sms_temp_modify")
     public ApiResult<Integer> setAppTemplateCodeModify(@CookieValue(name = "userId", required = false) String userId,
-            @RequestBody Map<String, Object> dto) {
+            @RequestBody List<Map<String, Object>> dto) {
         return ApiResult.success(smsService.setAppTemplateCodeModify(dto));
     }
 

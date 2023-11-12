@@ -95,12 +95,12 @@
                         if($("input[name=groups]:checked").length>0){
                             $("tr#targetMembers").show();
                             //전체선택 check box
-                            var html = '<span style="margin-right:10px;white-space: nowrap;">'
-                                + '<input type="checkbox" id="membersAll" name="membersAll" onchange="fnMembersAll()"" checked/>'
-                                + '<label for="membersAll" style="margin-right:10px" > '
-                                + '전체 선택'
-                                + '</label></span><br />';
-                            $("tr#targetMembers>td").append(html);
+                            // var html = '<span style="margin-right:10px;white-space: nowrap;">'
+                            //     + '<input type="checkbox" id="membersAll" name="membersAll" onchange="fnMembersAll()"" checked/>'
+                            //     + '<label for="membersAll" style="margin-right:10px" > '
+                            //     + '전체 선택'
+                            //     + '</label></span><br />';
+                            // $("tr#targetMembers>td").append(html);
                             setGroupsMembers();
                         }
                         else{
@@ -146,10 +146,13 @@
                 }
             }
             
+            //지점별 그룹선택
             function setGroupsMembers(){
                 var groups = $("input[name='groups']:checked");
-                // console.log("groups ::", groups);
-                for(var i=0; i<groups.length; i++){
+                let params = new Array();
+                for(let i=0; i<groups.length; i++){
+                    params.push(groups.eq(i).val());
+
                     for(var j=0; j<mems.length; j++){
                         if( groups.eq(i).val() == mems[j][0] ){
                             // console.log("mems :: ", mems[j]);
@@ -157,6 +160,24 @@
                         }
                     }
                 }
+
+                // console.log(params);
+
+                // let result = fnCall('get', '/manage/sms_memberList?gId='+params, {});
+                // let reArr = [];
+                // result.forEach(e => {
+                //     reArr.push([e.gid.toString(), e.mid.toString(), e.name, e.organization, e.position, e.phone_num]);
+                // });
+                // $("tr#targetMembers>td>span").remove();
+                // var html = '<span style="margin-right:10px;white-space: nowrap;">'
+                //                 + '<input type="checkbox" id="membersAll" name="membersAll" onchange="fnMembersAll()"" checked/>'
+                //                 + '<label for="membersAll" style="margin-right:10px" > '
+                //                 + '전체 선택'
+                //                 + '</label></span><br />';
+                //             $("tr#targetMembers>td").append(html);
+                // for(let i=0; i<reArr.length; i++){
+                //     makeGroupsMember(reArr[i]);
+                // }
             }
             function makeGroupsMember(member){
                 if(checkGroupsMember(member[1])){

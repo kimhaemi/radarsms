@@ -15,7 +15,7 @@ function fnCall(method, url, params){
         //     params
         // }),
         success : function(res) { // 결과 성공 콜백함수
-            console.log("success: " + res);
+            console.log("success: " + res.status);
             result = res;
             // return res;
         },

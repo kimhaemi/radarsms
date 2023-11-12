@@ -143,6 +143,11 @@ public class ManageGetService {
         return smsTargetGroupMemberRepository.getSmsTargetGroupsMemberId(gid);
     }
 
+    // 문자 수신 그룹 멤버 ([ *** ] 그룹에 속한 사용자)
+    public List<SmsTargetGroupMemberDto> getSmsTargetGroupsMemberId2(List<String> gid) {
+        return smsTargetGroupMemberRepository.getSmsTargetGroupsMemberId2(gid);
+    }
+
     // 문자 수신 그룹 멤버 ([ *** ] 그룹에 속하지 않은 사용자)
     public List<SmsTargetMemberDto> getSmsTargetGroupsMemberIdNot(Long gid) {
         return smsTargetMemberRepository.getSmsTargetGroupsMemberIdNot(gid);

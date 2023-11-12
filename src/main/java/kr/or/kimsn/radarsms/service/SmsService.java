@@ -141,17 +141,24 @@ public class SmsService {
 
     // template 수정
     @Transactional
-    public Integer setAppTemplateCodeModify(Map<String, Object> appTemplateCodeDto) {
+    public Integer setAppTemplateCodeModify(List<Map<String, Object>> appTemplateCodeDto) {
         Integer result = 0;
 
         log.info("appTemplateCodeDto :::; " + appTemplateCodeDto);
-        String oldTemplateCode = appTemplateCodeDto.get("oldTemplateCode").toString();
-        String newTemplateCode = appTemplateCodeDto.get("newTemplateCode").toString();
-        String head = appTemplateCodeDto.get("head").toString();
 
         try {
-            log.info("사용자 수정 usermodify");
-            result = appTemplateCodeRepository.setAppTemplateCodeModify(newTemplateCode, oldTemplateCode, head);
+
+            for (Map<String, Object> smsDto : appTemplateCodeDto) {
+
+                String oldTemplateCode = smsDto.get("oldTemplateCode").toString();
+                String newTemplateCode = smsDto.get("newTemplateCode").toString();
+                String head = smsDto.get("head").toString();
+                String useButton = smsDto.get("useButton").toString();
+                log.info("사용자 수정 usermodify");
+                result = appTemplateCodeRepository.setAppTemplateCodeModify(newTemplateCode, oldTemplateCode, head,
+                        useButton);
+            }
+
         } catch (Exception e) {
             log.info("update error : " + e);
             return -1;
